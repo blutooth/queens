@@ -4,7 +4,6 @@
   import Venue from './lib/Venue.svelte';
   import Foundations from './lib/Foundations.svelte';
   import Summit from './lib/Summit.svelte';
-  import Convener from './lib/Convener.svelte';
   import Queens from './lib/Queens.svelte';
   import Dignitaries from './lib/Dignitaries.svelte';
   import Prior from './lib/Prior.svelte';
@@ -21,7 +20,6 @@
   <Venue />
   <Foundations />
   <Summit />
-  <Convener />
   <Queens />
   <Dignitaries />
   <Prior />

@@ -28,7 +28,6 @@
     </button>
     <ul class:open>
       <li><a href="#venue" on:click={() => (open = false)}>Venues</a></li>
-      <li><a href="#convener" on:click={() => (open = false)}>Convener</a></li>
       <li><a href="#lineage" on:click={() => (open = false)}>Lineage</a></li>
       <li><a href="#dignitaries" on:click={() => (open = false)}>Attendees</a></li>
       <li><a href="#programme" on:click={() => (open = false)}>Programme</a></li>
