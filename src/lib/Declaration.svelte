@@ -32,7 +32,7 @@
   <div class="container-narrow">
     <header>
       <div class="rule"></div>
-      <p class="eyebrow">United Kingdom · 2026</p>
+      <p class="eyebrow">United Kingdom · 14 – 31 August 2026</p>
       <h2>
         The Queen Aruk<br />
         <span class="italic">Declaration.</span>
@@ -77,7 +77,7 @@
         <div class="sign-text">
           <div class="s1">Signed and Affirmed</div>
           <div class="s2">At the Queen Aruk Global Queens Summit</div>
-          <div class="s3">United Kingdom · 2026</div>
+          <div class="s3">United Kingdom · 14 – 31 August 2026</div>
         </div>
         <span class="glyph">♕</span>
       </div>
