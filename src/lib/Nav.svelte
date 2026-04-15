@@ -27,10 +27,10 @@
       <span class:open></span>
     </button>
     <ul class:open>
-      <li><a href="#programme" on:click={() => (open = false)}>Programme</a></li>
-      <li><a href="#lineage" on:click={() => (open = false)}>Lineage</a></li>
-      <li><a href="#dignitaries" on:click={() => (open = false)}>Attendees</a></li>
       <li><a href="#venue" on:click={() => (open = false)}>Venues</a></li>
+      <li><a href="#declaration" on:click={() => (open = false)}>Declaration</a></li>
+      <li><a href="#programme" on:click={() => (open = false)}>Programme</a></li>
+      <li><a href="#dignitaries" on:click={() => (open = false)}>Attendees</a></li>
       <li><a href="#pricing" on:click={() => (open = false)}>Pricing</a></li>
       <li><a href="#rsvp" class="cta" on:click={() => (open = false)}>RSVP</a></li>
     </ul>
