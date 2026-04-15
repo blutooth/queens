@@ -31,7 +31,7 @@
               <li><span class="check">◈</span>{i}</li>
             {/each}
           </ul>
-          <a class="cta" href="#rsvp">Select {t.name} →</a>
+          <a class="cta" href="#rsvp-form">Select {t.name} →</a>
         </article>
       {/each}
     </div>

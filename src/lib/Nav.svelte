@@ -12,7 +12,7 @@
 
 <nav class:scrolled>
   <div class="container row">
-    <a href="#top" class="mark">
+    <a href="/" class="mark">
       <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
         <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1" />
         <path d="M12 24 L14 16 L18 22 L20 14 L22 22 L26 16 L28 24 Z" fill="currentColor" />
@@ -27,12 +27,11 @@
       <span class:open></span>
     </button>
     <ul class:open>
-      <li><a href="#venue" on:click={() => (open = false)}>Venues</a></li>
-      <li><a href="#declaration" on:click={() => (open = false)}>Declaration</a></li>
-      <li><a href="#programme" on:click={() => (open = false)}>Programme</a></li>
-      <li><a href="#dignitaries" on:click={() => (open = false)}>Attendees</a></li>
-      <li><a href="#pricing" on:click={() => (open = false)}>Pricing</a></li>
-      <li><a href="#rsvp" class="cta" on:click={() => (open = false)}>RSVP</a></li>
+      <li><a href="/#venue" on:click={() => (open = false)}>Venues</a></li>
+      <li><a href="/#declaration" on:click={() => (open = false)}>Declaration</a></li>
+      <li><a href="/#programme" on:click={() => (open = false)}>Programme</a></li>
+      <li><a href="/#dignitaries" on:click={() => (open = false)}>Attendees</a></li>
+      <li><a href="/rsvp/" class="cta" on:click={() => (open = false)}>Pricing &amp; RSVP</a></li>
     </ul>
   </div>
 </nav>

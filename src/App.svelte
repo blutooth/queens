@@ -7,9 +7,8 @@
   import Program from './lib/Program.svelte';
   import Queens from './lib/Queens.svelte';
   import Gathering from './lib/Gathering.svelte';
-  import Pricing from './lib/Pricing.svelte';
   import Partners from './lib/Partners.svelte';
-  import Rsvp from './lib/Rsvp.svelte';
+  import RsvpCta from './lib/RsvpCta.svelte';
   import Footer from './lib/Footer.svelte';
 </script>
 
@@ -22,8 +21,7 @@
   <Program />
   <Queens />
   <Gathering />
-  <Pricing />
   <Partners />
-  <Rsvp />
+  <RsvpCta />
 </main>
 <Footer />

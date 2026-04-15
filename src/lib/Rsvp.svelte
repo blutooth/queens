@@ -49,7 +49,7 @@
   });
 </script>
 
-<section id="rsvp" class="rsvp">
+<section id="rsvp-form" class="rsvp">
   <div class="container">
     <div class="head">
       <p class="eyebrow">Reserve your place</p>
