@@ -1,7 +1,6 @@
 <script>
   import Nav from './lib/Nav.svelte';
   import Hero from './lib/Hero.svelte';
-  import Summit from './lib/Summit.svelte';
   import Venue from './lib/Venue.svelte';
   import Foundations from './lib/Foundations.svelte';
   import Declaration from './lib/Declaration.svelte';
@@ -17,7 +16,6 @@
 <Nav />
 <main>
   <Hero />
-  <Summit />
   <Venue />
   <Foundations />
   <Declaration />
