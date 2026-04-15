@@ -1,0 +1,120 @@
+:root {
+  --paper: #f7f1e3;
+  --paper-soft: #efe4ce;
+  --paper-deep: #e6d8bb;
+  --ink: #231c15;
+  --ink-soft: #4d3f2e;
+  --muted: #8a7a65;
+  --line: rgba(35, 28, 21, 0.12);
+  --line-strong: rgba(35, 28, 21, 0.25);
+
+  --terracotta: #c85a2e;
+  --terracotta-bright: #e0774d;
+  --terracotta-soft: #f2b493;
+  --forest: #2d4a37;
+  --forest-bright: #3d6349;
+  --gold: #a67c3d;
+  --gold-bright: #c99b55;
+  --cream: #faf6ea;
+
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.55;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+}
+
+a {
+  color: var(--terracotta);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover { color: var(--forest); }
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Subtle editorial treatment for portrait photography — softens JPEG
+   artifacts, adds warmth and grain so compressed shots read richer. */
+.portrait-rich {
+  position: relative;
+  isolation: isolate;
+}
+.portrait-rich img {
+  filter: saturate(1.08) contrast(1.04) brightness(0.98);
+}
+.portrait-rich::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 55%, rgba(35, 28, 21, 0.25) 100%),
+    linear-gradient(180deg, transparent 60%, rgba(35, 28, 21, 0.08) 100%);
+  mix-blend-mode: multiply;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.container-narrow {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+section {
+  padding: 7rem 0;
+}
+
+@media (max-width: 640px) {
+  section { padding: 4.5rem 0; }
+}
+
+::selection {
+  background: var(--terracotta);
+  color: var(--cream);
+}

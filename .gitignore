@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+.vite
+*.log
+
+# Raw source material — kept locally, not published.
+# (PDFs, original photos, working notes.)
+reference/
