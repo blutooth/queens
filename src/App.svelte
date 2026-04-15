@@ -7,8 +7,7 @@
   import Declaration from './lib/Declaration.svelte';
   import Program from './lib/Program.svelte';
   import Queens from './lib/Queens.svelte';
-  import Dignitaries from './lib/Dignitaries.svelte';
-  import Prior from './lib/Prior.svelte';
+  import Gathering from './lib/Gathering.svelte';
   import Pricing from './lib/Pricing.svelte';
   import Partners from './lib/Partners.svelte';
   import Rsvp from './lib/Rsvp.svelte';
@@ -24,8 +23,7 @@
   <Declaration />
   <Program />
   <Queens />
-  <Dignitaries />
-  <Prior />
+  <Gathering />
   <Pricing />
   <Partners />
   <Rsvp />
