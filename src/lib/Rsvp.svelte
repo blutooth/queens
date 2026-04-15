@@ -130,9 +130,9 @@
               <label>
                 <span>Tier</span>
                 <select bind:value={tier}>
-                  <option>Observer · £1,200</option>
-                  <option>Royal Guest · £4,500</option>
-                  <option>Patron · £12,000</option>
+                  <option>Observer · £50</option>
+                  <option>Royal Guest · £200</option>
+                  <option>Patron · £500</option>
                 </select>
               </label>
             </div>

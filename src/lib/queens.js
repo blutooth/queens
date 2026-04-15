@@ -262,7 +262,7 @@ export const dignitaries = [
 export const tiers = [
   {
     name: 'Observer',
-    price: '£1,200',
+    price: '£50',
     tag: 'Entry pass',
     body: 'Access to public convocations, exhibitions, and the opening processional. Ideal for scholars, press, and supporters.',
     includes: [
@@ -275,7 +275,7 @@ export const tiers = [
   },
   {
     name: 'Royal Guest',
-    price: '£4,500',
+    price: '£200',
     tag: 'Full programme',
     body: 'Full access to the summit programme — ceremonies, forums, Oxford convocation, and the closing gala at Porchester Hall.',
     includes: [
@@ -289,7 +289,7 @@ export const tiers = [
   },
   {
     name: 'Patron',
-    price: '£12,000',
+    price: '£500',
     tag: 'Residence included',
     body: 'The complete convocation with residence at Hawkhill Place, private audiences, and patronage recognition in the official programme.',
     includes: [
