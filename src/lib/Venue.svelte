@@ -1,5 +1,6 @@
 <script>
   import { venues } from './queens.js';
+  import { asset } from './asset.js';
 </script>
 
 <section id="venue" class="venue">
@@ -19,17 +20,17 @@
     <!-- Opening editorial collage of the Porchester ballroom -->
     <div class="collage">
       <figure class="big">
-        <img src="/images/porchester-2.jpg" alt="Porchester Hall ballroom dressed for a ceremony" />
+        <img src={asset('/images/porchester-2.jpg')} alt="Porchester Hall ballroom dressed for a ceremony" />
         <figcaption>
           <span class="sash">Porchester Hall · London</span>
           <span class="caption-title">The Ballroom</span>
         </figcaption>
       </figure>
       <figure class="med">
-        <img src="/images/porchester-1.jpg" alt="Porchester Hall in full event mode" />
+        <img src={asset('/images/porchester-1.jpg')} alt="Porchester Hall in full event mode" />
       </figure>
       <figure class="med">
-        <img src="/images/porchester-4.jpg" alt="Porchester Hall in reception setup" />
+        <img src={asset('/images/porchester-4.jpg')} alt="Porchester Hall in reception setup" />
       </figure>
     </div>
 

@@ -1,4 +1,6 @@
 <script>
+  import { asset } from './asset.js';
+
   const stats = [
     { n: '400+', k: 'Royal attendees' },
     { n: '22', k: 'African nations' },
@@ -49,15 +51,15 @@
     <!-- IPADA Nigeria event photography -->
     <div class="strip">
       <figure>
-        <img src="/images/queen-aruk-ii-canopy.jpg" alt="Queen Aruk II at a ceremonial convocation" />
+        <img src={asset('/images/queen-aruk-ii-canopy.jpg')} alt="Queen Aruk II at a ceremonial convocation" />
         <figcaption>Ceremonial convocation</figcaption>
       </figure>
       <figure class="wide">
-        <img src="/images/ipada-diaspora.jpg" alt="Royal delegation at the IPADA Diaspora Global Conference, Nigeria" />
+        <img src={asset('/images/ipada-diaspora.jpg')} alt="Royal delegation at the IPADA Diaspora Global Conference, Nigeria" />
         <figcaption>Diaspora Global Conference · Nigeria</figcaption>
       </figure>
       <figure>
-        <img src="/images/dancers.jpg" alt="Cultural troupe in ceremonial dress" />
+        <img src={asset('/images/dancers.jpg')} alt="Cultural troupe in ceremonial dress" />
         <figcaption>The cultural troupe</figcaption>
       </figure>
     </div>

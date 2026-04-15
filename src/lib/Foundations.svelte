@@ -1,30 +1,31 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { pillars } from './queens.js';
+  import { asset } from './asset.js';
 
   const moments = [
     {
-      src: '/images/queen-aruk-ii-throne.jpg',
+      src: asset('/images/queen-aruk-ii-throne.jpg'),
       title: 'The Throne of Aruk II',
       where: 'Royal Portrait',
     },
     {
-      src: '/images/queen-aruk-ii-canopy.jpg',
+      src: asset('/images/queen-aruk-ii-canopy.jpg'),
       title: 'The Ndebele Convocation',
       where: 'Kwajekejeke · South Africa',
     },
     {
-      src: '/images/queen-aruk-ii-portrait.jpg',
+      src: asset('/images/queen-aruk-ii-portrait.jpg'),
       title: 'In Full Regalia',
       where: 'Throne Room',
     },
     {
-      src: '/images/queen-aruk-ii-closeup.jpg',
+      src: asset('/images/queen-aruk-ii-closeup.jpg'),
       title: 'Coral & Crown',
       where: 'Royal Portrait',
     },
     {
-      src: '/images/dancers.jpg',
+      src: asset('/images/dancers.jpg'),
       title: 'Ceremonial Dance',
       where: 'Cultural Troupe',
     },

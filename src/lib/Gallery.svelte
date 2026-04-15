@@ -1,33 +1,34 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import { asset } from './asset.js';
 
   const slides = [
     {
-      src: '/images/queen-aruk-ii-throne.jpg',
+      src: asset('/images/queen-aruk-ii-throne.jpg'),
       tag: 'Studio · Royal Portrait',
       title: 'The Throne of Aruk II',
       note: 'Seated in purple velvet and gold, holding the royal fan and staff',
     },
     {
-      src: '/images/queen-aruk-ii-canopy.jpg',
+      src: asset('/images/queen-aruk-ii-canopy.jpg'),
       tag: 'Kwajekejeke Cultural Village · South Africa',
       title: 'The Ndebele Convocation',
       note: '40th Anniversary of King Silamba of the Ndebele kingdom',
     },
     {
-      src: '/images/queen-aruk-ii-portrait.jpg',
+      src: asset('/images/queen-aruk-ii-portrait.jpg'),
       tag: 'Throne Room · Processional Regalia',
       title: 'In Full Regalia',
       note: 'White lace over purple, embroidered vest, royal staff and fan',
     },
     {
-      src: '/images/queen-aruk-ii-closeup.jpg',
+      src: asset('/images/queen-aruk-ii-closeup.jpg'),
       tag: 'Royal Portrait · Close',
       title: 'Coral & Crown',
       note: 'Tiara and layered coral beads of the Efik court',
     },
     {
-      src: '/images/dancers.jpg',
+      src: asset('/images/dancers.jpg'),
       tag: 'Cultural Troupe',
       title: 'Ceremonial Dance',
       note: 'The court dancers in purple-and-gold ceremonial dress',

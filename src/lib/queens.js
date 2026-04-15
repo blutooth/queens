@@ -1,3 +1,5 @@
+import { asset } from './asset.js';
+
 export const summit = {
   name: 'African Queens Summit',
   longName: 'African & Diaspora Queens Summit',
@@ -13,7 +15,7 @@ export const venues = [
     kicker: 'The Ceremonies',
     name: 'Porchester Hall',
     city: 'London · Bayswater',
-    image: '/images/porchester-1.jpg',
+    image: asset('/images/porchester-1.jpg'),
     description: 'A grand Edwardian hall with soaring ceilings, a gilded ballroom, and capacity for 500 — host to the opening processional, royal receptions, and the closing gala in the heart of London.',
     features: [
       'Historic Edwardian ballroom',
@@ -27,7 +29,7 @@ export const venues = [
     kicker: 'The Residence',
     name: 'Hawkhill Place',
     city: 'Oxfordshire',
-    image: '/images/hawkhill-grounds.png',
+    image: asset('/images/hawkhill-grounds.png'),
     description: 'An eight-bedroom country retreat set in private gated grounds, with dedicated spa and wellness facilities — the residential home of the queens for the duration of the summit.',
     features: [
       '8 ensuite bedrooms',
@@ -41,7 +43,7 @@ export const venues = [
     kicker: 'The Academy',
     name: 'University of Oxford',
     city: 'Oxford',
-    image: '/images/oxford-colleges.jpg',
+    image: asset('/images/oxford-colleges.jpg'),
     description: 'A capacity-building course at one of the world\'s oldest universities — academic sessions, lectures, and scholarly dialogue on leadership, governance, and heritage.',
     features: [
       'Capacity-building curriculum',
@@ -100,7 +102,7 @@ export const matriarchs = [
     region: 'Egypt',
     title: 'Great Royal Wife',
     bio: 'Great Royal Wife of Akhenaten, presiding over one of the wealthiest and most transformative eras of ancient Egypt.',
-    image: '/images/matriarchs/nefertiti.jpg',
+    image: asset('/images/matriarchs/nefertiti.jpg'),
     artifact: 'Painted limestone bust, Berlin',
   },
   {
@@ -109,7 +111,7 @@ export const matriarchs = [
     region: 'Egypt',
     title: 'Pharaoh of Egypt',
     bio: 'One of the most successful pharaohs, a prolific builder who commissioned hundreds of projects and expanded trade.',
-    image: '/images/matriarchs/hatshepsut.jpg',
+    image: asset('/images/matriarchs/hatshepsut.jpg'),
     artifact: 'Limestone seated statue',
   },
   {
@@ -118,7 +120,7 @@ export const matriarchs = [
     region: 'Ethiopia · Saba',
     title: 'Queen of Sheba',
     bio: 'The legendary queen whose wisdom, wealth, and diplomacy thread through Ethiopian, biblical, and Quranic traditions.',
-    image: '/images/matriarchs/makeda.jpg',
+    image: asset('/images/matriarchs/makeda.jpg'),
     artifact: 'Safavid manuscript painting',
   },
   {
@@ -127,7 +129,7 @@ export const matriarchs = [
     region: 'Kush · Nubia',
     title: 'Kandake of Meroë',
     bio: 'The one-eyed warrior queen who led Kushite armies against Rome and negotiated peace with Augustus himself.',
-    image: '/images/matriarchs/amanirenas.jpg',
+    image: asset('/images/matriarchs/amanirenas.jpg'),
     artifact: '19th c. Lepsius engraving',
   },
   {
@@ -136,7 +138,7 @@ export const matriarchs = [
     region: 'Zazzau · Nigeria',
     title: 'Warrior Queen',
     bio: 'A Hausa warrior queen who expanded her territory through a celebrated military career and mastered the Saharan trade.',
-    image: '/images/matriarchs/amina.jpg',
+    image: asset('/images/matriarchs/amina.jpg'),
     artifact: 'Equestrian statue, Lagos',
   },
   {
@@ -145,7 +147,7 @@ export const matriarchs = [
     region: 'Ndongo · Angola',
     title: 'Queen of Ndongo',
     bio: 'A diplomat and strategist who resisted Portuguese colonisation for four decades, leading armies into her sixties.',
-    image: '/images/matriarchs/nzinga.jpg',
+    image: asset('/images/matriarchs/nzinga.jpg'),
     artifact: 'Hand-coloured 19th c. engraving',
   },
   {
@@ -154,7 +156,7 @@ export const matriarchs = [
     region: 'Ashanti · Ghana',
     title: 'Queen Mother of Ejisu',
     bio: 'At sixty, she led the Ashanti in the War of the Golden Stool against the British Empire.',
-    image: '/images/matriarchs/yaa.jpg',
+    image: asset('/images/matriarchs/yaa.jpg'),
     artifact: 'Yaa Asantewaa Museum, Ejisu',
   },
 ];

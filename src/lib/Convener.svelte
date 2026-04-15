@@ -1,7 +1,11 @@
+<script>
+  import { asset } from './asset.js';
+</script>
+
 <section id="convener" class="convener">
   <div class="container grid">
     <figure class="portrait portrait-rich">
-      <img src="/images/queen-aruk-ii-portrait.jpg" alt="Queen Aruk II in processional regalia" />
+      <img src={asset('/images/queen-aruk-ii-portrait.jpg')} alt="Queen Aruk II in processional regalia" />
       <figcaption>
         <span class="crown">♕</span>
         <span>Obonganwan · Queen Aruk II</span>

@@ -1,9 +1,10 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import { asset } from './asset.js';
 
   const slides = [
     {
-      image: '/images/queen-aruk-ii-throne.jpg',
+      image: asset('/images/queen-aruk-ii-throne.jpg'),
       tone: 'light',
       eyebrow: 'You are cordially invited',
       titleA: 'African',
@@ -17,7 +18,7 @@
       badge: 'England · 2026',
     },
     {
-      image: '/images/queen-aruk-ii-portrait.jpg',
+      image: asset('/images/queen-aruk-ii-portrait.jpg'),
       tone: 'light',
       eyebrow: 'The Convener',
       titleA: 'Her Royal',
@@ -31,7 +32,7 @@
       badge: 'Royalty Defined by Impact',
     },
     {
-      image: '/images/matriarchs/nzinga.jpg',
+      image: asset('/images/matriarchs/nzinga.jpg'),
       tone: 'warm',
       eyebrow: 'Three thousand years of queenship',
       titleA: 'The',
@@ -45,7 +46,7 @@
       badge: 'A lineage of seven',
     },
     {
-      image: '/images/porchester-1.jpg',
+      image: asset('/images/porchester-1.jpg'),
       tone: 'dark',
       eyebrow: 'The London Ceremonies',
       titleA: 'A grand',
@@ -59,7 +60,7 @@
       badge: 'London · Bayswater',
     },
     {
-      image: '/images/hawkhill-grounds.png',
+      image: asset('/images/hawkhill-grounds.png'),
       tone: 'light',
       eyebrow: 'The Residence',
       titleA: 'A country',
@@ -73,7 +74,7 @@
       badge: 'Oxfordshire',
     },
     {
-      image: '/images/oxford-colleges.jpg',
+      image: asset('/images/oxford-colleges.jpg'),
       tone: 'dark',
       eyebrow: 'The Academy',
       titleA: 'A course at',
