@@ -20,15 +20,21 @@
     <div class="grid">
       {#each programme as p}
         <article class="chapter">
-          <div class="idx">{p.idx}</div>
-          <div class="group">{p.group}</div>
-          <h3>{p.title}</h3>
-          <p class="body">{p.body}</p>
-          <ul>
-            {#each p.items as it}
-              <li><span class="tick">◈</span>{it}</li>
-            {/each}
-          </ul>
+          <div class="image">
+            <img src={p.image} alt={p.title} />
+            <div class="scrim"></div>
+            <div class="badge">{p.idx}</div>
+            <div class="group">{p.group}</div>
+          </div>
+          <div class="body">
+            <h3>{p.title}</h3>
+            <p class="lede">{p.body}</p>
+            <ul>
+              {#each p.items as it}
+                <li><span class="tick">◈</span>{it}</li>
+              {/each}
+            </ul>
+          </div>
         </article>
       {/each}
     </div>
@@ -37,7 +43,7 @@
       <span class="glyph">♕</span>
       <p>
         Designed to deliver a balance of <strong>influence, cultural pride,
-        and enduring legacy</strong>. A separate programme &amp; engagement brief
+        and enduring legacy</strong>. The full programme &amp; engagement brief
         is provided to confirmed attendees.
       </p>
     </aside>
@@ -72,65 +78,105 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    gap: 1.5rem;
     margin-bottom: 3rem;
   }
 
   .chapter {
-    position: relative;
-    padding: 2.25rem 1.75rem 2rem;
     background: var(--paper-soft);
     border-radius: 4px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .chapter:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 48px -20px rgba(35, 28, 21, 0.18);
+    transform: translateY(-6px);
+    box-shadow: 0 28px 50px -20px rgba(35, 28, 21, 0.25);
   }
 
-  .idx {
+  .image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .chapter:hover .image img { transform: scale(1.05); }
+  .scrim {
     position: absolute;
-    top: 1.5rem;
-    right: 1.75rem;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(35, 28, 21, 0.15) 0%, rgba(35, 28, 21, 0.05) 40%, rgba(35, 28, 21, 0.6) 100%);
+  }
+  .badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
     font-family: var(--font-display);
     font-style: italic;
-    color: var(--terracotta);
-    font-size: 1.1rem;
+    background: var(--terracotta);
+    color: var(--cream);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: 0 6px 16px -4px rgba(200, 90, 46, 0.5);
   }
   .group {
-    font-size: 0.65rem;
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    color: var(--cream);
+    font-size: 0.7rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--terracotta);
     font-weight: 500;
-    margin-bottom: 0.9rem;
+    background: rgba(35, 28, 21, 0.5);
+    backdrop-filter: blur(6px);
+    padding: 0.35rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  .body {
+    padding: 1.75rem 1.5rem 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   h3 {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     font-weight: 500;
     line-height: 1.1;
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.85rem;
+    color: var(--ink);
   }
-  .body {
+  .lede {
     color: var(--ink-soft);
     font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
   }
 
   ul {
     list-style: none;
     margin-top: auto;
-    padding-top: 1.25rem;
+    padding-top: 1.1rem;
     border-top: 1px solid var(--line);
   }
   li {
     display: flex;
-    gap: 0.65rem;
-    padding: 0.4rem 0;
-    font-size: 0.88rem;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    font-size: 0.85rem;
     color: var(--ink);
     align-items: baseline;
   }
@@ -144,7 +190,7 @@
     grid-template-columns: auto 1fr;
     gap: 1.25rem;
     align-items: center;
-    max-width: 760px;
+    max-width: 780px;
     margin: 0 auto;
     padding: 1.75rem 2rem;
     background: var(--forest);

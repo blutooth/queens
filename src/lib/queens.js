@@ -167,6 +167,7 @@ export const programme = [
     group: 'Academic & Intellectual',
     title: 'The Oxford Convocation',
     body: 'A short executive course and royal lecture series at the University of Oxford — a curriculum on leadership, governance, and global influence.',
+    image: asset('/images/oxford-colleges.jpg'),
     items: [
       'Executive course at Oxford',
       'Royal lecture series',
@@ -178,6 +179,7 @@ export const programme = [
     group: 'Royal & Cultural',
     title: 'Heritage, Theatre & Immersion',
     body: 'An African theatrical production celebrating heritage and identity, set alongside curated cultural immersion experiences across London.',
+    image: asset('/images/queen-aruk-ii-canopy.jpg'),
     items: [
       'African theatrical production',
       'Cultural immersion in London',
@@ -189,6 +191,7 @@ export const programme = [
     group: 'Prestige Engagements',
     title: 'Royal Gala, High Tea & Palace',
     body: 'The Royal Gala Night at Porchester Hall in London\'s West End, a prestigious Royal High Tea, and attendance at Buckingham Palace — subject to protocol confirmation.',
+    image: asset('/images/porchester-2.jpg'),
     items: [
       'Royal Gala Night · Porchester Hall',
       'Royal High Tea at a distinguished London venue',
@@ -200,6 +203,7 @@ export const programme = [
     group: 'Strategic & Diplomatic',
     title: 'Queens\' Roundtables',
     body: 'High-level Queens\' Roundtables, closed leadership dialogues, and international stakeholder engagements for the royal delegations.',
+    image: asset('/images/ipada-diaspora.jpg'),
     items: [
       'High-level Queens\' Roundtables',
       'Closed leadership dialogues',
@@ -211,6 +215,7 @@ export const programme = [
     group: 'Cultural Finale',
     title: 'Notting Hill Carnival',
     body: 'Participation in the Notting Hill Carnival on 31 August 2026 — celebrating African and Caribbean cultural excellence on a global stage.',
+    image: asset('/images/dancers.jpg'),
     items: [
       'Procession on 31 August 2026',
       'African & Caribbean cultural excellence',
@@ -222,6 +227,7 @@ export const programme = [
     group: 'Hospitality',
     title: 'Residence, Transport & Protocol',
     body: 'Luxury accommodation arranged for every attending Queen, with coordinated transport and protocol support throughout the summit.',
+    image: asset('/images/hawkhill-grounds.png'),
     items: [
       'Luxury accommodation',
       'Coordinated transport',
