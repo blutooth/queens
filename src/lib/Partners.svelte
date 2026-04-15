@@ -14,10 +14,13 @@
 
     <div class="list">
       {#each partners as p, i}
-        <div class="row">
+        <div class="row" class:featured={p.featured}>
           <div class="rank">No. {String(i + 1).padStart(2, '0')}</div>
           <div class="name-col">
-            <h3>{p.name}</h3>
+            <h3>
+              {p.name}
+              {#if p.featured}<span class="badge">◈ In partnership</span>{/if}
+            </h3>
           </div>
           <div class="role">{p.role}</div>
         </div>
@@ -68,6 +71,25 @@
     border-top: 1px solid rgba(250, 246, 234, 0.15);
   }
   .row:last-child { border-bottom: 1px solid rgba(250, 246, 234, 0.15); }
+  .row.featured {
+    background: rgba(224, 119, 77, 0.08);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 2px;
+  }
+  .badge {
+    display: inline-block;
+    margin-left: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--terracotta-bright);
+    vertical-align: middle;
+    font-weight: 500;
+  }
 
   .rank {
     font-family: var(--font-display);

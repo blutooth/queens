@@ -41,6 +41,11 @@
       </div>
     </div>
 
+    <div class="ipada">
+      <span class="glyph">◈</span>
+      <span>In partnership with <strong>IPADA Initiatives</strong> — cultural impact, education, and empowerment across Africa and the Diaspora.</span>
+    </div>
+
     <div class="bottom">
       <span>© 2026 Queen Aruk II Foundation</span>
       <span class="middle">Unity · Legacy · Sovereignty · Empowerment</span>
@@ -123,6 +128,30 @@
     color: rgba(250, 246, 234, 0.5);
     margin-top: 0.5rem;
     text-transform: uppercase;
+  }
+
+  .ipada {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(250, 246, 234, 0.08);
+    color: rgba(250, 246, 234, 0.75);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 720px;
+  }
+  .ipada .glyph {
+    color: var(--terracotta-bright);
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .ipada strong {
+    color: var(--terracotta-bright);
+    font-weight: 500;
   }
 
   .bottom {

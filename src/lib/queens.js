@@ -305,7 +305,7 @@ export const tiers = [
 
 export const partners = [
   { name: 'Queen Aruk II Foundation', role: 'Convener' },
-  { name: 'Ipada Initiatives', role: 'Strategic Partner' },
+  { name: 'IPADA Initiatives', role: 'Principal Partner', featured: true },
   { name: 'Forum of African Traditional Authorities', role: 'Institutional Partner' },
   { name: 'Maasai Tourism Festival', role: 'Cultural Partner' },
   { name: 'Motherland Beckons', role: 'Diaspora Partner' },
