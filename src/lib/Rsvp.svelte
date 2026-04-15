@@ -9,7 +9,8 @@
   );
   const waLink = `https://wa.me/${phone}?text=${prefill}`;
 
-  let qrSvg = '';
+  let calendarQr = '';
+  let waQr = '';
 
   // vCalendar event — scanning this on a phone adds the summit to the calendar
   const ics = [
@@ -31,12 +32,20 @@
   ].join('\r\n');
 
   onMount(async () => {
-    qrSvg = await QRCode.toString(ics, {
-      type: 'svg',
-      errorCorrectionLevel: 'M',
-      margin: 1,
-      color: { dark: '#231c15', light: '#f7f1e300' },
-    });
+    [calendarQr, waQr] = await Promise.all([
+      QRCode.toString(ics, {
+        type: 'svg',
+        errorCorrectionLevel: 'M',
+        margin: 1,
+        color: { dark: '#231c15', light: '#f7f1e300' },
+      }),
+      QRCode.toString(waLink, {
+        type: 'svg',
+        errorCorrectionLevel: 'M',
+        margin: 1,
+        color: { dark: '#0b2a1f', light: '#ffffff00' },
+      }),
+    ]);
   });
 </script>
 
@@ -66,7 +75,7 @@
             </div>
           </div>
 
-          <div class="qr">{@html qrSvg}</div>
+          <div class="qr">{@html calendarQr}</div>
 
           <div class="qr-foot">
             <div class="dates">14 – 31 August 2026</div>
@@ -94,13 +103,22 @@
             your chosen tier.
           </p>
 
-          <a class="wa-btn" href={waLink} target="_blank" rel="noopener">
-            <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true">
-              <path fill="currentColor" d="M16 3C8.82 3 3 8.82 3 16c0 2.29.6 4.44 1.66 6.3L3 29l6.92-1.62A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm6.13 15.69c-.34-.17-1.99-.98-2.3-1.09-.31-.11-.53-.17-.76.17-.22.33-.87 1.09-1.06 1.3-.2.22-.39.24-.72.08-.34-.17-1.43-.52-2.72-1.66a10.28 10.28 0 0 1-1.9-2.36c-.2-.34 0-.52.15-.68.15-.15.34-.4.51-.6.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.6-.09-.17-.76-1.85-1.05-2.53-.27-.66-.55-.57-.76-.58l-.65-.01a1.25 1.25 0 0 0-.9.42c-.3.33-1.17 1.15-1.17 2.8 0 1.66 1.2 3.25 1.37 3.48.17.22 2.37 3.62 5.75 5.07.8.34 1.43.54 1.92.7.8.26 1.54.22 2.11.13.64-.1 1.99-.81 2.27-1.6.28-.78.28-1.46.2-1.6-.08-.14-.3-.22-.64-.39z"/>
-            </svg>
-            Message on WhatsApp
-          </a>
-          <p class="wa-num">+44 7932 506 556</p>
+          <div class="wa-action">
+            <div class="wa-buttons">
+              <a class="wa-btn" href={waLink} target="_blank" rel="noopener">
+                <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true">
+                  <path fill="currentColor" d="M16 3C8.82 3 3 8.82 3 16c0 2.29.6 4.44 1.66 6.3L3 29l6.92-1.62A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm6.13 15.69c-.34-.17-1.99-.98-2.3-1.09-.31-.11-.53-.17-.76.17-.22.33-.87 1.09-1.06 1.3-.2.22-.39.24-.72.08-.34-.17-1.43-.52-2.72-1.66a10.28 10.28 0 0 1-1.9-2.36c-.2-.34 0-.52.15-.68.15-.15.34-.4.51-.6.17-.2.22-.34.34-.57.11-.22.06-.42-.03-.6-.09-.17-.76-1.85-1.05-2.53-.27-.66-.55-.57-.76-.58l-.65-.01a1.25 1.25 0 0 0-.9.42c-.3.33-1.17 1.15-1.17 2.8 0 1.66 1.2 3.25 1.37 3.48.17.22 2.37 3.62 5.75 5.07.8.34 1.43.54 1.92.7.8.26 1.54.22 2.11.13.64-.1 1.99-.81 2.27-1.6.28-.78.28-1.46.2-1.6-.08-.14-.3-.22-.64-.39z"/>
+                </svg>
+                Message on WhatsApp
+              </a>
+              <p class="wa-num">+44 7932 506 556</p>
+              <p class="wa-hint">On mobile? Tap to open a chat. On desktop, scan the code →</p>
+            </div>
+            <div class="wa-qr" aria-label="WhatsApp QR code">
+              {@html waQr}
+              <span class="wa-qr-label">Scan to RSVP</span>
+            </div>
+          </div>
 
           <div class="wa-alt">
             <div class="alt-k">Prefer email or telephone?</div>
@@ -283,6 +301,15 @@
     max-width: 52ch;
   }
 
+  .wa-action {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+  }
+  .wa-buttons { display: flex; flex-direction: column; align-items: flex-start; }
+
   .wa-btn {
     display: inline-flex;
     align-items: center;
@@ -307,6 +334,45 @@
     color: rgba(250, 246, 234, 0.7);
     font-size: 1rem;
     margin-top: 0.85rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .wa-hint {
+    font-size: 0.78rem !important;
+    color: rgba(250, 246, 234, 0.55) !important;
+    margin-bottom: 0 !important;
+    max-width: 28ch !important;
+    line-height: 1.4 !important;
+  }
+
+  .wa-qr {
+    background: var(--cream);
+    padding: 0.85rem;
+    border-radius: 4px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .wa-qr :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .wa-qr-label {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #25d366;
+    font-weight: 500;
   }
 
   .wa-alt {
@@ -337,5 +403,9 @@
     .grid { grid-template-columns: 1fr; }
     .qr-panel { position: static; }
     .wa-card { padding: 2rem 1.5rem; }
+  }
+  @media (max-width: 560px) {
+    .wa-action { grid-template-columns: 1fr; gap: 2.5rem; justify-items: start; }
+    .wa-qr { align-self: center; }
   }
 </style>
