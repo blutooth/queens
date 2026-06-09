@@ -33,7 +33,7 @@
         </div>
         <div>
           <h5>Connect</h5>
-          <a href="mailto:obonganwan.aruk@yahoo.co.uk">obonganwan.aruk@yahoo.co.uk</a>
+          <a href="mailto:africanqueenssummit@gmail.com">africanqueenssummit@gmail.com</a>
           <a href="tel:+447932506556">+44 7932 506 556</a>
           <a href="tel:+2347062774657">+234 706 277 4657</a>
           <a href="https://globalqueenssummit.com">globalqueenssummit.com</a>
