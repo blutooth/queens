@@ -9,43 +9,15 @@
   );
   const waLink = `https://wa.me/${phone}?text=${prefill}`;
 
-  let calendarQr = '';
   let waQr = '';
 
-  // vCalendar event — scanning this on a phone adds the summit to the calendar
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//ARUK II Foundation//African Queens Summit//EN',
-    'BEGIN:VEVENT',
-    'UID:african-queens-summit-2026@africanqueenssummit.com',
-    'DTSTAMP:20260415T120000Z',
-    'DTSTART:20260814T180000Z',
-    'DTEND:20260831T220000Z',
-    'SUMMARY:African Queens Summit',
-    'LOCATION:Porchester Hall, London; Hawkhill Place, Oxford; University of Oxford',
-    'DESCRIPTION:The African & Diaspora Queens Summit — a convocation of 100 queens of Africa and the Diaspora. Convened by Her Royal Majesty Queen Aruk II. https://africanqueenssummit.com',
-    'URL:https://africanqueenssummit.com',
-    'ORGANIZER;CN=Queen Aruk II Foundation:mailto:africanqueenssummit@gmail.com',
-    'END:VEVENT',
-    'END:VCALENDAR',
-  ].join('\r\n');
-
   onMount(async () => {
-    [calendarQr, waQr] = await Promise.all([
-      QRCode.toString(ics, {
-        type: 'svg',
-        errorCorrectionLevel: 'M',
-        margin: 1,
-        color: { dark: '#231c15', light: '#f7f1e300' },
-      }),
-      QRCode.toString(waLink, {
-        type: 'svg',
-        errorCorrectionLevel: 'M',
-        margin: 1,
-        color: { dark: '#0b2a1f', light: '#ffffff00' },
-      }),
-    ]);
+    waQr = await QRCode.toString(waLink, {
+      type: 'svg',
+      errorCorrectionLevel: 'M',
+      margin: 1,
+      color: { dark: '#0b2a1f', light: '#ffffff00' },
+    });
   });
 </script>
 
@@ -64,29 +36,6 @@
     </div>
 
     <div class="grid">
-      <!-- QR panel -->
-      <aside class="qr-panel">
-        <div class="qr-inner">
-          <div class="qr-head">
-            <span class="crown">♕</span>
-            <div>
-              <div class="k">Save the date</div>
-              <div class="v">Scan with camera</div>
-            </div>
-          </div>
-
-          <div class="qr">{@html calendarQr}</div>
-
-          <div class="qr-foot">
-            <div class="dates">14 – 31 August 2026</div>
-            <div class="places">London · Oxford</div>
-            <a class="dl" href={'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics)} download="african-queens-summit.ics">
-              Add to calendar ↗
-            </a>
-          </div>
-        </div>
-      </aside>
-
       <!-- WhatsApp RSVP -->
       <div class="wa-wrap">
         <div class="wa-card">
@@ -159,10 +108,8 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 360px 1fr;
-    gap: 2.5rem;
-    align-items: start;
-    max-width: 1100px;
+    grid-template-columns: 1fr;
+    max-width: 760px;
     margin: 0 auto;
   }
 

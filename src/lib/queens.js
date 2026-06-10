@@ -295,6 +295,47 @@ export const dignitaries = [
   },
 ];
 
+// Four registration packages. Each includes the three flagship engagements.
+// `retail` is the indicative à-la-carte value, shown struck through to convey
+// the saving against the summit package rate.
+export const packages = [
+  { name: 'Signature', price: 450, retail: 600, note: 'The three flagship engagements', body: 'Oxford, the Royal Gala and Buckingham Palace — the heart of the summit.', image: asset('/images/oxford-university.jpg') },
+  { name: 'Signature + 2', price: 550, retail: 760, note: 'Flagships + any two excursions', body: 'Add two further outings of your choosing from the programme.', image: asset('/images/oxford-magdalen.jpg') },
+  { name: 'Signature + 3', price: 650, retail: 920, note: 'Flagships + any three excursions', body: 'Add three further outings of your choosing from the programme.', featured: true, image: asset('/images/dancers.jpg') },
+  { name: 'Full Programme', price: 730, retail: 1100, note: 'Every engagement included', body: 'The complete convocation — every excursion across the seventeen days.', premium: true, image: asset('/images/queen-aruk-ii-throne.jpg') },
+];
+
+// The day-by-day programme. `price` is a number (GBP) or a label / null.
+// `image` is set where a real photograph exists; cards without one fall back
+// to a branded placeholder.
+// `price` is the summit (conference) rate paid by attendees; `retail` is the
+// indicative individual / on-the-door value, shown struck through to make the
+// saving visible.
+export const itinerary = [
+  { date: '14–15 Aug', title: 'Arrival & Welcome', price: null, image: asset('/images/queen-aruk-ii-throne.jpg'), detail: 'Reception of the royal delegations and settling into residence.' },
+  { date: '16 Aug', title: 'Opening Ceremony', price: 'Included', image: asset('/images/porchester-1.jpg'), detail: 'The grand opening processional and royal reception.' },
+  { date: '17–18 Aug', title: 'Oxford University', price: 150, retail: 220, flagship: true, image: asset('/images/oxford-university.jpg'), detail: 'Executive course, the royal lecture series and the honorary banquet.' },
+  { date: '19 Aug', title: 'Blenheim Palace', price: 45, retail: 65, image: asset('/images/blenheim-palace.jpg'), detail: 'A private visit to the birthplace of Sir Winston Churchill.' },
+  { date: '20 Aug', title: "Lord Mayor's Reception", price: 40, retail: 60, image: asset('/images/lord-mayor.jpg'), detail: 'A civic reception in the historic City of London.' },
+  { date: '21 Aug', title: 'Bicester Village', price: 30, retail: 45, image: asset('/images/bicester-village.jpg'), detail: 'A luxury shopping excursion — lunch included.' },
+  { date: '22 Aug', title: 'Rest, Art & Leisure', price: 20, retail: 30, image: asset('/images/hawkhill-grounds.png'), detail: 'A restful day at Hawkhill with art, spa and wellness.' },
+  { date: '23 Aug', title: 'Royal Gala Night', price: 150, retail: 220, flagship: true, image: asset('/images/porchester-2.jpg'), detail: 'The black-tie Gala at Porchester Hall, London.' },
+  { date: '24 Aug', title: 'London Sightseeing', price: 50, retail: 75, image: asset('/images/london-sightseeing.jpg'), detail: 'A guided open-top tour of the capital by coach.' },
+  { date: '25 Aug', title: 'Buckingham Palace', price: 100, retail: 140, flagship: true, image: asset('/images/buckingham-palace.jpg'), detail: 'A visit to the State Rooms, subject to protocol confirmation.' },
+  { date: '26 Aug', title: 'Kew Gardens', price: 40, retail: 60, image: asset('/images/kew-gardens.jpg'), detail: 'The Royal Botanic Gardens at Kew.' },
+  { date: '27 Aug', title: "St Paul's & Tower of London", price: 80, retail: 120, image: asset('/images/st-pauls.jpg'), detail: 'The cathedral, the Tower and the Crown Jewels.' },
+  { date: '28 Aug', title: 'Westminster', price: 50, retail: 75, image: asset('/images/westminster.jpg'), detail: 'Westminster Abbey and the Houses of Parliament.' },
+  { date: '29–30 Aug', title: 'Rest', price: null, image: asset('/images/london-rest.jpg'), detail: 'Leisure days and personal engagements.' },
+  { date: '31 Aug', title: 'Notting Hill Carnival', price: 'Free', image: asset('/images/celebration-carnival.jpg'), detail: 'The cultural finale on a global stage.' },
+];
+
+// Optional London attractions, bookable as add-ons. Per person.
+export const extras = [
+  { name: 'London Eye', price: '£33' },
+  { name: 'Madame Tussauds', price: '£51' },
+  { name: 'Thames River Cruise', price: '£18' },
+];
+
 export const tiers = [
   {
     name: 'Observer',
