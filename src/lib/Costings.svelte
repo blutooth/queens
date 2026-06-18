@@ -77,7 +77,7 @@
               </div>
               <div class="note">{p.note}</div>
               <p class="pbody">{p.body}</p>
-              <a class="cta" href={packLink(p.name, p.price)} target="_blank" rel="noopener">Reserve →</a>
+              <a class="cta" href={p.stripe ?? packLink(p.name, p.price)} target="_blank" rel="noopener">Reserve →</a>
             </div>
           </article>
         {/each}

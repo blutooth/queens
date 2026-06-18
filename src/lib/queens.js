@@ -299,10 +299,10 @@ export const dignitaries = [
 // `retail` is the indicative à-la-carte value, shown struck through to convey
 // the saving against the summit package rate.
 export const packages = [
-  { name: 'Signature', price: 450, retail: 600, note: 'The three flagship engagements', body: 'Oxford, the Royal Gala and Buckingham Palace — the heart of the summit.', image: asset('/images/oxford-university.jpg') },
-  { name: 'Signature + 2', price: 550, retail: 760, note: 'Flagships + any two excursions', body: 'Add two further outings of your choosing from the programme.', image: asset('/images/oxford-magdalen.jpg') },
-  { name: 'Signature + 3', price: 650, retail: 920, note: 'Flagships + any three excursions', body: 'Add three further outings of your choosing from the programme.', featured: true, image: asset('/images/dancers.jpg') },
-  { name: 'Full Programme', price: 730, retail: 1100, note: 'Every engagement included', body: 'The complete convocation — every excursion across the seventeen days.', premium: true, image: asset('/images/queen-aruk-ii-throne.jpg') },
+  { name: 'Signature', price: 485, retail: 600, note: 'The three flagship engagements', body: 'Oxford, the Royal Gala and Buckingham Palace — the heart of the summit.', image: asset('/images/oxford-university.jpg'), stripe: 'https://buy.stripe.com/00w3cv7Lj9M49JDfrP1VK00' },
+  { name: 'Signature + 2', price: 550, retail: 760, note: 'Flagships + any two excursions', body: 'Add two further outings of your choosing from the programme.', image: asset('/images/oxford-magdalen.jpg'), stripe: 'https://buy.stripe.com/00w8wPghPbUcdZTenL1VK01' },
+  { name: 'Signature + 3', price: 650, retail: 920, note: 'Flagships + any three excursions', body: 'Add three further outings of your choosing from the programme.', featured: true, image: asset('/images/dancers.jpg'), stripe: 'https://buy.stripe.com/8x2eVd9Tr9M42hbdjH1VK02' },
+  { name: 'Full Programme', price: 730, retail: 1100, note: 'Every engagement included', body: 'The complete convocation — every excursion across the seventeen days.', premium: true, image: asset('/images/queen-aruk-ii-throne.jpg'), stripe: 'https://buy.stripe.com/5kQ28r5Db7DW8Fz4Nb1VK03' },
 ];
 
 // The day-by-day programme. `price` is a number (GBP) or a label / null.
