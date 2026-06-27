@@ -100,7 +100,7 @@ const programme = [
 ];
 
 // Per-audience defaults
-const AUD_SALUTATION = { queens: 'Your Majesty', kings: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness' };
+const AUD_SALUTATION = { queens: 'Your Majesty', kings: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
 
 // Letter body per audience (content/letters/<audience>.md), falling back to base letter.md
 const letterCache = {};
@@ -124,6 +124,7 @@ function waAccept(name, audience) {
     politicians: `Your Excellency, this is ${name}`,
     guests: `Hello, this is ${name}`,
     princesses: `Your Royal Highness, this is ${name} 👑`,
+    excellency: `Your Excellency, this is ${name}`,
   };
   const opener = openers[audience] || openers.queens;
   const msg = `${opener} — I am honoured to accept your gracious invitation and confirm my attendance at the African Queens Summit (14–31 August 2026, London & Oxford).`;
@@ -162,6 +163,7 @@ function heritage({ data, noteHtml, letterHtml }) {
     : (AUD_SALUTATION[audience] !== undefined ? AUD_SALUTATION[audience] : 'Your Majesty');
   const kingdom = data.kingdom || '';
   const date = data.date || '';
+  const custom = !!data.custom; // a per-person custom letter is self-contained
   const waLink = waAccept(name, audience);
 
   const progRows = programme
@@ -196,7 +198,7 @@ function heritage({ data, noteHtml, letterHtml }) {
     </div>`,
     letter: () => `<section class="content">
       ${date ? `<p class="dateline">${esc(date)}</p>` : ''}
-      <p class="salutation">${saluteLine}</p>
+      ${custom ? '' : `<p class="salutation">${saluteLine}</p>`}
       ${noteBlock}${letterHtml}
     </section>`,
     programme: () => `<div class="mud-divider"></div>
@@ -587,12 +589,6 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
   .toolbar select { flex: 0 0 auto; width: auto; }
   .count { font-family: 'Marcellus', serif; font-size: 12px; letter-spacing: 0.04em; color: #8a7250; margin-left: auto; }
   #list { max-height: 70vh; overflow-y: auto; padding-right: 6px; }
-  #gate { position: fixed; inset: 0; z-index: 100000; background: #2b1810; background-image: conic-gradient(from 45deg at 50% 50%, #3c2415, #5a3a24, #3c2415); display: flex; align-items: center; justify-content: center; padding: 20px; }
-  .gate-card { background: var(--paper); border: 1px solid var(--gold-deep); border-radius: 16px; padding: 34px 28px; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 22px 56px rgba(0,0,0,0.55); }
-  .gate-title { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 24px; color: var(--emerald-deep); margin-bottom: 6px; }
-  .gate-sub { font-family: 'Marcellus', serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a7250; margin-bottom: 18px; }
-  #gate input { margin-bottom: 12px; text-align: center; }
-  #gate-err { display: none; color: #c0532b; font-size: 13px; margin-top: 10px; }
   .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--emerald-deep); color: #fdf6e3; border: 1px solid var(--gold); padding: 14px 22px; border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); font-family: 'Marcellus', serif; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; z-index: 99999; max-width: 92vw; text-align: center; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   .sent-chk { display: flex; align-items: center; gap: 6px; font-family: 'Marcellus', serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a7250; margin: 0; cursor: pointer; }
@@ -603,28 +599,6 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
 </style>
 </head>
 <body>
-  <div id="gate">
-    <div class="gate-card">
-      <div class="gate-title">African Queens Summit · Invitations</div>
-      <p class="gate-sub">Enter password to continue</p>
-      <input id="gate-pw" type="password" placeholder="Password" autocomplete="off" />
-      <button id="gate-go" class="act">Enter</button>
-      <p id="gate-err">Incorrect password</p>
-    </div>
-  </div>
-  <script>
-  (function () {
-    var KEY = 'aqs-gate';
-    var gate = document.getElementById('gate');
-    function unlock() { gate.style.display = 'none'; }
-    if (sessionStorage.getItem(KEY) === '1') unlock();
-    var go = document.getElementById('gate-go'), pw = document.getElementById('gate-pw'), err = document.getElementById('gate-err');
-    function tryPw() { if (pw.value === 'queens1234') { try { sessionStorage.setItem(KEY, '1'); } catch (e) {} unlock(); } else { err.style.display = 'block'; pw.value = ''; pw.focus(); } }
-    go.addEventListener('click', tryPw);
-    pw.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); tryPw(); } });
-    try { pw.focus(); } catch (e) {}
-  })();
-  </script>
   <div class="wrap">
     <h1>African Queens Summit · Invitations</h1>
     <div class="sub">Master Page — Create &amp; Send Personal Invitations</div>
@@ -643,7 +617,8 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
         <div class="field"><label>Audience (sets letter &amp; salutation)</label><select id="f-audience">
           <option value="queens">Queen</option>
           <option value="kings">King</option>
-          <option value="politicians">Politician / Head of State</option>
+          <option value="politicians">Politician</option>
+          <option value="excellency">Head of State / Excellency</option>
           <option value="guests">Special Guest</option>
           <option value="princesses">Princess</option>
         </select></div>
@@ -696,6 +671,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
           <option value="kings">Kings</option>
           <option value="princesses">Princesses</option>
           <option value="politicians">Politicians</option>
+          <option value="excellency">Heads of State</option>
           <option value="guests">Guests</option>
         </select>
         <select id="filter-sent">
@@ -716,7 +692,8 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       <div class="field"><label>Audience letter</label><select id="ed-audience">
         <option value="queens">Queens</option>
         <option value="kings">Kings</option>
-        <option value="politicians">Politicians / Heads of State</option>
+        <option value="politicians">Politicians</option>
+        <option value="excellency">Heads of State / Excellency</option>
         <option value="guests">Special Guests</option>
         <option value="princesses">Princesses</option>
       </select></div>
@@ -734,6 +711,9 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
   var INVITES = ${data};
   var INVITED = ${invitedJson};
   var origin = location.origin;
+  // Invitation links must point at the live site (names aren't stored there —
+  // they travel only in the query params). On localhost, use the production host.
+  var SITE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'https://africanqueenssummit.com' : origin;
 
   function slugify(s) {
     var honor = /^(hrm|hrh|hm|her|his|royal|majesty|highness|queen|king|chief|obong|obonganwan|princess|prince|dr|sir|lady|the)\\b/i;
@@ -743,9 +723,9 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   }
   function inviteUrl(name, audience) {
-    var SHORT = { queens: 'q', kings: 'k', princesses: 'pr', politicians: 'po', guests: 'g' };
+    var SHORT = { queens: 'q', kings: 'k', princesses: 'pr', politicians: 'po', guests: 'g', excellency: 'ex' };
     var n = encodeURIComponent(String(name).trim().replace(/\\s+/g, '_'));
-    return origin + '/invite/card/?n=' + n + '&t=' + (SHORT[audience] || 'q');
+    return SITE + '/invite/card/?n=' + n + '&t=' + (SHORT[audience] || 'q');
   }
   function shareWa(name, slug, audience) {
     var sal = SAL_DEFAULT[audience] || '';
@@ -753,7 +733,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     var msg = greeting + ' \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, you are warmly invited to the African Global Queens Summit (United Kingdom, 14\\u201331 August 2026). Your personal invitation: ' + inviteUrl(name, audience) + ' \\u2014 kindly RSVP via the page.';
     return 'https://wa.me/?text=' + encodeURIComponent(msg);
   }
-  var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness' };
+  var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
   var ALL_SECTIONS = ['hero', 'recipient', 'letter', 'programme', 'signature', 'rsvp', 'footer'];
   var LETTERS = ${lettersJson};
   var NOTES = {
@@ -761,7 +741,8 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     kings: 'It would be a profound honour to welcome you among the sovereigns gathered in England this August.',
     politicians: 'It would be a distinct honour to receive you among the convocation in England this August.',
     guests: 'It would be a joy to welcome you as our honoured guest at the Summit in England this August.',
-    princesses: 'It would be a profound honour to welcome you among the royal women gathered in England this August.'
+    princesses: 'It would be a profound honour to welcome you among the royal women gathered in England this August.',
+    excellency: 'It would be a singular honour to welcome Your Excellency among the leaders gathered in England this August.'
   };
 
   // --- toast ---
@@ -1070,10 +1051,10 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     var nU = P.get('n'); var nFull = P.get('name');
     var name = (nU ? nU.replace(/_/g, ' ') : (nFull || 'Your Majesty')).trim().replace(/\\s+/g, ' ');
     var title = (P.get('e') || P.get('epithet') || P.get('title') || '').replace(/_/g, ' ').trim();
-    var TYPE_MAP = { q: 'queens', k: 'kings', pr: 'princesses', po: 'politicians', g: 'guests' };
+    var TYPE_MAP = { q: 'queens', k: 'kings', pr: 'princesses', po: 'politicians', g: 'guests', ex: 'excellency' };
     var rawType = (P.get('t') || P.get('type') || P.get('a') || 'q').trim().toLowerCase();
     var type = TYPE_MAP[rawType] || rawType || 'queens';
-    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness' };
+    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
     var LETTERS = ${lettersJson};
     var sal = SAL.hasOwnProperty(type) ? SAL[type] : 'Your Majesty';
     document.getElementById('v-name').textContent = name;
@@ -1084,7 +1065,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     document.getElementById('v-salute').textContent = sal ? (sal + ' ' + name + ',') : ('Dear ' + name + ',');
     document.getElementById('v-letter').innerHTML = LETTERS[type] || LETTERS.queens || '';
     document.title = 'A Royal Invitation \\u00b7 ' + name;
-    var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Royal Highness, this is ' + name + ' \\uD83D\\uDC51' };
+    var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Royal Highness, this is ' + name + ' \\uD83D\\uDC51', excellency: 'Your Excellency, this is ' + name };
     var opener = openers[type] || openers.queens;
     var waMsg = opener + ' \\u2014 I am honoured to accept your gracious invitation and confirm my attendance at the African Queens Summit (14\\u201331 August 2026, London \\u0026 Oxford).';
     document.getElementById('v-wa').href = 'https://wa.me/447932506556?text=' + encodeURIComponent(waMsg);
@@ -1122,6 +1103,7 @@ for (const f of files) {
   const { note, letter } = splitBody(body);
   const letterHtml = letter ? md(letter) : getLetter(audience);
   const noteHtml = note ? inline(note.split('\n\n')[0]) : '';
+  data.custom = !!letter;
   const html = TEMPLATES[template]({ data, noteHtml, letterHtml });
   const dir = join(outRoot, slug);
   mkdirSync(dir, { recursive: true });
@@ -1131,7 +1113,7 @@ for (const f of files) {
 }
 
 const rawLetters = {};
-for (const a of ['queens', 'kings', 'politicians', 'guests', 'princesses']) {
+for (const a of ['queens', 'kings', 'politicians', 'guests', 'princesses', 'excellency']) {
   const p = join(root, 'content', 'letters', `${a}.md`);
   if (existsSync(p)) rawLetters[a] = readFileSync(p, 'utf8');
 }
@@ -1159,7 +1141,7 @@ writeFileSync(join(outRoot, 'index.html'), masterPage(built, Object.keys(TEMPLAT
 const sampleHtml = heritage({ data: { name: 'Sample', audience: 'queens' }, noteHtml: '', letterHtml: '' });
 const HERITAGE_CSS = (sampleHtml.match(/<style>([\s\S]*?)<\/style>/) || [null, ''])[1];
 const lettersHtmlMap = {};
-for (const a of ['queens', 'kings', 'politicians', 'guests', 'princesses']) lettersHtmlMap[a] = getLetter(a);
+for (const a of ['queens', 'kings', 'politicians', 'guests', 'princesses', 'excellency']) lettersHtmlMap[a] = getLetter(a);
 const progRowsHtml = programme
   .map(([d, t, ic], i) =>
     `<div class="prog-row${i === programme.length - 1 ? ' finale' : ''}"><span class="prog-ico" aria-hidden="true">${ic}</span><span class="when">${esc(d)}</span><span class="what">${esc(t)}</span></div>`)
