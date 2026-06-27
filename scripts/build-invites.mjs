@@ -173,7 +173,7 @@ function heritage({ data, noteHtml, letterHtml }) {
 
   const noteBlock = noteHtml ? `<div class="note">${noteHtml}</div>\n` : '';
   const kingdomBlock = kingdom ? `<span class="ribbon-kingdom">${esc(kingdom)}</span>` : '';
-  const saluteLine = salutation ? `${esc(salutation)} ${esc(name)},` : `Dear ${esc(name)},`;
+  const saluteLine = salutation ? `${esc(salutation)},` : `Dear ${esc(name)},`;
 
   // ----- composable sections (add/subtract via frontmatter) -----
   const SECTIONS = {
@@ -1062,7 +1062,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     if (sal) { hEl.textContent = sal; hEl.style.display = ''; }
     var tEl = document.getElementById('v-title');
     if (title) { tEl.textContent = title; tEl.style.display = ''; }
-    document.getElementById('v-salute').textContent = sal ? (sal + ' ' + name + ',') : ('Dear ' + name + ',');
+    document.getElementById('v-salute').textContent = sal ? (sal + ',') : ('Dear ' + name + ',');
     document.getElementById('v-letter').innerHTML = LETTERS[type] || LETTERS.queens || '';
     document.title = 'A Royal Invitation \\u00b7 ' + name;
     var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Royal Highness, this is ' + name + ' \\uD83D\\uDC51', excellency: 'Your Excellency, this is ' + name };
