@@ -4,6 +4,22 @@ dist
 .vite
 *.log
 
+# Generated invitation pages (built from content/ by scripts/build-invites.mjs)
+public/invite/
+
 # Raw source material — kept locally, not published.
 # (PDFs, original photos, working notes.)
 reference/
+
+# Local WhatsApp invitation tool (tools/whatsapp/)
+tools/whatsapp/node_modules/
+tools/whatsapp/.wwebjs_auth/
+tools/whatsapp/.wwebjs_cache/
+tools/whatsapp/sent.json
+
+# Personal data — kept local only, never committed/deployed. Invitations use
+# query-param links (/invite/card/?name=…&type=…) so no PII is stored on the site.
+content/invitees/*
+!content/invitees/.gitkeep
+content/data/*
+!content/data/.gitkeep

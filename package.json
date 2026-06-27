@@ -5,6 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "invites": "node scripts/build-invites.mjs",
+    "import": "node scripts/import-csv.mjs",
+    "prebuild": "node scripts/build-invites.mjs",
+    "predev": "node scripts/build-invites.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
