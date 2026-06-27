@@ -73,7 +73,6 @@
             <div class="alt-k">Prefer email or telephone?</div>
             <a href="mailto:africanqueenssummit@gmail.com">africanqueenssummit@gmail.com</a>
             <a href="tel:+447932506556">+44 7932 506 556</a>
-            <a href="tel:+2347062774657">+234 706 277 4657</a>
           </div>
         </div>
       </div>
