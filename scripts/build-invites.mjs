@@ -163,6 +163,11 @@ function heritage({ data, noteHtml, letterHtml }) {
     : (AUD_SALUTATION[audience] !== undefined ? AUD_SALUTATION[audience] : 'Your Majesty');
   const kingdom = data.kingdom || '';
   const date = data.date || '';
+  // Orange-box honorific line: defaults to the audience salutation, but can be
+  // overridden per person (honorific: ...) or hidden (honorific: none).
+  const honorificText = data.honorific === undefined
+    ? salutation
+    : (String(data.honorific).toLowerCase() === 'none' ? '' : data.honorific);
   const custom = !!data.custom; // a per-person custom letter is self-contained
   const waLink = waAccept(name, audience);
 
@@ -191,7 +196,7 @@ function heritage({ data, noteHtml, letterHtml }) {
     recipient: () => `<div class="ribbon-wrap">
       <div class="ribbon fade fd5">
         <span class="ribbon-label">A Personal Invitation To</span>
-        ${salutation ? `<span class="ribbon-honorific">${esc(salutation)}</span>` : ''}
+        ${honorificText ? `<span class="ribbon-honorific">${esc(honorificText)}</span>` : ''}
         <span class="ribbon-name">${esc(name)}</span>
         ${kingdomBlock}
       </div>
