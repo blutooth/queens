@@ -1054,8 +1054,9 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
   (function () {
     var P = new URLSearchParams(location.search);
     var nU = P.get('n'); var nFull = P.get('name');
-    var name = (nU ? nU.replace(/_/g, ' ') : (nFull || 'Your Majesty')).trim().replace(/\\s+/g, ' ');
+    var name = (nU ? nU.replace(/_/g, ' ') : (nFull || 'Your Majesty')).trim().replace(/\\s+/g, ' ').replace(/[,\\s]+$/, '');
     var title = (P.get('e') || P.get('epithet') || P.get('title') || '').replace(/_/g, ' ').trim();
+    var hOverride = (P.get('h') || P.get('honorific') || '').replace(/_/g, ' ').trim();
     var TYPE_MAP = { q: 'queens', k: 'kings', pr: 'princesses', po: 'politicians', g: 'guests', ex: 'excellency' };
     var rawType = (P.get('t') || P.get('type') || P.get('a') || 'q').trim().toLowerCase();
     var type = TYPE_MAP[rawType] || rawType || 'queens';
@@ -1064,7 +1065,8 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     var sal = SAL.hasOwnProperty(type) ? SAL[type] : 'Your Majesty';
     document.getElementById('v-name').textContent = name;
     var hEl = document.getElementById('v-honorific');
-    if (sal) { hEl.textContent = sal; hEl.style.display = ''; }
+    var honorificDisplay = hOverride ? (hOverride.toLowerCase() === 'none' ? '' : hOverride) : sal;
+    if (honorificDisplay) { hEl.textContent = honorificDisplay; hEl.style.display = ''; }
     var tEl = document.getElementById('v-title');
     if (title) { tEl.textContent = title; tEl.style.display = ''; }
     document.getElementById('v-salute').textContent = sal ? (sal + ',') : ('Dear ' + name + ',');
