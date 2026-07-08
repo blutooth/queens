@@ -116,6 +116,7 @@ export default defineConfig(() => ({
       input: {
         main: resolve(__dirname, 'index.html'),
         rsvp: resolve(__dirname, 'rsvp/index.html'),
+        glamping: resolve(__dirname, 'glamping/index.html'),
       },
     },
   },

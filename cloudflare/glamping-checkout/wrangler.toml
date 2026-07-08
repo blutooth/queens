@@ -1,0 +1,17 @@
+name = "glamping-checkout"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Price per person per night, in pence. £30 = 3000.
+[vars]
+RATE_PENCE = "3000"
+SITE_URL = "https://africanqueenssummit.com"
+
+# The Stripe secret key is NOT stored here. Set it as an encrypted secret:
+#   wrangler secret put STRIPE_SECRET_KEY
+# (paste sk_test_… when prompted; swap to sk_live_… when you go live)
+
+# Optional: serve from a tidy route on your own domain instead of *.workers.dev
+# [[routes]]
+# pattern = "checkout.africanqueenssummit.com/glamping"
+# custom_domain = true
