@@ -31,7 +31,7 @@
       <li><a href="/#declaration" on:click={() => (open = false)}>Declaration</a></li>
       <li><a href="/#programme" on:click={() => (open = false)}>Programme</a></li>
       <li><a href="/#dignitaries" on:click={() => (open = false)}>Attendees</a></li>
-      <li><a href="/glamping/" on:click={() => (open = false)}>Glamping</a></li>
+      <li><a href="/glamping/" on:click={() => (open = false)}>Accommodation</a></li>
       <li><a href="/rsvp/" class="cta" on:click={() => (open = false)}>Pricing &amp; RSVP</a></li>
     </ul>
   </div>

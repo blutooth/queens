@@ -41,20 +41,18 @@
   };
 
   const gallery = [
-    { src: asset('/images/hawkhill-grounds.png'), cap: 'The walled grounds of Hawkhill Place — your setting for the Summit.' },
     { src: asset('/images/glamping-6.jpg'), cap: 'Inside a furnished bell tent — a proper bed beneath the canvas.' },
     { src: asset('/images/glamping-1.jpg'), cap: 'Cream canvas bell tents on their own timber decks.' },
-    { src: asset('/images/glamping-2.jpg'), cap: 'Lantern-lit under an Oxfordshire moon.' },
-    { src: asset('/images/glamping-5.jpg'), cap: 'Soft furnishings and light through the canopy.' },
+    { src: asset('/images/glamping-3.jpg'), cap: 'Lantern-lit under a starlit Oxfordshire sky.' },
   ];
 </script>
 
 <section class="glamp">
   <!-- Hero -->
-  <header class="hero" style="background-image: linear-gradient(to bottom, rgba(20,26,20,0.35), rgba(20,26,20,0.75)), url({asset('/images/glamping-3.jpg')})">
+  <header class="hero" style="background-image: linear-gradient(to bottom, rgba(20,26,20,0.35), rgba(20,26,20,0.75)), url({asset('/images/hawkhill-grounds.png')})">
     <div class="hero-inner">
       <p class="eyebrow">Hawkhill Place · Oxfordshire</p>
-      <h1>Glamping<br /><span class="italic">under summer skies.</span></h1>
+      <h1>Accommodation<br /><span class="italic">under summer skies.</span></h1>
       <p class="lede">
         Stay in a luxury bell tent in the private grounds of Hawkhill Place for
         the nights of the Summit — canvas and comfort, minutes from the
@@ -216,14 +214,14 @@
   /* Gallery */
   .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 14px;
-    max-width: 1200px;
-    margin: clamp(2.5rem, 6vw, 4rem) auto;
+    max-width: 880px;
+    margin: clamp(2rem, 5vw, 3rem) auto;
     padding: 0 clamp(1.2rem, 4vw, 2.5rem);
   }
-  .gallery figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 30px rgba(35,28,21,0.16); }
-  .gallery img { width: 100%; height: 320px; object-fit: cover; display: block; transition: transform 0.6s ease; }
+  .gallery figure { margin: 0; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(35,28,21,0.14); }
+  .gallery img { width: 100%; height: 210px; object-fit: cover; display: block; transition: transform 0.6s ease; }
   .gallery figure:hover img { transform: scale(1.05); }
   .gallery figcaption {
     position: absolute; left: 0; right: 0; bottom: 0;
