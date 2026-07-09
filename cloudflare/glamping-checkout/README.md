@@ -1,25 +1,20 @@
-# Glamping checkout Worker
+# Checkout Worker (glamping + donations)
 
-A tiny Cloudflare Worker that creates a Stripe Checkout Session with the
-**quantity (person-nights) locked in**, then redirects the guest to Stripe.
+A tiny Cloudflare Worker that creates a Stripe Checkout Session and redirects
+the visitor to Stripe. It handles **two flows with one Stripe secret key**:
 
-The glamping page can't set the quantity itself: Stripe Payment Links have no
-quantity URL parameter, and setting it server-side needs the **secret key**,
-which must never live in a static site. This Worker holds the secret and makes
-that one API call.
+- **Glamping** — `?qty=6&nights=3&guests=2&from=14&to=17` → charges qty × £30.
+- **Donations** — `?intent=donate&amount=25000&currency=gbp&mode=payment` →
+  charges a freely-chosen amount (`amount` in pence), one-time or `mode=subscription`
+  for monthly. Optional `designation`, `giftaid=1`.
 
-## How it's called
+Neither page can set the price itself: Stripe Payment Links have a fixed price,
+and setting the amount server-side needs the **secret key**, which must never
+live in a static site. This Worker holds the secret and makes that one API call.
 
-The "Book & pay" button links to:
-
-```
-https://<your-worker-url>/?qty=6&nights=3&guests=2&from=14&to=17
-```
-
-- `qty` — person-nights = nights × guests (the Stripe quantity). Required.
-- `nights`, `guests`, `from`, `to` — optional, used for the receipt/metadata.
-
-The Worker builds a £30-per-unit session and 302-redirects to Stripe checkout.
+> The donate page (`src/lib/Donate.svelte`) points at this same Worker URL — so
+> once it's deployed with the secret set, **both** glamping and giving work.
+> There is no separate donations worker to deploy.
 
 ## Deploy (one time)
 
