@@ -26,6 +26,9 @@
  *   node send.mjs --to 447700900123          # REAL single-number test send (one message,
  *                                            # ignores manifest; asks for typed confirmation)
  *   node send.mjs --to <num> --link <url> --name <name>   # override link / greeting name
+ *   node send.mjs --match                    # READ-ONLY: look up invitee phone numbers from
+ *                                            # your contacts and write a CSV (sends nothing)
+ *   node send.mjs --match --out <path.csv>   # choose the CSV output path
  */
 
 import fs from 'node:fs';
@@ -45,6 +48,11 @@ const DEFAULT_MANIFEST = path.resolve(__dirname, '../../content/data/invitees.js
 const SAMPLE_MANIFEST = path.resolve(__dirname, '../../content/data/invitees.sample.json');
 const SENT_LOG = path.resolve(__dirname, 'sent.json');
 
+// --match (read-only) reads invitee names from the markdown source of truth and
+// writes the matched phone numbers here by default.
+const INVITEES_DIR = path.resolve(__dirname, '../../content/invitees');
+const DEFAULT_MATCH_OUT = path.resolve(__dirname, '../../content/data/contacts-matched.csv');
+
 const DEFAULT_MAX = 20;
 const DELAY_MIN_MS = 20_000; // 20s
 const DELAY_MAX_MS = 45_000; // 45s
@@ -60,6 +68,7 @@ function parseArgs(argv) {
   const args = {
     send: false, report: false, selftest: false, max: DEFAULT_MAX,
     manifest: null, mockContacts: null, to: null, link: null, name: null,
+    match: false, out: null,
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -75,6 +84,9 @@ function parseArgs(argv) {
     else if (a === '--to') args.to = argv[++i];
     else if (a === '--link') args.link = argv[++i];
     else if (a === '--name') args.name = argv[++i];
+    // Read-only match & export of invitee names -> contact phone numbers (CSV).
+    else if (a === '--match' || a === '--export') args.match = true;
+    else if (a === '--out') args.out = argv[++i];
     else if (a === '--help' || a === '-h') args.help = true;
     else console.warn(`(ignoring unknown argument: ${a})`);
   }
@@ -238,6 +250,88 @@ function loadManifest(explicitPath) {
   return { path: p, invitees: data };
 }
 
+/**
+ * Read invitee names from the markdown source of truth (content/invitees/*.md).
+ * This is authoritative — invitees.json may be stale. Parses the simple
+ * `--- ... ---` YAML-ish frontmatter for slug / name / audience. Skips .gitkeep
+ * and any file lacking a name.
+ * @returns Array<{ slug, name, audience, file }>
+ */
+export function loadInviteesFromMarkdown(dir = INVITEES_DIR) {
+  if (!fs.existsSync(dir)) throw new Error(`Invitees directory not found: ${dir}`);
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
+  const out = [];
+  for (const file of files) {
+    const raw = fs.readFileSync(path.join(dir, file), 'utf8');
+    const m = raw.match(/^---\s*\r?\n([\s\S]*?)\r?\n---/);
+    if (!m) continue;
+    const fm = {};
+    for (const line of m[1].split(/\r?\n/)) {
+      const kv = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
+      if (!kv) continue;
+      let val = kv[2].trim();
+      // strip surrounding quotes if present
+      val = val.replace(/^["']|["']$/g, '');
+      fm[kv[1].trim().toLowerCase()] = val;
+    }
+    const name = (fm.name || '').trim();
+    if (!name) continue;
+    out.push({
+      slug: (fm.slug || path.basename(file, '.md')).trim(),
+      name,
+      audience: (fm.audience || '').trim(),
+      file,
+    });
+  }
+  return out;
+}
+
+/** Quote a CSV cell if it contains comma, quote, or newline. */
+function csvCell(value) {
+  const s = value == null ? '' : String(value);
+  if (/[",\r\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+  return s;
+}
+
+const CSV_HEADER = 'slug,name,audience,status,phone,contact_name';
+
+/**
+ * Match a list of invitees (from markdown) against a contacts array.
+ * Pure/offline — no network. Returns rows + counts for the CSV export.
+ */
+export function buildMatchRows(invitees, contacts) {
+  const rows = [];
+  const counts = { matched: 0, ambiguous: 0, unmatched: 0 };
+  for (const inv of invitees) {
+    const res = matchInvitee(inv, contacts);
+    let status, phone = '', contactName = '';
+    if (res.status === 'matched') {
+      status = 'matched';
+      phone = contactPhone(res.contact);
+      contactName = res.contact.name || res.contact.pushname || res.contact.verifiedName || '';
+    } else if (res.candidates) {
+      status = 'ambiguous';
+      contactName = res.candidates.join(' | ');
+    } else {
+      status = 'unmatched';
+    }
+    counts[status]++;
+    rows.push({
+      slug: inv.slug, name: inv.name, audience: inv.audience,
+      status, phone, contact_name: contactName,
+    });
+  }
+  return { rows, counts };
+}
+
+function rowsToCsv(rows) {
+  const lines = [CSV_HEADER];
+  for (const r of rows) {
+    lines.push([r.slug, r.name, r.audience, r.status, r.phone, r.contact_name].map(csvCell).join(','));
+  }
+  return lines.join('\n') + '\n';
+}
+
 function loadSentLog() {
   if (!fs.existsSync(SENT_LOG)) return [];
   try {
@@ -397,6 +491,16 @@ async function run() {
   if (args.selftest) {
     const ok = runSelfTest();
     process.exit(ok ? 0 : 1);
+  }
+
+  // Read-only match & export. Mutually exclusive with sends.
+  if (args.match) {
+    if (args.send || args.to) {
+      console.error('Refusing: --match is read-only and cannot be combined with --send or --to.');
+      process.exit(1);
+    }
+    await matchExport(args);
+    return;
   }
 
   // Single-number REAL test send. Mutually exclusive with bulk send / mock.
@@ -612,6 +716,74 @@ async function testSend(args) {
     console.log(`\nTest message sent to +${digits}. (Not recorded in sent.json.)`);
   } finally {
     try { await client.destroy(); } catch { /* ignore */ }
+  }
+}
+
+/**
+ * READ-ONLY match & export. Reads invitee names from content/invitees/*.md,
+ * matches each to a WhatsApp contact (existing matcher), and writes a CSV of
+ * slug,name,audience,status,phone,contact_name. Never sends a message.
+ *
+ * Offline testing: pass --mock-contacts <json> to skip the WhatsApp connection
+ * and match against a fake contact array (prints would-be CSV rows).
+ */
+async function matchExport(args) {
+  const invitees = loadInviteesFromMarkdown();
+  const outPath = args.out ? path.resolve(args.out) : DEFAULT_MATCH_OUT;
+
+  console.log('================ MATCH & EXPORT (read-only) ================');
+  console.log(`Invitee source: ${INVITEES_DIR} (${invitees.length} markdown invitees)`);
+  console.log('Note: WhatsApp provides phone numbers only — never email addresses.\n');
+
+  let contacts;
+  let client = null;
+  if (args.mockContacts) {
+    contacts = JSON.parse(fs.readFileSync(path.resolve(args.mockContacts), 'utf8'));
+    console.log(`[MOCK] Loaded ${contacts.length} fake contacts from ${args.mockContacts} (no WhatsApp connection).\n`);
+  } else {
+    client = await makeClient();
+    console.log('Connecting to WhatsApp Web...');
+    await ready(client);
+    console.log('WhatsApp ready.');
+    contacts = await getContacts(client);
+    console.log(`Loaded ${contacts.length} personal contacts.\n`);
+  }
+
+  try {
+    const { rows, counts } = buildMatchRows(invitees, contacts);
+    const csv = rowsToCsv(rows);
+
+    if (args.mockContacts) {
+      // Offline test: print the would-be CSV instead of (also) writing nothing.
+      console.log('--- would-be CSV ---');
+      process.stdout.write(csv);
+      console.log('--------------------\n');
+    } else {
+      fs.mkdirSync(path.dirname(outPath), { recursive: true });
+      fs.writeFileSync(outPath, csv);
+    }
+
+    console.log('================ SUMMARY ================');
+    console.log(`Total invitees : ${rows.length}`);
+    console.log(`Matched        : ${counts.matched}`);
+    console.log(`Ambiguous      : ${counts.ambiguous}`);
+    console.log(`Unmatched      : ${counts.unmatched}`);
+    if (!args.mockContacts) console.log(`\nCSV written to : ${outPath}`);
+    console.log('Columns        : slug,name,audience,status,phone,contact_name');
+
+    const ambiguous = rows.filter((r) => r.status === 'ambiguous');
+    const unmatched = rows.filter((r) => r.status === 'unmatched');
+    if (ambiguous.length) {
+      console.log('\nAMBIGUOUS (multiple contacts matched — disambiguate the contact or the name):');
+      for (const r of ambiguous) console.log(`  - ${r.name} (${r.audience || 'no audience'})  [${r.contact_name}]`);
+    }
+    if (unmatched.length) {
+      console.log('\nUNMATCHED (save the contact or correct the name, then re-run):');
+      for (const r of unmatched) console.log(`  - ${r.name} (${r.audience || 'no audience'})`);
+    }
+    console.log('\nThis was READ-ONLY: no messages were sent.');
+  } finally {
+    if (client) { try { await client.destroy(); } catch { /* ignore */ } }
   }
 }
 

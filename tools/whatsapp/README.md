@@ -81,6 +81,49 @@ node send.mjs --to 447700900123 --name "Marie"      # personalise the greeting
 
 ---
 
+## Look up contacts (read-only phone-number export)
+
+To find the phone numbers of your invitees from your own WhatsApp contacts —
+**without sending anything** — use match & export:
+
+```bash
+node send.mjs --match
+```
+
+What this does:
+- On first run, prints the **QR code** to link your WhatsApp (same as above).
+- Reads every invitee from the markdown source of truth
+  `content/invitees/*.md` (the authoritative list — this includes everyone, e.g.
+  Mia Mottley; `invitees.json` may be stale and is **not** used here).
+- Fetches your contacts once and matches each invitee with the same matcher used
+  elsewhere (exact title-stripped set, then token-subset).
+- Writes a CSV to `content/data/contacts-matched.csv` (override with `--out`)
+  with columns:
+
+  ```
+  slug,name,audience,status,phone,contact_name
+  ```
+
+  `status` is `matched`, `ambiguous`, or `unmatched`. For matched rows, `phone`
+  is the full international number in digits (this is **your own** data, so it is
+  not masked in the file). Fields containing commas are quoted.
+- Prints a summary (matched / ambiguous / unmatched counts) and lists the
+  ambiguous + unmatched names so you can fix them (save the contact under the
+  person's real name, or correct the name) and re-run.
+
+This mode is **READ-ONLY**: it never sends a message. It is mutually exclusive
+with `--send` and `--to`.
+
+> **Note:** WhatsApp exposes **phone numbers only** — it does **not** provide
+> contacts' email addresses. The `email` column in the invitee data is not
+> populated by this tool.
+
+```bash
+node send.mjs --match --out ../../somewhere/else.csv      # custom output path
+```
+
+---
+
 ## How to run
 
 Always run the **dry run first**. Nothing is ever sent unless you pass `--send`
@@ -104,6 +147,7 @@ node send.mjs --send --max 10              # cap this run at 10 sends (default 2
 node send.mjs --manifest ../../path.json   # use a different manifest
 node send.mjs --selftest                   # offline matcher + template test (no WhatsApp)
 node send.mjs --to 447700900123            # REAL single-number test send (see "Test it first")
+node send.mjs --match                      # READ-ONLY: export invitee phone numbers (see below)
 ```
 
 `npm run dry-run`, `npm run report`, `npm run selftest`, `npm run send` are
