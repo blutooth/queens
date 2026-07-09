@@ -34,7 +34,7 @@ We're inviting one exceptional entertainer to perform for Africa's elite — and
 <!-- accent: terracotta -->
 > The opportunity
 # An exclusive stage, among Africa's leaders.
-## Porchester Hall, London · 23 August 2026
+## Porchester Hall, London · 25 August 2026
 - **500 in the room** — a gilded Edwardian ballroom, central London
 - **The Royal Gala Night** — black tie, cameras, confetti, chandeliers
 - **Global press** and a front row of royalty
@@ -100,7 +100,7 @@ We're inviting one exceptional entertainer to perform for Africa's elite — and
 # Seventeen days. Three stages with your name on them.
 - **16 Aug** — Grand Opening Ceremony
 - **17–18 Aug** — University of Oxford *(your stage)*
-- **23 Aug** — Royal Gala, Porchester Hall *(your stage)*
+- **25 Aug** — Royal Gala, Porchester Hall *(your stage)*
 - **31 Aug** — Notting Hill Carnival finale *(your stage)*
 
 ---
