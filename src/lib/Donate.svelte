@@ -1,4 +1,6 @@
 <script>
+  import { asset } from './asset.js';
+
   // Serverless checkout — the SAME Cloudflare Worker as glamping (it already
   // holds the Stripe secret). ?intent=donate routes it to the donation flow.
   // Deploy: cloudflare/glamping-checkout/README.md
@@ -110,21 +112,24 @@
       name: 'Sceptre',
       role: 'Supporter',
       amount: 2500,
-      points: ["Name on the summit's digital donor wall", 'Acknowledgement in the summit programme', 'Seats travel support toward one delegate', 'A post-summit impact report'],
+      impact: 'Helps seat one delegate — travel & protocol',
+      points: ["Named on the summit's donor wall", 'Acknowledged in the summit programme', 'A post-summit impact report'],
     },
     {
       no: 'No. 02',
       name: 'Diadem',
       role: 'Patron',
       amount: 5000,
-      points: ['Everything in Sceptre, and', 'Logo on the summit sponsors page', 'Two invitations to a summit reception', 'Seats one delegate for travel and stay', 'Recognition across summit social channels'],
+      impact: 'Seats one delegate — travel & stay',
+      points: ['Everything in Sceptre, and', 'An invitation for two to a summit reception', "Recognition across the summit's channels"],
     },
     {
       no: 'No. 03',
       name: 'Throne',
       role: 'Benefactor',
       amount: 10000,
-      points: ['Everything in Diadem, and', 'Logo in the printed programme and on-screen at the Royal Gala', 'Two seats at the Royal Gala Night, Porchester Hall', 'Seats two delegates', 'Named acknowledgement at the Oxford convocation'],
+      impact: 'Seats two delegates — travel & stay',
+      points: ['Everything in Diadem, and', 'Two seats at the Royal Gala, Porchester Hall', 'Named at the Oxford convocation'],
     },
     {
       no: 'No. 04',
@@ -132,7 +137,8 @@
       role: 'Presenting Patron',
       amount: 25000,
       presenting: true,
-      points: ['Everything in Throne, and', 'Presenting recognition across summit branding', 'A table of eight at the Royal Gala, with Royal High Tea invitations', 'Seats four delegates', 'A greeting or branded moment, subject to protocol', 'Featured in the post-summit record'],
+      impact: 'Seats four delegates — travel & stay',
+      points: ['Everything in Throne, and', 'A table of eight at the Royal Gala, with Royal High Tea', 'A greeting or branded moment, subject to protocol', 'Presenting recognition, with our thanks, across the summit'],
     },
   ];
 
@@ -242,13 +248,21 @@
   <!-- ============ SPONSORSHIP ============ -->
   <section class="sponsor" id="sponsor">
     <div class="wrap">
-      <p class="eyebrow center">Sponsorship</p>
-      <h2 class="center">Stand with the <span class="ital-terra">convocation.</span></h2>
-      <p class="sub center">
-        Sponsors make the summit possible and share in its standing. Four circles
-        of support, each named for the regalia of sovereignty, with a bespoke
-        path for founding partners of the movement.
-      </p>
+      <div class="sponsor-intro">
+        <figure class="sponsor-portrait portrait-rich">
+          <img src={asset('/images/queen-3.jpg')} alt="A queen of the Diaspora in coral regalia" loading="lazy" />
+        </figure>
+        <div class="sponsor-lead">
+          <p class="eyebrow">Become a patron</p>
+          <h2>Stand with the <span class="ital-terra">convocation.</span></h2>
+          <p class="sub">
+            Behind every seat is a queen who leads with wisdom and travels with
+            little — some reign over thriving nations, others hold thrones of deep
+            honour and modest means. Your patronage is what brings her to England.
+          </p>
+          <p class="sub soft">The circles below are only a way to say thank you.</p>
+        </div>
+      </div>
 
       <div class="sponsor-grid">
         {#each sponsorTiers as t}
@@ -257,8 +271,10 @@
             <p class="no">♛ {t.no}</p>
             <h4>{t.name}</h4>
             <p class="role">{t.role}</p>
-            <p class="big">{sym}{t.amount.toLocaleString()}</p>
-            <p class="per">Per the 2026 convocation</p>
+            <p class="impact">{t.impact}</p>
+            <p class="amount"><span class="from">from</span> {sym}{t.amount.toLocaleString()}</p>
+            <p class="per">a single gift · for the 2026 convocation</p>
+            <p class="thanks-label">With our thanks</p>
             <ul class="ticks">
               {#each t.points as p}<li>{p}</li>{/each}
             </ul>
@@ -273,9 +289,9 @@
         <div>
           <h3>Founding Benefactor, <span class="ital-terra">by arrangement.</span></h3>
           <p>
-            For partnerships beyond the Crown circle: naming a programme element,
-            standing with the movement across the Caribbean and Africa, or a
-            bespoke package shaped with the summit office.
+            Some gifts don't fit a tier. If you'd like to lend your name to a
+            moment of the summit, or walk with the movement across the Caribbean
+            and Africa, let's shape it together — over a conversation, not a form.
           </p>
         </div>
         <button class="btn btn-terra" on:click={() => scrollTo('enquiry')}>Speak with the team</button>
@@ -295,9 +311,9 @@
         <p class="eyebrow">Sponsor enquiry</p>
         <h2>Let us shape it <span class="ital-terra">together.</span></h2>
         <p class="gift-lede">
-          Sponsorships are confirmed in conversation with the summit office. Tell
-          us which circle interests you, and the team will follow up with the
-          detail and next steps.
+          A partnership begins with a conversation, not a contract. Tell us what
+          moves you and which circle feels right, and the team will take it from
+          there — warmly, and at your pace.
         </p>
         <p class="enq-direct">Prefer to write directly? Reach the partnerships team at <a href="mailto:{CONTACT}">{CONTACT}</a>.</p>
       </div>
@@ -328,7 +344,7 @@
   </section>
 
   <!-- ============ CLOSING BAND ============ -->
-  <section class="band">
+  <section class="band" style="background-image: linear-gradient(rgba(20,15,9,0.82), rgba(20,15,9,0.9)), url({asset('/images/queen-1.jpg')})">
     <div class="marquee">Seat a Queen ✦ Amplify ✦ Sustain ✦ Unity ✦ Legacy ✦ Sovereignty ✦ Empowerment ✦ Seat a Queen</div>
     <div class="band-inner">
       <h2>One lineage. <span class="ital-terra">Many crowns.</span></h2>
@@ -503,6 +519,19 @@
   /* ---------- SPONSORSHIP ---------- */
   .sponsor { background: var(--paper); padding: clamp(4.5rem, 9vw, 7rem) 0; }
   .sponsor h2 { margin-top: 0.4rem; }
+  .sponsor-intro {
+    display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(1.8rem, 4vw, 3.4rem);
+    align-items: center; margin-bottom: 1rem;
+  }
+  @media (max-width: 820px) { .sponsor-intro { grid-template-columns: 1fr; } }
+  .sponsor-portrait {
+    margin: 0; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(35,28,21,0.18);
+  }
+  .sponsor-portrait img { width: 100%; height: clamp(300px, 42vw, 460px); object-fit: cover; object-position: center 25%; display: block; }
+  @media (max-width: 820px) { .sponsor-portrait img { height: 320px; } }
+  .sponsor-lead .sub { margin: 1rem 0 0; }
+  .sponsor-lead .sub.soft { color: var(--muted); font-size: 0.95rem; font-style: italic; }
   .sponsor-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 3rem 0 2.4rem; }
   @media (max-width: 960px) { .sponsor-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px) { .sponsor-grid { grid-template-columns: 1fr; } }
@@ -515,12 +544,32 @@
   .sponsor-card.presenting .no { color: var(--gold-bright); }
   .sponsor-card h4 { font-size: 1.4rem; }
   .sponsor-card.presenting h4 { color: #fff; }
-  .sponsor-card .role { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.62rem; font-weight: 700; color: var(--muted); margin: 0.15rem 0 0.8rem; }
+  .sponsor-card .role { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.62rem; font-weight: 700; color: var(--muted); margin: 0.15rem 0 0.9rem; }
   .sponsor-card.presenting .role { color: var(--terracotta-soft); }
-  .sponsor-card .big { font-family: var(--font-display); font-weight: 400; font-size: 1.8rem; }
-  .sponsor-card.presenting .big { color: #fff; }
-  .sponsor-card .per { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.6rem; color: var(--muted); margin-bottom: 0.6rem; }
-  .sponsor-card.presenting .per { color: var(--terracotta-soft); }
+  .sponsor-card .impact {
+    font-family: var(--font-display); font-style: italic; font-size: 1.05rem;
+    color: var(--forest); line-height: 1.35; min-height: 2.7em;
+  }
+  .sponsor-card.presenting .impact { color: #fff; }
+  .sponsor-card .amount {
+    font-family: var(--font-display); font-weight: 400; font-size: 1.5rem;
+    color: var(--ink-soft); margin-top: 0.8rem;
+  }
+  .sponsor-card .amount .from {
+    font-family: var(--font-sans); font-size: 0.62rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-right: 0.15rem;
+  }
+  .sponsor-card.presenting .amount { color: var(--cream); }
+  .sponsor-card.presenting .amount .from { color: var(--terracotta-soft); }
+  .sponsor-card .per { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.58rem; color: var(--muted); margin: 0.25rem 0 1.1rem; }
+  .sponsor-card.presenting .per { color: rgba(250,246,234,0.6); }
+  .sponsor-card .thanks-label {
+    text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.58rem;
+    font-weight: 700; color: var(--muted); margin: 0 0 0.2rem;
+    padding-top: 0.9rem; border-top: 1px solid var(--line);
+  }
+  .sponsor-card.presenting .thanks-label { color: var(--terracotta-soft); border-color: rgba(250,246,234,0.18); }
+  .sponsor-card.presenting .thanks-label { color: var(--terracotta-soft); }
   .sponsor-card .ticks { margin: 0.4rem 0 1.3rem; flex: 1; }
   .sponsor-card .ticks li { font-size: 0.82rem; }
   .sponsor-card.presenting .ticks li { color: rgba(250,246,234,0.85); }
@@ -551,7 +600,7 @@
   .enq-direct { margin-top: 1.4rem; font-size: 0.9rem; color: var(--ink-soft); }
 
   /* ---------- BAND ---------- */
-  .band { background: #1a130c; color: var(--cream); padding: clamp(4rem, 8vw, 6rem) 0 clamp(4.5rem, 9vw, 7rem); text-align: center; overflow: hidden; }
+  .band { background: #1a130c; background-size: cover; background-position: center 20%; color: var(--cream); padding: clamp(4rem, 8vw, 6rem) 0 clamp(4.5rem, 9vw, 7rem); text-align: center; overflow: hidden; }
   .marquee {
     font-family: var(--font-display); font-style: italic; font-size: 1.1rem;
     color: rgba(250,246,234,0.28); white-space: nowrap; text-align: center;
