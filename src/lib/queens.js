@@ -319,7 +319,7 @@ export const itinerary = [
   { date: '20 Aug', title: "Lord Mayor's Reception", price: 40, retail: 60, image: asset('/images/lord-mayor.jpg'), detail: 'A civic reception in the historic City of London.' },
   { date: '21 Aug', title: 'Bicester Village', price: 75, image: asset('/images/bicester-village.jpg'), detail: 'A luxury shopping excursion — lunch included.' },
   { date: '22 Aug', title: 'Rest, Art & Leisure', price: 20, retail: 30, image: asset('/images/hawkhill-grounds.png'), detail: 'A restful day at Hawkhill with art, spa and wellness.' },
-  { date: '23 Aug', title: 'Buckingham Palace', price: 100, retail: 140, flagship: true, image: asset('/images/buckingham-palace.jpg'), detail: 'A visit to the State Rooms, subject to protocol confirmation.' },
+  { date: '23 Aug', title: 'Buckingham Palace', price: 100, retail: 140, flagship: true, image: asset('/images/buckingham-palace.jpg'), detail: 'The State Rooms & Royal Mews, subject to protocol confirmation.' },
   { date: '24 Aug', title: 'London Sightseeing & River Cruise', price: 65, image: asset('/images/london-sightseeing.jpg'), detail: 'A guided open-top coach tour of the capital with a Thames river cruise — a 24-hour pass.' },
   { date: '25 Aug', title: 'Royal Gala Night', price: 150, retail: 220, flagship: true, image: asset('/images/porchester-2.jpg'), detail: 'The black-tie Gala at Porchester Hall, London.' },
   { date: '26 Aug', title: 'Kew Gardens', price: 60, image: asset('/images/kew-gardens.jpg'), detail: 'The Royal Botanic Gardens at Kew.' },
