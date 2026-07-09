@@ -190,12 +190,12 @@ export const programme = [
     idx: '03',
     group: 'Prestige Engagements',
     title: 'Royal Gala, High Tea & Palace',
-    body: 'The Royal Gala Night at Porchester Hall in London\'s West End, a prestigious Royal High Tea, and attendance at Buckingham Palace — subject to protocol confirmation.',
+    body: 'The State Rooms & Royal Mews at Buckingham Palace on 23 August, a prestigious Royal High Tea, and the Royal Gala Night at Porchester Hall in London\'s West End on 25 August — subject to protocol confirmation.',
     image: asset('/images/porchester-2.jpg'),
     items: [
-      'Royal Gala Night · Porchester Hall',
+      'Buckingham Palace · State Rooms & Royal Mews · 23 Aug',
       'Royal High Tea at a distinguished London venue',
-      'Buckingham Palace attendance (subject to protocol)',
+      'Royal Gala Night · Porchester Hall · 25 Aug',
     ],
   },
   {
