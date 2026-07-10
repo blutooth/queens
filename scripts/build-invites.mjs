@@ -418,7 +418,7 @@ function heritage({ data, noteHtml, letterHtml }) {
   .prog-row.finale .prog-ico { background: radial-gradient(circle at 50% 32%, #ffe6cf, #f2bf95); border-color: var(--terracotta); }
   .prog-row.finale .what { font-weight: 600; color: var(--emerald-deep); }
 
-  .signoff { background: var(--paper-soft); margin: 22px 18px 0; padding: 30px clamp(20px, 5vw, 46px) 34px; text-align: center; border: 1px solid rgba(184,134,11,0.35); border-radius: 16px; }
+  .signoff { background: transparent; margin: 22px 18px 0; padding: 30px clamp(20px, 5vw, 46px) 34px; text-align: center; }
   .signoff .regard { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--brown); margin: 0 0 4px; }
   .sig-img { width: 230px; max-width: 70%; height: auto; display: block; margin: 6px auto 8px; mix-blend-mode: multiply; }
   .signoff .name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 24px; color: var(--emerald-deep); margin: 0; }
