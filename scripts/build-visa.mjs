@@ -80,14 +80,15 @@ function letterHtml(v, sig, emblem) {
   // The Re: line is the per-visitor part. Each detail is labelled; a filled
   // field shows its value, a blank field leaves an underlined space to write in
   // — so the same file works as a ready-to-fill blank template or a completed letter.
-  const blank = (w) => `<span class="fill" style="min-width:${w}"></span>`;
   let nameBit = esc(v.name || '');
   if (v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
-  const reLine =
-    `${nameBit || blank('240px')}` +
-    `; Address: ${v.address ? esc(v.address) : blank('220px')}` +
-    `; Date of Birth: ${v.dob ? esc(v.dob) : blank('140px')}` +
-    `; Passport Number: ${v.passport ? esc(v.passport) : blank('150px')}.`;
+  const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${valu ? esc(valu) : ''}</li>`;
+  const reBlock = `<p class="re">Re: ${nameBit}</p>
+  <ul class="re-list">
+    ${item('Address', v.address)}
+    ${item('Date of Birth', v.dob)}
+    ${item('Passport Number', v.passport)}
+  </ul>`;
   const senderAddr = SENDER.address.map((l) => esc(l)).join('<br />');
 
   return `<!doctype html>
@@ -153,14 +154,16 @@ function letterHtml(v, sig, emblem) {
   .meta { margin-bottom: 16px; }
   .meta .to { margin-top: 6px; white-space: pre-line; }
   .subject { font-weight: 600; margin: 14px 0 6px; }
-  .re { font-weight: 600; margin: 0 0 16px; }
-  .re .fill { display: inline-block; border-bottom: 1px solid #333; height: 0.95em; vertical-align: text-bottom; }
+  .re { font-weight: 600; margin: 0 0 4px; }
+  .re-list { list-style: disc; margin: 0 0 16px; padding-left: 26px; }
+  .re-list li { margin: 3px 0; }
+  .re-list .lbl { font-weight: 600; }
   p { margin: 0 0 11px; text-align: justify; }
   ul { margin: 4px 0 12px; padding-left: 22px; }
   li { margin: 2px 0; }
   h3 { font-family: 'Marcellus', serif; font-size: 11.5pt; color: var(--emerald-deep); margin: 16px 0 6px; }
   .sign { margin-top: 22px; }
-  .sign img { display: block; height: 62px; width: auto; margin: 4px 0; }
+  .sign img { display: block; height: 84px; width: auto; margin: 6px 0 2px; }
   .sign .nm { font-weight: 600; }
   .toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px; }
   .toolbar button, .toolbar a { font-family: system-ui, sans-serif; font-size: 13px; padding: 8px 16px; border: 1px solid #999; border-radius: 6px; background: #fff; cursor: pointer; color: #1a1a1a; text-decoration: none; }
@@ -178,6 +181,7 @@ function letterHtml(v, sig, emblem) {
 <div class="toolbar">
   <button onclick="window.print()">🖨 Save as PDF</button>
   <button onclick="copyLetter()">📋 Copy text</button>
+  <button onclick="copyLink()">🔗 Copy link</button>
   <a id="emailBtn" href="#">✉️ Email</a>
   <a id="waBtn" target="_blank" rel="noopener" href="#">💬 WhatsApp</a>
 </div>
@@ -207,7 +211,7 @@ UK Visas and Immigration</div>
   </div>
 
   <p class="subject">Subject: Official Invitation in Support of Standard Visitor Visa Applications</p>
-  <p class="re">Re: ${reLine}</p>
+  ${reBlock}
 
   <p>Dear Sir/Madam,</p>
 
@@ -277,21 +281,22 @@ UK Visas and Immigration</div>
   function letterText() {
     return document.querySelector('.body-pad').innerText.replace(/\\n{3,}/g, '\\n\\n').trim();
   }
-  function copyLetter() {
-    var t = letterText();
-    var ok = function () { alert('Letter text copied — paste it into WhatsApp, email, or a message.'); };
+  function copyToClipboard(text, okMsg) {
+    var ok = function () { alert(okMsg); };
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(t).then(ok, fallback);
+      navigator.clipboard.writeText(text).then(ok, fallback);
     } else { fallback(); }
     function fallback() {
       var ta = document.createElement('textarea');
-      ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
       document.body.appendChild(ta); ta.select();
       try { document.execCommand('copy'); ok(); }
-      catch (e) { alert('Copy not supported here — select the letter text and copy manually.'); }
+      catch (e) { alert('Copy not supported here — select and copy manually.'); }
       document.body.removeChild(ta);
     }
   }
+  function copyLetter() { copyToClipboard(letterText(), 'Letter text copied — paste it into WhatsApp, email, or a message.'); }
+  function copyLink() { copyToClipboard(location.href, 'Link copied to clipboard.'); }
   (function () {
     var subj = encodeURIComponent('Visa Invitation Letter — ' + NAME);
     var body = encodeURIComponent(letterText());
@@ -326,7 +331,7 @@ for (const f of files) {
 // index of all letters
 const staff = built.filter((b) => b.slug !== '_template');
 const rows = staff
-  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open &amp; share ↗</a><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
+  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><label><input type="checkbox" onchange="setInvited('${b.slug}', this.checked)" /> Invited</label></td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open &amp; share ↗</a><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
   .join('\n      ');
 writeFileSync(join(outDir, 'index.html'), `<!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -361,6 +366,10 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   .act{text-align:right;white-space:nowrap;}
   .act a{color:#f4d98a;font-weight:600;text-decoration:none;margin-right:12px;}
   .act a:hover{text-decoration:underline;}
+  .inv{white-space:nowrap;color:#c9b98f;font-size:12.5px;}
+  .inv input{accent-color:var(--gold);vertical-align:middle;margin:0 5px 0 0;cursor:pointer;}
+  tr.done .nm{color:#8fdcae;}
+  tr.done .nm::after{content:' ✓';color:#8fdcae;}
   .del{font:inherit;font-size:12px;cursor:pointer;background:none;border:1px solid rgba(224,119,77,0.6);color:#e0987d;border-radius:6px;padding:4px 10px;}
   .del:hover{background:rgba(224,119,77,0.15);}
   .note{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:11px 14px;font-size:12.5px;color:#e7d9b0;margin-top:18px;}
@@ -415,6 +424,11 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
         setTimeout(function(){ location.reload(); }, 900);
       }).catch(function(e){ msg.style.color='#e0987d'; msg.textContent='Error: '+e.message; });
   }
+  var INV_KEY = 'visaInvited';
+  function getInv(){ try { return JSON.parse(localStorage.getItem(INV_KEY)) || {}; } catch(e){ return {}; } }
+  function markRow(slug,on){ var row=document.querySelector('[data-slug="'+slug+'"]'); if(!row) return; row.classList.toggle('done',on); var cb=row.querySelector('.inv input'); if(cb) cb.checked=on; }
+  function setInvited(slug,on){ var m=getInv(); if(on) m[slug]=true; else delete m[slug]; localStorage.setItem(INV_KEY, JSON.stringify(m)); markRow(slug,on); }
+  (function(){ var m=getInv(); Object.keys(m).forEach(function(s){ markRow(s,true); }); })();
   function del(slug){
     if(!confirm('Delete this delegation member\\u2019s letter?')) return;
     fetch('/api/delete-visa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:slug})})
