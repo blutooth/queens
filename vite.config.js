@@ -85,8 +85,8 @@ function serveInvitePages() {
       server.middlewares.use((req, res, next) => {
         try {
           const url = (req.url || '').split('?')[0];
-          if (url === '/invite') { res.statusCode = 302; res.setHeader('Location', '/invite/'); res.end(); return; }
-          if (url.startsWith('/invite/')) {
+          if (url === '/invite' || url === '/visa') { res.statusCode = 302; res.setHeader('Location', url + '/'); res.end(); return; }
+          if (url.startsWith('/invite/') || url.startsWith('/visa/')) {
             const rel = decodeURIComponent(url);
             let file = resolve(__dirname, 'public' + rel);
             if (rel.endsWith('/')) {

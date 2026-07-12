@@ -162,9 +162,9 @@ function letterHtml(v, sig, emblem) {
   .sign { margin-top: 22px; }
   .sign img { display: block; height: 62px; width: auto; margin: 4px 0; }
   .sign .nm { font-weight: 600; }
-  .toolbar { text-align: center; margin: 14px; }
-  .toolbar button { font-family: system-ui, sans-serif; font-size: 13px; padding: 8px 18px; border: 1px solid #999; border-radius: 6px; background: #fff; cursor: pointer; }
-  .toolbar button:hover { background: #f2f2f2; }
+  .toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px; }
+  .toolbar button, .toolbar a { font-family: system-ui, sans-serif; font-size: 13px; padding: 8px 16px; border: 1px solid #999; border-radius: 6px; background: #fff; cursor: pointer; color: #1a1a1a; text-decoration: none; }
+  .toolbar button:hover, .toolbar a:hover { background: #f2f2f2; }
   @media print {
     html, body { background: #fff; }
     .toolbar { display: none; }
@@ -175,7 +175,12 @@ function letterHtml(v, sig, emblem) {
 </style>
 </head>
 <body>
-<div class="toolbar"><button onclick="window.print()">Print / Save as PDF</button></div>
+<div class="toolbar">
+  <button onclick="window.print()">🖨 Save as PDF</button>
+  <button onclick="copyLetter()">📋 Copy text</button>
+  <a id="emailBtn" href="#">✉️ Email</a>
+  <a id="waBtn" target="_blank" rel="noopener" href="#">💬 WhatsApp</a>
+</div>
 <div class="sheet">
   <div class="kente-band"></div>
   <header class="hero">
@@ -267,6 +272,33 @@ UK Visas and Immigration</div>
   </div>
   </div>
 </div>
+<script>
+  var NAME = ${JSON.stringify(v.name || 'Visitor')};
+  function letterText() {
+    return document.querySelector('.body-pad').innerText.replace(/\\n{3,}/g, '\\n\\n').trim();
+  }
+  function copyLetter() {
+    var t = letterText();
+    var ok = function () { alert('Letter text copied — paste it into WhatsApp, email, or a message.'); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(t).then(ok, fallback);
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); ok(); }
+      catch (e) { alert('Copy not supported here — select the letter text and copy manually.'); }
+      document.body.removeChild(ta);
+    }
+  }
+  (function () {
+    var subj = encodeURIComponent('Visa Invitation Letter — ' + NAME);
+    var body = encodeURIComponent(letterText());
+    document.getElementById('emailBtn').href = 'mailto:?subject=' + subj + '&body=' + body;
+    document.getElementById('waBtn').href = 'https://wa.me/?text=' + body;
+  })();
+</script>
 </body>
 </html>`;
 }
@@ -293,15 +325,34 @@ for (const f of files) {
 
 // index of all letters
 const rows = built
-  .map((b) => `<li><a href="/visa/${b.slug}/">${esc(b.name)}</a></li>`)
+  .map((b, i) => `<tr><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="act"><a href="./${b.slug}/index.html">Open &amp; share →</a></td></tr>`)
   .join('\n      ');
 writeFileSync(join(outDir, 'index.html'), `<!doctype html>
-<html lang="en"><head><meta charset="UTF-8" />
-<title>Visa Invitation Letters</title>
-<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 20px;color:#1a1a1a}
-h1{font-size:1.3rem}li{margin:6px 0}a{color:#2d4a37}</style></head>
-<body><h1>UK Visa Invitation Letters</h1><ul>
-      ${rows || '<li>(no letters yet — add content/visa/&lt;name&gt;.md)</li>'}
-    </ul></body></html>`);
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UK Visa Invitation Letters</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#1a1a1a;line-height:1.5}
+  h1{font-size:1.4rem;margin-bottom:4px}
+  .sub{color:#666;font-size:0.9rem;margin:0 0 18px}
+  .note{background:#fff7ed;border:1px solid #f0c9a0;border-radius:8px;padding:12px 14px;font-size:0.85rem;color:#7a4a17;margin-bottom:20px}
+  table{width:100%;border-collapse:collapse}
+  td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:middle}
+  .num{color:#999;width:32px}
+  .nm{font-weight:600}
+  .act{text-align:right;white-space:nowrap}
+  .act a{color:#2d4a37;font-weight:600;text-decoration:none}
+  .act a:hover{text-decoration:underline}
+</style></head>
+<body>
+  <h1>UK Visa Invitation Letters</h1>
+  <p class="sub">${built.length} letter(s) · African Global Queens Summit</p>
+  <div class="note"><strong>How to send:</strong> open a letter, then use its buttons —
+    <em>Save as PDF</em> (attach to email/WhatsApp), <em>Copy text</em> (paste into a message),
+    <em>Email</em> or <em>WhatsApp</em>. These letters contain personal data (DOB, passport) —
+    share only with the intended recipient.</div>
+  <table>
+      ${rows || '<tr><td>(no letters yet — copy content/visa/_template.md to content/visa/&lt;name&gt;.md, fill it in, then run <code>npm run visa</code>)</td></tr>'}
+  </table>
+</body></html>`);
 
 console.log(`\nBuilt ${built.length} visa letter(s) → public/visa/`);

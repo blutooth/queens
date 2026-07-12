@@ -560,6 +560,8 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
   .tab { font-family: 'Marcellus', serif; font-size: 13px; letter-spacing: 0.05em; color: #e7c89a; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,175,55,0.4); padding: 10px 20px; border-radius: 999px; cursor: pointer; }
   .tab:hover { background: rgba(255,255,255,0.12); }
   .tab.active { background: linear-gradient(180deg,#f4d97a,var(--gold)); color: var(--brown); border-color: var(--gold-deep); }
+  .visa-tab { text-decoration: none; background: var(--emerald); color: #f4d98a; border-color: var(--emerald); }
+  .visa-tab:hover { background: var(--emerald-deep); }
   .panel[hidden] { display: none; }
   .big-toggle { display: block; width: 100%; text-align: center; font-size: 14.5px; padding: 15px 18px; margin: 8px 0 4px; background: transparent; color: var(--emerald-deep); border: 2px dashed var(--emerald); border-radius: 12px; }
   .big-toggle:hover { background: rgba(13,107,79,0.06); }
@@ -612,6 +614,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       <button class="tab active" data-tab="create">＋ Create</button>
       <button class="tab" data-tab="existing">Existing invitations</button>
       <button class="tab" data-tab="shared">Shared letters</button>
+      <a class="tab visa-tab" href="/visa/" target="_blank" rel="noopener">🛂 Visa Letters ↗</a>
     </div>
 
     <div class="panel" id="tab-create">
