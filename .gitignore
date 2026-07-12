@@ -23,6 +23,9 @@ content/invitees/*
 !content/invitees/.gitkeep
 content/data/*
 !content/data/.gitkeep
+content/visa/*
+!content/visa/.gitkeep
+public/visa/
 
 # never commit secrets
 stripe.txt

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "invites": "node scripts/build-invites.mjs",
+    "visa": "node scripts/build-visa.mjs",
     "import": "node scripts/import-csv.mjs",
     "prebuild": "node scripts/build-invites.mjs",
     "predev": "node scripts/build-invites.mjs",
