@@ -324,35 +324,107 @@ for (const f of files) {
 }
 
 // index of all letters
-const rows = built
-  .map((b, i) => `<tr><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="act"><a href="./${b.slug}/index.html">Open &amp; share →</a></td></tr>`)
+const staff = built.filter((b) => b.slug !== '_template');
+const rows = staff
+  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open &amp; share ↗</a><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
   .join('\n      ');
 writeFileSync(join(outDir, 'index.html'), `<!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>UK Visa Invitation Letters</title>
+<title>Palace Staff · Visa Letters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Marcellus&display=swap" rel="stylesheet" />
 <style>
-  body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#1a1a1a;line-height:1.5}
-  h1{font-size:1.4rem;margin-bottom:4px}
-  .sub{color:#666;font-size:0.9rem;margin:0 0 18px}
-  .note{background:#fff7ed;border:1px solid #f0c9a0;border-radius:8px;padding:12px 14px;font-size:0.85rem;color:#7a4a17;margin-bottom:20px}
-  table{width:100%;border-collapse:collapse}
-  td{padding:10px 8px;border-bottom:1px solid #eee;vertical-align:middle}
-  .num{color:#999;width:32px}
-  .nm{font-weight:600}
-  .act{text-align:right;white-space:nowrap}
-  .act a{color:#2d4a37;font-weight:600;text-decoration:none}
-  .act a:hover{text-decoration:underline}
+  :root{--emerald:#0d6b4f;--emerald-deep:#094b38;--gold:#d4af37;--gold-deep:#b8860b;--brown:#3c2415;}
+  *{box-sizing:border-box;}
+  body{font-family:system-ui,sans-serif;margin:0;color:#eae2d0;line-height:1.55;
+    background:radial-gradient(circle at 50% 0,#12503b,#0a2e22 60%,#071f18);min-height:100vh;}
+  .wrap{max-width:760px;margin:0 auto;padding:36px 20px 60px;}
+  h1{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#fdf6e3;margin:0 0 2px;}
+  .sub{font-family:'Marcellus',serif;letter-spacing:0.14em;text-transform:uppercase;font-size:11px;color:var(--gold);margin:0 0 22px;}
+  .card{background:rgba(255,255,255,0.05);border:1px solid rgba(212,175,55,0.35);border-radius:16px;padding:22px 22px 24px;margin-bottom:26px;}
+  h2{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:#fdf6e3;margin:0 0 14px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;}
+  .field{display:flex;flex-direction:column;gap:4px;}
+  .field.wide{grid-column:1 / -1;}
+  label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#c9b98f;}
+  input{font:inherit;font-size:14px;padding:9px 11px;border-radius:8px;border:1px solid rgba(212,175,55,0.4);background:rgba(0,0,0,0.25);color:#fdf6e3;}
+  input::placeholder{color:#7f9084;}
+  .btn{font-family:'Marcellus',serif;font-size:14px;cursor:pointer;border:none;border-radius:999px;padding:11px 26px;margin-top:16px;
+    background:linear-gradient(180deg,#f4d97a,var(--gold));color:var(--brown);}
+  .btn:hover{filter:brightness(1.05);}
+  .msg{margin-top:12px;font-size:13px;min-height:18px;}
+  .msg a{color:#f4d98a;}
+  table{width:100%;border-collapse:collapse;}
+  td{padding:11px 8px;border-bottom:1px solid rgba(212,175,55,0.18);vertical-align:middle;}
+  .num{color:#8fae9f;width:30px;}
+  .nm{font-weight:600;color:#fdf6e3;}
+  .act{text-align:right;white-space:nowrap;}
+  .act a{color:#f4d98a;font-weight:600;text-decoration:none;margin-right:12px;}
+  .act a:hover{text-decoration:underline;}
+  .del{font:inherit;font-size:12px;cursor:pointer;background:none;border:1px solid rgba(224,119,77,0.6);color:#e0987d;border-radius:6px;padding:4px 10px;}
+  .del:hover{background:rgba(224,119,77,0.15);}
+  .note{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:11px 14px;font-size:12.5px;color:#e7d9b0;margin-top:18px;}
+  .empty{color:#9db3a6;font-style:italic;}
+  .tmpl{color:#c9b98f;font-size:13px;margin-top:14px;}.tmpl a{color:#f4d98a;}
 </style></head>
 <body>
-  <h1>UK Visa Invitation Letters</h1>
-  <p class="sub">${built.length} letter(s) · African Global Queens Summit</p>
-  <div class="note"><strong>How to send:</strong> open a letter, then use its buttons —
-    <em>Save as PDF</em> (attach to email/WhatsApp), <em>Copy text</em> (paste into a message),
-    <em>Email</em> or <em>WhatsApp</em>. These letters contain personal data (DOB, passport) —
-    share only with the intended recipient.</div>
-  <table>
-      ${rows || '<tr><td>(no letters yet — copy content/visa/_template.md to content/visa/&lt;name&gt;.md, fill it in, then run <code>npm run visa</code>)</td></tr>'}
-  </table>
+  <div class="wrap">
+    <h1>Palace Staff · Visa Letters</h1>
+    <p class="sub">African Global Queens Summit — UK Standard Visitor delegation</p>
+
+    <div class="card">
+      <h2>Add a delegation member</h2>
+      <div class="grid">
+        <div class="field wide"><label>Full name (with title)</label><input id="v-name" placeholder="Mr Samuel Iso" /></div>
+        <div class="field wide"><label>Role / title</label><input id="v-role" placeholder="Traditional, cultural administrator and orator of 5 Nnettah Community" /></div>
+        <div class="field wide"><label>Address</label><input id="v-address" placeholder="Esuk Otu, Calabar, Cross River State, Nigeria" /></div>
+        <div class="field"><label>Date of birth</label><input id="v-dob" placeholder="5th July 1999" /></div>
+        <div class="field"><label>Passport number</label><input id="v-passport" placeholder="B05181252" /></div>
+        <div class="field"><label>Letter date (optional)</label><input id="v-date" placeholder="leave blank to fill by hand" /></div>
+        <div class="field"><label>Visit from</label><input id="v-from" value="${esc(DEFAULT_FROM)}" /></div>
+        <div class="field"><label>Visit to</label><input id="v-to" value="${esc(DEFAULT_TO)}" /></div>
+      </div>
+      <button class="btn" onclick="createLetter()">Create letter</button>
+      <div class="msg" id="msg"></div>
+    </div>
+
+    <h2 style="margin:0 0 8px">Delegation (<span id="count">${staff.length}</span>)</h2>
+    <table id="list">
+      ${rows || '<tr class="none"><td class="empty">No members yet — add one above.</td></tr>'}
+    </table>
+    <p class="tmpl">Need a printable blank form? <a href="./_template/index.html" target="_blank">Open the blank template ↗</a></p>
+    <div class="note">⚠️ These letters carry personal data (date of birth, passport). Open a letter to Save as PDF / Copy / Email / WhatsApp, and share only with the intended recipient. Saved locally — never published online.</div>
+  </div>
+
+<script>
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+  function createLetter(){
+    var name = val('v-name');
+    var msg = document.getElementById('msg');
+    if(!name){ msg.style.color='#e0987d'; msg.textContent='Please enter a name.'; return; }
+    var slug = slugify(name);
+    var md = ['---','name: '+name,'role: '+val('v-role'),'address: '+val('v-address'),
+      'dob: '+val('v-dob'),'passport: '+val('v-passport'),'date: '+val('v-date'),
+      'from: '+val('v-from'),'to: '+val('v-to'),'---',''].join('\\n');
+    msg.style.color='#c9b98f'; msg.textContent='Creating…';
+    fetch('/api/create-visa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:slug,markdown:md})})
+      .then(function(r){return r.json();}).then(function(res){
+        if(!res.ok) throw new Error(res.error||'failed');
+        msg.style.color='#8fdcae'; msg.innerHTML='Created — <a href="'+res.url+'index.html" target="_blank">open '+name+'\\u2019s letter \\u2197</a>';
+        setTimeout(function(){ location.reload(); }, 900);
+      }).catch(function(e){ msg.style.color='#e0987d'; msg.textContent='Error: '+e.message; });
+  }
+  function del(slug){
+    if(!confirm('Delete this delegation member\\u2019s letter?')) return;
+    fetch('/api/delete-visa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:slug})})
+      .then(function(r){return r.json();}).then(function(res){
+        if(!res.ok) throw new Error(res.error||'failed');
+        var row=document.querySelector('[data-slug="'+slug+'"]'); if(row) row.remove();
+        var c=document.getElementById('count'); c.textContent=Math.max(0,parseInt(c.textContent,10)-1);
+      }).catch(function(e){ alert('Error: '+e.message); });
+  }
+</script>
 </body></html>`);
 
 console.log(`\nBuilt ${built.length} visa letter(s) → public/visa/`);

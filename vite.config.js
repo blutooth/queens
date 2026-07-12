@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { resolve } from 'node:path';
-import { writeFileSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync, statSync, unlinkSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
 // The site is served from the apex of africanqueenssummit.com.
@@ -29,6 +29,55 @@ function inviteCreateApi() {
             writeFileSync(resolve(__dirname, 'content/invitees', safe + '.md'), markdown);
             execFileSync('node', ['scripts/build-invites.mjs'], { cwd: __dirname, stdio: 'ignore' });
             res.end(JSON.stringify({ ok: true, url: '/invite/' + safe + '/' }));
+          } catch (e) {
+            res.statusCode = 400;
+            res.end(JSON.stringify({ ok: false, error: String((e && e.message) || e) }));
+          }
+        });
+      });
+    },
+  };
+}
+
+// Dev-only: the palace-staff visa master page (/visa/) creates and deletes
+// per-visitor markdown files and regenerates the letters. Not present in prod.
+function visaApi() {
+  const dir = resolve(__dirname, 'content/visa');
+  const rebuild = () => execFileSync('node', ['scripts/build-visa.mjs'], { cwd: __dirname, stdio: 'ignore' });
+  const readBody = (req) => new Promise((res) => { let b = ''; req.on('data', (c) => { b += c; }); req.on('end', () => res(b)); });
+  const safeSlug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  return {
+    name: 'visa-api',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use('/api/create-visa', (req, res) => {
+        if (req.method !== 'POST') { res.statusCode = 405; res.end('Method Not Allowed'); return; }
+        readBody(req).then((body) => {
+          res.setHeader('Content-Type', 'application/json');
+          try {
+            const { slug, markdown } = JSON.parse(body || '{}');
+            const safe = safeSlug(slug);
+            if (!safe || !markdown) throw new Error('missing slug or markdown');
+            writeFileSync(resolve(dir, safe + '.md'), markdown);
+            rebuild();
+            res.end(JSON.stringify({ ok: true, url: '/visa/' + safe + '/' }));
+          } catch (e) {
+            res.statusCode = 400;
+            res.end(JSON.stringify({ ok: false, error: String((e && e.message) || e) }));
+          }
+        });
+      });
+      server.middlewares.use('/api/delete-visa', (req, res) => {
+        if (req.method !== 'POST') { res.statusCode = 405; res.end('Method Not Allowed'); return; }
+        readBody(req).then((body) => {
+          res.setHeader('Content-Type', 'application/json');
+          try {
+            const safe = safeSlug(JSON.parse(body || '{}').slug);
+            if (!safe) throw new Error('bad slug');
+            const p = resolve(dir, safe + '.md');
+            if (existsSync(p)) unlinkSync(p);
+            rebuild();
+            res.end(JSON.stringify({ ok: true }));
           } catch (e) {
             res.statusCode = 400;
             res.end(JSON.stringify({ ok: false, error: String((e && e.message) || e) }));
@@ -109,7 +158,7 @@ function serveInvitePages() {
 }
 
 export default defineConfig(() => ({
-  plugins: [serveInvitePages(), svelte(), inviteCreateApi(), invitedApi()],
+  plugins: [serveInvitePages(), svelte(), inviteCreateApi(), invitedApi(), visaApi()],
   base,
   build: {
     rollupOptions: {
