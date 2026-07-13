@@ -60,6 +60,13 @@ function dataUri(file) {
 const signatureDataUri = () => dataUri('queen-aruk-signature.png');
 const emblemDataUri = () => dataUri('summit-emblem.png');
 
+// Encode a visitor's data for the web card link (matches the browser decoder).
+const b64url = (s) => Buffer.from(s, 'utf8').toString('base64url');
+const cardLinkFor = (v) => `${SITE_URL}/visa/card/?d=${b64url(JSON.stringify({
+  name: v.name || '', role: v.role || '', address: v.address || '', dob: v.dob || '',
+  passport: v.passport || '', date: v.date || '', from: v.from || '', to: v.to || '',
+}))}`;
+
 const esc = (s) => String(s ?? '')
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -188,6 +195,7 @@ function letterHtml(v, sig, emblem, opts = {}) {
 <div class="toolbar">
   <button onclick="window.print()">🖨 Save as PDF</button>
   <button onclick="copyLetter()">📋 Copy text</button>
+  <button onclick="copyLink()">🔗 Copy link</button>
   <a id="emailBtn" href="#">✉️ Email</a>
   <a id="waBtn" target="_blank" rel="noopener" href="#">💬 WhatsApp</a>
 </div>
@@ -284,6 +292,8 @@ UK Visas and Immigration</div>
 </div>
 <script>
   var NAME = ${JSON.stringify(v.name || 'Visitor')};
+  var CARD_URL = ${card ? 'location.href' : JSON.stringify(cardLinkFor(v))};
+  function copyLink() { copyToClipboard(CARD_URL, 'Shareable web link copied \\u2014 it opens this letter on any device. It carries the passport/DOB, so send only to the intended recipient.'); }
   function letterText() {
     return document.querySelector('.body-pad').innerText.replace(/\\n{3,}/g, '\\n\\n').trim();
   }
