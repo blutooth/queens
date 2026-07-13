@@ -331,7 +331,7 @@ for (const f of files) {
 // index of all letters
 const staff = built.filter((b) => b.slug !== '_template');
 const rows = staff
-  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><label><input type="checkbox" onchange="setInvited('${b.slug}', this.checked)" /> Invited</label></td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open &amp; share ↗</a><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
+  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open &amp; share ↗</a><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
   .join('\n      ');
 writeFileSync(join(outDir, 'index.html'), `<!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -366,10 +366,14 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   .act{text-align:right;white-space:nowrap;}
   .act a{color:#f4d98a;font-weight:600;text-decoration:none;margin-right:12px;}
   .act a:hover{text-decoration:underline;}
-  .inv{white-space:nowrap;color:#c9b98f;font-size:12.5px;}
-  .inv input{accent-color:var(--gold);vertical-align:middle;margin:0 5px 0 0;cursor:pointer;}
+  .inv{white-space:nowrap;}
+  .inv-btn{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:12.5px;cursor:pointer;background:none;border:1px solid rgba(212,175,55,0.4);color:#c9b98f;border-radius:999px;padding:5px 14px;}
+  .inv-btn:hover{background:rgba(212,175,55,0.1);}
+  .inv-btn .tickbox{width:14px;height:14px;border:1.5px solid currentColor;border-radius:3px;position:relative;flex:none;}
   tr.done .nm{color:#8fdcae;}
-  tr.done .nm::after{content:' ✓';color:#8fdcae;}
+  tr.done .inv-btn{background:rgba(143,220,174,0.14);border-color:#8fdcae;color:#8fdcae;}
+  tr.done .inv-btn .tickbox{background:#8fdcae;}
+  tr.done .inv-btn .tickbox::after{content:'✓';position:absolute;top:-4px;left:0;color:#0a2e22;font-size:13px;font-weight:700;line-height:1;}
   .del{font:inherit;font-size:12px;cursor:pointer;background:none;border:1px solid rgba(224,119,77,0.6);color:#e0987d;border-radius:6px;padding:4px 10px;}
   .del:hover{background:rgba(224,119,77,0.15);}
   .note{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:11px 14px;font-size:12.5px;color:#e7d9b0;margin-top:18px;}
@@ -426,8 +430,8 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   }
   var INV_KEY = 'visaInvited';
   function getInv(){ try { return JSON.parse(localStorage.getItem(INV_KEY)) || {}; } catch(e){ return {}; } }
-  function markRow(slug,on){ var row=document.querySelector('[data-slug="'+slug+'"]'); if(!row) return; row.classList.toggle('done',on); var cb=row.querySelector('.inv input'); if(cb) cb.checked=on; }
-  function setInvited(slug,on){ var m=getInv(); if(on) m[slug]=true; else delete m[slug]; localStorage.setItem(INV_KEY, JSON.stringify(m)); markRow(slug,on); }
+  function markRow(slug,on){ var row=document.querySelector('[data-slug="'+slug+'"]'); if(row) row.classList.toggle('done',on); }
+  function toggleInvited(slug){ var m=getInv(); var on=!m[slug]; if(on) m[slug]=true; else delete m[slug]; localStorage.setItem(INV_KEY, JSON.stringify(m)); markRow(slug,on); }
   (function(){ var m=getInv(); Object.keys(m).forEach(function(s){ markRow(s,true); }); })();
   function del(slug){
     if(!confirm('Delete this delegation member\\u2019s letter?')) return;
