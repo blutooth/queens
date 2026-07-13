@@ -181,7 +181,6 @@ function letterHtml(v, sig, emblem) {
 <div class="toolbar">
   <button onclick="window.print()">🖨 Save as PDF</button>
   <button onclick="copyLetter()">📋 Copy text</button>
-  <button onclick="copyLink()">🔗 Copy link</button>
   <a id="emailBtn" href="#">✉️ Email</a>
   <a id="waBtn" target="_blank" rel="noopener" href="#">💬 WhatsApp</a>
 </div>
@@ -295,8 +294,22 @@ UK Visas and Immigration</div>
       document.body.removeChild(ta);
     }
   }
-  function copyLetter() { copyToClipboard(letterText(), 'Letter text copied — paste it into WhatsApp, email, or a message.'); }
-  function copyLink() { copyToClipboard(location.href, 'Link copied to clipboard.'); }
+  function copyLetter() {
+    var pad = document.querySelector('.body-pad');
+    var text = letterText();
+    var msg = 'Letter copied. Pasted into email or a document it keeps the signature; in a plain-text box (e.g. WhatsApp) the signature can\\u2019t show \\u2014 attach the PDF for the signed version.';
+    if (navigator.clipboard && navigator.clipboard.write && window.ClipboardItem && window.isSecureContext) {
+      try {
+        var item = new ClipboardItem({
+          'text/html': new Blob([pad.innerHTML], { type: 'text/html' }),
+          'text/plain': new Blob([text], { type: 'text/plain' }),
+        });
+        navigator.clipboard.write([item]).then(function () { alert(msg); }, function () { copyToClipboard(text, msg); });
+        return;
+      } catch (e) { /* fall through to plain text */ }
+    }
+    copyToClipboard(text, msg);
+  }
   (function () {
     var subj = encodeURIComponent('Visa Invitation Letter — ' + NAME);
     var body = encodeURIComponent(letterText());
