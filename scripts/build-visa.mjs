@@ -47,6 +47,8 @@ const SENDER = {
 const ACCOMMODATION = 'Hawkhill Place, Stanton St John, Oxford OX33 1HS';
 const DEFAULT_FROM = '25 July 2026';
 const DEFAULT_TO = '20 September 2026';
+// Base for shareable web links (the deployed /visa/card/ viewer).
+const SITE_URL = 'https://africanqueenssummit.com';
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
 // no external requests).
@@ -73,17 +75,22 @@ function parseFrontmatter(txt) {
   return data;
 }
 
-function letterHtml(v, sig, emblem) {
+function letterHtml(v, sig, emblem, opts = {}) {
+  const card = !!opts.card; // web card viewer — fields come from the URL at runtime
   const from = v.from || DEFAULT_FROM;
   const to = v.to || DEFAULT_TO;
-  const dateLine = v.date ? esc(v.date) : '';
+  const dateLine = card ? '<span id="c-date"></span>' : (v.date ? esc(v.date) : '');
+  const fromHtml = card ? '<strong id="c-from"></strong>' : `<strong>${esc(from)}</strong>`;
+  const toHtml = card ? '<strong id="c-to"></strong>' : `<strong>${esc(to)}</strong>`;
+  const emblemSrc = card ? '/images/summit-emblem.png' : (emblem || '');
+  const sigSrc = card ? '/images/queen-aruk-signature.png' : (sig || '');
   // The Re: line is the per-visitor part. Each detail is labelled; a filled
   // field shows its value, a blank field leaves an underlined space to write in
   // — so the same file works as a ready-to-fill blank template or a completed letter.
   let nameBit = esc(v.name || '');
   if (v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
   const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${valu ? esc(valu) : ''}</li>`;
-  const reBlock = `<p class="re">Re: ${nameBit}</p>
+  const reBlock = card ? '<div id="c-re"></div>' : `<p class="re">Re: ${nameBit}</p>
   <ul class="re-list">
     ${item('Address', v.address)}
     ${item('Date of Birth', v.dob)}
@@ -187,7 +194,7 @@ function letterHtml(v, sig, emblem) {
 <div class="sheet">
   <div class="kente-band"></div>
   <header class="hero">
-    <div class="medallion"><span class="rays" aria-hidden="true"></span>${emblem ? `<img class="emblem" src="${emblem}" alt="Summit emblem" />` : ''}</div>
+    <div class="medallion"><span class="rays" aria-hidden="true"></span>${emblemSrc ? `<img class="emblem" src="${emblemSrc}" alt="Summit emblem" />` : ''}</div>
     <p class="eyebrow">Office of the Convener</p>
     <h1 class="title">${esc(SUMMIT)}</h1>
     <p class="subtitle">United Kingdom &middot; 14&ndash;31 August 2026</p>
@@ -220,7 +227,7 @@ UK Visas and Immigration</div>
 
   <p>The individuals named in their respective visa applications are longstanding members of my palace establishment and perform recognised customary, ceremonial, cultural, and administrative duties in support of my traditional institution. Their participation forms an important part of the official cultural representation of my Queendom and will enable them to assist in the ceremonial, protocol, and cultural aspects of the Summit.</p>
 
-  <p>The proposed visit will take place from <strong>${esc(from)}</strong> (for preparation in advance of the summit) to on or before <strong>${esc(to)}</strong> (to take into account clearance and consolidation prior to departure), following which they will return to Nigeria to resume their official responsibilities in and outside the palace and their personal, family, and community obligations. Their visit is strictly temporary and is solely for cultural, ceremonial, and Summit-related activities permitted under the UK Standard Visitor route. They have no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
+  <p>The proposed visit will take place from ${fromHtml} (for preparation in advance of the summit) to on or before ${toHtml} (to take into account clearance and consolidation prior to departure), following which they will return to Nigeria to resume their official responsibilities in and outside the palace and their personal, family, and community obligations. Their visit is strictly temporary and is solely for cultural, ceremonial, and Summit-related activities permitted under the UK Standard Visitor route. They have no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
 
   <p>During their stay, they will be accommodated at my residence:</p>
   <p style="margin-left:22px"><strong>${esc(ACCOMMODATION)}</strong></p>
@@ -268,7 +275,7 @@ UK Visas and Immigration</div>
 
   <div class="sign">
     <p style="margin-bottom:2px">Yours faithfully,</p>
-    ${sig ? `<img src="${sig}" alt="Signature" />` : '<div style="height:56px"></div>'}
+    ${sigSrc ? `<img src="${sigSrc}" alt="Signature" />` : '<div style="height:56px"></div>'}
     <div class="nm">${esc(SIGNATORY.name)}</div>
     <div>${esc(SIGNATORY.line1)}</div>
     <div>${esc(SIGNATORY.line2)}</div>
@@ -310,6 +317,23 @@ UK Visas and Immigration</div>
     }
     copyToClipboard(text, msg);
   }
+  ${card ? `(function () {
+    var p = new URLSearchParams(location.search), raw = p.get('d') || '';
+    var data = {};
+    try { data = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/'))))); } catch (e) {}
+    NAME = data.name || 'Visitor';
+    function esch(s){ var d=document.createElement('div'); d.textContent = s==null?'':s; return d.innerHTML; }
+    function setText(id, val){ var el=document.getElementById(id); if(el) el.textContent = val || ''; }
+    setText('c-date', data.date);
+    setText('c-from', data.from || ${JSON.stringify(DEFAULT_FROM)});
+    setText('c-to', data.to || ${JSON.stringify(DEFAULT_TO)});
+    var nameBit = esch(data.name || '');
+    if (data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
+    var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + (val ? esch(val) : '') + '</li>'; };
+    var re = document.getElementById('c-re');
+    if (re) re.innerHTML = '<p class="re">Re: ' + nameBit + '</p><ul class="re-list">' + li('Address', data.address) + li('Date of Birth', data.dob) + li('Passport Number', data.passport) + '</ul>';
+    document.title = 'Visa Invitation Letter \\u2014 ' + (data.name || '');
+  })();` : ''}
   (function () {
     var subj = encodeURIComponent('Visa Invitation Letter — ' + NAME);
     var body = encodeURIComponent(letterText());
@@ -337,14 +361,31 @@ for (const f of files) {
   const label = v.name || '(blank template — details to be inserted)';
   mkdirSync(join(outDir, slug), { recursive: true });
   writeFileSync(join(outDir, slug, 'index.html'), letterHtml(v, sig, emblem));
-  built.push({ slug, name: label });
+  built.push({ slug, name: label, v });
   console.log(`  ✓ /visa/${slug}/  —  ${label}`);
+}
+
+// Web card viewer — one deployed page that renders any letter from an encoded
+// ?d= param (the visitor's data travels in the URL, so it works on the web).
+mkdirSync(join(outDir, 'card'), { recursive: true });
+writeFileSync(join(outDir, 'card', 'index.html'), letterHtml({}, null, null, { card: true }));
+
+// Per-member data for the master page's "Get link" button.
+const VISA_DATA = {};
+for (const b of built) {
+  if (b.slug === '_template') continue;
+  const d = b.v || {};
+  VISA_DATA[b.slug] = {
+    name: d.name || '', role: d.role || '', address: d.address || '',
+    dob: d.dob || '', passport: d.passport || '', date: d.date || '',
+    from: d.from || '', to: d.to || '',
+  };
 }
 
 // index of all letters
 const staff = built.filter((b) => b.slug !== '_template');
 const rows = staff
-  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open &amp; share ↗</a><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
+  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
   .join('\n      ');
 writeFileSync(join(outDir, 'index.html'), `<!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -389,6 +430,8 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   tr.done .inv-btn .tickbox::after{content:'✓';position:absolute;top:-4px;left:0;color:#0a2e22;font-size:13px;font-weight:700;line-height:1;}
   .del{font:inherit;font-size:12px;cursor:pointer;background:none;border:1px solid rgba(224,119,77,0.6);color:#e0987d;border-radius:6px;padding:4px 10px;}
   .del:hover{background:rgba(224,119,77,0.15);}
+  .linkbtn{font:inherit;font-size:12px;cursor:pointer;background:none;border:1px solid rgba(143,220,174,0.6);color:#8fdcae;border-radius:6px;padding:4px 10px;margin-right:8px;}
+  .linkbtn:hover{background:rgba(143,220,174,0.15);}
   .note{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:11px 14px;font-size:12.5px;color:#e7d9b0;margin-top:18px;}
   .empty{color:#9db3a6;font-style:italic;}
   .tmpl{color:#c9b98f;font-size:13px;margin-top:14px;}.tmpl a{color:#f4d98a;}
@@ -406,7 +449,7 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
         <div class="field wide"><label>Address</label><input id="v-address" placeholder="Esuk Otu, Calabar, Cross River State, Nigeria" /></div>
         <div class="field"><label>Date of birth</label><input id="v-dob" placeholder="5th July 1999" /></div>
         <div class="field"><label>Passport number</label><input id="v-passport" placeholder="B05181252" /></div>
-        <div class="field"><label>Letter date (optional)</label><input id="v-date" placeholder="leave blank to fill by hand" /></div>
+        <div class="field"><label>Letter date (defaults to today)</label><input id="v-date" placeholder="e.g. 13 July 2026" /></div>
         <div class="field"><label>Visit from</label><input id="v-from" value="${esc(DEFAULT_FROM)}" /></div>
         <div class="field"><label>Visit to</label><input id="v-to" value="${esc(DEFAULT_TO)}" /></div>
       </div>
@@ -419,10 +462,23 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
       ${rows || '<tr class="none"><td class="empty">No members yet — add one above.</td></tr>'}
     </table>
     <p class="tmpl">Need a printable blank form? <a href="./_template/index.html" target="_blank">Open the blank template ↗</a></p>
-    <div class="note">⚠️ These letters carry personal data (date of birth, passport). Open a letter to Save as PDF / Copy / Email / WhatsApp, and share only with the intended recipient. Saved locally — never published online.</div>
+    <div class="note">⚠️ These letters carry personal data (date of birth, passport). <strong>Get link</strong> copies a web link that opens the letter on any device — but the details (incl. passport) travel inside that link, so share it <strong>only with the intended recipient</strong>. For anything official, the <strong>PDF</strong> (Open → Save as PDF) is safest.</div>
   </div>
 
 <script>
+  var VISA_DATA = ${JSON.stringify(VISA_DATA)};
+  var SITE_URL = ${JSON.stringify(SITE_URL)};
+  function copyToClipboard(text, okMsg){
+    var ok=function(){ alert(okMsg); };
+    if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(ok, fb); } else { fb(); }
+    function fb(){ var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); ok(); }catch(e){ prompt('Copy this link:', text); } document.body.removeChild(ta); }
+  }
+  function b64url(s){ return btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,''); }
+  function getLink(slug){
+    var d = VISA_DATA[slug]; if(!d) return;
+    var url = SITE_URL + '/visa/card/?d=' + b64url(JSON.stringify(d));
+    copyToClipboard(url, 'Shareable web link copied.\\n\\nIt opens the letter on any device — but it carries this person\\u2019s details incl. passport number, so share it only with the intended recipient.');
+  }
   function val(id){ return document.getElementById(id).value.trim(); }
   function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
   function createLetter(){
@@ -446,6 +502,8 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   function markRow(slug,on){ var row=document.querySelector('[data-slug="'+slug+'"]'); if(row) row.classList.toggle('done',on); }
   function toggleInvited(slug){ var m=getInv(); var on=!m[slug]; if(on) m[slug]=true; else delete m[slug]; localStorage.setItem(INV_KEY, JSON.stringify(m)); markRow(slug,on); }
   (function(){ var m=getInv(); Object.keys(m).forEach(function(s){ markRow(s,true); }); })();
+  // Default the letter date to today (the day the doc is created).
+  (function(){ var d=new Date(),M=['January','February','March','April','May','June','July','August','September','October','November','December'];var el=document.getElementById('v-date');if(el&&!el.value)el.value=d.getDate()+' '+M[d.getMonth()]+' '+d.getFullYear(); })();
   function del(slug){
     if(!confirm('Delete this delegation member\\u2019s letter?')) return;
     fetch('/api/delete-visa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:slug})})

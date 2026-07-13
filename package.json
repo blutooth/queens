@@ -9,8 +9,8 @@
     "visa": "node scripts/build-visa.mjs",
     "visa:pdf": "node scripts/build-visa.mjs && node scripts/build-visa-pdf.mjs",
     "import": "node scripts/import-csv.mjs",
-    "prebuild": "node scripts/build-invites.mjs",
-    "predev": "node scripts/build-invites.mjs",
+    "prebuild": "node scripts/build-invites.mjs && node scripts/build-visa.mjs",
+    "predev": "node scripts/build-invites.mjs && node scripts/build-visa.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
