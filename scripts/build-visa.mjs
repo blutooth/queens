@@ -95,8 +95,9 @@ function letterHtml(v, sig, emblem, opts = {}) {
   // The Re: line is the per-visitor part. Each detail is labelled; a filled
   // field shows its value, a blank field leaves an underlined space to write in
   // — so the same file works as a ready-to-fill blank template or a completed letter.
+  const kind = v.kind === 'guest' ? 'guest' : 'staff';
   let nameBit = esc(v.name || '');
-  if (v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
+  if (kind === 'staff' && v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
   const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${valu ? esc(valu) : ''}</li>`;
   const reBlock = card ? '<div class="c-re"></div>' : `<p class="re">Re: ${nameBit}</p>
   <ul class="re-list">
@@ -339,7 +340,7 @@ UK Visas and Immigration</div>
     setAll('c-from', data.from || ${JSON.stringify(DEFAULT_FROM)});
     setAll('c-to', data.to || ${JSON.stringify(DEFAULT_TO)});
     var nameBit = esch(data.name || '');
-    if (data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
+    if (data.kind !== 'guest' && data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
     var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + (val ? esch(val) : '') + '</li>'; };
     var reHtml = '<p class="re">Re: ' + nameBit + '</p><ul class="re-list">' + li('Address', data.address) + li('Date of Birth', data.dob) + li('Passport Number', data.passport) + '</ul>';
     var res = document.querySelectorAll('.c-re'); for (var j=0;j<res.length;j++) res[j].innerHTML = reHtml;
@@ -464,7 +465,7 @@ const MASTER_SCRIPT = `
     var url = SITE_URL + '/visa/card/?d=' + b64url(JSON.stringify(d));
     copyToClipboard(url, 'Long web link copied (no short link yet for this member).\\n\\nFor a friendly short link, run npm run visa:links.');
   }
-  function val(id){ return document.getElementById(id).value.trim(); }
+  function val(id){ var el=document.getElementById(id); return el ? el.value.trim() : ''; }
   function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
   function createLetter(){
     var name = val('v-name');
@@ -530,13 +531,13 @@ function masterPage(pageKind) {
       <p style="font-size:12.5px;color:#e7d9b0;margin:-6px 0 14px">${responsibility}</p>
       <div class="grid">
         <div class="field wide"><label>Full name (with title)</label><input id="v-name" placeholder="${isGuest ? 'HRM Queen Josephine Munmavwili' : 'Mr Samuel Iso'}" /></div>
-        <div class="field wide"><label>Role / title</label><input id="v-role" placeholder="${rolePh}" /></div>
+        ${isGuest ? '' : `<div class="field wide"><label>Role / title</label><input id="v-role" placeholder="${rolePh}" /></div>`}
         <div class="field wide"><label>Address</label><input id="v-address" placeholder="Calabar, Cross River State, Nigeria" /></div>
         <div class="field"><label>Date of birth</label><input id="v-dob" placeholder="5th July 1999" /></div>
         <div class="field"><label>Passport number</label><input id="v-passport" placeholder="B05181252" /></div>
         <div class="field"><label>Letter date (defaults to today)</label><input id="v-date" placeholder="e.g. 14 July 2026" /></div>
-        <div class="field"><label>Visit from</label><input id="v-from" value="${esc(DEFAULT_FROM)}" /></div>
-        <div class="field"><label>Visit to</label><input id="v-to" value="${esc(DEFAULT_TO)}" /></div>
+        ${isGuest ? '' : `<div class="field"><label>Visit from</label><input id="v-from" value="${esc(DEFAULT_FROM)}" /></div>
+        <div class="field"><label>Visit to</label><input id="v-to" value="${esc(DEFAULT_TO)}" /></div>`}
       </div>
       <button class="btn" onclick="createLetter()">Create letter</button>
       <div class="msg" id="msg"></div>
