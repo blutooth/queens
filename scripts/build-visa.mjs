@@ -510,7 +510,6 @@ function masterPage(pageKind) {
     ? 'African Global Queens Summit — invited Queens, Kings, princes, princesses &amp; public'
     : 'African Global Queens Summit — UK Standard Visitor delegation';
   const addHeading = isGuest ? 'Add a Queen / King / invited guest' : 'Add a palace-staff member';
-  const otherLink = isGuest ? '<a href="/visa/">← Palace Staff letters</a>' : '<a href="/visa/royals/">Queens &amp; Kings letters →</a>';
   const listHeading = isGuest ? 'Invited Queens &amp; Kings' : 'Delegation';
   const responsibility = 'The standard invitation-support letter — only the name, address, date of birth &amp; passport change per person.';
   const rolePh = isGuest ? 'Paramount Queen and custodian of heritage' : 'Traditional, cultural administrator and orator';
@@ -524,7 +523,6 @@ function masterPage(pageKind) {
   <div class="wrap">
     <h1>${title}</h1>
     <p class="sub">${sub}</p>
-    <p class="nav">${otherLink}</p>
 
     <div class="card">
       <h2>${addHeading}</h2>
