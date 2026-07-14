@@ -47,6 +47,9 @@ const SENDER = {
 const ACCOMMODATION = 'Hawkhill Place, Stanton St John, Oxford OX33 1HS';
 const DEFAULT_FROM = '25 July 2026';
 const DEFAULT_TO = '20 September 2026';
+// Queens & Kings attend the summit itself, 14–31 August 2026.
+const GUEST_FROM = '14 August 2026';
+const GUEST_TO = '31 August 2026';
 // Base for shareable web links (the deployed /visa/card/ viewer).
 const SITE_URL = 'https://africanqueenssummit.com';
 
@@ -85,8 +88,9 @@ function parseFrontmatter(txt) {
 
 function letterHtml(v, sig, emblem, opts = {}) {
   const card = !!opts.card; // web card viewer — fields come from the URL at runtime
-  const from = v.from || DEFAULT_FROM;
-  const to = v.to || DEFAULT_TO;
+  const isGuestV = v.kind === 'guest';
+  const from = v.from || (isGuestV ? GUEST_FROM : DEFAULT_FROM);
+  const to = v.to || (isGuestV ? GUEST_TO : DEFAULT_TO);
   const dateLine = card ? '<span class="c-date"></span>' : (v.date ? esc(v.date) : '');
   const fromHtml = card ? '<strong class="c-from"></strong>' : `<strong>${esc(from)}</strong>`;
   const toHtml = card ? '<strong class="c-to"></strong>' : `<strong>${esc(to)}</strong>`;
@@ -356,8 +360,8 @@ UK Visas and Immigration</div>
     function esch(s){ var d=document.createElement('div'); d.textContent = s==null?'':s; return d.innerHTML; }
     function setAll(cls, val){ var e=document.querySelectorAll('.'+cls); for(var i=0;i<e.length;i++) e[i].textContent = val || ''; }
     setAll('c-date', data.date);
-    setAll('c-from', data.from || ${JSON.stringify(DEFAULT_FROM)});
-    setAll('c-to', data.to || ${JSON.stringify(DEFAULT_TO)});
+    setAll('c-from', data.from || (guest ? ${JSON.stringify(GUEST_FROM)} : ${JSON.stringify(DEFAULT_FROM)}));
+    setAll('c-to', data.to || (guest ? ${JSON.stringify(GUEST_TO)} : ${JSON.stringify(DEFAULT_TO)}));
     var nameBit = guest ? '' : esch(data.name || '');
     if (!guest && data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
     var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + ((!guest && val) ? esch(val) : '') + '</li>'; };
