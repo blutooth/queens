@@ -44,6 +44,8 @@ function inviteCreateApi() {
 function visaApi() {
   const dir = resolve(__dirname, 'content/visa');
   const rebuild = () => execFileSync('node', ['scripts/build-visa.mjs'], { cwd: __dirname, stdio: 'ignore' });
+  // Best-effort: generate the TinyURL short link for any new member (needs network).
+  const makeLinks = () => { try { execFileSync('node', ['scripts/build-visa-links.mjs'], { cwd: __dirname, stdio: 'ignore', timeout: 25000 }); } catch (e) { /* offline / rate-limited — skip */ } };
   const readBody = (req) => new Promise((res) => { let b = ''; req.on('data', (c) => { b += c; }); req.on('end', () => res(b)); });
   const safeSlug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
   return {
@@ -59,6 +61,7 @@ function visaApi() {
             const safe = safeSlug(slug);
             if (!safe || !markdown) throw new Error('missing slug or markdown');
             writeFileSync(resolve(dir, safe + '.md'), markdown);
+            makeLinks(); // auto-create the short link for the new participant
             rebuild();
             res.end(JSON.stringify({ ok: true, url: '/visa/' + safe + '/' }));
           } catch (e) {
