@@ -489,8 +489,8 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
       <h2>Add a delegation member</h2>
       <div class="grid">
         <div class="field wide"><label>Letter type</label><select id="v-kind">
-          <option value="staff">Palace staff / delegation — I cover accommodation, meals &amp; transport</option>
-          <option value="guest">Invited guest (Queen/King/Prince/Princess/Public) — I cover meals only</option>
+          <option value="staff">Palace staff visa letter — I cover accommodation, meals &amp; transport</option>
+          <option value="guest">Queens &amp; Kings visa letter (Queens, Kings, princes, princesses &amp; public) — I cover meals only</option>
         </select></div>
         <div class="field wide"><label>Full name (with title)</label><input id="v-name" placeholder="Mr Samuel Iso" /></div>
         <div class="field wide"><label>Role / title</label><input id="v-role" placeholder="Traditional, cultural administrator and orator of 5 Nnettah Community" /></div>
