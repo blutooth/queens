@@ -70,7 +70,10 @@ for (const f of files) {
   if (map[slug] && !force) { kept++; rows.push([v.name, map[slug]]); console.log(`  = ${v.name}  ->  ${map[slug]}`); continue; }
   const url = cardUrl(v);
   let short = null;
-  for (const alias of [`${slug}-aqs`, `${slug}-aqs2`, `${slug}-aqs3`, `${slug}-a${Date.now().toString(36).slice(-3)}`]) {
+  // Long full-name aliases exceed TinyURL's limit — fall back to first+last name.
+  const parts = slug.split('-');
+  const shortSlug = parts.length > 2 ? `${parts[0]}-${parts[parts.length - 1]}` : slug;
+  for (const alias of [`${slug}-aqs`, `${shortSlug}-aqs`, `${shortSlug}-aqs2`, `${slug}-a${Date.now().toString(36).slice(-3)}`]) {
     short = await tinyurl(url, alias);
     if (short) break;
   }
