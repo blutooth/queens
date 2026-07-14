@@ -37,6 +37,7 @@ function cardUrl(v) {
   const data = {
     name: v.name || '', role: v.role || '', address: v.address || '', dob: v.dob || '',
     passport: v.passport || '', date: v.date || '', from: v.from || '', to: v.to || '',
+    kind: v.kind === 'guest' ? 'guest' : 'staff',
   };
   return `${SITE_URL}/visa/card/?d=${b64url(JSON.stringify(data))}`;
 }
