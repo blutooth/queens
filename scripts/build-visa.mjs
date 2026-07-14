@@ -100,11 +100,10 @@ function letterHtml(v, sig, emblem, opts = {}) {
   // field shows its value, a blank field leaves an underlined space to write in
   // — so the same file works as a ready-to-fill blank template or a completed letter.
   const kind = v.kind === 'guest' ? 'guest' : 'staff';
-  // Queens & Kings letters leave the Re section blank, to be filled in individually.
-  const blankRe = !card && kind === 'guest';
-  let nameBit = blankRe ? '' : esc(v.name || '');
-  if (!blankRe && kind === 'staff' && v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
-  const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${(!blankRe && valu) ? esc(valu) : ''}</li>`;
+  // Re section fills from the details entered; any field left empty stays blank to fill by hand.
+  let nameBit = esc(v.name || '');
+  if (kind === 'staff' && v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
+  const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${valu ? esc(valu) : ''}</li>`;
   const reBlock = card ? '<div class="c-re"></div>' : `<p class="re">Re: ${nameBit}</p>
   <ul class="re-list">
     ${item('Address', v.address)}
@@ -367,9 +366,9 @@ UK Visas and Immigration</div>
     setAll('c-date', data.date);
     setAll('c-from', data.from || (guest ? ${JSON.stringify(GUEST_FROM)} : ${JSON.stringify(DEFAULT_FROM)}));
     setAll('c-to', data.to || (guest ? ${JSON.stringify(GUEST_TO)} : ${JSON.stringify(DEFAULT_TO)}));
-    var nameBit = guest ? '' : esch(data.name || '');
+    var nameBit = esch(data.name || '');
     if (!guest && data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
-    var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + ((!guest && val) ? esch(val) : '') + '</li>'; };
+    var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + (val ? esch(val) : '') + '</li>'; };
     var reHtml = '<p class="re">Re: ' + nameBit + '</p><ul class="re-list">' + li('Address', data.address) + li('Date of Birth', data.dob) + li('Passport Number', data.passport) + '</ul>';
     var res = document.querySelectorAll('.c-re'); for (var j=0;j<res.length;j++) res[j].innerHTML = reHtml;
     if (guest) { var bp = document.querySelector('.body-pad'); if (bp) bp.classList.add('kind-guest'); }
@@ -461,6 +460,7 @@ const MASTER_CSS = `
   td{padding:11px 8px;border-bottom:1px solid rgba(212,175,55,0.18);vertical-align:middle;}
   .num{color:#8fae9f;width:30px;}
   .nm{font-weight:600;color:#fdf6e3;}
+  .nm a{color:inherit;text-decoration:none;}.nm a:hover{text-decoration:underline;color:#f4d98a;}
   .cat{font-weight:400;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#0a2e22;background:var(--gold);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle;}
   .act{text-align:right;white-space:nowrap;}
   .act a{color:#f4d98a;font-weight:600;text-decoration:none;margin-right:12px;}
@@ -534,7 +534,7 @@ function masterPage(pageKind) {
   const isGuest = pageKind === 'guest';
   const members = built.filter((b) => b.slug !== '_template' && memberKind(b) === pageKind);
   const rows = members
-    .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}${b.v && b.v.category ? ` <span class="cat">${esc(b.v.category)}</span>` : ''}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="/visa/${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
+    .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm"><a href="/visa/${b.slug}/index.html" target="_blank">${esc(b.name)}</a>${b.v && b.v.category ? ` <span class="cat">${esc(b.v.category)}</span>` : ''}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="/visa/${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
     .join('\n      ');
   const title = isGuest ? 'Queens & Kings · Visa Letters' : 'Palace Staff · Visa Letters';
   const sub = isGuest
