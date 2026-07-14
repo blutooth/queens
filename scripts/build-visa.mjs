@@ -96,9 +96,11 @@ function letterHtml(v, sig, emblem, opts = {}) {
   // field shows its value, a blank field leaves an underlined space to write in
   // — so the same file works as a ready-to-fill blank template or a completed letter.
   const kind = v.kind === 'guest' ? 'guest' : 'staff';
-  let nameBit = esc(v.name || '');
-  if (kind === 'staff' && v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
-  const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${valu ? esc(valu) : ''}</li>`;
+  // Queens & Kings letters leave the Re section blank, to be filled in individually.
+  const blankRe = !card && kind === 'guest';
+  let nameBit = blankRe ? '' : esc(v.name || '');
+  if (!blankRe && kind === 'staff' && v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
+  const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${(!blankRe && valu) ? esc(valu) : ''}</li>`;
   const reBlock = card ? '<div class="c-re"></div>' : `<p class="re">Re: ${nameBit}</p>
   <ul class="re-list">
     ${item('Address', v.address)}
@@ -174,6 +176,10 @@ function letterHtml(v, sig, emblem, opts = {}) {
   .re-list { list-style: disc; margin: 0 0 16px; padding-left: 26px; }
   .re-list li { margin: 3px 0; }
   .re-list .lbl { font-weight: 600; }
+  /* Queens & Kings (guest) vs palace staff wording */
+  .only-guest { display: none; }
+  .kind-guest .only-staff { display: none; }
+  .kind-guest .only-guest { display: block; }
   p { margin: 0 0 11px; text-align: justify; }
   ul { margin: 4px 0 12px; padding-left: 22px; }
   li { margin: 2px 0; }
@@ -211,7 +217,7 @@ function letterHtml(v, sig, emblem, opts = {}) {
   </header>
   <div class="kente-band"></div>
 
-  <div class="body-pad">
+  <div class="body-pad ${card ? '' : (kind === 'guest' ? 'kind-guest' : '')}">
   <div class="sender">
     <div class="nm">${esc(SENDER.name)}</div>
     <div class="role">${esc(SENDER.line1)}</div>
@@ -231,18 +237,22 @@ UK Visas and Immigration</div>
 
   <p>Dear Sir/Madam,</p>
 
-  <p>I write in my capacity as Obonganwan Marie Erete, ${esc(SIGNATORY.line1)}, the Traditional Ruler of ${esc(QUEENDOM)}, to formally invite my customary, traditional, and cultural palace staff to visit the United Kingdom as members of my official delegation.</p>
+  <p class="only-staff">I write in my capacity as Obonganwan Marie Erete, ${esc(SIGNATORY.line1)}, the Traditional Ruler of ${esc(QUEENDOM)}, to formally invite my customary, traditional, and cultural palace staff to visit the United Kingdom as members of my official delegation.</p>
+  <p class="only-guest">I write in my capacity as Obonganwan Marie Erete, ${esc(SIGNATORY.line1)}, the Traditional Ruler of ${esc(QUEENDOM)}, to formally invite and support the visa application of the individual named above to attend the ${esc(SUMMIT)} in the United Kingdom as my invited guest.</p>
 
-  <p>The purpose of their visit is to accompany me and participate in the <strong>${esc(SUMMIT)}</strong>, an international cultural and leadership forum convened under my leadership. The Summit brings together traditional rulers, women leaders, policymakers, academics, and members of the African diaspora to promote African cultural heritage, women's leadership, intercultural dialogue, and sustainable community development.</p>
+  <p class="only-staff">The purpose of their visit is to accompany me and participate in the <strong>${esc(SUMMIT)}</strong>, an international cultural and leadership forum convened under my leadership. The Summit brings together traditional rulers, women leaders, policymakers, academics, and members of the African diaspora to promote African cultural heritage, women's leadership, intercultural dialogue, and sustainable community development.</p>
+  <p class="only-guest">The purpose of the visit is to attend and participate in the <strong>${esc(SUMMIT)}</strong>, an international cultural and leadership forum convened under my leadership. The Summit brings together traditional rulers, women leaders, policymakers, academics, and members of the African diaspora to promote African cultural heritage, women's leadership, intercultural dialogue, and sustainable community development.</p>
 
-  <p>The individuals named in their respective visa applications are longstanding members of my palace establishment and perform recognised customary, ceremonial, cultural, and administrative duties in support of my traditional institution. Their participation forms an important part of the official cultural representation of my Queendom and will enable them to assist in the ceremonial, protocol, and cultural aspects of the Summit.</p>
+  <p class="only-staff">The individuals named in their respective visa applications are longstanding members of my palace establishment and perform recognised customary, ceremonial, cultural, and administrative duties in support of my traditional institution. Their participation forms an important part of the official cultural representation of my Queendom and will enable them to assist in the ceremonial, protocol, and cultural aspects of the Summit.</p>
+  <p class="only-guest">The individual named above is an invited guest of the Summit, attending in their own capacity. Their participation forms an important part of this international cultural and diplomatic gathering of traditional rulers, dignitaries, and members of the African diaspora.</p>
 
-  <p>The proposed visit will take place from ${fromHtml} (for preparation in advance of the summit) to on or before ${toHtml} (to take into account clearance and consolidation prior to departure), following which they will return to Nigeria to resume their official responsibilities in and outside the palace and their personal, family, and community obligations. Their visit is strictly temporary and is solely for cultural, ceremonial, and Summit-related activities permitted under the UK Standard Visitor route. They have no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
+  <p class="only-staff">The proposed visit will take place from ${fromHtml} (for preparation in advance of the summit) to on or before ${toHtml} (to take into account clearance and consolidation prior to departure), following which they will return to Nigeria to resume their official responsibilities in and outside the palace and their personal, family, and community obligations. Their visit is strictly temporary and is solely for cultural, ceremonial, and Summit-related activities permitted under the UK Standard Visitor route. They have no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
+  <p class="only-guest">The proposed visit will take place from ${fromHtml} to on or before ${toHtml}, following which the visitor will return to their home country to resume their personal, professional, family, and community obligations. The visit is strictly temporary and is solely for attendance at the Summit and related cultural activities permitted under the UK Standard Visitor route. The visitor has no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
 
   <p>During their stay, they will be accommodated at my residence:</p>
   <p style="margin-left:22px"><strong>${esc(ACCOMMODATION)}</strong></p>
 
-  <p>I confirm that I shall be financially responsible for the visitors throughout their stay in the United Kingdom. This includes:</p>
+  <p>I confirm that I shall be financially responsible for the visitor throughout their stay in the United Kingdom. This includes:</p>
   <ul>
     <li>Accommodation</li>
     <li>Meals</li>
@@ -250,19 +260,26 @@ UK Visas and Immigration</div>
     <li>General living expenses</li>
     <li>Emergency support, where necessary</li>
   </ul>
-  <p>I will provide pastoral support throughout their visit.</p>
+  <p class="only-staff">I will provide pastoral support throughout their visit.</p>
 
   <h3>Assurance of Compliance</h3>
-  <p>I respectfully confirm that the invited visitors have substantial and compelling ties to Nigeria, including:</p>
-  <ul>
+  <p class="only-staff">I respectfully confirm that the invited visitors have substantial and compelling ties to Nigeria, including:</p>
+  <ul class="only-staff">
     <li>Permanent residence in Nigeria.</li>
     <li>Family responsibilities.</li>
     <li>Official appointments within my palace establishment.</li>
     <li>Ongoing traditional and cultural duties.</li>
     <li>Community obligations requiring their return (e.g. paid employment, business or pastoral duties).</li>
   </ul>
+  <p class="only-guest">I respectfully confirm that the invited visitor has substantial and compelling ties to their home country, including:</p>
+  <ul class="only-guest">
+    <li>Permanent residence in their home country.</li>
+    <li>Family responsibilities.</li>
+    <li>Professional, business or community commitments.</li>
+    <li>Obligations requiring their return upon completion of the visit.</li>
+  </ul>
   <p>These commitments provide strong assurance that they will depart the United Kingdom at the conclusion of their authorised visit.</p>
-  <p>Neither I nor the visitors have any intention of breaching UK immigration laws or visa conditions. They fully understand that the Standard Visitor Visa does not permit employment, access to public funds, or long-term residence in the United Kingdom.</p>
+  <p>Neither I nor the visitor has any intention of breaching UK immigration laws or visa conditions. The visitor fully understands that the Standard Visitor Visa does not permit employment, access to public funds, or long-term residence in the United Kingdom.</p>
 
   <h3>Supporting Documentation</h3>
   <p>To support this invitation, I will provide copies of the following documents:</p>
@@ -270,14 +287,15 @@ UK Visas and Immigration</div>
     <li>My passport.</li>
     <li>Recent bank statements.</li>
   </ul>
-  <p>Each visitor will also submit:</p>
+  <p>The visitor will also submit:</p>
   <ul>
     <li>A valid passport.</li>
     <li>Bank statements (where applicable).</li>
     <li>Any other supporting documents required by UKVI.</li>
   </ul>
 
-  <p>I respectfully confirm that each member of my delegation maintains strong and enduring ties to Nigeria through their official appointments within my traditional institution, family commitments, and continuing cultural responsibilities, all of which require their return upon completion of the visit.</p>
+  <p class="only-staff">I respectfully confirm that each member of my delegation maintains strong and enduring ties to Nigeria through their official appointments within my traditional institution, family commitments, and continuing cultural responsibilities, all of which require their return upon completion of the visit.</p>
+  <p class="only-guest">I respectfully confirm that the visitor maintains strong and enduring ties to their home country through their professional, family, and community commitments, all of which require their return upon completion of the visit.</p>
 
   <p>I respectfully request that UK Visas and Immigration give favourable consideration to their applications. I am available to provide any further information or supporting documentation that may assist in the assessment of these applications.</p>
 
@@ -333,17 +351,19 @@ UK Visas and Immigration</div>
     var p = new URLSearchParams(location.search), raw = p.get('d') || '';
     var data = {};
     try { data = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/'))))); } catch (e) {}
+    var guest = data.kind === 'guest';
     NAME = data.name || 'Visitor';
     function esch(s){ var d=document.createElement('div'); d.textContent = s==null?'':s; return d.innerHTML; }
     function setAll(cls, val){ var e=document.querySelectorAll('.'+cls); for(var i=0;i<e.length;i++) e[i].textContent = val || ''; }
     setAll('c-date', data.date);
     setAll('c-from', data.from || ${JSON.stringify(DEFAULT_FROM)});
     setAll('c-to', data.to || ${JSON.stringify(DEFAULT_TO)});
-    var nameBit = esch(data.name || '');
-    if (data.kind !== 'guest' && data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
-    var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + (val ? esch(val) : '') + '</li>'; };
+    var nameBit = guest ? '' : esch(data.name || '');
+    if (!guest && data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
+    var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + ((!guest && val) ? esch(val) : '') + '</li>'; };
     var reHtml = '<p class="re">Re: ' + nameBit + '</p><ul class="re-list">' + li('Address', data.address) + li('Date of Birth', data.dob) + li('Passport Number', data.passport) + '</ul>';
     var res = document.querySelectorAll('.c-re'); for (var j=0;j<res.length;j++) res[j].innerHTML = reHtml;
+    if (guest) { var bp = document.querySelector('.body-pad'); if (bp) bp.classList.add('kind-guest'); }
     document.title = 'Visa Invitation Letter \\u2014 ' + (data.name || '');
   })();` : ''}
   (function () {
