@@ -292,7 +292,7 @@ UK Visas and Immigration</div>
 </div>
 <script>
   var NAME = ${JSON.stringify(v.name || 'Visitor')};
-  var CARD_URL = ${card ? 'location.href' : JSON.stringify(cardLinkFor(v))};
+  var CARD_URL = ${card ? 'location.href' : JSON.stringify(opts.short || cardLinkFor(v))};
   function copyLink() { copyToClipboard(CARD_URL, 'Shareable web link copied \\u2014 it opens this letter on any device. It carries the passport/DOB, so send only to the intended recipient.'); }
   function letterText() {
     return document.querySelector('.body-pad').innerText.replace(/\\n{3,}/g, '\\n\\n').trim();
@@ -362,6 +362,14 @@ mkdirSync(outDir, { recursive: true });
 
 const sig = signatureDataUri();
 const emblem = emblemDataUri();
+
+// Friendly short links (slug -> tinyurl), if generated. Letters + master page prefer these.
+let SHORTLINKS = {};
+const shortlinksPath = join(root, 'content', 'data', 'visa-shortlinks.json');
+if (existsSync(shortlinksPath)) {
+  try { SHORTLINKS = JSON.parse(readFileSync(shortlinksPath, 'utf8')); } catch (e) { SHORTLINKS = {}; }
+}
+
 const files = readdirSync(visaDir).filter((f) => f.endsWith('.md')).sort();
 const built = [];
 
@@ -370,7 +378,7 @@ for (const f of files) {
   const slug = f.replace(/\.md$/, '');
   const label = v.name || '(blank template — details to be inserted)';
   mkdirSync(join(outDir, slug), { recursive: true });
-  writeFileSync(join(outDir, slug, 'index.html'), letterHtml(v, sig, emblem));
+  writeFileSync(join(outDir, slug, 'index.html'), letterHtml(v, sig, emblem, { short: SHORTLINKS[slug] }));
   built.push({ slug, name: label, v });
   console.log(`  ✓ /visa/${slug}/  —  ${label}`);
 }
@@ -477,6 +485,7 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
 
 <script>
   var VISA_DATA = ${JSON.stringify(VISA_DATA)};
+  var SHORTLINKS = ${JSON.stringify(SHORTLINKS)};
   var SITE_URL = ${JSON.stringify(SITE_URL)};
   function copyToClipboard(text, okMsg){
     var ok=function(){ alert(okMsg); };
@@ -485,9 +494,13 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   }
   function b64url(s){ return btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,''); }
   function getLink(slug){
+    if (SHORTLINKS[slug]) {
+      copyToClipboard(SHORTLINKS[slug], 'Friendly link copied:\\n' + SHORTLINKS[slug] + '\\n\\nIt opens the letter on any device. Carries this person\\u2019s details incl. passport, so share only with the intended recipient.');
+      return;
+    }
     var d = VISA_DATA[slug]; if(!d) return;
     var url = SITE_URL + '/visa/card/?d=' + b64url(JSON.stringify(d));
-    copyToClipboard(url, 'Shareable web link copied.\\n\\nIt opens the letter on any device — but it carries this person\\u2019s details incl. passport number, so share it only with the intended recipient.');
+    copyToClipboard(url, 'Long web link copied (no short link yet for this member).\\n\\nIt opens the letter but is long — for a friendly short link, ask to regenerate the visa links.');
   }
   function val(id){ return document.getElementById(id).value.trim(); }
   function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
