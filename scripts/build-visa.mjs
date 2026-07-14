@@ -257,11 +257,16 @@ UK Visas and Immigration</div>
   <p style="margin-left:22px"><strong>${esc(ACCOMMODATION)}</strong></p>
 
   <p>I confirm that I shall be financially responsible for the visitor throughout their stay in the United Kingdom. This includes:</p>
-  <ul>
+  <ul class="only-staff">
     <li>Accommodation</li>
     <li>Meals</li>
     <li>Local transportation</li>
     <li>General living expenses</li>
+    <li>Emergency support, where necessary</li>
+  </ul>
+  <ul class="only-guest">
+    <li>Meals</li>
+    <li>Local transportation</li>
     <li>Emergency support, where necessary</li>
   </ul>
   <p class="only-staff">I will provide pastoral support throughout their visit.</p>
@@ -285,14 +290,14 @@ UK Visas and Immigration</div>
   <p>These commitments provide strong assurance that they will depart the United Kingdom at the conclusion of their authorised visit.</p>
   <p>Neither I nor the visitor has any intention of breaching UK immigration laws or visa conditions. The visitor fully understands that the Standard Visitor Visa does not permit employment, access to public funds, or long-term residence in the United Kingdom.</p>
 
-  <h3>Supporting Documentation</h3>
-  <p>To support this invitation, I will provide copies of the following documents:</p>
-  <ul>
+  <h3 class="only-staff">Supporting Documentation</h3>
+  <p class="only-staff">To support this invitation, I will provide copies of the following documents:</p>
+  <ul class="only-staff">
     <li>My passport.</li>
     <li>Recent bank statements.</li>
   </ul>
-  <p>The visitor will also submit:</p>
-  <ul>
+  <p class="only-staff">The visitor will also submit:</p>
+  <ul class="only-staff">
     <li>A valid passport.</li>
     <li>Bank statements (where applicable).</li>
     <li>Any other supporting documents required by UKVI.</li>
