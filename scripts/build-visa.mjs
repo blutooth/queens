@@ -420,7 +420,8 @@ const MASTER_CSS = `
   .field{display:flex;flex-direction:column;gap:4px;}
   .field.wide{grid-column:1 / -1;}
   label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#c9b98f;}
-  input{font:inherit;font-size:14px;padding:9px 11px;border-radius:8px;border:1px solid rgba(212,175,55,0.4);background:rgba(0,0,0,0.25);color:#fdf6e3;}
+  input,select{font:inherit;font-size:14px;padding:9px 11px;border-radius:8px;border:1px solid rgba(212,175,55,0.4);background:rgba(0,0,0,0.25);color:#fdf6e3;}
+  select option{color:#111;}
   input::placeholder{color:#7f9084;}
   .btn{font-family:'Marcellus',serif;font-size:14px;cursor:pointer;border:none;border-radius:999px;padding:11px 26px;margin-top:16px;
     background:linear-gradient(180deg,#f4d97a,var(--gold));color:var(--brown);}
@@ -431,6 +432,7 @@ const MASTER_CSS = `
   td{padding:11px 8px;border-bottom:1px solid rgba(212,175,55,0.18);vertical-align:middle;}
   .num{color:#8fae9f;width:30px;}
   .nm{font-weight:600;color:#fdf6e3;}
+  .cat{font-weight:400;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#0a2e22;background:var(--gold);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle;}
   .act{text-align:right;white-space:nowrap;}
   .act a{color:#f4d98a;font-weight:600;text-decoration:none;margin-right:12px;}
   .act a:hover{text-decoration:underline;}
@@ -472,7 +474,7 @@ const MASTER_SCRIPT = `
     var msg = document.getElementById('msg');
     if(!name){ msg.style.color='#e0987d'; msg.textContent='Please enter a name.'; return; }
     var slug = slugify(name);
-    var md = ['---','name: '+name,'kind: '+KIND,'role: '+val('v-role'),'address: '+val('v-address'),
+    var md = ['---','name: '+name,'kind: '+KIND,'category: '+val('v-category'),'role: '+val('v-role'),'address: '+val('v-address'),
       'dob: '+val('v-dob'),'passport: '+val('v-passport'),'date: '+val('v-date'),
       'from: '+val('v-from'),'to: '+val('v-to'),'---',''].join('\\n');
     msg.style.color='#c9b98f'; msg.textContent='Creating…';
@@ -503,7 +505,7 @@ function masterPage(pageKind) {
   const isGuest = pageKind === 'guest';
   const members = built.filter((b) => b.slug !== '_template' && memberKind(b) === pageKind);
   const rows = members
-    .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="/visa/${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
+    .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}${b.v && b.v.category ? ` <span class="cat">${esc(b.v.category)}</span>` : ''}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="/visa/${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
     .join('\n      ');
   const title = isGuest ? 'Queens & Kings · Visa Letters' : 'Palace Staff · Visa Letters';
   const sub = isGuest
@@ -529,7 +531,9 @@ function masterPage(pageKind) {
       <p style="font-size:12.5px;color:#e7d9b0;margin:-6px 0 14px">${responsibility}</p>
       <div class="grid">
         <div class="field wide"><label>Full name (with title)</label><input id="v-name" placeholder="${isGuest ? 'HRM Queen Josephine Munmavwili' : 'Mr Samuel Iso'}" /></div>
-        ${isGuest ? '' : `<div class="field wide"><label>Role / title</label><input id="v-role" placeholder="${rolePh}" /></div>`}
+        ${isGuest ? `<div class="field wide"><label>Category</label><select id="v-category">
+          <option>Queen</option><option>King</option><option>Prince</option><option>Princess</option><option>Special Guest</option><option>Politician</option>
+        </select></div>` : `<div class="field wide"><label>Role / title</label><input id="v-role" placeholder="${rolePh}" /></div>`}
         <div class="field wide"><label>Address</label><input id="v-address" placeholder="Calabar, Cross River State, Nigeria" /></div>
         <div class="field"><label>Date of birth</label><input id="v-dob" placeholder="5th July 1999" /></div>
         <div class="field"><label>Passport number</label><input id="v-passport" placeholder="B05181252" /></div>
