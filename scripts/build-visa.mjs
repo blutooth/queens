@@ -253,10 +253,10 @@ UK Visas and Immigration</div>
   <p class="only-staff">The proposed visit will take place from ${fromHtml} (for preparation in advance of the summit) to on or before ${toHtml} (to take into account clearance and consolidation prior to departure), following which they will return to Nigeria to resume their official responsibilities in and outside the palace and their personal, family, and community obligations. Their visit is strictly temporary and is solely for cultural, ceremonial, and Summit-related activities permitted under the UK Standard Visitor route. They have no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
   <p class="only-guest">The proposed visit will take place from ${fromHtml} to on or before ${toHtml}, following which the visitor will return to their home country to resume their personal, professional, family, and community obligations. The visit is strictly temporary and is solely for attendance at the Summit and related cultural activities permitted under the UK Standard Visitor route. The visitor has no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
 
-  <p>During their stay, they will be accommodated at my residence:</p>
-  <p style="margin-left:22px"><strong>${esc(ACCOMMODATION)}</strong></p>
+  <p class="only-staff">During their stay, they will be accommodated at my residence:</p>
+  <p class="only-staff" style="margin-left:22px"><strong>${esc(ACCOMMODATION)}</strong></p>
 
-  <p>I confirm that I shall be financially responsible for the visitor throughout their stay in the United Kingdom. This includes:</p>
+  <p class="only-staff">I confirm that I shall be financially responsible for the visitor throughout their stay in the United Kingdom. This includes:</p>
   <ul class="only-staff">
     <li>Accommodation</li>
     <li>Meals</li>
@@ -264,12 +264,9 @@ UK Visas and Immigration</div>
     <li>General living expenses</li>
     <li>Emergency support, where necessary</li>
   </ul>
-  <ul class="only-guest">
-    <li>Meals</li>
-    <li>Local transportation</li>
-    <li>Emergency support, where necessary</li>
-  </ul>
   <p class="only-staff">I will provide pastoral support throughout their visit.</p>
+
+  <p class="only-guest">Provision has been made for accommodation at ${esc(ACCOMMODATION)} for the above named individual. I further confirm that I will be responsible for meals, local transportation and emergency support, where necessary.</p>
 
   <h3>Assurance of Compliance</h3>
   <p class="only-staff">I respectfully confirm that the invited visitors have substantial and compelling ties to Nigeria, including:</p>
