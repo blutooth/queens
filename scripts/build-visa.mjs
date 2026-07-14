@@ -266,7 +266,7 @@ UK Visas and Immigration</div>
   </ul>
   <p class="only-staff">I will provide pastoral support throughout their visit.</p>
 
-  <p class="only-guest">Provision has been made for accommodation at ${esc(ACCOMMODATION)} for the above named individual. I further confirm that I will be responsible for meals, local transportation and emergency support, where necessary.</p>
+  <p class="only-guest">Provision has been made for accommodation at ${esc(ACCOMMODATION)} for the above named individual.</p>
 
   <h3>Assurance of Compliance</h3>
   <p class="only-staff">I respectfully confirm that the invited visitors have substantial and compelling ties to Nigeria, including:</p>
