@@ -532,7 +532,7 @@ function masterPage(pageKind) {
       <div class="grid">
         <div class="field wide"><label>Full name (with title)</label><input id="v-name" placeholder="${isGuest ? 'HRM Queen Josephine Munmavwili' : 'Mr Samuel Iso'}" /></div>
         ${isGuest ? `<div class="field wide"><label>Category</label><select id="v-category">
-          <option>Queen</option><option>King</option><option>Prince</option><option>Princess</option><option>Special Guest</option><option>Politician</option>
+          <option>Queen</option><option>King</option><option>Prince</option><option>Princess</option><option>Special Guest</option><option>Politician</option><option>Mr</option><option>Mrs</option><option>Miss</option><option>Ms</option>
         </select></div>` : `<div class="field wide"><label>Role / title</label><input id="v-role" placeholder="${rolePh}" /></div>`}
         <div class="field wide"><label>Address</label><input id="v-address" placeholder="Calabar, Cross River State, Nigeria" /></div>
         <div class="field"><label>Date of birth</label><input id="v-dob" placeholder="5th July 1999" /></div>
