@@ -158,7 +158,10 @@ function letterHtml(v, sig, emblem, opts = {}) {
     background: repeating-conic-gradient(from 0deg, rgba(212,175,55,0) 0deg, rgba(212,175,55,0) 4deg, rgba(212,175,55,0.6) 5deg, rgba(212,175,55,0) 6deg, rgba(212,175,55,0) 10deg);
     -webkit-mask: radial-gradient(circle, transparent 44%, #000 45%, #000 74%, transparent 75%);
     mask: radial-gradient(circle, transparent 44%, #000 45%, #000 74%, transparent 75%);
+    animation: raysSpin 50s linear infinite;
   }
+  @keyframes raysSpin { to { transform: rotate(360deg); } }
+  @media print { .medallion .rays { animation: none; } }
   .emblem {
     position: relative; z-index: 2; width: 94px; height: 94px; object-fit: contain;
     margin: 13px; border-radius: 50%; background: rgba(251,245,233,0.95); padding: 3px;
