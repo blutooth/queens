@@ -426,24 +426,18 @@ for (const b of built) {
   };
 }
 
-// index of all letters
-const staff = built.filter((b) => b.slug !== '_template');
-const rows = staff
-  .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="./${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
-  .join('\n      ');
-writeFileSync(join(outDir, 'index.html'), `<!doctype html>
-<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Palace Staff · Visa Letters</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Marcellus&display=swap" rel="stylesheet" />
-<style>
+// Two separate master pages — Palace Staff (/visa/) and Queens & Kings (/visa/royals/).
+const memberKind = (b) => (b.v && b.v.kind === 'guest') ? 'guest' : 'staff';
+
+const MASTER_CSS = `
   :root{--emerald:#0d6b4f;--emerald-deep:#094b38;--gold:#d4af37;--gold-deep:#b8860b;--brown:#3c2415;}
   *{box-sizing:border-box;}
   body{font-family:system-ui,sans-serif;margin:0;color:#eae2d0;line-height:1.55;
     background:radial-gradient(circle at 50% 0,#12503b,#0a2e22 60%,#071f18);min-height:100vh;}
   .wrap{max-width:760px;margin:0 auto;padding:36px 20px 60px;}
   h1{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#fdf6e3;margin:0 0 2px;}
-  .sub{font-family:'Marcellus',serif;letter-spacing:0.14em;text-transform:uppercase;font-size:11px;color:var(--gold);margin:0 0 22px;}
+  .sub{font-family:'Marcellus',serif;letter-spacing:0.14em;text-transform:uppercase;font-size:11px;color:var(--gold);margin:0 0 14px;}
+  .nav{margin:0 0 22px;font-size:13px;}.nav a{color:#f4d98a;text-decoration:none;}.nav a:hover{text-decoration:underline;}
   .card{background:rgba(255,255,255,0.05);border:1px solid rgba(212,175,55,0.35);border-radius:16px;padding:22px 22px 24px;margin-bottom:26px;}
   h2{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:#fdf6e3;margin:0 0 14px;}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;}
@@ -477,46 +471,9 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   .linkbtn{font:inherit;font-size:12px;cursor:pointer;background:none;border:1px solid rgba(143,220,174,0.6);color:#8fdcae;border-radius:6px;padding:4px 10px;margin-right:8px;}
   .linkbtn:hover{background:rgba(143,220,174,0.15);}
   .note{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:11px 14px;font-size:12.5px;color:#e7d9b0;margin-top:18px;}
-  .empty{color:#9db3a6;font-style:italic;}
-  .tmpl{color:#c9b98f;font-size:13px;margin-top:14px;}.tmpl a{color:#f4d98a;}
-</style></head>
-<body>
-  <div class="wrap">
-    <h1>Palace Staff · Visa Letters</h1>
-    <p class="sub">African Global Queens Summit — UK Standard Visitor delegation</p>
+  .empty{color:#9db3a6;font-style:italic;}`;
 
-    <div class="card">
-      <h2>Add a delegation member</h2>
-      <div class="grid">
-        <div class="field wide"><label>Letter type</label><select id="v-kind">
-          <option value="staff">Palace staff visa letter — I cover accommodation, meals &amp; transport</option>
-          <option value="guest">Queens &amp; Kings visa letter (Queens, Kings, princes, princesses &amp; public) — I cover meals only</option>
-        </select></div>
-        <div class="field wide"><label>Full name (with title)</label><input id="v-name" placeholder="Mr Samuel Iso" /></div>
-        <div class="field wide"><label>Role / title</label><input id="v-role" placeholder="Traditional, cultural administrator and orator of 5 Nnettah Community" /></div>
-        <div class="field wide"><label>Address</label><input id="v-address" placeholder="Esuk Otu, Calabar, Cross River State, Nigeria" /></div>
-        <div class="field"><label>Date of birth</label><input id="v-dob" placeholder="5th July 1999" /></div>
-        <div class="field"><label>Passport number</label><input id="v-passport" placeholder="B05181252" /></div>
-        <div class="field"><label>Letter date (defaults to today)</label><input id="v-date" placeholder="e.g. 13 July 2026" /></div>
-        <div class="field"><label>Visit from</label><input id="v-from" value="${esc(DEFAULT_FROM)}" /></div>
-        <div class="field"><label>Visit to</label><input id="v-to" value="${esc(DEFAULT_TO)}" /></div>
-      </div>
-      <button class="btn" onclick="createLetter()">Create letter</button>
-      <div class="msg" id="msg"></div>
-    </div>
-
-    <h2 style="margin:0 0 8px">Delegation (<span id="count">${staff.length}</span>)</h2>
-    <table id="list">
-      ${rows || '<tr class="none"><td class="empty">No members yet — add one above.</td></tr>'}
-    </table>
-    <p class="tmpl">Need a printable blank form? <a href="./_template/index.html" target="_blank">Open the blank template ↗</a></p>
-    <div class="note">⚠️ These letters carry personal data (date of birth, passport). <strong>Get link</strong> copies a web link that opens the letter on any device — but the details (incl. passport) travel inside that link, so share it <strong>only with the intended recipient</strong>. For anything official, the <strong>PDF</strong> (Open → Save as PDF) is safest.</div>
-  </div>
-
-<script>
-  var VISA_DATA = ${JSON.stringify(VISA_DATA)};
-  var SHORTLINKS = ${JSON.stringify(SHORTLINKS)};
-  var SITE_URL = ${JSON.stringify(SITE_URL)};
+const MASTER_SCRIPT = `
   function copyToClipboard(text, okMsg){
     var ok=function(){ alert(okMsg); };
     if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(ok, fb); } else { fb(); }
@@ -530,7 +487,7 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
     }
     var d = VISA_DATA[slug]; if(!d) return;
     var url = SITE_URL + '/visa/card/?d=' + b64url(JSON.stringify(d));
-    copyToClipboard(url, 'Long web link copied (no short link yet for this member).\\n\\nIt opens the letter but is long — for a friendly short link, ask to regenerate the visa links.');
+    copyToClipboard(url, 'Long web link copied (no short link yet for this member).\\n\\nFor a friendly short link, run npm run visa:links.');
   }
   function val(id){ return document.getElementById(id).value.trim(); }
   function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
@@ -539,7 +496,7 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
     var msg = document.getElementById('msg');
     if(!name){ msg.style.color='#e0987d'; msg.textContent='Please enter a name.'; return; }
     var slug = slugify(name);
-    var md = ['---','name: '+name,'kind: '+val('v-kind'),'role: '+val('v-role'),'address: '+val('v-address'),
+    var md = ['---','name: '+name,'kind: '+KIND,'role: '+val('v-role'),'address: '+val('v-address'),
       'dob: '+val('v-dob'),'passport: '+val('v-passport'),'date: '+val('v-date'),
       'from: '+val('v-from'),'to: '+val('v-to'),'---',''].join('\\n');
     msg.style.color='#c9b98f'; msg.textContent='Creating…';
@@ -555,18 +512,81 @@ writeFileSync(join(outDir, 'index.html'), `<!doctype html>
   function markRow(slug,on){ var row=document.querySelector('[data-slug="'+slug+'"]'); if(row) row.classList.toggle('done',on); }
   function toggleInvited(slug){ var m=getInv(); var on=!m[slug]; if(on) m[slug]=true; else delete m[slug]; localStorage.setItem(INV_KEY, JSON.stringify(m)); markRow(slug,on); }
   (function(){ var m=getInv(); Object.keys(m).forEach(function(s){ markRow(s,true); }); })();
-  // Default the letter date to today (the day the doc is created).
   (function(){ var d=new Date(),M=['January','February','March','April','May','June','July','August','September','October','November','December'];var el=document.getElementById('v-date');if(el&&!el.value)el.value=d.getDate()+' '+M[d.getMonth()]+' '+d.getFullYear(); })();
   function del(slug){
-    if(!confirm('Delete this delegation member\\u2019s letter?')) return;
+    if(!confirm('Delete this letter?')) return;
     fetch('/api/delete-visa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:slug})})
       .then(function(r){return r.json();}).then(function(res){
         if(!res.ok) throw new Error(res.error||'failed');
         var row=document.querySelector('[data-slug="'+slug+'"]'); if(row) row.remove();
         var c=document.getElementById('count'); c.textContent=Math.max(0,parseInt(c.textContent,10)-1);
       }).catch(function(e){ alert('Error: '+e.message); });
-  }
-</script>
-</body></html>`);
+  }`;
 
-console.log(`\nBuilt ${built.length} visa letter(s) → public/visa/`);
+function masterPage(pageKind) {
+  const isGuest = pageKind === 'guest';
+  const members = built.filter((b) => b.slug !== '_template' && memberKind(b) === pageKind);
+  const rows = members
+    .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm">${esc(b.name)}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="/visa/${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
+    .join('\n      ');
+  const title = isGuest ? 'Queens & Kings · Visa Letters' : 'Palace Staff · Visa Letters';
+  const sub = isGuest
+    ? 'African Global Queens Summit — invited Queens, Kings, princes, princesses &amp; public'
+    : 'African Global Queens Summit — UK Standard Visitor delegation';
+  const addHeading = isGuest ? 'Add a Queen / King / invited guest' : 'Add a palace-staff member';
+  const otherLink = isGuest ? '<a href="/visa/">← Palace Staff letters</a>' : '<a href="/visa/royals/">Queens &amp; Kings letters →</a>';
+  const listHeading = isGuest ? 'Invited Queens &amp; Kings' : 'Delegation';
+  const responsibility = isGuest
+    ? 'These are <strong>support</strong> letters — you are responsible for <strong>meals only</strong>; the visitor covers their own accommodation, transport &amp; events.'
+    : 'These letters cover <strong>accommodation, meals &amp; transport</strong> for palace staff.';
+  const rolePh = isGuest ? 'Paramount Queen and custodian of heritage' : 'Traditional, cultural administrator and orator';
+  return `<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${title}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Marcellus&display=swap" rel="stylesheet" />
+<style>${MASTER_CSS}</style></head>
+<body>
+  <div class="wrap">
+    <h1>${title}</h1>
+    <p class="sub">${sub}</p>
+    <p class="nav">${otherLink}</p>
+
+    <div class="card">
+      <h2>${addHeading}</h2>
+      <p style="font-size:12.5px;color:#e7d9b0;margin:-6px 0 14px">${responsibility}</p>
+      <div class="grid">
+        <div class="field wide"><label>Full name (with title)</label><input id="v-name" placeholder="${isGuest ? 'HRM Queen Josephine Munmavwili' : 'Mr Samuel Iso'}" /></div>
+        <div class="field wide"><label>Role / title</label><input id="v-role" placeholder="${rolePh}" /></div>
+        <div class="field wide"><label>Address</label><input id="v-address" placeholder="Calabar, Cross River State, Nigeria" /></div>
+        <div class="field"><label>Date of birth</label><input id="v-dob" placeholder="5th July 1999" /></div>
+        <div class="field"><label>Passport number</label><input id="v-passport" placeholder="B05181252" /></div>
+        <div class="field"><label>Letter date (defaults to today)</label><input id="v-date" placeholder="e.g. 14 July 2026" /></div>
+        <div class="field"><label>Visit from</label><input id="v-from" value="${esc(DEFAULT_FROM)}" /></div>
+        <div class="field"><label>Visit to</label><input id="v-to" value="${esc(DEFAULT_TO)}" /></div>
+      </div>
+      <button class="btn" onclick="createLetter()">Create letter</button>
+      <div class="msg" id="msg"></div>
+    </div>
+
+    <h2 style="margin:0 0 8px">${listHeading} (<span id="count">${members.length}</span>)</h2>
+    <table id="list">
+      ${rows || '<tr class="none"><td class="empty">No one yet — add someone above.</td></tr>'}
+    </table>
+    <div class="note">⚠️ These letters carry personal data (date of birth, passport). <strong>Get link</strong> copies a web link that opens the letter on any device — but the details (incl. passport) travel inside that link, so share it <strong>only with the intended recipient</strong>. For anything official, the <strong>PDF</strong> (Open → Save as PDF) is safest.</div>
+  </div>
+
+<script>
+  var KIND = ${JSON.stringify(pageKind)};
+  var VISA_DATA = ${JSON.stringify(VISA_DATA)};
+  var SHORTLINKS = ${JSON.stringify(SHORTLINKS)};
+  var SITE_URL = ${JSON.stringify(SITE_URL)};${MASTER_SCRIPT}
+</script>
+</body></html>`;
+}
+
+mkdirSync(join(outDir, 'royals'), { recursive: true });
+writeFileSync(join(outDir, 'index.html'), masterPage('staff'));
+writeFileSync(join(outDir, 'royals', 'index.html'), masterPage('guest'));
+
+console.log(`\nBuilt ${built.length} visa letter(s) → public/visa/ (staff: /visa/, Queens & Kings: /visa/royals/)`);
