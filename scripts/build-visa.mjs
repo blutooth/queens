@@ -590,8 +590,12 @@ function masterPage(pageKind) {
 </body></html>`;
 }
 
-mkdirSync(join(outDir, 'royals'), { recursive: true });
-writeFileSync(join(outDir, 'index.html'), masterPage('staff'));
-writeFileSync(join(outDir, 'royals', 'index.html'), masterPage('guest'));
+// The management pages are dev-only; on deploy (VISA_CARD_ONLY) only the card
+// viewer is published so the internal create/manage UI never goes public.
+if (!process.env.VISA_CARD_ONLY) {
+  mkdirSync(join(outDir, 'royals'), { recursive: true });
+  writeFileSync(join(outDir, 'index.html'), masterPage('staff'));
+  writeFileSync(join(outDir, 'royals', 'index.html'), masterPage('guest'));
+}
 
 console.log(`\nBuilt ${built.length} visa letter(s) → public/visa/ (staff: /visa/, Queens & Kings: /visa/royals/)`);
