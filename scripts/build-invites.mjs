@@ -385,7 +385,7 @@ function heritage({ data, noteHtml, letterHtml }) {
   }
   .note { position: relative; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; line-height: 1.5; color: var(--emerald-deep); background: #fbf2dd; border: 1px solid rgba(184,134,11,0.3); border-left: 4px solid var(--gold); border-radius: 12px; padding: 16px 22px; margin: 0 0 28px; }
   .content p { margin: 0 0 18px; }
-  .content p.subject { font-weight: 800; color: var(--emerald-deep); text-align: center; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.4; font-size: 1.06em; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 6px; text-decoration-thickness: 2px; margin: 8px 0 26px; }
+  .content p.subject { font-weight: 800; color: var(--emerald-deep); text-align: center; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.4; font-size: 1.06em; margin: 8px 0 26px; }
 
   /* title boxes (from markdown headings) */
   .content h2, .programme h2 {
