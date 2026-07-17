@@ -1151,6 +1151,153 @@ function moroccoMasterPage() {
 }
 
 // ====================================================================
+// APPOINTMENT LETTER — Consultant appointment on the Aruk II Humanitarian
+// Services (UK) C.I.C letterhead. Recipient personalised via ?n= (defaults
+// to Amb. Hanane Ait-Toudghi); optional ?title= ?org= ?date= ?sal=.
+// ====================================================================
+
+function appointmentPage() {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Letter of Appointment · African Queens Summit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Marcellus&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root { --emerald:#0d6b4f; --emerald-deep:#094b38; --gold:#d4af37; --gold-deep:#b8860b; --brown:#3c2415; --brown-soft:#5a3a24; --ink:#241a10; --paper:#fdfaf2; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Spectral',Georgia,serif; color:var(--ink); line-height:1.62; font-size:16px; background:#6b5636; padding:24px 12px 60px; }
+  .print { position:fixed; top:14px; right:14px; z-index:50; font-family:'Marcellus',serif; font-size:13px; letter-spacing:.05em; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:9px 18px; border-radius:999px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); text-decoration:none; }
+  .sheet { max-width:820px; margin:0 auto; background:var(--paper); box-shadow:0 20px 60px rgba(0,0,0,.45); border-top:6px solid var(--emerald); }
+  .pad { padding:40px clamp(22px,6vw,64px) 48px; }
+  .lh { text-align:center; border-bottom:2px solid var(--gold); padding-bottom:18px; }
+  .lh .motto { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; color:var(--emerald-deep); font-size:17px; margin:0 0 12px; }
+  .lh .crest { width:72px; height:72px; object-fit:contain; margin:0 auto 8px; display:block; }
+  .lh .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.06em; color:var(--brown); font-size:clamp(16px,3.4vw,21px); margin:0 0 6px; }
+  .lh .tag { font-family:'Spectral',serif; font-style:italic; color:var(--brown-soft); font-size:13px; margin:0 0 6px; }
+  .lh .addr { font-family:'Marcellus',serif; font-size:12px; letter-spacing:.03em; color:var(--brown-soft); margin:0; }
+  .date { text-align:right; margin:22px 0 18px; font-size:15px; color:var(--brown-soft); }
+  .to .nm { font-weight:600; }
+  .salute { margin:16px 0 10px; }
+  .re { font-family:'Marcellus',serif; font-weight:700; text-transform:uppercase; letter-spacing:.02em; color:var(--emerald-deep); background:rgba(212,175,55,.14); border-left:4px solid var(--gold); padding:10px 14px; border-radius:0 8px 8px 0; margin:0 0 20px; line-height:1.4; }
+  p { margin:0 0 14px; }
+  ul { margin:0 0 16px; padding:0; list-style:none; }
+  li { position:relative; padding:6px 0 6px 26px; }
+  li::before { content:'\\2756'; position:absolute; left:2px; top:6px; color:var(--gold-deep); font-size:.8em; }
+  .close { margin-top:22px; }
+  .sig-img { width:210px; max-width:62%; display:block; margin:8px 0 4px; mix-blend-mode:multiply; }
+  .sig-name { font-weight:700; font-family:'Cormorant Garamond',serif; font-size:19px; color:var(--emerald-deep); margin:0; }
+  .sig-sub { font-size:13.5px; color:var(--brown-soft); margin:2px 0 0; }
+  .foot { margin-top:30px; border-top:2px solid var(--gold); padding-top:14px; text-align:center; }
+  .foot .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.05em; color:var(--brown); font-size:14px; }
+  .foot .tag { font-style:italic; color:var(--brown-soft); font-size:12px; margin:4px 0; }
+  .foot .meta { font-size:11.5px; color:var(--brown-soft); line-height:1.7; }
+  .accept { margin-top:28px; border:1px dashed var(--gold-deep); border-radius:10px; padding:18px 20px; background:rgba(212,175,55,.06); }
+  .accept h3 { font-family:'Marcellus',serif; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin:0 0 10px; }
+  .accept .line { margin-top:16px; font-size:15px; }
+  @media print {
+    @page { margin:14mm; }
+    body { background:#fff; padding:0; }
+    .print { display:none !important; }
+    .sheet { box-shadow:none; max-width:100%; border-top:none; }
+    .lh, .re, .foot, .accept, li::before { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  }
+</style>
+</head>
+<body>
+  <a class="print" href="#" onclick="window.print();return false;">&#128424; Print / Save PDF</a>
+  <div class="sheet"><div class="pad">
+    <div class="lh">
+      <p class="motto">&ldquo;Leadership Rooted in Service, Royalty Defined by Impact.&rdquo;</p>
+      <img class="crest" src="/images/summit-emblem.png" alt="Aruk II crest" />
+      <p class="org">ARUK II HUMANITARIAN SERVICES (UK) C.I.C</p>
+      <p class="tag">Promoting Cultural Heritage &bull; Empowering Communities &bull; Advancing Humanitarian Initiatives</p>
+      <p class="addr">Hawkhill Place, Stanton St John, Oxford. OX33 1HS. United Kingdom</p>
+    </div>
+
+    <p class="date" id="a-date">17 July 2026</p>
+
+    <div class="to">
+      <div class="nm" id="a-name">Amb. Hanane Ait-Toudghi</div>
+      <div id="a-title" style="display:none"></div>
+      <div id="a-org" style="display:none"></div>
+    </div>
+    <p class="salute" id="a-salute">Your Excellency,</p>
+
+    <p class="re">Re: Letter of Appointment as Consultant for the African Queens Summit</p>
+
+    <p>We are pleased to formally appoint you, <strong id="a-name2">Amb. Hanane Ait-Toudghi</strong>, as a Consultant for the upcoming African Queens Summit.</p>
+
+    <p>This appointment is in recognition of your distinguished standing, network, and capacity to contribute meaningfully to the success of the Summit. Your role will be instrumental in shaping the reach, impact, and overall execution of the event.</p>
+
+    <p>In your capacity as Consultant, you are hereby entrusted with the authority and responsibility to:</p>
+    <ul>
+      <li>Coordinate invitations to distinguished guests and participants.</li>
+      <li>Lead and support fundraising efforts for the Summit.</li>
+      <li>Engage and attract investors and strategic partners.</li>
+      <li>Facilitate the participation of kings, queens, and notable traditional leaders across North Africa, including the Kingdom of Morocco.</li>
+      <li>Source funding and sponsorship opportunities to ensure the success of the Summit.</li>
+      <li>Promote and advertise the event through appropriate channels.</li>
+      <li>Identify, invite, and secure entertainers and performers for the Summit.</li>
+      <li>Recommend and engage reputable artists of African extraction from the diaspora.</li>
+      <li>Undertake all other activities deemed necessary, beneficial, and incidental to the successful planning and execution of the Summit.</li>
+    </ul>
+
+    <p>You are expected to carry out these responsibilities with professionalism, integrity, and in alignment with the vision and objectives of the African Queens Summit.</p>
+
+    <p>This appointment takes effect from the date of this letter and will remain valid until the conclusion of the Summit or as otherwise determined by the organizing committee. We are confident that your involvement will greatly enhance the success and prestige of this event, and we look forward to a productive collaboration.</p>
+
+    <p>Kindly signify your acceptance of this appointment by signing and returning a copy of this letter.</p>
+
+    <p>Thank you for your commitment and anticipated contributions.</p>
+
+    <div class="close">
+      <p style="margin-bottom:2px;">Yours faithfully,</p>
+      <img class="sig-img" src="/images/queen-aruk-signature.png" alt="Signature of Queen Aruk II" />
+      <p class="sig-name">Obonganwan Marie Erete, Queen Aruk II</p>
+      <p class="sig-sub">Summit Convener &middot; African and Diaspora Queens Summit</p>
+      <p class="sig-sub">On behalf of Aruk II HS (UK) C.I.C, in collaboration with Ipada Initiatives, FATA and Maasai Tourism Festival</p>
+    </div>
+
+    <div class="foot">
+      <div class="org">ARUK II HUMANITARIAN SERVICES (UK) C.I.C</div>
+      <div class="tag">Promoting Cultural Heritage &bull; Empowering Communities &bull; Advancing Humanitarian Initiatives</div>
+      <div class="meta">Hawkhill Place, Stanton St John, Oxford. OX33 1HS. United Kingdom &middot; Tel: +44 793 250 6556<br />obonganwan.aruk@yahoo.com &middot; africanqueenssummit@gmail.com &middot; Company Registration No: 17110628</div>
+    </div>
+
+    <div class="accept">
+      <h3>Acceptance</h3>
+      <p>I, <strong id="a-name3">Amb. Hanane Ait-Toudghi</strong>, hereby accept this appointment and agree to carry out the responsibilities outlined above.</p>
+      <div class="line">Signature: ________________________________</div>
+      <div class="line">Date: ________________________________</div>
+    </div>
+  </div></div>
+
+  <script>
+  (function () {
+    var P = new URLSearchParams(location.search);
+    function val(k) { return (P.get(k) || '').replace(/_/g, ' ').trim(); }
+    var name = val('n') || val('name') || 'Amb. Hanane Ait-Toudghi';
+    var title = val('title'), org = val('org'), date = val('date'), sal = val('sal');
+    var ids = ['a-name', 'a-name2', 'a-name3'];
+    for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).textContent = name;
+    if (title) { var t = document.getElementById('a-title'); t.textContent = title; t.style.display = ''; }
+    if (org) { var o = document.getElementById('a-org'); o.textContent = org; o.style.display = ''; }
+    if (date) document.getElementById('a-date').textContent = date;
+    if (sal) document.getElementById('a-salute').textContent = sal.replace(/,+$/, '') + ',';
+    document.title = 'Letter of Appointment \\u00b7 ' + name;
+  })();
+  </script>
+</body>
+</html>
+`;
+}
+
+// ====================================================================
 // VIEWER — a single page that renders an invitation from URL query params
 // (?name=…&title=…&type=…). No personal data is stored on the site; the
 // recipient's details live only in the link. Reuses the heritage styling.
@@ -1371,5 +1518,9 @@ console.log('  ✓ /invite/card/  —  query-param viewer (name/title/type)');
 mkdirSync(join(outRoot, 'morocco'), { recursive: true });
 writeFileSync(join(outRoot, 'morocco', 'index.html'), moroccoMasterPage());
 console.log('  ✓ /invite/morocco/  —  Kingdom of Morocco letter master page');
+
+mkdirSync(join(outRoot, 'appointment'), { recursive: true });
+writeFileSync(join(outRoot, 'appointment', 'index.html'), appointmentPage());
+console.log('  ✓ /invite/appointment/  —  Consultant appointment letter (Aruk II HS letterhead)');
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);
