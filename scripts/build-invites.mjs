@@ -1225,6 +1225,7 @@ function appointmentPage() {
       <div class="nm" id="a-name">Amb. Hanane Ait-Toudghi</div>
       <div id="a-title" style="display:none"></div>
       <div id="a-org" style="display:none"></div>
+      <div id="a-addr">103, Olofatan Ayekale, Ota-Efun, Osogho, Osun State. Nigeria.</div>
     </div>
     <p class="salute" id="a-salute">Your Excellency,</p>
 
@@ -1287,6 +1288,7 @@ function appointmentPage() {
     for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).textContent = name;
     if (title) { var t = document.getElementById('a-title'); t.textContent = title; t.style.display = ''; }
     if (org) { var o = document.getElementById('a-org'); o.textContent = org; o.style.display = ''; }
+    var addr = val('addr'); if (addr) document.getElementById('a-addr').textContent = addr;
     if (date) document.getElementById('a-date').textContent = date;
     if (sal) document.getElementById('a-salute').textContent = sal.replace(/,+$/, '') + ',';
     document.title = 'Letter of Appointment \\u00b7 ' + name;
