@@ -20,6 +20,6 @@ Invitees are respectfully requested to reserve the full period **14–31 August 
 
 ## A Historic Call
 
-Your Majesty, this Summit represents a defining chapter in the modern history of African royalty. Your presence will honour our ancestors, strengthen our unity, and help shape a future grounded in dignity, justice, and sovereign African leadership.
+This Summit represents a defining chapter in the modern history of African royalty. Your presence will honour our ancestors, strengthen our unity, and help shape a future grounded in dignity, justice, and sovereign African leadership.
 
 I look forward to welcoming you personally to the United Kingdom.

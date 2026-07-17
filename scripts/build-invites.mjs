@@ -113,7 +113,7 @@ const programme = [
 ];
 
 // Per-audience defaults
-const AUD_SALUTATION = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
+const AUD_SALUTATION = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Highness', excellency: 'Your Excellency' };
 
 // Letter body per audience (content/letters/<audience>.md), falling back to base letter.md
 const letterCache = {};
@@ -137,7 +137,7 @@ function waAccept(name, audience) {
     morocco: `Your Majesty, this is ${name} 👑`,
     politicians: `Your Excellency, this is ${name}`,
     guests: `Hello, this is ${name}`,
-    princesses: `Your Royal Highness, this is ${name} 👑`,
+    princesses: `Your Highness, this is ${name} 👑`,
     excellency: `Your Excellency, this is ${name}`,
   };
   const opener = openers[audience] || openers.queens;
@@ -761,7 +761,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     var msg = greeting + ' \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, you are warmly invited to the African Global Queens Summit (United Kingdom, 14\\u201331 August 2026). Your personal invitation: ' + inviteUrl(name, audience, noLetter) + ' \\u2014 kindly RSVP via the page.';
     return 'https://wa.me/?text=' + encodeURIComponent(msg);
   }
-  var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
+  var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Highness', excellency: 'Your Excellency' };
   var ALL_SECTIONS = ['hero', 'recipient', 'letter', 'programme', 'signature', 'rsvp', 'footer'];
   var LETTERS = ${lettersJson};
   var NOTES = {
@@ -1253,7 +1253,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     var type = TYPE_MAP[rawType] || rawType || 'queens';
     // The Morocco Government letter has no individual addressee — default the ribbon to "Your Excellencies".
     if (!hasName && type === 'morocco') name = 'Your Excellencies';
-    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
+    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Highness', excellency: 'Your Excellency' };
     var LETTERS = ${lettersJson};
     var sal = SAL.hasOwnProperty(type) ? SAL[type] : 'Your Majesty';
     document.getElementById('v-name').textContent = name;
@@ -1283,7 +1283,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
       }
     }
     document.title = 'A Royal Invitation \\u00b7 ' + name;
-    var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', morocco: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Royal Highness, this is ' + name + ' \\uD83D\\uDC51', excellency: 'Your Excellency, this is ' + name };
+    var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', morocco: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Highness, this is ' + name + ' \\uD83D\\uDC51', excellency: 'Your Excellency, this is ' + name };
     var opener = openers[type] || openers.queens;
     var waMsg = opener + ' \\u2014 I am honoured to accept your gracious invitation and confirm my attendance at the African Queens Summit (14\\u201331 August 2026, London \\u0026 Oxford).';
     document.getElementById('v-wa').href = 'https://wa.me/447932506556?text=' + encodeURIComponent(waMsg);
