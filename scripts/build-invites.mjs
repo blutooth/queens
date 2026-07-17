@@ -1070,12 +1070,15 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
   (function () {
     var P = new URLSearchParams(location.search);
     var nU = P.get('n'); var nFull = P.get('name');
+    var hasName = !!(nU || nFull);
     var name = (nU ? nU.replace(/_/g, ' ') : (nFull || 'Your Majesty')).trim().replace(/\\s+/g, ' ').replace(/[,\\s]+$/, '');
     var title = (P.get('e') || P.get('epithet') || P.get('title') || '').replace(/_/g, ' ').trim();
     var hOverride = (P.get('h') || P.get('honorific') || '').replace(/_/g, ' ').trim();
     var TYPE_MAP = { q: 'queens', k: 'kings', mo: 'morocco', pr: 'princesses', po: 'politicians', g: 'guests', ex: 'excellency' };
     var rawType = (P.get('t') || P.get('type') || P.get('a') || 'q').trim().toLowerCase();
     var type = TYPE_MAP[rawType] || rawType || 'queens';
+    // The Morocco Government letter has no individual addressee — default the ribbon to "Your Excellencies".
+    if (!hasName && type === 'morocco') name = 'Your Excellencies';
     var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
     var LETTERS = ${lettersJson};
     var sal = SAL.hasOwnProperty(type) ? SAL[type] : 'Your Majesty';
