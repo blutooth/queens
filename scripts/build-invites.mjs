@@ -1057,7 +1057,9 @@ function moroccoMasterPage() {
           <label>Honorific line</label>
           <select id="m-hon">
             <option value="default">Your Excellencies (default)</option>
-            <option value="none">Hide honorific</option>
+            <option value="Your Highness">Your Highness (Princess)</option>
+            <option value="Madam">Madam</option>
+            <option value="none">Hide honorific (no title)</option>
             <option value="custom">Custom&hellip;</option>
           </select>
         </div>
@@ -1118,6 +1120,7 @@ function moroccoMasterPage() {
       var hon = honEl.value;
       if (hon === 'none') q += '&h=none';
       else if (hon === 'custom') { var c = (honCustom.value || '').trim().replace(/\\s+/g, '_'); if (c) q += '&h=' + encodeURIComponent(c); }
+      else if (hon && hon !== 'default') q += '&h=' + encodeURIComponent(hon.replace(/\\s+/g, '_'));
       if (bodyEl.value === 'blank') q += '&letter=0';
       return q;
     }
