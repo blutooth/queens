@@ -1079,6 +1079,20 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     if (title) { tEl.textContent = title; tEl.style.display = ''; }
     document.getElementById('v-salute').textContent = sal ? (sal + ',') : ('Dear ' + name + ',');
     document.getElementById('v-letter').innerHTML = LETTERS[type] || LETTERS.queens || '';
+    // Optional: drop the letter body (hero + recipient + programme + signature only).
+    // ?letter=0 (or ?nl=1 / ?nobody=1) removes the whole letter section.
+    var noLetter = /^(0|no|off|false|hide|none)$/i.test(P.get('letter') || '') || /^(1|yes|on|true)$/i.test((P.get('nl') || P.get('nobody') || ''));
+    if (noLetter) {
+      var _c = document.querySelector('.content'); if (_c && _c.parentNode) _c.parentNode.removeChild(_c);
+      // Add the official letterhead at the top (below the hero), so the card reads as formal stationery.
+      var _rw = document.querySelector('.ribbon-wrap');
+      if (_rw && _rw.parentNode) {
+        var _lh = document.createElement('div');
+        _lh.style.cssText = 'text-align:center;background:var(--sand);padding:24px 22px 6px;';
+        _lh.innerHTML = '<div style="background:#fff;display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:12px;border:1px solid var(--gold);box-shadow:0 8px 22px rgba(0,0,0,0.16);"><img src="/images/partners-letterhead.png" alt="African Global Queens Summit letterhead" style="height:92px;width:auto;max-width:74vw;display:block;" /></div>';
+        _rw.parentNode.insertBefore(_lh, _rw);
+      }
+    }
     document.title = 'A Royal Invitation \\u00b7 ' + name;
     var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', morocco: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Royal Highness, this is ' + name + ' \\uD83D\\uDC51', excellency: 'Your Excellency, this is ' + name };
     var opener = openers[type] || openers.queens;
