@@ -630,6 +630,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       <button class="tab" data-tab="existing">Existing invitations</button>
       <button class="tab" data-tab="shared">Shared letters</button>
       <a class="tab visa-tab" href="/visa/" target="_blank" rel="noopener">🛂 Visa Letters ↗</a>
+      <a class="tab visa-tab" href="/invite/morocco/" target="_blank" rel="noopener">🇲🇦 Morocco Letter ↗</a>
     </div>
 
     <div class="panel" id="tab-create">
@@ -987,6 +988,166 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
 }
 
 // ====================================================================
+// MOROCCO MASTER PAGE — build, preview and share the Kingdom of Morocco
+// Government letter. It targets /invite/card/?t=mo, with optional recipient
+// name / honorific and a full-vs-blank toggle.
+// ====================================================================
+
+function moroccoMasterPage() {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Kingdom of Morocco · Letter Master Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Marcellus&family=Spectral:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --emerald:#0d6b4f; --emerald-deep:#094b38; --gold:#d4af37; --gold-deep:#b8860b; --terracotta:#c0532b; --brown:#3c2415; --sand:#f6ecd8; --paper:#fdf9f0; --ink:#2a1c10; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Spectral', Georgia, serif; color: var(--ink);
+    background: #2b1810 conic-gradient(from 45deg at 50% 50%, #3c2415, #5a3a24, #3c2415) fixed; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 18px 80px; }
+  h1 { font-family: 'Cormorant Garamond', serif; color: #fdf6e3; font-size: clamp(28px,6vw,44px); margin: 0 0 6px; text-align: center; }
+  .sub { text-align: center; color: #e7c89a; font-family: 'Marcellus', serif; letter-spacing: 0.12em; text-transform: uppercase; font-size: 12px; margin-bottom: 26px; }
+  .back { display: inline-block; margin: 0 auto 18px; text-align: center; }
+  .back a { color: #e7c89a; font-family: 'Marcellus', serif; font-size: 12px; letter-spacing: 0.05em; text-decoration: none; border: 1px solid rgba(212,175,55,0.4); padding: 8px 16px; border-radius: 999px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+  .card { background: var(--paper); border: 1px solid var(--gold-deep); border-radius: 16px; padding: 22px clamp(16px,3vw,26px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .card h2 { font-family: 'Cormorant Garamond', serif; color: var(--emerald-deep); font-size: 22px; margin: 0 0 14px; }
+  .field { margin-bottom: 14px; }
+  label { display: block; font-family: 'Marcellus', serif; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--emerald-deep); margin-bottom: 5px; }
+  input, select { width: 100%; font-family: 'Spectral', serif; font-size: 15px; padding: 10px 12px; border: 1px solid #cdbb8e; border-radius: 8px; background: #fff; color: var(--ink); }
+  .link-out { display: flex; gap: 8px; align-items: stretch; margin-top: 8px; }
+  .link-out input { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; background: #fbf5e9; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .act { font-family: 'Marcellus', serif; font-size: 13px; letter-spacing: 0.04em; text-decoration: none; cursor: pointer; text-align: center;
+    color: var(--brown); background: linear-gradient(180deg,#f4d97a,var(--gold)); border: 1px solid var(--gold-deep); padding: 11px 16px; border-radius: 999px; }
+  .act:hover { filter: brightness(1.04); }
+  .act.ghost { background: transparent; color: var(--emerald-deep); border-color: var(--emerald); }
+  .act.wa { background: #25d366; border-color: #1da851; color: #053; }
+  .act.small { padding: 10px 14px; font-size: 12px; }
+  .hint { font-size: 13px; color: #6f5a36; margin-top: 12px; line-height: 1.6; }
+  code { background: #efe4c7; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  .preview-card { padding: 0; overflow: hidden; }
+  .preview-head { display:flex; align-items:center; justify-content:space-between; padding: 14px 18px; border-bottom: 1px solid rgba(184,134,11,0.4); }
+  .preview-head h2 { margin: 0; font-size: 18px; }
+  iframe { width: 100%; height: 760px; border: 0; background: #2b1810; display: block; }
+  .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--emerald-deep); color: #fdf6e3; border: 1px solid var(--gold); padding: 13px 20px; border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); font-family: 'Marcellus', serif; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; z-index: 99999; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } iframe { height: 600px; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Kingdom of Morocco</h1>
+    <div class="sub">Government Letter — Build, Preview &amp; Share</div>
+    <div class="back" style="display:block;text-align:center;"><a href="/invite/">&#10094; Back to Invitations</a></div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Build the letter link</h2>
+        <div class="field">
+          <label>Addressed to (optional)</label>
+          <input id="m-name" placeholder="Leave blank for &ldquo;Your Excellencies&rdquo;" />
+        </div>
+        <div class="field">
+          <label>Honorific line</label>
+          <select id="m-hon">
+            <option value="default">Your Excellencies (default)</option>
+            <option value="none">Hide honorific</option>
+            <option value="custom">Custom&hellip;</option>
+          </select>
+        </div>
+        <div class="field" id="m-hon-custom-wrap" style="display:none;">
+          <label>Custom honorific</label>
+          <input id="m-hon-custom" placeholder="e.g. Their Excellencies" />
+        </div>
+        <div class="field">
+          <label>Content</label>
+          <select id="m-body">
+            <option value="full">Full letter</option>
+            <option value="blank">Blank stationery (letterhead &amp; signature only)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Shareable link</label>
+          <div class="link-out">
+            <input id="m-link" readonly />
+            <button class="act ghost small" id="m-copy">Copy</button>
+          </div>
+        </div>
+        <div class="btns">
+          <a class="act" id="m-open" href="#" target="_blank" rel="noopener">Open letter &#10095;</a>
+          <a class="act wa" id="m-wa" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <a class="act ghost" id="m-email" href="#">Email</a>
+          <a class="act ghost" id="m-print" href="#" target="_blank" rel="noopener">Print / Save PDF</a>
+        </div>
+        <p class="hint">The letter body is edited in <code>content/letters/morocco.md</code>. This page only builds &amp; shares links — no personal data is stored on the site.</p>
+      </div>
+
+      <div class="card preview-card">
+        <div class="preview-head"><h2>Live preview</h2><a class="act ghost small" id="m-refresh" href="#">Refresh</a></div>
+        <iframe id="m-preview" title="Morocco letter preview"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+  (function () {
+    var origin = location.origin;
+    var SITE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'https://africanqueenssummit.com' : origin;
+    var nameEl = document.getElementById('m-name');
+    var honEl = document.getElementById('m-hon');
+    var honWrap = document.getElementById('m-hon-custom-wrap');
+    var honCustom = document.getElementById('m-hon-custom');
+    var bodyEl = document.getElementById('m-body');
+    var linkEl = document.getElementById('m-link');
+    var frame = document.getElementById('m-preview');
+    var toastEl = document.getElementById('toast');
+    var toastTimer;
+    function toast(m) { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400); }
+
+    function query() {
+      var q = '/invite/card/?t=mo';
+      var nm = (nameEl.value || '').trim().replace(/\\s+/g, '_');
+      if (nm) q += '&n=' + encodeURIComponent(nm);
+      var hon = honEl.value;
+      if (hon === 'none') q += '&h=none';
+      else if (hon === 'custom') { var c = (honCustom.value || '').trim().replace(/\\s+/g, '_'); if (c) q += '&h=' + encodeURIComponent(c); }
+      if (bodyEl.value === 'blank') q += '&letter=0';
+      return q;
+    }
+    function refresh() {
+      var rel = query();
+      linkEl.value = SITE + rel;
+      document.getElementById('m-open').href = SITE + rel;
+      document.getElementById('m-print').href = SITE + rel;
+      var waMsg = 'Your Excellencies \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, please find our letter regarding the African Queens Summit 2026: ' + SITE + rel;
+      document.getElementById('m-wa').href = 'https://wa.me/?text=' + encodeURIComponent(waMsg);
+      var subj = encodeURIComponent('African Queens Summit 2026 \\u2014 Letter to the Government of the Kingdom of Morocco');
+      var mailBody = encodeURIComponent('Your Excellencies,\\n\\nPlease find our letter here: ' + SITE + rel + '\\n\\nWith highest consideration,\\nAfrican Queens Summit Secretariat');
+      document.getElementById('m-email').href = 'mailto:?subject=' + subj + '&body=' + mailBody;
+      if (frame.src !== location.origin + rel && frame.getAttribute('data-rel') !== rel) { frame.setAttribute('data-rel', rel); frame.src = rel; }
+    }
+    honEl.addEventListener('change', function () { honWrap.style.display = honEl.value === 'custom' ? '' : 'none'; refresh(); });
+    [nameEl, honCustom].forEach(function (el) { el.addEventListener('input', refresh); });
+    bodyEl.addEventListener('change', refresh);
+    document.getElementById('m-copy').addEventListener('click', function () { linkEl.select(); navigator.clipboard.writeText(linkEl.value); toast('Link copied'); });
+    document.getElementById('m-refresh').addEventListener('click', function (e) { e.preventDefault(); frame.setAttribute('data-rel', ''); refresh(); });
+    document.getElementById('m-email').addEventListener('click', function () { toast('Opening your email app\\u2026'); });
+    refresh();
+  })();
+  </script>
+</body>
+</html>
+`;
+}
+
+// ====================================================================
 // VIEWER — a single page that renders an invitation from URL query params
 // (?name=…&title=…&type=…). No personal data is stored on the site; the
 // recipient's details live only in the link. Reuses the heritage styling.
@@ -1203,5 +1364,9 @@ const progRowsHtml = programme
 mkdirSync(join(outRoot, 'card'), { recursive: true });
 writeFileSync(join(outRoot, 'card', 'index.html'), viewerPage(HERITAGE_CSS, lettersHtmlMap, progRowsHtml));
 console.log('  ✓ /invite/card/  —  query-param viewer (name/title/type)');
+
+mkdirSync(join(outRoot, 'morocco'), { recursive: true });
+writeFileSync(join(outRoot, 'morocco', 'index.html'), moroccoMasterPage());
+console.log('  ✓ /invite/morocco/  —  Kingdom of Morocco letter master page');
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);
