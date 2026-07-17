@@ -1225,7 +1225,7 @@ function appointmentPage() {
       <div class="nm" id="a-name">Amb. Hanane Ait-Toudghi</div>
       <div id="a-title" style="display:none"></div>
       <div id="a-org" style="display:none"></div>
-      <div id="a-addr">10 Abass Lane, Across Kubuwa, Abuja. Nigeria.</div>
+      <div id="a-addr">10 Abass Lane, Across Kubwa, Abuja. Nigeria.</div>
     </div>
     <p class="salute" id="a-salute">Your Excellency,</p>
 
