@@ -653,6 +653,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
           <label class="chk"><input type="checkbox" value="footer" checked /> Footer</label>
         </div>
       </div>
+      <div class="field"><label class="chk" style="text-transform:none;letter-spacing:normal;font-size:14px;color:var(--ink);"><input type="checkbox" id="f-nobody" style="width:auto;margin-right:8px;" /> Omit letter body — share letterhead, programme &amp; signature only</label></div>
       <div class="field"><label>Personal note (optional)</label><textarea id="f-note" placeholder="It would be a profound honour to welcome you…"></textarea></div>
       <button type="button" class="big-toggle" id="f-customletter">✎ Customise the whole letter for THIS person only</button>
       <p class="hint" style="margin:2px 0 10px;">Overrides the audience letter — for this person only, not the others.</p>
@@ -734,15 +735,15 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     if (!t) t = String(s);
     return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   }
-  function inviteUrl(name, audience) {
+  function inviteUrl(name, audience, noLetter) {
     var SHORT = { queens: 'q', kings: 'k', morocco: 'mo', princesses: 'pr', politicians: 'po', guests: 'g', excellency: 'ex' };
     var n = encodeURIComponent(String(name).trim().replace(/\\s+/g, '_'));
-    return SITE + '/invite/card/?n=' + n + '&t=' + (SHORT[audience] || 'q');
+    return SITE + '/invite/card/?n=' + n + '&t=' + (SHORT[audience] || 'q') + (noLetter ? '&letter=0' : '');
   }
-  function shareWa(name, slug, audience) {
+  function shareWa(name, slug, audience, noLetter) {
     var sal = SAL_DEFAULT[audience] || '';
     var greeting = sal ? (sal + ', ' + name) : ('Dear ' + name);
-    var msg = greeting + ' \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, you are warmly invited to the African Global Queens Summit (United Kingdom, 14\\u201331 August 2026). Your personal invitation: ' + inviteUrl(name, audience) + ' \\u2014 kindly RSVP via the page.';
+    var msg = greeting + ' \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, you are warmly invited to the African Global Queens Summit (United Kingdom, 14\\u201331 August 2026). Your personal invitation: ' + inviteUrl(name, audience, noLetter) + ' \\u2014 kindly RSVP via the page.';
     return 'https://wa.me/?text=' + encodeURIComponent(msg);
   }
   var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
@@ -793,7 +794,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
   // --- existing list ---
   var list = document.getElementById('list');
   function renderRow(it) {
-    var url = inviteUrl(it.name, it.audience);
+    var url = inviteUrl(it.name, it.audience, it.noLetter);
     var row = document.createElement('div');
     row.className = 'row' + (sent[it.slug] ? ' sent' : '');
     row.setAttribute('data-slug', it.slug);
@@ -805,7 +806,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       '<span class="tag">' + it.template + '</span>' +
       '<a class="act" href="' + url + '" target="_blank">Open</a>' +
       '<button class="act ghost" data-copy="' + url + '">Copy link</button>' +
-      '<a class="act wa" href="' + shareWa(it.name, it.slug, it.audience) + '" target="_blank">Send on WhatsApp</a>' +
+      '<a class="act wa" href="' + shareWa(it.name, it.slug, it.audience, it.noLetter) + '" target="_blank">Send on WhatsApp</a>' +
       '<span class="path">' + url + '</span>';
     var chk = document.createElement('label'); chk.className = 'sent-chk';
     var box = document.createElement('input'); box.type = 'checkbox'; box.checked = !!sent[it.slug];
@@ -915,7 +916,10 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     var date = document.getElementById('f-date').value.trim();
     var tpl = document.getElementById('f-template').value;
     var note = document.getElementById('f-note').value.trim();
+    var noLetter = document.getElementById('f-nobody').checked;
     var secs = Array.prototype.map.call(document.querySelectorAll('#f-sections input:checked'), function (c) { return c.value; });
+    // Keep the per-person page consistent with the shared card: drop the letter section too.
+    if (noLetter) secs = secs.filter(function (s) { return s !== 'letter'; });
 
     var lines = ['---', 'slug: ' + slug, 'name: ' + name, 'audience: ' + audience, 'template: ' + tpl];
     if (sal) lines.push('salutation: ' + sal);
@@ -931,13 +935,13 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     document.getElementById('md').value = out;
     document.getElementById('fname').textContent = 'content/invitees/' + slug + '.md';
     var liveEl = document.getElementById('livelink');
-    var vurl = inviteUrl(name, audience);
+    var vurl = inviteUrl(name, audience, noLetter);
     liveEl.innerHTML = '<a href="' + vurl + '" target="_blank">' + vurl + '</a>';
     document.getElementById('out').style.display = 'block';
     // the link works immediately (no generation needed — it's a query-param page)
     var existing = list.querySelector('[data-slug="' + slug + '"]');
     if (existing) existing.remove();
-    list.insertBefore(renderRow({ slug: slug, name: name, audience: audience, template: tpl }), list.firstChild);
+    list.insertBefore(renderRow({ slug: slug, name: name, audience: audience, template: tpl, noLetter: noLetter }), list.firstChild);
     refreshEmpty();
     if (window.__applyFilter) window.__applyFilter();
     toast('✓ ' + name + ' — invitation link ready.');
