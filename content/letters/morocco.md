@@ -1,25 +1,42 @@
-With the highest royal esteem and in accordance with established international protocol, I extend this formal and personal invitation to you to attend the **African Global Queens Summit**, to be convened in the United Kingdom, with official arrival on **14 August 2026** and departure on **31 August 2026**. This Summit is convened as a sovereign royal gathering of African Queens, designed to affirm our collective authority and to advance Africa's cultural, political, and moral presence within the global order.
+To Their Excellencies,\
+The Members of the Government of the Kingdom of Morocco\
+Secretariat General of the Government\
+Administrative Quarter\
+Avenue Mohammed V\
+Rabat-Chellah\
+Kingdom of Morocco
 
-## A Sovereign Convergence of African Queens
+Your Excellencies,
 
-African Queens have, for centuries, served as the custodians of land, the moral anchors of kingdoms, and the guardians of cultural continuity. In this moment of global reassessment and historical reckoning, our leadership is once again required — unified, visible, and decisive.
+**REQUEST FOR PARTNERSHIP, GUIDANCE, AND FACILITATION OF KINGDOM OF MOROCCO FEMALE TRADITIONAL LEADERS' PARTICIPATION IN THE AFRICA QUEENS SUMMIT 2026 (OXFORD AND LONDON, ENGLAND)**
 
-The African Global Queens Summit is therefore convened as a closed, dignified, and intentional assembly, bringing together African royal women from the continent and the Diaspora to speak with one voice on matters that define our peoples' future.
+Royal Greetings and Divine blessings be upon you and your families.
 
-## Strategic Purpose of the Summit
+It is with profound respect and sincere appreciation that we address the distinguished institution and Members of the Government of the Kingdom of Morocco whose enduring commitment to the preservation of traditional leadership, indigenous knowledge systems, and African cultural heritage continues to inspire communities across Morocco and the continent.
 
-- Establish a permanent global platform for African Queens.
-- Advance unified royal positions on land sovereignty, restitution, and reparative justice.
-- Strengthen royal-to-institutional diplomacy between Africa, the United Kingdom, and Europe.
-- Position African Queens as strategic partners in governance, peacebuilding, and sustainable development.
-- Preserve royal heritage while cultivating the next generation of African leadership.
+We respectfully seek the partnership, guidance, and support of The Kingdom in facilitating the participation of Morocco's distinguished female traditional leaders in the forthcoming Africa Queens Summit 2026, to be held in Oxford and London, England from 14 to 31 August 2026.
 
-## Duration, Accommodation & Logistics
+## Purpose of the Summit
 
-Invitees are respectfully requested to reserve the full period **14–31 August 2026** to ensure meaningful participation across all Summit engagements. The Secretariat will be happy to arrange accommodation in the UK based on your requirements and your budget, following your confirmation of attendance.
+The Africa Queens Summit is envisioned as a distinguished international gathering that brings together African Queens, female traditional leaders, royal matriarchs, and women custodians of indigenous leadership from across the continent and the African Diaspora. The Summit seeks to create a dignified platform for dialogue, cultural exchange, leadership development, and strategic engagement on matters affecting African communities in the twenty-first century.
 
-## A Historic Call
+Recognising the historic role of African royal women as custodians of culture, guardians of community values, and advocates for social cohesion, the Summit aims to:
 
-Your Majesty, this Summit represents a defining chapter in the modern history of African royalty. Your presence will honour our ancestors, strengthen our unity, and help shape a future grounded in dignity, justice, and sovereign African leadership.
+- Promote the preservation and celebration of Africa's rich royal and cultural heritage.
+- Foster dialogue and collaboration among female traditional leaders across Africa and the Diaspora.
+- Share experiences and best practices in addressing social challenges, including gender-based violence, youth unemployment, and effective healthcare.
+- Strengthen cultural, educational, and institutional partnerships between Africa and other international stakeholders.
+- Encourage intergenerational leadership development and mentorship among emerging African leaders.
+- Explore opportunities for collaboration in community development, peacebuilding, heritage preservation, and sustainable socio-economic advancement.
 
-I look forward to welcoming you personally to the United Kingdom.
+## Request for The Kingdom of Morocco's Guidance and Support
+
+In recognition of The Kingdom's esteemed position as the representative voice of traditional leadership in Morocco, we would be honoured to receive your guidance regarding the identification and participation of suitable female traditional leaders whose presence would contribute meaningfully to the objectives of the Summit.
+
+Among the many respected leaders whose participation would be highly valued are:
+
+- Her Royal Highness, Princess Lalla Asma
+- Her Royal Highness, Princess Lalla Khadija
+- Her Royal Highness, Princess Meryem
+
+We present these names with the utmost respect and as indicative of the calibre of leadership we hope to welcome, while remaining guided by the counsel and recommendations of The Kingdom of Morocco regarding appropriate representation.

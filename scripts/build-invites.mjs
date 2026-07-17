@@ -36,7 +36,8 @@ function md(src) {
   const out = [];
   let para = [];
   let list = null;
-  const flushPara = () => { if (para.length) { out.push(`<p>${inline(para.join(' ').trim())}</p>`); para = []; } };
+  // A line ending with a backslash forces a hard line break (e.g. a stacked address).
+  const flushPara = () => { if (para.length) { out.push(`<p>${inline(para.join(' ').trim()).replace(/@@BR@@\s*/g, '<br>')}</p>`); para = []; } };
   const closeList = () => { if (list) { out.push('</ul>'); list = null; } };
   for (const raw of lines) {
     const line = raw.replace(/\s+$/, '');
@@ -45,7 +46,10 @@ function md(src) {
     if (h) { flushPara(); closeList(); out.push(`<h2>${inline(h[2])}</h2>`); continue; }
     const li = line.match(/^\s*[-*]\s+(.*)$/);
     if (li) { flushPara(); if (!list) { out.push('<ul>'); list = 'ul'; } out.push(`<li>${inline(li[1])}</li>`); continue; }
-    closeList(); para.push(line.trim());
+    closeList();
+    let t = line.trim();
+    if (t.endsWith('\\')) t = t.slice(0, -1).replace(/\s+$/, '') + '@@BR@@';
+    para.push(t);
   }
   flushPara(); closeList();
   return out.join('\n        ');
@@ -100,7 +104,7 @@ const programme = [
 ];
 
 // Per-audience defaults
-const AUD_SALUTATION = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
+const AUD_SALUTATION = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
 
 // Letter body per audience (content/letters/<audience>.md), falling back to base letter.md
 const letterCache = {};
@@ -204,7 +208,7 @@ function heritage({ data, noteHtml, letterHtml }) {
     </div>`,
     letter: () => `<section class="content">
       ${date ? `<p class="dateline">${esc(date)}</p>` : ''}
-      ${custom ? '' : `<p class="salutation">${saluteLine}</p>`}
+      ${(custom || audience === 'morocco') ? '' : `<p class="salutation">${saluteLine}</p>`}
       ${noteBlock}${letterHtml}
     </section>`,
     programme: () => `<div class="mud-divider"></div>
@@ -746,7 +750,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     var msg = greeting + ' \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, you are warmly invited to the African Global Queens Summit (United Kingdom, 14\\u201331 August 2026). Your personal invitation: ' + inviteUrl(name, audience, noLetter) + ' \\u2014 kindly RSVP via the page.';
     return 'https://wa.me/?text=' + encodeURIComponent(msg);
   }
-  var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
+  var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
   var ALL_SECTIONS = ['hero', 'recipient', 'letter', 'programme', 'signature', 'rsvp', 'footer'];
   var LETTERS = ${lettersJson};
   var NOTES = {
@@ -1072,7 +1076,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     var TYPE_MAP = { q: 'queens', k: 'kings', mo: 'morocco', pr: 'princesses', po: 'politicians', g: 'guests', ex: 'excellency' };
     var rawType = (P.get('t') || P.get('type') || P.get('a') || 'q').trim().toLowerCase();
     var type = TYPE_MAP[rawType] || rawType || 'queens';
-    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Majesty', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
+    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Royal Highness', excellency: 'Your Excellency' };
     var LETTERS = ${lettersJson};
     var sal = SAL.hasOwnProperty(type) ? SAL[type] : 'Your Majesty';
     document.getElementById('v-name').textContent = name;
@@ -1082,6 +1086,8 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     var tEl = document.getElementById('v-title');
     if (title) { tEl.textContent = title; tEl.style.display = ''; }
     document.getElementById('v-salute').textContent = sal ? (sal + ',') : ('Dear ' + name + ',');
+    // The Morocco letter carries its own inside address and "Your Excellencies," salutation.
+    if (type === 'morocco') { var _sv = document.getElementById('v-salute'); if (_sv) _sv.style.display = 'none'; }
     document.getElementById('v-letter').innerHTML = LETTERS[type] || LETTERS.queens || '';
     // Optional: drop the letter body (hero + recipient + programme + signature only).
     // ?letter=0 (or ?nl=1 / ?nobody=1) removes the whole letter section.
