@@ -1225,7 +1225,7 @@ function appointmentPage() {
       <div class="nm" id="a-name">Amb. Hanane Ait-Toudghi</div>
       <div id="a-title" style="display:none"></div>
       <div id="a-org" style="display:none"></div>
-      <div id="a-addr">103, Olofatan Ayekale, Ota-Efun, Osogho, Osun State. Nigeria.</div>
+      <div id="a-addr">103, Olofatan Ayekale, Ota-Efun, Osogbo, Osun State. Nigeria.</div>
     </div>
     <p class="salute" id="a-salute">Your Excellency,</p>
 
