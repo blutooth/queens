@@ -38,5 +38,11 @@ Among the many respected leaders whose participation would be highly valued are:
 - Her Royal Highness, Princess Lalla Asma
 - Her Royal Highness, Princess Lalla Khadija
 - Her Royal Highness, Princess Meryem
+- Nezha Hayat
+- Rita Marie Zniber
+- Saida Lamrani
+- Mirriam Bensalah Chaqroun
+- Laila Mamou
+- Salwa Idrissi Akhannouch
 
 We present these names with the utmost respect and as indicative of the calibre of leadership we hope to welcome, while remaining guided by the counsel and recommendations of The Kingdom of Morocco regarding appropriate representation.
