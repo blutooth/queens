@@ -1,5 +1,7 @@
 To Their Excellencies,\
 The Members of the Government of the Kingdom of Morocco\
+The Royal Cabinet\
+The Royal Protocol Office\
 Secretariat General of the Government\
 Administrative Quarter\
 Avenue Mohammed V\
