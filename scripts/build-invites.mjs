@@ -37,7 +37,16 @@ function md(src) {
   let para = [];
   let list = null;
   // A line ending with a backslash forces a hard line break (e.g. a stacked address).
-  const flushPara = () => { if (para.length) { out.push(`<p>${inline(para.join(' ').trim()).replace(/@@BR@@\s*/g, '<br>')}</p>`); para = []; } };
+  const flushPara = () => {
+    if (!para.length) return;
+    const raw = para.join(' ').trim();
+    // A line that is entirely bold (**…**) becomes a prominent subject line.
+    const subj = raw.match(/^\*\*((?:(?!\*\*)[\s\S])+)\*\*$/);
+    const cls = subj ? ' class="subject"' : '';
+    const inner = subj ? subj[1] : raw;
+    out.push(`<p${cls}>${inline(inner).replace(/@@BR@@\s*/g, '<br>')}</p>`);
+    para = [];
+  };
   const closeList = () => { if (list) { out.push('</ul>'); list = null; } };
   for (const raw of lines) {
     const line = raw.replace(/\s+$/, '');
@@ -376,6 +385,7 @@ function heritage({ data, noteHtml, letterHtml }) {
   }
   .note { position: relative; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; line-height: 1.5; color: var(--emerald-deep); background: #fbf2dd; border: 1px solid rgba(184,134,11,0.3); border-left: 4px solid var(--gold); border-radius: 12px; padding: 16px 22px; margin: 0 0 28px; }
   .content p { margin: 0 0 18px; }
+  .content p.subject { font-weight: 800; color: var(--emerald-deep); text-align: center; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.4; font-size: 1.06em; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 6px; text-decoration-thickness: 2px; margin: 8px 0 26px; }
 
   /* title boxes (from markdown headings) */
   .content h2, .programme h2 {
