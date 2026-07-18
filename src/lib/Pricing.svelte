@@ -53,6 +53,18 @@
       {/each}
     </div>
 
+    <div class="pay-row">
+      <a
+        class="pay-btn"
+        href="https://checkout.africanqueenssummit.com/b/14A3cvd5D7DWaNH6Vj1VK05"
+        target="_blank"
+        rel="noopener"
+      >
+        Register &amp; Pay Securely Online →
+      </a>
+      <p class="pay-note">Secure card payment via Stripe.</p>
+    </div>
+
     <p class="footnote">
       Prices are indicative and exclusive of VAT. Group rates for royal delegations
       of four or more are available on request from the Office of the Convener.
@@ -223,6 +235,39 @@
     color: #0b2a1f;
     transform: translateY(-1px);
     box-shadow: 0 14px 32px -10px rgba(37, 211, 102, 0.4);
+  }
+
+  .pay-row {
+    text-align: center;
+    margin: 0 auto 2.25rem;
+  }
+  .pay-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.1rem 2.4rem;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border: 1px solid var(--ink);
+    transition: all 0.2s ease;
+  }
+  .pay-btn:hover {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px -12px rgba(35, 28, 21, 0.4);
+  }
+  .pay-note {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
   }
 
   .footnote {
