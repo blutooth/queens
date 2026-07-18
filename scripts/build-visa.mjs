@@ -53,6 +53,11 @@ const GUEST_TO = '31 August 2026';
 // Base for shareable web links (the deployed /visa/card/ viewer).
 const SITE_URL = 'https://africanqueenssummit.com';
 
+// TEMPORARY BLOCK — when true, the deployed /visa/card/ viewer refuses to
+// render any letter (no view / print / copy / download). Set to false and
+// redeploy to unblock. Only affects the shared web links, not local pages.
+const VISA_BLOCKED = true;
+
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
 // no external requests).
 function dataUri(file) {
@@ -356,6 +361,19 @@ UK Visas and Immigration</div>
     copyToClipboard(text, msg);
   }
   ${card ? `(function () {
+    ${VISA_BLOCKED ? `
+    document.title = 'Temporarily Unavailable';
+    document.body.innerHTML = '<div style="min-height:100vh;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;font-family:Georgia,\\'Times New Roman\\',serif;background:#241a10;">' +
+      '<div style="max-width:480px;">' +
+      '<div style="font-size:46px;margin-bottom:16px;">&#128274;</div>' +
+      '<h1 style="font-weight:600;font-size:27px;margin:0 0 14px;color:#e8c66a;">Temporarily Unavailable</h1>' +
+      '<p style="font-size:16px;line-height:1.65;color:#e9dec6;margin:0 0 12px;">This visa invitation letter is temporarily unavailable while under review. It cannot be viewed, printed or downloaded at this time.</p>' +
+      '<p style="font-size:15px;line-height:1.6;color:#c9b688;margin:0;">Please try again later or contact the Office of the Convener.</p>' +
+      '<p style="font-size:13px;color:#9c855a;margin-top:22px;">African Queens Summit &middot; africanqueenssummit@gmail.com</p>' +
+      '</div></div>';
+    try { window.print = function () {}; } catch (e) {}
+    return;
+    ` : ''}
     var p = new URLSearchParams(location.search), raw = p.get('d') || '';
     var data = {};
     try { data = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/'))))); } catch (e) {}
@@ -375,10 +393,12 @@ UK Visas and Immigration</div>
     document.title = 'Visa Invitation Letter \\u2014 ' + (data.name || '');
   })();` : ''}
   (function () {
+    var emailBtn = document.getElementById('emailBtn'), waBtn = document.getElementById('waBtn');
+    if (!emailBtn || !waBtn) return; // letter not rendered (e.g. temporarily blocked)
     var subj = encodeURIComponent('Visa Invitation Letter — ' + NAME);
     var body = encodeURIComponent(letterText());
-    document.getElementById('emailBtn').href = 'mailto:?subject=' + subj + '&body=' + body;
-    document.getElementById('waBtn').href = 'https://wa.me/?text=' + body;
+    emailBtn.href = 'mailto:?subject=' + subj + '&body=' + body;
+    waBtn.href = 'https://wa.me/?text=' + body;
   })();
 </script>
 </body>
