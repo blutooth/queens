@@ -1300,6 +1300,177 @@ function appointmentPage() {
 }
 
 // ====================================================================
+// INVOICE — an editable invoice on the Aruk II / Summit letterhead covering
+// events, Hawkhill accommodation (Queen Aruk II Village gazebos + main
+// residence), food, drinks and transport. Amounts fill in live; auto-totals.
+// ====================================================================
+
+function invoicePage() {
+  const items = [
+    ['Summit Events', 'Access to the full programme of engagements, 14&ndash;31 August 2026'],
+    ['Accommodation &mdash; Queen Aruk II Village (Gazebos)', 'Gazebo lodging in the grounds of Hawkhill Place'],
+    ['Accommodation &mdash; Hawkhill Main Residence', 'Room(s) within the main residence, Hawkhill Place'],
+    ['Food &amp; Catering', 'Meals and catering throughout the stay'],
+    ['Drinks &amp; Refreshments', 'Beverages and refreshments'],
+    ['Transportation', 'Airport transfers and local transport'],
+  ];
+  const rows = items.map(([d, sub]) => `<tr class="item">
+        <td class="desc"><span class="d-main">${d}</span><span class="d-sub">${sub}</span></td>
+        <td class="c"><input class="qty" type="number" min="0" step="1" value="1" /></td>
+        <td class="c"><span class="cur">&pound;</span><input class="rate" type="number" min="0" step="0.01" placeholder="0.00" /></td>
+        <td class="c amtcell"><span class="cur">&pound;</span><span class="amt">0.00</span></td>
+      </tr>`).join('\n      ');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Invoice · African Queens Summit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Marcellus&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root { --emerald:#0d6b4f; --emerald-deep:#094b38; --gold:#d4af37; --gold-deep:#b8860b; --brown:#3c2415; --brown-soft:#5a3a24; --ink:#241a10; --paper:#fdfaf2; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Spectral',Georgia,serif; color:var(--ink); line-height:1.5; font-size:15px; background:#6b5636; padding:24px 12px 60px; }
+  .print { position:fixed; top:14px; right:14px; z-index:50; font-family:'Marcellus',serif; font-size:13px; letter-spacing:.05em; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:9px 18px; border-radius:999px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); text-decoration:none; }
+  .sheet { max-width:840px; margin:0 auto; background:var(--paper); box-shadow:0 20px 60px rgba(0,0,0,.45); border-top:6px solid var(--emerald); }
+  .pad { padding:36px clamp(20px,5vw,56px) 44px; }
+  .lh { text-align:center; border-bottom:2px solid var(--gold); padding-bottom:16px; }
+  .lh .motto { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; color:var(--emerald-deep); font-size:16px; margin:0 0 10px; }
+  .lh .crest { width:64px; height:64px; object-fit:contain; margin:0 auto 8px; display:block; }
+  .lh .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.06em; color:var(--brown); font-size:clamp(15px,3.2vw,20px); margin:0 0 5px; }
+  .lh .tag { font-family:'Spectral',serif; font-style:italic; color:var(--brown-soft); font-size:12.5px; margin:0 0 5px; }
+  .lh .addr { font-family:'Marcellus',serif; font-size:11.5px; letter-spacing:.03em; color:var(--brown-soft); margin:0; }
+  .inv-title { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--emerald-deep); font-size:26px; margin:22px 0 4px; }
+  .meta { display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; margin:14px 0 20px; }
+  .meta .box { flex:1 1 220px; }
+  .meta label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:4px; }
+  .fld { width:100%; font-family:'Spectral',serif; font-size:14px; color:var(--ink); border:none; border-bottom:1px solid var(--gold-deep); background:transparent; padding:4px 2px; }
+  .billto { min-height:66px; white-space:pre-wrap; border:1px dashed var(--gold-deep); border-radius:8px; padding:8px 10px; font-size:14px; }
+  .billto:empty:before { content:attr(data-ph); color:#a99; }
+  table { width:100%; border-collapse:collapse; margin-top:6px; }
+  thead th { font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:#fff; background:var(--emerald); padding:9px 10px; text-align:left; }
+  thead th.c { text-align:right; width:96px; }
+  tbody td { padding:10px; border-bottom:1px solid rgba(184,134,11,.4); vertical-align:top; }
+  td.c { text-align:right; white-space:nowrap; }
+  .d-main { display:block; font-weight:600; }
+  .d-sub { display:block; font-size:12px; color:var(--brown-soft); margin-top:2px; }
+  input.qty, input.rate { width:70px; text-align:right; font-family:'Spectral',serif; font-size:14px; border:none; border-bottom:1px solid var(--gold-deep); background:#fff8ec; padding:4px 4px; border-radius:3px; }
+  input.qty { width:52px; }
+  .cur { color:var(--brown-soft); margin-right:1px; }
+  .amtcell { font-weight:600; }
+  .totals { margin-top:14px; margin-left:auto; width:min(340px,100%); }
+  .totals .row { display:flex; justify-content:space-between; padding:7px 2px; font-size:14.5px; border-bottom:1px solid rgba(184,134,11,.3); }
+  .totals .row.grand { border-top:2px solid var(--gold); border-bottom:none; margin-top:4px; padding-top:11px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:20px; color:var(--emerald-deep); }
+  .totals input { width:110px; text-align:right; font-family:'Spectral',serif; font-size:14px; border:none; border-bottom:1px solid var(--gold-deep); background:#fff8ec; padding:3px 4px; border-radius:3px; }
+  .notes { margin-top:22px; }
+  .notes label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:5px; }
+  .notes .box { min-height:56px; white-space:pre-wrap; border:1px dashed var(--gold-deep); border-radius:8px; padding:8px 10px; font-size:13.5px; color:var(--ink); }
+  .notes .box:empty:before { content:attr(data-ph); color:#a99; }
+  .foot { margin-top:26px; border-top:2px solid var(--gold); padding-top:12px; text-align:center; }
+  .foot .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.05em; color:var(--brown); font-size:13px; }
+  .foot .tag { font-style:italic; color:var(--brown-soft); font-size:11.5px; margin:4px 0; }
+  .foot .meta2 { font-size:11px; color:var(--brown-soft); line-height:1.7; }
+  @media print {
+    @page { margin:12mm; }
+    body { background:#fff; padding:0; }
+    .print { display:none !important; }
+    .sheet { box-shadow:none; max-width:100%; border-top:none; }
+    input, .fld { background:transparent !important; }
+    .billto, .notes .box { border-style:solid; }
+    .lh, thead th, .foot { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  }
+</style>
+</head>
+<body>
+  <a class="print" href="#" onclick="window.print();return false;">&#128424; Print / Save PDF</a>
+  <div class="sheet"><div class="pad">
+    <div class="lh">
+      <p class="motto">&ldquo;Leadership Rooted in Service, Royalty Defined by Impact.&rdquo;</p>
+      <img class="crest" src="/images/summit-emblem.png" alt="Aruk II crest" />
+      <p class="org">ARUK II HUMANITARIAN SERVICES (UK) C.I.C</p>
+      <p class="tag">Promoting Cultural Heritage &bull; Empowering Communities &bull; Advancing Humanitarian Initiatives</p>
+      <p class="addr">Hawkhill Place, Stanton St John, Oxford. OX33 1HS. United Kingdom</p>
+    </div>
+
+    <div class="inv-title">Invoice</div>
+
+    <div class="meta">
+      <div class="box">
+        <label>Bill To</label>
+        <div class="billto" contenteditable="true" data-ph="Name / organisation and address&hellip;"></div>
+      </div>
+      <div class="box" style="max-width:240px;">
+        <label>Invoice No.</label>
+        <input class="fld" value="AQS-2026-" />
+        <label style="margin-top:12px;">Invoice Date</label>
+        <input class="fld" value="18 July 2026" />
+        <label style="margin-top:12px;">Due Date</label>
+        <input class="fld" placeholder="&mdash;" />
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th class="c">Qty / Nights</th>
+          <th class="c">Unit (&pound;)</th>
+          <th class="c">Amount (&pound;)</th>
+        </tr>
+      </thead>
+      <tbody>
+      ${rows}
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <div class="row"><span>Subtotal</span><span>&pound;<span id="subtotal">0.00</span></span></div>
+      <div class="row"><span>Deposit / Amount Paid</span><span>&pound;<input id="paid" type="number" min="0" step="0.01" placeholder="0.00" /></span></div>
+      <div class="row grand"><span>Balance Due</span><span>&pound;<span id="balance">0.00</span></span></div>
+    </div>
+
+    <div class="notes">
+      <label>Notes &amp; Payment Terms</label>
+      <div class="box" contenteditable="true" data-ph="Payment terms, bank details, or any notes&hellip;"></div>
+    </div>
+
+    <div class="foot">
+      <div class="org">ARUK II HUMANITARIAN SERVICES (UK) C.I.C</div>
+      <div class="tag">Promoting Cultural Heritage &bull; Empowering Communities &bull; Advancing Humanitarian Initiatives</div>
+      <div class="meta2">Hawkhill Place, Stanton St John, Oxford. OX33 1HS. United Kingdom &middot; Tel: +44 793 250 6556<br />obonganwan.aruk@yahoo.com &middot; africanqueenssummit@gmail.com &middot; Company Registration No: 17110628</div>
+    </div>
+  </div></div>
+
+  <script>
+  (function () {
+    function money(n) { if (!isFinite(n)) n = 0; return n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function num(el) { var v = el ? parseFloat(el.value) : 0; return isFinite(v) ? v : 0; }
+    var rows = document.querySelectorAll('tr.item');
+    function recalc() {
+      var sub = 0;
+      for (var i = 0; i < rows.length; i++) {
+        var amt = num(rows[i].querySelector('.qty')) * num(rows[i].querySelector('.rate'));
+        rows[i].querySelector('.amt').textContent = money(amt);
+        sub += amt;
+      }
+      document.getElementById('subtotal').textContent = money(sub);
+      document.getElementById('balance').textContent = money(sub - num(document.getElementById('paid')));
+    }
+    document.addEventListener('input', function (e) {
+      if (e.target && (e.target.classList.contains('qty') || e.target.classList.contains('rate') || e.target.id === 'paid')) recalc();
+    });
+    recalc();
+  })();
+  </script>
+</body>
+</html>
+`;
+}
+
+// ====================================================================
 // VIEWER — a single page that renders an invitation from URL query params
 // (?name=…&title=…&type=…). No personal data is stored on the site; the
 // recipient's details live only in the link. Reuses the heritage styling.
@@ -1524,5 +1695,9 @@ console.log('  ✓ /invite/morocco/  —  Kingdom of Morocco letter master page'
 mkdirSync(join(outRoot, 'appointment'), { recursive: true });
 writeFileSync(join(outRoot, 'appointment', 'index.html'), appointmentPage());
 console.log('  ✓ /invite/appointment/  —  Consultant appointment letter (Aruk II HS letterhead)');
+
+mkdirSync(join(outRoot, 'invoice'), { recursive: true });
+writeFileSync(join(outRoot, 'invoice', 'index.html'), invoicePage());
+console.log('  ✓ /invite/invoice/  —  Summit invoice (Aruk II HS letterhead)');
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);
