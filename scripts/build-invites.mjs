@@ -631,6 +631,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       <button class="tab" data-tab="shared">Shared letters</button>
       <a class="tab visa-tab" href="/visa/" target="_blank" rel="noopener">🛂 Visa Letters ↗</a>
       <a class="tab visa-tab" href="/invite/morocco/" target="_blank" rel="noopener">🇲🇦 Morocco Letter ↗</a>
+      <a class="tab visa-tab" href="/invite/invoices/" target="_blank" rel="noopener">🧾 Invoices ↗</a>
     </div>
 
     <div class="panel" id="tab-create">
@@ -1400,15 +1401,15 @@ function invoicePage() {
     <div class="meta">
       <div class="box">
         <label>Bill To</label>
-        <div class="billto" contenteditable="true" data-ph="Name / organisation and address&hellip;"></div>
+        <div class="billto" id="billto" contenteditable="true" data-ph="Name / organisation and address&hellip;"></div>
       </div>
       <div class="box" style="max-width:240px;">
         <label>Invoice No.</label>
-        <input class="fld" value="AQS-2026-" />
+        <input class="fld" id="inv-no" value="AQS-2026-" />
         <label style="margin-top:12px;">Invoice Date</label>
-        <input class="fld" value="18 July 2026" />
+        <input class="fld" id="inv-date" value="" />
         <label style="margin-top:12px;">Due Date</label>
-        <input class="fld" placeholder="&mdash;" />
+        <input class="fld" id="inv-due" placeholder="&mdash;" />
       </div>
     </div>
 
@@ -1434,7 +1435,7 @@ function invoicePage() {
 
     <div class="notes">
       <label>Notes &amp; Payment Terms</label>
-      <div class="box" contenteditable="true" data-ph="Payment terms, bank details, or any notes&hellip;"></div>
+      <div class="box" id="notes" contenteditable="true" data-ph="Payment terms, bank details, or any notes&hellip;"></div>
     </div>
 
     <div class="foot">
@@ -1462,7 +1463,212 @@ function invoicePage() {
     document.addEventListener('input', function (e) {
       if (e.target && (e.target.classList.contains('qty') || e.target.classList.contains('rate') || e.target.id === 'paid')) recalc();
     });
+    // Prefill from an encoded invoice link (?d=), e.g. built by the invoice master page.
+    (function () {
+      try {
+        var raw = new URLSearchParams(location.search).get('d');
+        if (!raw) return;
+        var d = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/')))));
+        var set = function (id, v) { var el = document.getElementById(id); if (el && v != null) { if (el.tagName === 'INPUT') el.value = v; else el.textContent = v; } };
+        set('billto', d.billTo); set('inv-no', d.invNo); set('inv-date', d.date); set('inv-due', d.due); set('notes', d.notes); set('paid', d.paid);
+        if (d.items) for (var i = 0; i < rows.length && i < d.items.length; i++) {
+          var it = d.items[i] || {};
+          if (it.qty != null) rows[i].querySelector('.qty').value = it.qty;
+          if (it.rate != null) rows[i].querySelector('.rate').value = it.rate;
+        }
+        if (d.title) document.title = 'Invoice ' + (d.invNo || '') + ' \\u2014 African Queens Summit';
+      } catch (e) {}
+    })();
     recalc();
+  })();
+  </script>
+</body>
+</html>
+`;
+}
+
+// ====================================================================
+// INVOICE MASTER PAGE — create numbered invoices, save them (per browser),
+// list past ones, and share (each invoice is an encoded link that reopens
+// the invoice pre-filled at /invite/invoice/?d=…).
+// ====================================================================
+
+function invoiceMasterPage() {
+  const labels = [
+    'Summit Events',
+    'Accommodation &mdash; Queen Aruk II Village (Gazebos)',
+    'Accommodation &mdash; Hawkhill Main Residence',
+    'Food &amp; Catering',
+    'Drinks &amp; Refreshments',
+    'Transportation',
+  ];
+  const itemRows = labels.map((l) => `<div class="irow">
+          <span class="ilabel">${l}</span>
+          <span class="inp"><label>Qty</label><input class="m-qty" type="number" min="0" step="1" value="1" /></span>
+          <span class="inp"><label>Unit &pound;</label><input class="m-rate" type="number" min="0" step="0.01" placeholder="0.00" /></span>
+        </div>`).join('\n        ');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Invoices · Master Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Marcellus&family=Spectral:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --emerald:#0d6b4f; --emerald-deep:#094b38; --gold:#d4af37; --gold-deep:#b8860b; --terracotta:#c0532b; --brown:#3c2415; --sand:#f6ecd8; --paper:#fdf9f0; --ink:#2a1c10; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Spectral',Georgia,serif; color:var(--ink); background:#2b1810 conic-gradient(from 45deg at 50% 50%, #3c2415, #5a3a24, #3c2415) fixed; }
+  .wrap { max-width:960px; margin:0 auto; padding:40px 18px 80px; }
+  h1 { font-family:'Cormorant Garamond',serif; color:#fdf6e3; font-size:clamp(28px,6vw,44px); margin:0 0 6px; text-align:center; }
+  .sub { text-align:center; color:#e7c89a; font-family:'Marcellus',serif; letter-spacing:.12em; text-transform:uppercase; font-size:12px; margin-bottom:22px; }
+  .back { text-align:center; margin-bottom:18px; }
+  .back a { color:#e7c89a; font-family:'Marcellus',serif; font-size:12px; letter-spacing:.05em; text-decoration:none; border:1px solid rgba(212,175,55,.4); padding:8px 16px; border-radius:999px; }
+  .card { background:var(--paper); border:1px solid var(--gold-deep); border-radius:16px; padding:22px clamp(16px,3vw,28px); margin-bottom:24px; box-shadow:0 16px 40px rgba(0,0,0,.4); }
+  .card h2 { font-family:'Cormorant Garamond',serif; color:var(--emerald-deep); font-size:22px; margin:0 0 16px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .field { margin-bottom:14px; }
+  label { display:block; font-family:'Marcellus',serif; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:5px; }
+  input, textarea { width:100%; font-family:'Spectral',serif; font-size:15px; padding:9px 11px; border:1px solid #cdbb8e; border-radius:8px; background:#fff; color:var(--ink); }
+  textarea { min-height:60px; resize:vertical; }
+  .items { margin:6px 0 4px; }
+  .irow { display:grid; grid-template-columns:1fr 90px 120px; gap:12px; align-items:end; padding:9px 0; border-bottom:1px dashed rgba(184,134,11,.4); }
+  .irow:last-child { border-bottom:none; }
+  .ilabel { font-size:14px; color:var(--brown); font-weight:500; padding-bottom:8px; }
+  .inp label { margin-bottom:3px; }
+  .inp input { text-align:right; }
+  .totrow { display:flex; justify-content:flex-end; align-items:baseline; gap:10px; margin-top:12px; font-family:'Cormorant Garamond',serif; }
+  .totrow .tl { font-size:14px; color:var(--emerald-deep); font-family:'Marcellus',serif; letter-spacing:.06em; text-transform:uppercase; }
+  .totrow .tv { font-size:26px; font-weight:700; color:var(--emerald-deep); }
+  .act { font-family:'Marcellus',serif; font-size:13px; letter-spacing:.04em; text-decoration:none; cursor:pointer; text-align:center; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:10px 16px; border-radius:999px; }
+  .act.ghost { background:transparent; color:var(--emerald-deep); border-color:var(--emerald); }
+  .act:hover { filter:brightness(1.04); }
+  .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  .out { margin-top:16px; display:none; }
+  .link-out { display:flex; gap:8px; margin-bottom:10px; }
+  .link-out input { font-family:ui-monospace,Menlo,monospace; font-size:12.5px; background:#fbf5e9; }
+  .inv-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:12px 0; border-bottom:1px dashed rgba(184,134,11,.4); }
+  .inv-row:last-child { border-bottom:none; }
+  .inv-no { font-family:'Marcellus',serif; font-weight:700; color:var(--terracotta); font-size:13px; }
+  .inv-bt { flex:1 1 200px; font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--brown); }
+  .inv-tot { font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--emerald-deep); font-size:17px; }
+  .empty { color:#8a7250; font-style:italic; }
+  .hint { font-size:13px; color:#6f5a36; margin-top:12px; }
+  code { background:#efe4c7; padding:1px 6px; border-radius:4px; font-size:12px; }
+  .toast { position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--emerald-deep); color:#fdf6e3; border:1px solid var(--gold); padding:13px 20px; border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,.5); font-family:'Marcellus',serif; font-size:14px; opacity:0; pointer-events:none; transition:opacity .3s ease, transform .3s ease; z-index:99999; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  @media (max-width:640px){ .two{grid-template-columns:1fr;} .irow{grid-template-columns:1fr 70px 96px;} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>African Queens Summit &middot; Invoices</h1>
+    <div class="sub">Master Page &mdash; Create, Save &amp; Share Invoices</div>
+    <div class="back"><a href="/invite/">&#10094; Back to Invitations</a></div>
+
+    <div class="card">
+      <h2>Create an invoice</h2>
+      <div class="two">
+        <div class="field"><label>Bill To</label><textarea id="m-billto" placeholder="Name / organisation and address&#10;(one item per line)"></textarea></div>
+        <div>
+          <div class="field"><label>Invoice No.</label><input id="m-no" /></div>
+          <div class="two">
+            <div class="field"><label>Date</label><input id="m-date" placeholder="e.g. 19 July 2026" /></div>
+            <div class="field"><label>Due Date</label><input id="m-due" placeholder="&mdash;" /></div>
+          </div>
+        </div>
+      </div>
+
+      <label>Line items</label>
+      <div class="items" id="m-items">
+        ${itemRows}
+      </div>
+
+      <div class="two" style="margin-top:14px;">
+        <div class="field"><label>Deposit / Amount Paid (&pound;)</label><input id="m-paid" type="number" min="0" step="0.01" placeholder="0.00" /></div>
+        <div class="field"><label>Notes / Payment Terms</label><textarea id="m-notes" placeholder="Bank details, terms&hellip;"></textarea></div>
+      </div>
+
+      <div class="totrow"><span class="tl">Total</span><span class="tv">&pound;<span id="m-total">0.00</span></span></div>
+
+      <div class="btns"><button class="act" id="m-create">Create invoice &#10095;</button></div>
+
+      <div class="out" id="m-out">
+        <label>Shareable invoice link</label>
+        <div class="link-out"><input id="m-link" readonly /><button class="act ghost" id="m-copy">Copy</button></div>
+        <div class="btns">
+          <a class="act" id="m-open" href="#" target="_blank" rel="noopener">Open invoice &#10095;</a>
+          <a class="act ghost" id="m-email" href="#">Email</a>
+        </div>
+        <p class="hint">Open it to review, then use its <strong>Print / Save PDF</strong> button. The link reopens the invoice pre-filled.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Saved invoices</h2>
+      <div id="m-list"></div>
+      <p class="hint">Saved in this browser only. <code>Delete</code> removes it from the list (the link still works if you kept it).</p>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+  (function () {
+    var SITE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'https://africanqueenssummit.com' : location.origin;
+    var KEY = 'aqs-invoices';
+    function $(id) { return document.getElementById(id); }
+    function money(n) { if (!isFinite(n)) n = 0; return n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function b64url(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, ''); }
+    function irows() { return document.querySelectorAll('#m-items .irow'); }
+    function num(el) { var v = el ? parseFloat(el.value) : 0; return isFinite(v) ? v : 0; }
+    function collect() {
+      var its = [], rs = irows();
+      for (var i = 0; i < rs.length; i++) its.push({ qty: num(rs[i].querySelector('.m-qty')), rate: num(rs[i].querySelector('.m-rate')) });
+      return { billTo: $('m-billto').value.trim(), invNo: $('m-no').value.trim(), date: $('m-date').value.trim(), due: $('m-due').value.trim(), paid: num($('m-paid')), notes: $('m-notes').value.trim(), items: its };
+    }
+    function totalOf(d) { var s = 0; for (var i = 0; i < d.items.length; i++) s += d.items[i].qty * d.items[i].rate; return s; }
+    function liveTotal() { $('m-total').textContent = money(totalOf(collect())); }
+    function linkOf(d) { return SITE + '/invite/invoice/?d=' + b64url(d); }
+    function loadList() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
+    function saveList(a) { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} }
+    function nextNo() { return 'AQS-2026-' + ('00' + (loadList().length + 1)).slice(-3); }
+    var toastEl = $('toast'), tt;
+    function toast(m) { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toastEl.classList.remove('show'); }, 2200); }
+    function renderList() {
+      var a = loadList(), el = $('m-list');
+      if (!a.length) { el.innerHTML = '<p class="empty">No invoices saved yet.</p>'; return; }
+      el.innerHTML = '';
+      a.forEach(function (inv, idx) {
+        var row = document.createElement('div'); row.className = 'inv-row';
+        var bt = (inv.billTo || '').split('\\n')[0] || '(no bill-to)';
+        var n0 = document.createElement('span'); n0.className = 'inv-no'; n0.textContent = inv.invNo || '\\u2014';
+        var b1 = document.createElement('span'); b1.className = 'inv-bt'; b1.textContent = bt;
+        var t1 = document.createElement('span'); t1.className = 'inv-tot'; t1.textContent = '\\u00a3' + money(inv.total);
+        var op = document.createElement('a'); op.className = 'act'; op.textContent = 'Open'; op.href = inv.url; op.target = '_blank'; op.rel = 'noopener';
+        var cp = document.createElement('button'); cp.className = 'act ghost'; cp.textContent = 'Copy'; cp.onclick = function () { navigator.clipboard.writeText(inv.url); toast('Link copied'); };
+        var dl = document.createElement('button'); dl.className = 'act ghost'; dl.textContent = 'Delete'; dl.onclick = function () { var b = loadList(); b.splice(idx, 1); saveList(b); renderList(); };
+        row.appendChild(n0); row.appendChild(b1); row.appendChild(t1); row.appendChild(op); row.appendChild(cp); row.appendChild(dl);
+        el.appendChild(row);
+      });
+    }
+    document.addEventListener('input', function (e) { if (e.target && (e.target.classList.contains('m-qty') || e.target.classList.contains('m-rate'))) liveTotal(); });
+    $('m-create').addEventListener('click', function () {
+      var d = collect();
+      if (!d.invNo) { d.invNo = nextNo(); $('m-no').value = d.invNo; }
+      var url = linkOf(d), tot = totalOf(d);
+      $('m-link').value = url; $('m-open').href = url;
+      var subj = encodeURIComponent('Invoice ' + d.invNo + ' \\u2014 African Queens Summit');
+      var body = encodeURIComponent('Please find invoice ' + d.invNo + ' (total \\u00a3' + money(tot) + '): ' + url);
+      $('m-email').href = 'mailto:?subject=' + subj + '&body=' + body;
+      $('m-out').style.display = 'block';
+      var a = loadList(); a.unshift({ invNo: d.invNo, billTo: d.billTo, date: d.date, total: tot, url: url }); saveList(a); renderList();
+      toast('Invoice ' + d.invNo + ' created');
+    });
+    $('m-copy').addEventListener('click', function () { $('m-link').select(); navigator.clipboard.writeText($('m-link').value); toast('Link copied'); });
+    $('m-no').value = nextNo();
+    renderList(); liveTotal();
   })();
   </script>
 </body>
@@ -1699,5 +1905,9 @@ console.log('  ✓ /invite/appointment/  —  Consultant appointment letter (Aru
 mkdirSync(join(outRoot, 'invoice'), { recursive: true });
 writeFileSync(join(outRoot, 'invoice', 'index.html'), invoicePage());
 console.log('  ✓ /invite/invoice/  —  Summit invoice (Aruk II HS letterhead)');
+
+mkdirSync(join(outRoot, 'invoices'), { recursive: true });
+writeFileSync(join(outRoot, 'invoices', 'index.html'), invoiceMasterPage());
+console.log('  ✓ /invite/invoices/  —  invoice master page (create/save/list/share)');
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);
