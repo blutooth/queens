@@ -53,10 +53,17 @@ const GUEST_TO = '31 August 2026';
 // Base for shareable web links (the deployed /visa/card/ viewer).
 const SITE_URL = 'https://africanqueenssummit.com';
 
-// TEMPORARY BLOCK — when true, the deployed /visa/card/ viewer refuses to
-// render any letter (no view / print / copy / download). Set to false and
-// redeploy to unblock. Only affects the shared web links, not local pages.
-const VISA_BLOCKED = true;
+// TEMPORARY BLOCK — controls which shared /visa/card/ letters refuse to
+// render (no view / print / copy / download). Redeploy after changing.
+//   ''      = nothing blocked (fully unblocked)
+//   'guest' = Queens & Kings blocked, Palace Staff available
+//   'staff' = Palace Staff blocked, Queens & Kings available
+//   'all'   = everyone blocked
+// Only affects shared web links, not local pages.
+const VISA_BLOCK_SCOPE = 'guest';
+const VISA_BLOCK_COND = VISA_BLOCK_SCOPE === 'all' ? 'true'
+  : VISA_BLOCK_SCOPE === 'guest' ? 'guest'
+  : VISA_BLOCK_SCOPE === 'staff' ? '!guest' : '';
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
 // no external requests).
@@ -361,7 +368,11 @@ UK Visas and Immigration</div>
     copyToClipboard(text, msg);
   }
   ${card ? `(function () {
-    ${VISA_BLOCKED ? `
+    var p = new URLSearchParams(location.search), raw = p.get('d') || '';
+    var data = {};
+    try { data = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/'))))); } catch (e) {}
+    var guest = data.kind === 'guest';
+    ${VISA_BLOCK_COND ? `if (${VISA_BLOCK_COND}) {
     document.title = 'Temporarily Unavailable';
     document.body.innerHTML = '<div style="min-height:100vh;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;font-family:Georgia,\\'Times New Roman\\',serif;background:#241a10;">' +
       '<div style="max-width:480px;">' +
@@ -373,11 +384,7 @@ UK Visas and Immigration</div>
       '</div></div>';
     try { window.print = function () {}; } catch (e) {}
     return;
-    ` : ''}
-    var p = new URLSearchParams(location.search), raw = p.get('d') || '';
-    var data = {};
-    try { data = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/'))))); } catch (e) {}
-    var guest = data.kind === 'guest';
+    }` : ''}
     NAME = data.name || 'Visitor';
     function esch(s){ var d=document.createElement('div'); d.textContent = s==null?'':s; return d.innerHTML; }
     function setAll(cls, val){ var e=document.querySelectorAll('.'+cls); for(var i=0;i<e.length;i++) e[i].textContent = val || ''; }
