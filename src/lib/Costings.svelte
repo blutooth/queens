@@ -83,6 +83,18 @@
         {/each}
       </div>
 
+      <div class="pay-row">
+        <a
+          class="pay-btn"
+          href="https://checkout.africanqueenssummit.com/b/14A3cvd5D7DWaNH6Vj1VK05"
+          target="_blank"
+          rel="noopener"
+        >
+          Register &amp; Pay Securely Online →
+        </a>
+        <p class="pay-note">Secure card payment via Stripe.</p>
+      </div>
+
       <div class="extras">
         <h4>Optional London attractions</h4>
         <ul>
@@ -245,6 +257,19 @@
     border-radius: 999px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s ease;
   }
   .cta:hover { background: #30e377; transform: translateY(-1px); }
+
+  .pay-row { text-align: center; margin: 0 auto 2.5rem; }
+  .pay-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 1.1rem 2.4rem; background: var(--ink); color: var(--cream);
+    border-radius: 999px; font-size: 1rem; font-weight: 600; letter-spacing: 0.01em;
+    border: 1px solid var(--ink); transition: all 0.2s ease;
+  }
+  .pay-btn:hover {
+    background: var(--terracotta); border-color: var(--terracotta); color: var(--cream);
+    transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgba(35, 28, 21, 0.4);
+  }
+  .pay-note { margin-top: 0.75rem; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.02em; }
 
   .extras { max-width: 520px; margin: 0 auto 2.5rem; background: var(--paper-soft); border-radius: 6px; padding: 1.5rem 1.75rem; }
   .extras h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.75rem; }

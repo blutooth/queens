@@ -74,6 +74,18 @@
             <a href="mailto:africanqueenssummit@gmail.com">africanqueenssummit@gmail.com</a>
             <a href="tel:+447932506556">+44 7932 506 556</a>
           </div>
+
+          <div class="pay-row">
+            <a
+              class="pay-btn"
+              href="https://checkout.africanqueenssummit.com/b/14A3cvd5D7DWaNH6Vj1VK05"
+              target="_blank"
+              rel="noopener"
+            >
+              Register &amp; Pay Securely Online →
+            </a>
+            <p class="pay-note">Secure card payment via Stripe.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -111,6 +123,19 @@
     max-width: 760px;
     margin: 0 auto;
   }
+
+  .pay-row { text-align: center; margin: 1.75rem 0 0.25rem; }
+  .pay-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 1.1rem 2.4rem; background: var(--ink); color: var(--cream);
+    border-radius: 999px; font-size: 1rem; font-weight: 600; letter-spacing: 0.01em;
+    border: 1px solid var(--ink); transition: all 0.2s ease;
+  }
+  .pay-btn:hover {
+    background: var(--terracotta); border-color: var(--terracotta); color: var(--cream);
+    transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgba(35, 28, 21, 0.4);
+  }
+  .pay-note { margin-top: 0.75rem; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.02em; }
 
   /* QR panel */
   .qr-panel { position: sticky; top: 6rem; }
