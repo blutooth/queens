@@ -1366,13 +1366,13 @@ function invoicePage() {
   .totals .row { display:flex; justify-content:space-between; padding:7px 2px; font-size:14.5px; border-bottom:1px solid rgba(184,134,11,.3); }
   .totals .row.grand { border-top:2px solid var(--gold); border-bottom:none; margin-top:4px; padding-top:11px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:20px; color:var(--emerald-deep); }
   .totals input { width:110px; text-align:right; font-family:'Spectral',serif; font-size:14px; border:none; border-bottom:1px solid var(--gold-deep); background:#fff8ec; padding:3px 4px; border-radius:3px; }
-  .bank { margin-top:22px; }
-  .bank > label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:8px; }
-  .bank-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; border:1px dashed var(--gold-deep); border-radius:8px; padding:14px 16px; }
+  .bank { margin-top:18px; }
+  .bank > label { display:block; font-family:'Marcellus',serif; font-size:9.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:5px; }
+  .bank-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; border:1px dashed var(--gold-deep); border-radius:7px; padding:8px 12px; max-width:520px; }
   .bk { display:flex; flex-direction:column; }
   .bk.wide { grid-column:1 / -1; }
-  .bl { font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--brown-soft); margin-bottom:2px; }
-  .bkf { border:none; border-bottom:1px solid var(--gold-deep); background:transparent; font-family:'Spectral',serif; font-size:13.5px; padding:3px 2px; color:var(--ink); }
+  .bl { font-size:8px; letter-spacing:.04em; text-transform:uppercase; color:var(--brown-soft); margin-bottom:0; }
+  .bkf { border:none; border-bottom:1px solid var(--gold-deep); background:transparent; font-family:'Spectral',serif; font-size:11px; padding:1px 2px; color:var(--ink); }
   .notes { margin-top:22px; }
   .notes label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:5px; }
   .notes .box { min-height:56px; white-space:pre-wrap; border:1px dashed var(--gold-deep); border-radius:8px; padding:8px 10px; font-size:13.5px; color:var(--ink); }
