@@ -1760,7 +1760,10 @@ function invoiceMasterPage() {
     </div>
 
     <div class="card">
-      <h2>Saved invoices</h2>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+        <h2 style="margin:0;">Saved invoices</h2>
+        <button type="button" class="act ghost" id="m-shorten-all">Shorten all links</button>
+      </div>
       <div id="m-list"></div>
       <p class="hint">Saved in this browser only. <code>Delete</code> removes it from the list (the link still works if you kept it).</p>
     </div>
@@ -1817,9 +1820,18 @@ function invoiceMasterPage() {
         var b1 = document.createElement('span'); b1.className = 'inv-bt'; b1.textContent = bt;
         var t1 = document.createElement('span'); t1.className = 'inv-tot'; t1.textContent = '\\u00a3' + money(inv.total);
         var op = document.createElement('a'); op.className = 'act'; op.textContent = 'Open'; op.href = inv.url; op.target = '_blank'; op.rel = 'noopener';
+        var sh = document.createElement('button'); sh.className = 'act ghost'; sh.textContent = (inv.url || '').indexOf('tinyurl.com') >= 0 ? 'Short \\u2713' : 'Shorten';
+        sh.onclick = function () {
+          if ((inv.url || '').indexOf('tinyurl.com') >= 0) { toast('Already short'); return; }
+          sh.textContent = 'Shortening\\u2026';
+          fetch('/api/shorten', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: inv.url }) })
+            .then(function (r) { return r.json(); })
+            .then(function (j) { if (j && j.ok && j.short) { var b = loadList(); if (b[idx]) { b[idx].url = j.short; saveList(b); } renderList(); toast('Short link ready'); } else { sh.textContent = 'Shorten'; toast('Could not shorten'); } })
+            .catch(function () { sh.textContent = 'Shorten'; toast('Shortening needs the local dev server'); });
+        };
         var cp = document.createElement('button'); cp.className = 'act ghost'; cp.textContent = 'Copy'; cp.onclick = function () { navigator.clipboard.writeText(inv.url); toast('Link copied'); };
         var dl = document.createElement('button'); dl.className = 'act ghost'; dl.textContent = 'Delete'; dl.onclick = function () { var b = loadList(); b.splice(idx, 1); saveList(b); renderList(); };
-        row.appendChild(n0); row.appendChild(b1); row.appendChild(t1); row.appendChild(op); row.appendChild(cp); row.appendChild(dl);
+        row.appendChild(n0); row.appendChild(b1); row.appendChild(t1); row.appendChild(op); row.appendChild(sh); row.appendChild(cp); row.appendChild(dl);
         el.appendChild(row);
       });
     }
@@ -1851,6 +1863,23 @@ function invoiceMasterPage() {
         })
         .catch(function () { toast('Shortening needs the local dev server'); })
         .then(function () { b.textContent = 'Shorten link'; });
+    });
+    // Shorten every saved invoice link (sequentially, to be gentle on TinyURL).
+    $('m-shorten-all').addEventListener('click', function () {
+      var b = this, a = loadList(), todo = [];
+      for (var i = 0; i < a.length; i++) if ((a[i].url || '').indexOf('tinyurl.com') < 0) todo.push(i);
+      if (!todo.length) { toast(a.length ? 'All already short' : 'No saved invoices'); return; }
+      b.textContent = 'Shortening\\u2026'; b.disabled = true;
+      var done = 0;
+      (function next(k) {
+        if (k >= todo.length) { b.textContent = 'Shorten all links'; b.disabled = false; renderList(); toast(done + ' of ' + todo.length + ' shortened'); return; }
+        var idx = todo[k], cur = loadList();
+        fetch('/api/shorten', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: cur[idx].url }) })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (j && j.ok && j.short) { var c = loadList(); if (c[idx]) { c[idx].url = j.short; saveList(c); } done++; } })
+          .catch(function () {})
+          .then(function () { next(k + 1); });
+      })(0);
     });
 
     // Reusable template (bank details, notes, due terms, unit prices) in this browser.
