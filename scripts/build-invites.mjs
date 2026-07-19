@@ -1983,6 +1983,121 @@ function invoiceMasterPage() {
 }
 
 // ====================================================================
+// TRIBUTE — a ceremonial tribute to His Excellency, Chief Olusegun Obasanjo,
+// on the African Queens Summit letterhead (emblem header + partners footer).
+// ====================================================================
+
+function tributePage() {
+  const paras = [
+    "It is with the deepest admiration and profound respect that we pay tribute to your extraordinary life of service&mdash;a life defined by courage, conviction, visionary leadership, and an unwavering commitment to the advancement of Nigeria, Africa, and humanity.",
+    "You stand among Africa&rsquo;s most eminent statesmen, a leader whose legacy transcends generations and whose influence continues to shape the continent&rsquo;s journey toward peace, prosperity, democratic governance, and sustainable development. Your remarkable career, spanning distinguished military service, national leadership, international diplomacy, and enduring statesmanship, reflects an uncommon devotion to the ideals of justice, unity, and transformational leadership.",
+    "As President of the Federal Republic of Nigeria from 1999 to 2007, you assumed leadership at one of the most pivotal moments in the nation&rsquo;s history. With wisdom, resilience, and strategic foresight, you guided Nigeria&rsquo;s democratic rebirth, strengthened national institutions, championed economic reforms, restored international confidence, and laid the foundation for sustained national progress.",
+    "Your administration&rsquo;s successful negotiation of Nigeria&rsquo;s historic external debt relief, alongside far-reaching reforms in telecommunications, banking, pensions, public procurement, and public sector governance, helped unlock new opportunities for economic growth and innovation. Your commitment to strengthening accountability and institutional development continues to inspire reform across the continent.",
+    "Yet your service did not conclude with the presidency.",
+    "Through the <strong>Olusegun Obasanjo Foundation</strong>, you have continued to dedicate your voice, experience, and influence to advancing food security, sustainable agriculture, health, education, youth empowerment, peacebuilding, and good governance across Africa. Your Foundation reflects your enduring belief that true leadership is measured not merely by the offices one holds, but by the lives one continues to transform long after leaving public office.",
+    "As an elder statesman, respected global diplomat, prolific author, mentor, and advocate for African unity, you have consistently demonstrated that leadership is a lifelong calling. Whether mediating conflicts, strengthening democratic institutions, mentoring emerging leaders, or championing Africa&rsquo;s place on the global stage, you continue to embody the highest ideals of servant leadership.",
+    "Your Excellency, your legacy is not written solely in the pages of history; it is etched into the institutions you strengthened, the reforms you championed, the peace you helped secure, the leaders you have inspired, and the countless lives your service continues to uplift.",
+    "It is therefore with immense honour and heartfelt gratitude that we invite you to grace the <strong>African Queens Global Summit</strong> with your distinguished presence. Your lifelong commitment to inclusive leadership, nation-building, and the advancement of Africa represents the very values this Summit seeks to celebrate and inspire.",
+    "Your presence would not only elevate this historic gathering but would also serve as a powerful reminder to women leaders, young changemakers, traditional leaders, policymakers, and future generations that authentic leadership is rooted in integrity, service, vision, and an unwavering commitment to the common good.",
+    "Your Excellency, we salute your remarkable journey, celebrate your enduring legacy, and honour your immeasurable contributions to Nigeria, to Africa, and to the world.",
+    "May your wisdom continue to illuminate the path of leadership, your example continue to inspire generations, and your life&rsquo;s work remain a lasting testament to the limitless possibilities of visionary service.",
+    "We would be profoundly honoured to welcome you to the African Queens Global Summit as we celebrate transformational leadership, African excellence, and a shared vision for a more prosperous, peaceful, and inclusive continent.",
+  ];
+  const body = paras.map((p) => `<p>${p}</p>`).join('\n      ');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>A Ceremonial Tribute &middot; Chief Olusegun Obasanjo, GCFR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Marcellus&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root { --emerald:#0d6b4f; --emerald-deep:#094b38; --gold:#d4af37; --gold-deep:#b8860b; --terracotta:#c0532b; --ochre:#d98e2b; --brown:#3c2415; --brown-soft:#5a3a24; --ink:#241a10; --paper:#fdfaf2; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Spectral',Georgia,serif; color:var(--ink); line-height:1.68; font-size:16px; background:#6b5636; padding:24px 12px 60px; }
+  .print { position:fixed; top:14px; right:14px; z-index:50; font-family:'Marcellus',serif; font-size:13px; letter-spacing:.05em; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:9px 18px; border-radius:999px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); text-decoration:none; }
+  .sheet { max-width:820px; margin:0 auto; background:var(--paper); box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:hidden; }
+  .kente-band { height:18px; width:100%; background-image: repeating-linear-gradient(90deg, var(--emerald) 0 26px, var(--gold) 26px 34px, var(--terracotta) 34px 60px, var(--brown) 60px 68px, var(--ochre) 68px 94px, var(--gold) 94px 102px), repeating-linear-gradient(0deg, rgba(0,0,0,.10) 0 6px, rgba(255,255,255,.06) 6px 12px); background-blend-mode:multiply; }
+  .kente-band.tall { height:26px; }
+  .hero { text-align:center; color:#fdf6e3; background-color:var(--emerald-deep); background-image: radial-gradient(circle at 50% -10%, rgba(217,142,43,.35), transparent 55%); }
+  .hero-in { padding:24px 20px 22px; }
+  .emblem { width:92px; height:92px; object-fit:contain; border-radius:50%; background:rgba(251,245,233,.95); padding:4px; border:3px solid var(--gold); box-shadow:0 0 0 5px rgba(13,107,79,.6); margin:0 auto 10px; display:block; }
+  .hero .eyebrow { font-family:'Marcellus',serif; letter-spacing:.28em; text-transform:uppercase; font-size:11px; color:var(--gold); margin:0 0 8px; }
+  .hero .h-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(22px,4.4vw,30px); color:#fdf6e3; margin:0 0 5px; }
+  .hero .h-sub { font-family:'Marcellus',serif; font-size:12px; letter-spacing:.06em; color:#f1dca0; margin:0; }
+  .pad { padding:34px clamp(24px,6vw,60px) 40px; }
+  .trib-title { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; font-style:italic; color:var(--emerald-deep); font-size:clamp(20px,4vw,27px); line-height:1.25; margin:0 0 22px; }
+  .salute { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:19px; color:var(--emerald-deep); margin:0 0 16px; }
+  p { margin:0 0 14px; }
+  .close { margin-top:24px; }
+  .sig-img { width:210px; max-width:62%; display:block; margin:8px 0 4px; mix-blend-mode:multiply; }
+  .sig-name { font-weight:700; font-family:'Cormorant Garamond',serif; font-size:19px; color:var(--emerald-deep); margin:0; }
+  .sig-sub { font-size:13.5px; color:var(--brown-soft); margin:2px 0 0; }
+  .sfoot { background:var(--brown); color:#ecd9b8; text-align:center; }
+  .sfoot-pad { padding:16px 20px 22px; }
+  .partners { display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
+  .lh-box { background:#fff; display:inline-flex; align-items:center; padding:6px 12px; border-radius:9px; border:1px solid var(--gold); height:72px; }
+  .lh-box img { height:58px; width:auto; max-width:54vw; display:block; }
+  .partner-logo { height:72px; width:auto; max-width:54vw; border-radius:9px; border:1px solid var(--gold); }
+  .sfoot .org { font-family:'Marcellus',serif; font-size:14px; color:var(--gold); margin:0 0 6px; letter-spacing:.04em; }
+  .sfoot .meta { margin:3px auto; font-size:12px; max-width:560px; line-height:1.65; color:#ddc89f; }
+  .sfoot a { color:#f1dca0; }
+  @media print {
+    @page { margin:12mm; }
+    body { background:#fff; padding:0; }
+    .print { display:none !important; }
+    .sheet { box-shadow:none; max-width:100%; }
+    .kente-band, .hero, .sfoot, .lh-box, .partner-logo { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  }
+</style>
+</head>
+<body>
+  <a class="print" href="#" onclick="window.print();return false;">&#128424; Print / Save PDF</a>
+  <div class="sheet">
+    <div class="kente-band tall"></div>
+    <header class="hero"><div class="hero-in">
+      <img class="emblem" src="/images/summit-emblem.png" alt="Summit emblem" />
+      <p class="eyebrow">African Queens Global Summit</p>
+      <p class="h-title">African Queens Global Summit</p>
+      <p class="h-sub">United Kingdom &middot; 14&ndash;31 August 2026</p>
+    </div></header>
+    <div class="kente-band"></div>
+
+    <div class="pad">
+      <h1 class="trib-title">A Ceremonial Tribute to His Excellency,<br />Chief Olusegun Obasanjo, GCFR</h1>
+      <p class="salute">Your Excellency, Chief Olusegun Obasanjo, GCFR,</p>
+      ${body}
+
+      <div class="close">
+        <p style="margin-bottom:2px;">With the highest esteem and profound respect,</p>
+        <img class="sig-img" src="/images/queen-aruk-signature.png" alt="Signature of Queen Aruk II" />
+        <p class="sig-name">Obonganwan Marie Erete, Queen Aruk II</p>
+        <p class="sig-sub">Summit Convener &middot; African and Diaspora Queens Summit</p>
+      </div>
+    </div>
+
+    <footer class="sfoot">
+      <div class="kente-band tall"></div>
+      <div class="sfoot-pad">
+        <div class="partners">
+          <div class="lh-box"><img src="/images/partners-letterhead.png" alt="Aruk II crest and partners" /></div>
+          <img class="partner-logo" src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
+        </div>
+        <p class="org">ARUK II Humanitarian Services (UK) C.I.C</p>
+        <p class="meta">Hawkhill Place, Stanton St John, Oxford, OX33 1HS, United Kingdom &middot; Tel: +44 793 250 6556</p>
+        <p class="meta"><a href="mailto:obonganwan.aruk@yahoo.com">obonganwan.aruk@yahoo.com</a> &middot; <a href="mailto:africanqueenssummit@gmail.com">africanqueenssummit@gmail.com</a> &middot; Company Reg. No. 17110628</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
+`;
+}
+
+// ====================================================================
 // VIEWER — a single page that renders an invitation from URL query params
 // (?name=…&title=…&type=…). No personal data is stored on the site; the
 // recipient's details live only in the link. Reuses the heritage styling.
@@ -2215,5 +2330,9 @@ console.log('  ✓ /invite/invoice/  —  Summit invoice (Aruk II HS letterhead)
 mkdirSync(join(outRoot, 'invoices'), { recursive: true });
 writeFileSync(join(outRoot, 'invoices', 'index.html'), invoiceMasterPage());
 console.log('  ✓ /invite/invoices/  —  invoice master page (create/save/list/share)');
+
+mkdirSync(join(outRoot, 'tribute'), { recursive: true });
+writeFileSync(join(outRoot, 'tribute', 'index.html'), tributePage());
+console.log('  ✓ /invite/tribute/  —  ceremonial tribute (Chief Olusegun Obasanjo)');
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);
