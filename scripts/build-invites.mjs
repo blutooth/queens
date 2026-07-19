@@ -1752,6 +1752,7 @@ function invoiceMasterPage() {
         <div class="link-out"><input id="m-link" readonly /><button class="act ghost" id="m-copy">Copy</button></div>
         <div class="btns">
           <a class="act" id="m-open" href="#" target="_blank" rel="noopener">Open invoice &#10095;</a>
+          <button type="button" class="act ghost" id="m-shorten">Shorten link</button>
           <a class="act ghost" id="m-email" href="#">Email</a>
         </div>
         <p class="hint">Open it to review, then use its <strong>Print / Save PDF</strong> button. The link reopens the invoice pre-filled.</p>
@@ -1836,6 +1837,21 @@ function invoiceMasterPage() {
       toast('Invoice ' + d.invNo + ' created');
     });
     $('m-copy').addEventListener('click', function () { $('m-link').select(); navigator.clipboard.writeText($('m-link').value); toast('Link copied'); });
+    $('m-shorten').addEventListener('click', function () {
+      var long = $('m-link').value; if (!long || long.indexOf('tinyurl.com') >= 0) { toast(long ? 'Already short' : 'Create an invoice first'); return; }
+      var b = this; b.textContent = 'Shortening\\u2026';
+      fetch('/api/shorten', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: long }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.ok && j.short) {
+            $('m-link').value = j.short; $('m-open').href = j.short;
+            var a = loadList(); if (a[0]) { a[0].url = j.short; saveList(a); renderList(); }
+            toast('Short link ready');
+          } else { toast('Could not shorten'); }
+        })
+        .catch(function () { toast('Shortening needs the local dev server'); })
+        .then(function () { b.textContent = 'Shorten link'; });
+    });
 
     // Reusable template (bank details, notes, due terms, unit prices) in this browser.
     var TKEY = 'aqs-invoice-template';

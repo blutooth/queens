@@ -91,6 +91,37 @@ function visaApi() {
   };
 }
 
+// Dev-only: shorten a long link (e.g. an encoded invoice URL) via TinyURL.
+// Browsers can't call TinyURL directly (no CORS), so the master page POSTs
+// the long URL here and the dev server fetches the short link server-side.
+function shortenApi() {
+  return {
+    name: 'shorten-api',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use('/api/shorten', (req, res) => {
+        if (req.method !== 'POST') { res.statusCode = 405; res.end('Method Not Allowed'); return; }
+        let body = '';
+        req.on('data', (c) => { body += c; });
+        req.on('end', async () => {
+          res.setHeader('Content-Type', 'application/json');
+          try {
+            const { url } = JSON.parse(body || '{}');
+            if (!url || !/^https?:\/\//.test(url)) throw new Error('bad url');
+            const r = await fetch('https://tinyurl.com/api-create.php?url=' + encodeURIComponent(url));
+            const t = (await r.text()).trim();
+            if (!t.startsWith('http')) throw new Error('shortener failed');
+            res.end(JSON.stringify({ ok: true, short: t }));
+          } catch (e) {
+            res.statusCode = 400;
+            res.end(JSON.stringify({ ok: false, error: String((e && e.message) || e) }));
+          }
+        });
+      });
+    },
+  };
+}
+
 // Dev-only: persist the "invited" status to content/data/invited.json so it
 // survives across browsers/devices (not just localStorage). Keyed by slug.
 function invitedApi() {
@@ -161,7 +192,7 @@ function serveInvitePages() {
 }
 
 export default defineConfig(() => ({
-  plugins: [serveInvitePages(), svelte(), inviteCreateApi(), invitedApi(), visaApi()],
+  plugins: [serveInvitePages(), svelte(), inviteCreateApi(), invitedApi(), visaApi(), shortenApi()],
   base,
   build: {
     rollupOptions: {
