@@ -1384,6 +1384,9 @@ function invoicePage() {
   input.qty { width:52px; }
   .cur { color:var(--brown-soft); margin-right:1px; }
   .amtcell { font-weight:600; }
+  input[readonly] { cursor:default; -moz-appearance:textfield; }
+  input[readonly]::-webkit-outer-spin-button, input[readonly]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+  body[data-locked] .billto, body[data-locked] .notes .box { border-color:transparent; }
   .opt-btn { font-family:'Marcellus',serif; font-size:11px; letter-spacing:.03em; color:var(--emerald-deep); background:rgba(212,175,55,.18); border:1px solid var(--gold-deep); border-radius:999px; padding:2px 10px; cursor:pointer; white-space:nowrap; }
   .modal[hidden] { display:none; }
   .modal { position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; }
@@ -1554,6 +1557,11 @@ function invoicePage() {
           if (it.rate != null) rows[i].querySelector('.rate').value = it.rate;
         }
         document.title = 'Invoice ' + (d.invNo || '') + ' \\u2014 African Queens Summit';
+        // Recipient view: lock the invoice so it can be viewed and printed but not amended.
+        var inps = document.querySelectorAll('input'); for (var li = 0; li < inps.length; li++) { inps[li].readOnly = true; inps[li].tabIndex = -1; }
+        var eds = document.querySelectorAll('[contenteditable]'); for (var le = 0; le < eds.length; le++) eds[le].setAttribute('contenteditable', 'false');
+        var sbt = document.getElementById('summit-btn'); if (sbt) sbt.style.display = 'none';
+        document.body.setAttribute('data-locked', '1');
       } catch (e) {}
     })();
     // Summit Events picker — tick some or all engagements (matches the website).
