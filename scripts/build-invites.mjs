@@ -2010,7 +2010,7 @@ function tributePage() {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>A Ceremonial Tribute &middot; Chief Olusegun Obasanjo, GCFR</title>
+<title>An Invitation &amp; Tribute &middot; Chief Olusegun Obasanjo, GCFR</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Marcellus&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
@@ -2065,14 +2065,14 @@ function tributePage() {
     <div class="kente-band tall"></div>
     <header class="hero"><div class="hero-in">
       <div class="medallion"><span class="rays" aria-hidden="true"></span><img class="emblem" src="/images/summit-emblem.png" alt="Summit emblem" /></div>
-      <p class="eyebrow">African Queens Global Summit</p>
+      <p class="eyebrow">Invitation &amp; Tribute</p>
       <p class="h-title">African Queens Global Summit</p>
       <p class="h-sub">United Kingdom &middot; 14&ndash;31 August 2026</p>
     </div></header>
     <div class="kente-band"></div>
 
     <div class="pad">
-      <h1 class="trib-title">A Ceremonial Tribute to His Excellency,<br />Chief Olusegun Obasanjo, GCFR</h1>
+      <h1 class="trib-title">An Invitation &amp; Ceremonial Tribute to His Excellency,<br />Chief Olusegun Obasanjo, GCFR</h1>
       <p class="salute">Your Excellency, Chief Olusegun Obasanjo, GCFR,</p>
       ${body}
 
