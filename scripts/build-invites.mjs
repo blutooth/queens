@@ -1689,6 +1689,8 @@ function invoiceMasterPage() {
   .inv-no { font-family:'Marcellus',serif; font-weight:700; color:var(--terracotta); font-size:13px; }
   .inv-bt { flex:1 1 200px; font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--brown); }
   .inv-tot { font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--emerald-deep); font-size:17px; }
+  .inv-url { flex-basis:100%; font-family:ui-monospace,Menlo,monospace; font-size:11px; color:#8a7250; word-break:break-all; margin-top:2px; }
+  .inv-url.short { color:var(--emerald-deep); font-weight:600; }
   .empty { color:#8a7250; font-style:italic; }
   .hint { font-size:13px; color:#6f5a36; margin-top:12px; }
   code { background:#efe4c7; padding:1px 6px; border-radius:4px; font-size:12px; }
@@ -1831,7 +1833,8 @@ function invoiceMasterPage() {
         };
         var cp = document.createElement('button'); cp.className = 'act ghost'; cp.textContent = 'Copy'; cp.onclick = function () { navigator.clipboard.writeText(inv.url); toast('Link copied'); };
         var dl = document.createElement('button'); dl.className = 'act ghost'; dl.textContent = 'Delete'; dl.onclick = function () { var b = loadList(); b.splice(idx, 1); saveList(b); renderList(); };
-        row.appendChild(n0); row.appendChild(b1); row.appendChild(t1); row.appendChild(op); row.appendChild(sh); row.appendChild(cp); row.appendChild(dl);
+        var u0 = document.createElement('span'); u0.className = 'inv-url' + ((inv.url || '').indexOf('tinyurl.com') >= 0 ? ' short' : ''); u0.textContent = inv.url || '';
+        row.appendChild(n0); row.appendChild(b1); row.appendChild(t1); row.appendChild(op); row.appendChild(sh); row.appendChild(cp); row.appendChild(dl); row.appendChild(u0);
         el.appendChild(row);
       });
     }
