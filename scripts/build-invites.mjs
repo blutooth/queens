@@ -2024,7 +2024,11 @@ function tributePage() {
   .kente-band.tall { height:26px; }
   .hero { text-align:center; color:#fdf6e3; background-color:var(--emerald-deep); background-image: radial-gradient(circle at 50% -10%, rgba(217,142,43,.35), transparent 55%); }
   .hero-in { padding:24px 20px 22px; }
-  .emblem { width:92px; height:92px; object-fit:contain; border-radius:50%; background:rgba(251,245,233,.95); padding:4px; border:3px solid var(--gold); box-shadow:0 0 0 5px rgba(13,107,79,.6); margin:0 auto 10px; display:block; }
+  .medallion { position:relative; width:124px; height:124px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; }
+  .medallion .rays { position:absolute; inset:0; border-radius:50%; background: repeating-conic-gradient(from 0deg, rgba(212,175,55,0) 0deg, rgba(212,175,55,0) 4deg, rgba(212,175,55,0.6) 5deg, rgba(212,175,55,0) 6deg, rgba(212,175,55,0) 10deg); -webkit-mask: radial-gradient(circle, transparent 44%, #000 45%, #000 74%, transparent 75%); mask: radial-gradient(circle, transparent 44%, #000 45%, #000 74%, transparent 75%); animation: raysSpin 50s linear infinite; }
+  @keyframes raysSpin { to { transform: rotate(360deg); } }
+  .emblem { position:relative; z-index:2; width:92px; height:92px; object-fit:contain; border-radius:50%; background:rgba(251,245,233,.95); padding:4px; border:3px solid var(--gold); box-shadow:0 0 0 5px rgba(13,107,79,.6); display:block; }
+  @media (prefers-reduced-motion: reduce) { .medallion .rays { animation:none; } }
   .hero .eyebrow { font-family:'Marcellus',serif; letter-spacing:.28em; text-transform:uppercase; font-size:11px; color:var(--gold); margin:0 0 8px; }
   .hero .h-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(22px,4.4vw,30px); color:#fdf6e3; margin:0 0 5px; }
   .hero .h-sub { font-family:'Marcellus',serif; font-size:12px; letter-spacing:.06em; color:#f1dca0; margin:0; }
@@ -2049,6 +2053,7 @@ function tributePage() {
     @page { margin:12mm; }
     body { background:#fff; padding:0; }
     .print { display:none !important; }
+    .rays { display:none !important; }
     .sheet { box-shadow:none; max-width:100%; }
     .kente-band, .hero, .sfoot, .lh-box, .partner-logo { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
   }
@@ -2059,7 +2064,7 @@ function tributePage() {
   <div class="sheet">
     <div class="kente-band tall"></div>
     <header class="hero"><div class="hero-in">
-      <img class="emblem" src="/images/summit-emblem.png" alt="Summit emblem" />
+      <div class="medallion"><span class="rays" aria-hidden="true"></span><img class="emblem" src="/images/summit-emblem.png" alt="Summit emblem" /></div>
       <p class="eyebrow">African Queens Global Summit</p>
       <p class="h-title">African Queens Global Summit</p>
       <p class="h-sub">United Kingdom &middot; 14&ndash;31 August 2026</p>
