@@ -1786,6 +1786,8 @@ function invoiceMasterPage() {
           <a class="act" id="m-open" href="#" target="_blank" rel="noopener">Open invoice &#10095;</a>
           <button type="button" class="act ghost" id="m-shorten">Shorten link</button>
           <a class="act ghost" id="m-email" href="#">Email</a>
+          <a class="act ghost" id="m-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <button type="button" class="act ghost" id="m-share">Share</button>
         </div>
         <p class="hint">Open it to review, then use its <strong>Print / Save PDF</strong> button. The link reopens the invoice pre-filled.</p>
       </div>
@@ -1869,14 +1871,25 @@ function invoiceMasterPage() {
       });
     }
     document.addEventListener('input', function (e) { if (e.target && (e.target.classList.contains('m-qty') || e.target.classList.contains('m-rate'))) liveTotal(); });
+    var curInvNo = '', curTot = 0;
+    function refreshShare() {
+      var url = $('m-link').value; if (!url) return;
+      var body = 'Please find invoice ' + curInvNo + ' (total \\u00a3' + money(curTot) + '): ' + url;
+      $('m-email').href = 'mailto:?subject=' + encodeURIComponent('Invoice ' + curInvNo + ' \\u2014 African Queens Summit') + '&body=' + encodeURIComponent(body);
+      $('m-wa').href = 'https://wa.me/?text=' + encodeURIComponent(body);
+    }
+    $('m-share').addEventListener('click', function () {
+      var url = $('m-link').value; if (!url) { toast('Create an invoice first'); return; }
+      var msg = 'Please find invoice ' + curInvNo + ' (total \\u00a3' + money(curTot) + '): ' + url;
+      if (navigator.share) { navigator.share({ title: 'Invoice ' + curInvNo, text: msg, url: url }).catch(function () {}); }
+      else { try { navigator.clipboard.writeText(url); } catch (e) {} toast('Link copied'); }
+    });
     $('m-create').addEventListener('click', function () {
       var d = collect();
       if (!d.invNo) { d.invNo = nextNo(); $('m-no').value = d.invNo; }
       var url = linkOf(d), tot = totalOf(d);
       $('m-link').value = url; $('m-open').href = url;
-      var subj = encodeURIComponent('Invoice ' + d.invNo + ' \\u2014 African Queens Summit');
-      var body = encodeURIComponent('Please find invoice ' + d.invNo + ' (total \\u00a3' + money(tot) + '): ' + url);
-      $('m-email').href = 'mailto:?subject=' + subj + '&body=' + body;
+      curInvNo = d.invNo; curTot = tot; refreshShare();
       $('m-out').style.display = 'block';
       var a = loadList(); a.unshift({ invNo: d.invNo, billTo: d.billTo, date: d.date, total: tot, url: url }); saveList(a); renderList();
       toast('Invoice ' + d.invNo + ' created');
@@ -1889,7 +1902,7 @@ function invoiceMasterPage() {
         .then(function (r) { return r.json(); })
         .then(function (j) {
           if (j && j.ok && j.short) {
-            $('m-link').value = j.short; $('m-open').href = j.short;
+            $('m-link').value = j.short; $('m-open').href = j.short; refreshShare();
             var a = loadList(); if (a[0]) { a[0].url = j.short; saveList(a); renderList(); }
             toast('Short link ready');
           } else { toast('Could not shorten'); }
