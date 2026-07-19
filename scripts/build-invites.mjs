@@ -1325,7 +1325,7 @@ function appointmentPage() {
 
 function invoicePage() {
   const items = [
-    ['Commitment Fee', 'Non-refundable fee to secure and confirm the reservation.'],
+    ['Commitment Fee', 'Non-refundable fee to secure and confirm the reservation.', '', '100'],
     ['Summit Events', 'Leave blank, or choose engagements &rarr;', 'events'],
     ['Accommodation &mdash; Queen Aruk II Village (Gazebos)', 'Gazebo lodging in the grounds of Hawkhill Place. Sleeps four.'],
     ['Accommodation &mdash; Hawkhill Main Residence', 'Rooms within the main residence, Hawkhill Place. Sleeps four.'],
@@ -1333,12 +1333,12 @@ function invoicePage() {
     ['Drinks &amp; Refreshments', 'Beverages and refreshments'],
     ['Transportation', 'Airport transfers and local transport'],
   ];
-  const rows = items.map(([d, sub, grp]) => {
+  const rows = items.map(([d, sub, grp, defRate]) => {
     const picker = grp === 'events' ? ` <button type="button" class="opt-btn" id="summit-btn">Select events&hellip;</button>` : '';
     return `<tr class="item">
         <td class="desc"><span class="d-main">${d}${picker}</span><span class="d-sub"${grp === 'events' ? ' id="summit-sub"' : ''}>${sub}</span></td>
         <td class="c"><input class="qty" type="number" min="0" step="1" value="1" /></td>
-        <td class="c"><span class="cur">&pound;</span><input class="rate" type="number" min="0" step="0.01" placeholder="0.00" /></td>
+        <td class="c"><span class="cur">&pound;</span><input class="rate" type="number" min="0" step="0.01" placeholder="0.00" value="${defRate || ''}" /></td>
         <td class="c amtcell"><span class="cur">&pound;</span><span class="amt">0.00</span></td>
       </tr>`;
   }).join('\n      ');
@@ -1613,10 +1613,10 @@ function invoiceMasterPage() {
     'Drinks &amp; Refreshments',
     'Transportation',
   ];
-  const itemRows = labels.map((l) => `<div class="irow">
+  const itemRows = labels.map((l, i) => `<div class="irow">
           <span class="ilabel">${l}</span>
           <span class="inp"><label>Qty</label><input class="m-qty" type="number" min="0" step="1" value="1" /></span>
-          <span class="inp"><label>Unit &pound;</label><input class="m-rate" type="number" min="0" step="0.01" placeholder="0.00" /></span>
+          <span class="inp"><label>Unit &pound;</label><input class="m-rate" type="number" min="0" step="0.01" placeholder="0.00"${i === 0 ? ' value="100"' : ''} /></span>
         </div>`).join('\n        ');
   return `<!DOCTYPE html>
 <html lang="en">
