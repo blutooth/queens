@@ -1366,6 +1366,13 @@ function invoicePage() {
   .totals .row { display:flex; justify-content:space-between; padding:7px 2px; font-size:14.5px; border-bottom:1px solid rgba(184,134,11,.3); }
   .totals .row.grand { border-top:2px solid var(--gold); border-bottom:none; margin-top:4px; padding-top:11px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:20px; color:var(--emerald-deep); }
   .totals input { width:110px; text-align:right; font-family:'Spectral',serif; font-size:14px; border:none; border-bottom:1px solid var(--gold-deep); background:#fff8ec; padding:3px 4px; border-radius:3px; }
+  .bank { margin-top:22px; }
+  .bank > label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:8px; }
+  .bank-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; border:1px dashed var(--gold-deep); border-radius:8px; padding:14px 16px; }
+  .bk { display:flex; flex-direction:column; }
+  .bk.wide { grid-column:1 / -1; }
+  .bl { font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--brown-soft); margin-bottom:2px; }
+  .bkf { border:none; border-bottom:1px solid var(--gold-deep); background:transparent; font-family:'Spectral',serif; font-size:13.5px; padding:3px 2px; color:var(--ink); }
   .notes { margin-top:22px; }
   .notes label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:5px; }
   .notes .box { min-height:56px; white-space:pre-wrap; border:1px dashed var(--gold-deep); border-radius:8px; padding:8px 10px; font-size:13.5px; color:var(--ink); }
@@ -1393,7 +1400,6 @@ function invoicePage() {
       <img class="crest" src="/images/summit-emblem.png" alt="Aruk II crest" />
       <p class="org">ARUK II HUMANITARIAN SERVICES (UK) C.I.C</p>
       <p class="tag">Promoting Cultural Heritage &bull; Empowering Communities &bull; Advancing Humanitarian Initiatives</p>
-      <p class="addr">Hawkhill Place, Stanton St John, Oxford. OX33 1HS. United Kingdom</p>
     </div>
 
     <div class="inv-title">Invoice</div>
@@ -1433,9 +1439,22 @@ function invoicePage() {
       <div class="row grand"><span>Balance Due</span><span>&pound;<span id="balance">0.00</span></span></div>
     </div>
 
+    <div class="bank">
+      <label>Payment &mdash; Bank Details</label>
+      <div class="bank-grid">
+        <div class="bk"><span class="bl">Account Name</span><input class="bkf" id="bk-name" /></div>
+        <div class="bk"><span class="bl">Bank</span><input class="bkf" id="bk-bank" /></div>
+        <div class="bk"><span class="bl">Sort Code</span><input class="bkf" id="bk-sort" /></div>
+        <div class="bk"><span class="bl">Account Number</span><input class="bkf" id="bk-acct" /></div>
+        <div class="bk"><span class="bl">IBAN</span><input class="bkf" id="bk-iban" /></div>
+        <div class="bk"><span class="bl">SWIFT / BIC</span><input class="bkf" id="bk-swift" /></div>
+        <div class="bk wide"><span class="bl">Payment Reference</span><input class="bkf" id="bk-ref" /></div>
+      </div>
+    </div>
+
     <div class="notes">
       <label>Notes &amp; Payment Terms</label>
-      <div class="box" id="notes" contenteditable="true" data-ph="Payment terms, bank details, or any notes&hellip;"></div>
+      <div class="box" id="notes" contenteditable="true" data-ph="Terms, or any additional notes&hellip;"></div>
     </div>
 
     <div class="foot">
@@ -1471,6 +1490,7 @@ function invoicePage() {
         var d = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/')))));
         var set = function (id, v) { var el = document.getElementById(id); if (el && v != null) { if (el.tagName === 'INPUT') el.value = v; else el.textContent = v; } };
         set('billto', d.billTo); set('inv-no', d.invNo); set('inv-date', d.date); set('inv-due', d.due); set('notes', d.notes); set('paid', d.paid);
+        if (d.bank) { set('bk-name', d.bank.name); set('bk-bank', d.bank.bank); set('bk-sort', d.bank.sort); set('bk-acct', d.bank.acct); set('bk-iban', d.bank.iban); set('bk-swift', d.bank.swift); set('bk-ref', d.bank.ref); }
         if (d.items) for (var i = 0; i < rows.length && i < d.items.length; i++) {
           var it = d.items[i] || {};
           if (it.qty != null) rows[i].querySelector('.qty').value = it.qty;
@@ -1537,6 +1557,8 @@ function invoiceMasterPage() {
   .irow { display:grid; grid-template-columns:1fr 90px 120px; gap:12px; align-items:end; padding:9px 0; border-bottom:1px dashed rgba(184,134,11,.4); }
   .irow:last-child { border-bottom:none; }
   .ilabel { font-size:14px; color:var(--brown); font-weight:500; padding-bottom:8px; }
+  .bankgrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .bankgrid .wide { grid-column:1 / -1; }
   .inp label { margin-bottom:3px; }
   .inp input { text-align:right; }
   .totrow { display:flex; justify-content:flex-end; align-items:baseline; gap:10px; margin-top:12px; font-family:'Cormorant Garamond',serif; }
@@ -1588,7 +1610,19 @@ function invoiceMasterPage() {
 
       <div class="two" style="margin-top:14px;">
         <div class="field"><label>Deposit / Amount Paid (&pound;)</label><input id="m-paid" type="number" min="0" step="0.01" placeholder="0.00" /></div>
-        <div class="field"><label>Notes / Payment Terms</label><textarea id="m-notes" placeholder="Bank details, terms&hellip;"></textarea></div>
+        <div class="field"><label>Notes / Payment Terms</label><textarea id="m-notes" placeholder="Terms or notes&hellip;"></textarea></div>
+      </div>
+
+      <div class="field"><label>Bank details (optional)</label>
+        <div class="bankgrid">
+          <input id="m-bk-name" placeholder="Account name" />
+          <input id="m-bk-bank" placeholder="Bank" />
+          <input id="m-bk-sort" placeholder="Sort code" />
+          <input id="m-bk-acct" placeholder="Account number" />
+          <input id="m-bk-iban" placeholder="IBAN" />
+          <input id="m-bk-swift" placeholder="SWIFT / BIC" />
+          <input id="m-bk-ref" class="wide" placeholder="Payment reference" />
+        </div>
       </div>
 
       <div class="totrow"><span class="tl">Total</span><span class="tv">&pound;<span id="m-total">0.00</span></span></div>
@@ -1626,7 +1660,7 @@ function invoiceMasterPage() {
     function collect() {
       var its = [], rs = irows();
       for (var i = 0; i < rs.length; i++) its.push({ qty: num(rs[i].querySelector('.m-qty')), rate: num(rs[i].querySelector('.m-rate')) });
-      return { billTo: $('m-billto').value.trim(), invNo: $('m-no').value.trim(), date: $('m-date').value.trim(), due: $('m-due').value.trim(), paid: num($('m-paid')), notes: $('m-notes').value.trim(), items: its };
+      return { billTo: $('m-billto').value.trim(), invNo: $('m-no').value.trim(), date: $('m-date').value.trim(), due: $('m-due').value.trim(), paid: num($('m-paid')), notes: $('m-notes').value.trim(), items: its, bank: { name: $('m-bk-name').value.trim(), bank: $('m-bk-bank').value.trim(), sort: $('m-bk-sort').value.trim(), acct: $('m-bk-acct').value.trim(), iban: $('m-bk-iban').value.trim(), swift: $('m-bk-swift').value.trim(), ref: $('m-bk-ref').value.trim() } };
     }
     function totalOf(d) { var s = 0; for (var i = 0; i < d.items.length; i++) s += d.items[i].qty * d.items[i].rate; return s; }
     function liveTotal() { $('m-total').textContent = money(totalOf(collect())); }
