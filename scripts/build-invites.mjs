@@ -1657,7 +1657,7 @@ function invoiceMasterPage() {
     function linkOf(d) { return SITE + '/invite/invoice/?d=' + b64url(d); }
     function loadList() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
     function saveList(a) { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} }
-    function nextNo() { return 'AQS-2026-' + ('00' + (loadList().length + 1)).slice(-3); }
+    function nextNo() { return 'AQS-2026-' + (100 + loadList().length); }
     var toastEl = $('toast'), tt;
     function toast(m) { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toastEl.classList.remove('show'); }, 2200); }
     function renderList() {
