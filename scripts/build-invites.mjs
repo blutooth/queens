@@ -1415,10 +1415,10 @@ function invoicePage() {
   .notes label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:5px; }
   .notes .box { min-height:56px; white-space:pre-wrap; border:1px dashed var(--gold-deep); border-radius:8px; padding:8px 10px; font-size:13.5px; color:var(--ink); }
   .notes .box:empty:before { content:attr(data-ph); color:#a99; }
-  .foot { margin-top:26px; border-top:2px solid var(--gold); padding-top:12px; text-align:center; }
-  .foot .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.05em; color:var(--brown); font-size:13px; }
-  .foot .tag { font-style:italic; color:var(--brown-soft); font-size:11.5px; margin:4px 0; }
-  .foot .meta2 { font-size:11px; color:var(--brown-soft); line-height:1.7; }
+  .foot { margin-top:28px; border-top:2px solid var(--gold); padding-top:15px; text-align:center; }
+  .foot .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.05em; color:var(--brown); font-size:15.5px; }
+  .foot .tag { font-style:italic; color:var(--brown-soft); font-size:13px; margin:5px 0; }
+  .foot .meta2 { font-size:12.5px; color:var(--brown-soft); line-height:1.75; }
   @media print {
     @page { margin:12mm; }
     body { background:#fff; padding:0; }
