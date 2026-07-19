@@ -2004,6 +2004,9 @@ function tributePage() {
     "We would be profoundly honoured to welcome you to the African Queens Global Summit as we celebrate transformational leadership, African excellence, and a shared vision for a more prosperous, peaceful, and inclusive continent.",
   ];
   const body = paras.map((p) => `<p>${p}</p>`).join('\n      ');
+  const itin = programme
+    .map(([d, t], i) => `<div class="prog-row${i === programme.length - 1 ? ' finale' : ''}"><span class="when">${esc(d)}</span><span class="what">${esc(t)}</span></div>`)
+    .join('\n        ');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2036,6 +2039,20 @@ function tributePage() {
   .trib-title { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; font-style:italic; color:var(--emerald-deep); font-size:clamp(20px,4vw,27px); line-height:1.25; margin:0 0 22px; }
   .salute { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:19px; color:var(--emerald-deep); margin:0 0 16px; }
   p { margin:0 0 14px; }
+  .prog { margin:28px 0 6px; }
+  .prog-h { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--emerald-deep); font-size:22px; margin:0 0 14px; }
+  .prog-list { border:1px solid rgba(184,134,11,.4); border-radius:10px; overflow:hidden; }
+  .prog-row { display:grid; grid-template-columns:118px 1fr; gap:14px; padding:9px 14px; border-bottom:1px solid rgba(184,134,11,.28); align-items:center; }
+  .prog-row:last-child { border-bottom:none; }
+  .prog-row:nth-child(even) { background:rgba(212,175,55,.07); }
+  .prog-row .when { font-family:'Marcellus',serif; font-size:11.5px; color:#fff; background:linear-gradient(180deg,var(--emerald),var(--emerald-deep)); padding:5px 10px; border-radius:999px; text-align:center; white-space:nowrap; border:1px solid var(--gold); }
+  .prog-row .what { color:var(--brown); font-size:14.5px; }
+  .prog-row.finale .when { background:linear-gradient(180deg,var(--terracotta),#9a3f1f); }
+  .prog-row.finale .what { font-weight:600; color:var(--emerald-deep); }
+  .attach { margin:22px 0 6px; text-align:center; background:rgba(212,175,55,.09); border:1px dashed var(--gold-deep); border-radius:12px; padding:16px 18px; }
+  .attach-lead { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--emerald-deep); font-size:16px; margin:0 0 10px; }
+  .attach-btn { display:inline-block; font-family:'Marcellus',serif; font-size:13px; letter-spacing:.03em; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:10px 20px; border-radius:999px; text-decoration:none; }
+  .attach-url { font-family:ui-monospace,Menlo,monospace; font-size:11.5px; color:var(--brown-soft); margin:10px 0 0; word-break:break-all; }
   .close { margin-top:24px; }
   .sig-img { width:210px; max-width:62%; display:block; margin:8px 0 4px; mix-blend-mode:multiply; }
   .sig-name { font-weight:700; font-family:'Cormorant Garamond',serif; font-size:19px; color:var(--emerald-deep); margin:0; }
@@ -2075,6 +2092,19 @@ function tributePage() {
       <h1 class="trib-title">An Invitation &amp; Ceremonial Tribute to His Excellency,<br />Chief Olusegun Obasanjo, GCFR</h1>
       <p class="salute">Your Excellency, Chief Olusegun Obasanjo, GCFR,</p>
       ${body}
+
+      <section class="prog">
+        <h2 class="prog-h">Summit Itinerary &middot; 14&ndash;31 August 2026</h2>
+        <div class="prog-list">
+        ${itin}
+        </div>
+      </section>
+
+      <div class="attach">
+        <p class="attach-lead">Enclosed &mdash; Your Excellency&rsquo;s personal Summit invitation, with the full programme and RSVP:</p>
+        <a class="attach-btn" href="https://africanqueenssummit.com/invite/card/?n=Chief_Olusegun_Obasanjo,_GCFR&amp;t=ex" target="_blank" rel="noopener">Open your invitation &amp; programme &#10095;</a>
+        <p class="attach-url">africanqueenssummit.com/invite/card/?n=Chief_Olusegun_Obasanjo,_GCFR&amp;t=ex</p>
+      </div>
 
       <div class="close">
         <p style="margin-bottom:2px;">With the highest esteem and profound respect,</p>
