@@ -1615,11 +1615,14 @@ function invoiceMasterPage() {
     'Drinks &amp; Refreshments',
     'Transportation',
   ];
-  const itemRows = labels.map((l, i) => `<div class="irow">
-          <span class="ilabel">${l}</span>
+  const itemRows = labels.map((l, i) => {
+    const btn = l === 'Summit Events' ? ` <button type="button" class="opt-btn" id="m-summit-btn">Select events&hellip;</button>` : '';
+    return `<div class="irow">
+          <span class="ilabel">${l}${btn}</span>
           <span class="inp"><label>Qty</label><input class="m-qty" type="number" min="0" step="1" value="1" /></span>
           <span class="inp"><label>Unit &pound;</label><input class="m-rate" type="number" min="0" step="0.01" placeholder="0.00"${i === 0 ? ' value="100"' : ''} /></span>
-        </div>`).join('\n        ');
+        </div>`;
+  }).join('\n        ');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1652,6 +1655,23 @@ function invoiceMasterPage() {
   .ilabel { font-size:14px; color:var(--brown); font-weight:500; padding-bottom:8px; }
   .bankgrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
   .bankgrid .wide { grid-column:1 / -1; }
+  .opt-btn { font-family:'Marcellus',serif; font-size:11px; letter-spacing:.03em; color:var(--emerald-deep); background:rgba(212,175,55,.18); border:1px solid var(--gold-deep); border-radius:999px; padding:2px 10px; cursor:pointer; white-space:nowrap; }
+  .modal[hidden] { display:none; }
+  .modal { position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .modal-backdrop { position:absolute; inset:0; background:rgba(20,12,6,.6); }
+  .modal-card { position:relative; background:var(--paper); border:1px solid var(--gold-deep); border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.5); width:min(460px,100%); max-height:86vh; overflow:auto; padding:20px 22px; }
+  .modal-card h3 { font-family:'Cormorant Garamond',serif; color:var(--emerald-deep); font-size:22px; margin:0 0 4px; }
+  .modal-hint { font-size:12.5px; color:#6f5a36; margin:0 0 12px; }
+  .modal-all { display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--gold-deep); margin-bottom:4px; font-size:14px; color:var(--ink); }
+  .modal-list { display:flex; flex-direction:column; }
+  .ev { display:flex; align-items:center; gap:10px; padding:7px 2px; border-bottom:1px dashed rgba(184,134,11,.4); font-size:14px; color:var(--ink); cursor:pointer; }
+  .ev input { accent-color:var(--emerald); }
+  .ev .en { flex:1; }
+  .ev .ep { font-family:'Cormorant Garamond',serif; color:var(--emerald-deep); font-weight:700; }
+  .modal-total { text-align:right; font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--emerald-deep); font-size:18px; margin-top:12px; }
+  .modal-btns { display:flex; justify-content:flex-end; gap:10px; margin-top:14px; }
+  .mbtn { font-family:'Marcellus',serif; font-size:13px; cursor:pointer; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:9px 18px; border-radius:999px; }
+  .mbtn.ghost { background:transparent; color:var(--emerald-deep); border-color:var(--emerald); }
   .inp label { margin-bottom:3px; }
   .inp input { text-align:right; }
   .totrow { display:flex; justify-content:flex-end; align-items:baseline; gap:10px; margin-top:12px; font-family:'Cormorant Garamond',serif; }
@@ -1744,6 +1764,23 @@ function invoiceMasterPage() {
       <p class="hint">Saved in this browser only. <code>Delete</code> removes it from the list (the link still works if you kept it).</p>
     </div>
   </div>
+
+  <div class="modal" id="m-summit-modal" hidden>
+    <div class="modal-backdrop" id="m-summit-backdrop"></div>
+    <div class="modal-card">
+      <h3>Summit Events &mdash; select engagements</h3>
+      <p class="modal-hint">Tick some or all. Prices match the website.</p>
+      <label class="modal-all"><input type="checkbox" id="m-summit-all" /> <strong>Select all (Full Programme)</strong></label>
+      <div class="modal-list" id="m-summit-list"></div>
+      <div class="modal-total">Selected total: &pound;<span id="m-summit-total">0.00</span></div>
+      <div class="modal-btns">
+        <button type="button" class="mbtn ghost" id="m-summit-clear">Clear</button>
+        <button type="button" class="mbtn ghost" id="m-summit-cancel">Cancel</button>
+        <button type="button" class="mbtn" id="m-summit-apply">Apply</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script>
@@ -1815,6 +1852,34 @@ function invoiceMasterPage() {
     }
     $('m-savetpl').addEventListener('click', saveTemplate);
     $('m-cleartpl').addEventListener('click', function () { try { localStorage.removeItem(TKEY); } catch (e) {} toast('Template cleared'); });
+
+    // Summit Events picker — sets the Summit Events unit price from the chosen engagements.
+    (function () {
+      var EVENTS = ${JSON.stringify(SUMMIT_EVENTS)};
+      var modal = document.getElementById('m-summit-modal'), listEl = document.getElementById('m-summit-list');
+      var allCb = document.getElementById('m-summit-all'), totEl = document.getElementById('m-summit-total');
+      var btn = document.getElementById('m-summit-btn');
+      if (!modal || !listEl || !btn) return;
+      var rateEl = btn.closest('.irow').querySelector('.m-rate');
+      var boxes = [];
+      for (var i = 0; i < EVENTS.length; i++) {
+        var w = document.createElement('label'); w.className = 'ev';
+        var cb = document.createElement('input'); cb.type = 'checkbox'; cb.setAttribute('data-price', EVENTS[i][1]);
+        var en = document.createElement('span'); en.className = 'en'; en.textContent = EVENTS[i][0];
+        var ep = document.createElement('span'); ep.className = 'ep'; ep.textContent = EVENTS[i][1] ? ('\\u00a3' + EVENTS[i][1]) : 'Included';
+        w.appendChild(cb); w.appendChild(en); w.appendChild(ep); listEl.appendChild(w); boxes.push(cb);
+      }
+      function mt() { var s = 0; for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) s += parseFloat(boxes[i].getAttribute('data-price')) || 0; return s; }
+      function sync() { totEl.textContent = money(mt()); var all = boxes.length > 0; for (var i = 0; i < boxes.length; i++) if (!boxes[i].checked) all = false; allCb.checked = all; }
+      listEl.addEventListener('change', sync);
+      allCb.addEventListener('change', function () { for (var i = 0; i < boxes.length; i++) boxes[i].checked = allCb.checked; sync(); });
+      function close() { modal.hidden = true; }
+      btn.addEventListener('click', function () { modal.hidden = false; sync(); });
+      document.getElementById('m-summit-cancel').addEventListener('click', close);
+      document.getElementById('m-summit-backdrop').addEventListener('click', close);
+      document.getElementById('m-summit-clear').addEventListener('click', function () { for (var i = 0; i < boxes.length; i++) boxes[i].checked = false; sync(); });
+      document.getElementById('m-summit-apply').addEventListener('click', function () { var sum = mt(); rateEl.value = sum ? sum : ''; close(); liveTotal(); });
+    })();
 
     $('m-no').value = nextNo();
     applyTemplate();
