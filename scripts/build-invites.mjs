@@ -1365,7 +1365,8 @@ function invoicePage() {
   .lh .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.06em; color:var(--brown); font-size:clamp(15px,3.2vw,20px); margin:0 0 5px; }
   .lh .tag { font-family:'Spectral',serif; font-style:italic; color:var(--brown-soft); font-size:12.5px; margin:0 0 5px; }
   .lh .addr { font-family:'Marcellus',serif; font-size:11.5px; letter-spacing:.03em; color:var(--brown-soft); margin:0; }
-  .inv-title { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--emerald-deep); font-size:26px; margin:22px 0 4px; }
+  .inv-title { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--emerald-deep); font-size:26px; margin:22px 0 2px; }
+  .inv-re { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--brown-soft); font-size:15px; margin:0 0 10px; }
   .meta { display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; margin:14px 0 20px; }
   .meta .box { flex:1 1 220px; }
   .meta label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:4px; }
@@ -1442,6 +1443,7 @@ function invoicePage() {
     </div>
 
     <div class="inv-title">Invoice</div>
+    <p class="inv-re">Re: African Queens Summit 2026 &middot; 14&ndash;31 August 2026</p>
 
     <div class="meta">
       <div class="box">
