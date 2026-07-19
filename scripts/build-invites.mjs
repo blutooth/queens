@@ -1325,6 +1325,7 @@ function appointmentPage() {
 
 function invoicePage() {
   const items = [
+    ['Commitment Fee', 'Non-refundable fee to secure and confirm the reservation.'],
     ['Summit Events', 'Leave blank, or choose engagements &rarr;', 'events'],
     ['Accommodation &mdash; Queen Aruk II Village (Gazebos)', 'Gazebo lodging in the grounds of Hawkhill Place. Sleeps four.'],
     ['Accommodation &mdash; Hawkhill Main Residence', 'Rooms within the main residence, Hawkhill Place. Sleeps four.'],
@@ -1560,6 +1561,7 @@ function invoicePage() {
       var allCb = document.getElementById('summit-all'), totEl = document.getElementById('summit-modal-total');
       var btn = document.getElementById('summit-btn');
       if (!modal || !listEl || !btn) return;
+      var summitRow = btn.closest('tr.item');
       var boxes = [];
       for (var i = 0; i < EVENTS.length; i++) {
         var w = document.createElement('label'); w.className = 'ev';
@@ -1580,8 +1582,8 @@ function invoicePage() {
       document.getElementById('summit-apply').addEventListener('click', function () {
         var picked = [], sum = 0;
         for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) { picked.push(boxes[i].getAttribute('data-name')); sum += parseFloat(boxes[i].getAttribute('data-price')) || 0; }
-        rows[0].querySelector('.rate').value = sum ? sum : '';
-        rows[0].querySelector('.qty').value = 1;
+        summitRow.querySelector('.rate').value = sum ? sum : '';
+        summitRow.querySelector('.qty').value = 1;
         var sub = document.getElementById('summit-sub');
         sub.textContent = picked.length ? (picked.length + (picked.length === 1 ? ' engagement: ' : ' engagements: ') + picked.join(', ')) : 'Leave blank, or choose engagements \\u2192';
         close(); recalc();
@@ -1603,6 +1605,7 @@ function invoicePage() {
 
 function invoiceMasterPage() {
   const labels = [
+    'Commitment Fee',
     'Summit Events',
     'Accommodation &mdash; Queen Aruk II Village (Gazebos) &middot; sleeps four',
     'Accommodation &mdash; Hawkhill Main Residence &middot; sleeps four',
