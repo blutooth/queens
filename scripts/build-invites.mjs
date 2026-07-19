@@ -1308,22 +1308,19 @@ function appointmentPage() {
 
 function invoicePage() {
   const items = [
-    ['Summit Events', 'Access to the full programme of engagements, 14&ndash;31 August 2026', ''],
-    ['Accommodation &mdash; Queen Aruk II Village (Gazebos)', 'Gazebo lodging in the grounds of Hawkhill Place. Sleeps four. Choose one accommodation option only.', 'accom'],
-    ['Accommodation &mdash; Hawkhill Main Residence', 'Rooms within the main residence, Hawkhill Place. Sleeps four. Choose one accommodation option only.', 'accom'],
-    ['Food &amp; Catering', 'Meals and catering throughout the stay', ''],
-    ['Drinks &amp; Refreshments', 'Beverages and refreshments', ''],
-    ['Transportation', 'Airport transfers and local transport', ''],
+    ['Summit Events', 'Access to the full programme of engagements, 14&ndash;31 August 2026'],
+    ['Accommodation &mdash; Queen Aruk II Village (Gazebos)', 'Gazebo lodging in the grounds of Hawkhill Place. Sleeps four.'],
+    ['Accommodation &mdash; Hawkhill Main Residence', 'Rooms within the main residence, Hawkhill Place. Sleeps four.'],
+    ['Food &amp; Catering', 'Meals and catering throughout the stay'],
+    ['Drinks &amp; Refreshments', 'Beverages and refreshments'],
+    ['Transportation', 'Airport transfers and local transport'],
   ];
-  const rows = items.map(([d, sub, grp], i) => {
-    const radio = grp === 'accom' ? `<input type="radio" name="accom" class="accom-radio" value="${i}"${i === 1 ? ' checked' : ''} aria-label="Select this accommodation" /> ` : '';
-    return `<tr class="item${grp === 'accom' ? ' accom-row' : ''}">
-        <td class="desc"><span class="d-main">${radio}${d}</span><span class="d-sub">${sub}</span></td>
+  const rows = items.map(([d, sub]) => `<tr class="item">
+        <td class="desc"><span class="d-main">${d}</span><span class="d-sub">${sub}</span></td>
         <td class="c"><input class="qty" type="number" min="0" step="1" value="1" /></td>
         <td class="c"><span class="cur">&pound;</span><input class="rate" type="number" min="0" step="0.01" placeholder="0.00" /></td>
         <td class="c amtcell"><span class="cur">&pound;</span><span class="amt">0.00</span></td>
-      </tr>`;
-  }).join('\n      ');
+      </tr>`).join('\n      ');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1365,8 +1362,6 @@ function invoicePage() {
   input.qty { width:52px; }
   .cur { color:var(--brown-soft); margin-right:1px; }
   .amtcell { font-weight:600; }
-  .accom-radio { accent-color:var(--emerald); margin-right:5px; vertical-align:middle; }
-  tr.excluded { opacity:.4; }
   .totals { margin-top:14px; margin-left:auto; width:min(340px,100%); }
   .totals .row { display:flex; justify-content:space-between; padding:7px 2px; font-size:14.5px; border-bottom:1px solid rgba(184,134,11,.3); }
   .totals .row.grand { border-top:2px solid var(--gold); border-bottom:none; margin-top:4px; padding-top:11px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:20px; color:var(--emerald-deep); }
@@ -1386,8 +1381,6 @@ function invoicePage() {
     .sheet { box-shadow:none; max-width:100%; border-top:none; }
     input, .fld { background:transparent !important; }
     .billto, .notes .box { border-style:solid; }
-    tr.excluded { display:none; }
-    .accom-radio { display:none; }
     .lh, thead th, .foot { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
   }
 </style>
@@ -1460,13 +1453,8 @@ function invoicePage() {
     function recalc() {
       var sub = 0;
       for (var i = 0; i < rows.length; i++) {
-        var r = rows[i];
-        var isAccom = r.classList.contains('accom-row');
-        var radio = r.querySelector('.accom-radio');
-        var active = !isAccom || (radio && radio.checked); // accommodation is either/or
-        var amt = active ? num(r.querySelector('.qty')) * num(r.querySelector('.rate')) : 0;
-        r.querySelector('.amt').textContent = money(amt);
-        r.classList.toggle('excluded', isAccom && !active);
+        var amt = num(rows[i].querySelector('.qty')) * num(rows[i].querySelector('.rate'));
+        rows[i].querySelector('.amt').textContent = money(amt);
         sub += amt;
       }
       document.getElementById('subtotal').textContent = money(sub);
@@ -1474,9 +1462,6 @@ function invoicePage() {
     }
     document.addEventListener('input', function (e) {
       if (e.target && (e.target.classList.contains('qty') || e.target.classList.contains('rate') || e.target.id === 'paid')) recalc();
-    });
-    document.addEventListener('change', function (e) {
-      if (e.target && e.target.classList.contains('accom-radio')) recalc();
     });
     // Prefill from an encoded invoice link (?d=), e.g. built by the invoice master page.
     (function () {
@@ -1491,7 +1476,6 @@ function invoicePage() {
           if (it.qty != null) rows[i].querySelector('.qty').value = it.qty;
           if (it.rate != null) rows[i].querySelector('.rate').value = it.rate;
         }
-        if (d.accom != null) { var rb = document.querySelector('.accom-radio[value="' + d.accom + '"]'); if (rb) rb.checked = true; }
         document.title = 'Invoice ' + (d.invNo || '') + ' \\u2014 African Queens Summit';
       } catch (e) {}
     })();
@@ -1518,15 +1502,11 @@ function invoiceMasterPage() {
     'Drinks &amp; Refreshments',
     'Transportation',
   ];
-  const itemRows = labels.map((l, i) => {
-    const accom = i === 1 || i === 2;
-    const radio = accom ? `<input type="radio" name="m-accom" class="m-accom" value="${i}"${i === 1 ? ' checked' : ''} /> ` : '';
-    return `<div class="irow${accom ? ' accom-row' : ''}">
-          <span class="ilabel">${radio}${l}</span>
+  const itemRows = labels.map((l) => `<div class="irow">
+          <span class="ilabel">${l}</span>
           <span class="inp"><label>Qty</label><input class="m-qty" type="number" min="0" step="1" value="1" /></span>
           <span class="inp"><label>Unit &pound;</label><input class="m-rate" type="number" min="0" step="0.01" placeholder="0.00" /></span>
-        </div>`;
-  }).join('\n        ');
+        </div>`).join('\n        ');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1557,8 +1537,6 @@ function invoiceMasterPage() {
   .irow { display:grid; grid-template-columns:1fr 90px 120px; gap:12px; align-items:end; padding:9px 0; border-bottom:1px dashed rgba(184,134,11,.4); }
   .irow:last-child { border-bottom:none; }
   .ilabel { font-size:14px; color:var(--brown); font-weight:500; padding-bottom:8px; }
-  .m-accom { accent-color:var(--emerald); margin-right:5px; vertical-align:middle; }
-  .irow.dim { opacity:.5; }
   .inp label { margin-bottom:3px; }
   .inp input { text-align:right; }
   .totrow { display:flex; justify-content:flex-end; align-items:baseline; gap:10px; margin-top:12px; font-family:'Cormorant Garamond',serif; }
@@ -1645,15 +1623,13 @@ function invoiceMasterPage() {
     function b64url(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, ''); }
     function irows() { return document.querySelectorAll('#m-items .irow'); }
     function num(el) { var v = el ? parseFloat(el.value) : 0; return isFinite(v) ? v : 0; }
-    function selAccom() { var r = document.querySelector('.m-accom:checked'); return r ? parseInt(r.value, 10) : -1; }
     function collect() {
       var its = [], rs = irows();
       for (var i = 0; i < rs.length; i++) its.push({ qty: num(rs[i].querySelector('.m-qty')), rate: num(rs[i].querySelector('.m-rate')) });
-      return { billTo: $('m-billto').value.trim(), invNo: $('m-no').value.trim(), date: $('m-date').value.trim(), due: $('m-due').value.trim(), paid: num($('m-paid')), notes: $('m-notes').value.trim(), items: its, accom: selAccom() };
+      return { billTo: $('m-billto').value.trim(), invNo: $('m-no').value.trim(), date: $('m-date').value.trim(), due: $('m-due').value.trim(), paid: num($('m-paid')), notes: $('m-notes').value.trim(), items: its };
     }
-    function totalOf(d) { var s = 0; for (var i = 0; i < d.items.length; i++) { if ((i === 1 || i === 2) && i !== d.accom) continue; s += d.items[i].qty * d.items[i].rate; } return s; }
+    function totalOf(d) { var s = 0; for (var i = 0; i < d.items.length; i++) s += d.items[i].qty * d.items[i].rate; return s; }
     function liveTotal() { $('m-total').textContent = money(totalOf(collect())); }
-    function updateAccomDim() { var a = selAccom(), rs = irows(); for (var i = 0; i < rs.length; i++) { if (rs[i].classList.contains('accom-row')) rs[i].classList.toggle('dim', i !== a); } }
     function linkOf(d) { return SITE + '/invite/invoice/?d=' + b64url(d); }
     function loadList() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
     function saveList(a) { try { localStorage.setItem(KEY, JSON.stringify(a)); } catch (e) {} }
@@ -1678,7 +1654,6 @@ function invoiceMasterPage() {
       });
     }
     document.addEventListener('input', function (e) { if (e.target && (e.target.classList.contains('m-qty') || e.target.classList.contains('m-rate'))) liveTotal(); });
-    document.addEventListener('change', function (e) { if (e.target && e.target.classList.contains('m-accom')) { updateAccomDim(); liveTotal(); } });
     $('m-create').addEventListener('click', function () {
       var d = collect();
       if (!d.invNo) { d.invNo = nextNo(); $('m-no').value = d.invNo; }
@@ -1693,7 +1668,7 @@ function invoiceMasterPage() {
     });
     $('m-copy').addEventListener('click', function () { $('m-link').select(); navigator.clipboard.writeText($('m-link').value); toast('Link copied'); });
     $('m-no').value = nextNo();
-    renderList(); updateAccomDim(); liveTotal();
+    renderList(); liveTotal();
   })();
   </script>
 </body>
