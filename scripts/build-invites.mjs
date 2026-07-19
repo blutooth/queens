@@ -649,6 +649,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       <a class="tab visa-tab" href="/visa/" target="_blank" rel="noopener">🛂 Visa Letters ↗</a>
       <a class="tab visa-tab" href="/invite/morocco/" target="_blank" rel="noopener">🇲🇦 Morocco Letter ↗</a>
       <a class="tab visa-tab" href="/invite/invoices/" target="_blank" rel="noopener">🧾 Invoices ↗</a>
+      <a class="tab visa-tab" href="/invite/tribute/" target="_blank" rel="noopener">🎖️ Obasanjo Tribute ↗</a>
     </div>
 
     <div class="panel" id="tab-create">
