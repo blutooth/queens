@@ -1365,6 +1365,9 @@ function invoicePage() {
   .lh .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.06em; color:var(--brown); font-size:clamp(15px,3.2vw,20px); margin:0 0 5px; }
   .lh .tag { font-family:'Spectral',serif; font-style:italic; color:var(--brown-soft); font-size:12.5px; margin:0 0 5px; }
   .lh .addr { font-family:'Marcellus',serif; font-size:11.5px; letter-spacing:.03em; color:var(--brown-soft); margin:0; }
+  .actions { position:fixed; top:14px; right:14px; z-index:50; display:flex; gap:7px; flex-wrap:wrap; justify-content:flex-end; max-width:70vw; }
+  .abtn { font-family:'Marcellus',serif; font-size:12px; letter-spacing:.03em; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:8px 13px; border-radius:999px; box-shadow:0 6px 16px rgba(0,0,0,.3); cursor:pointer; text-decoration:none; white-space:nowrap; }
+  .abtn.wa { background:#25d366; border-color:#1da851; color:#053; }
   .inv-title { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--emerald-deep); font-size:26px; margin:22px 0 2px; }
   .inv-re { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700; color:var(--emerald-deep); font-size:20px; margin:0 0 12px; }
   .meta { display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; margin:14px 0 20px; }
@@ -1426,7 +1429,7 @@ function invoicePage() {
   @media print {
     @page { margin:12mm; }
     body { background:#fff; padding:0; }
-    .print { display:none !important; }
+    .print, .actions { display:none !important; }
     .opt-btn, .modal { display:none !important; }
     .sheet { box-shadow:none; max-width:100%; border-top:none; }
     input, .fld { background:transparent !important; }
@@ -1436,7 +1439,12 @@ function invoicePage() {
 </style>
 </head>
 <body>
-  <a class="print" href="#" onclick="window.print();return false;">&#128424; Print / Save PDF</a>
+  <div class="actions">
+    <a class="abtn" id="inv-email" href="#">&#9993;&nbsp;Email</a>
+    <a class="abtn wa" id="inv-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    <button type="button" class="abtn" id="inv-share">Share</button>
+    <a class="abtn" href="#" onclick="window.print();return false;">&#128424;&nbsp;Print / PDF</a>
+  </div>
   <div class="sheet"><div class="pad">
     <div class="lh">
       <p class="motto">&ldquo;Leadership Rooted in Service, Royalty Defined by Impact.&rdquo;</p>
@@ -1597,6 +1605,20 @@ function invoicePage() {
         var sub = document.getElementById('summit-sub');
         sub.textContent = picked.length ? (picked.length + (picked.length === 1 ? ' engagement: ' : ' engagements: ') + picked.join(', ')) : 'Leave blank, or choose engagements \\u2192';
         close(); recalc();
+      });
+    })();
+    // Email / WhatsApp / Share the current invoice link.
+    (function () {
+      var link = location.href;
+      var invNo = (document.getElementById('inv-no') || {}).value || '';
+      var subj = 'Invoice ' + invNo + ' \\u2014 African Queens Summit';
+      var msg = 'Please find invoice ' + (invNo ? invNo + ' ' : '') + 'for the African Queens Summit 2026: ' + link;
+      var em = document.getElementById('inv-email'); if (em) em.href = 'mailto:?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(msg);
+      var wa = document.getElementById('inv-wa'); if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent(msg);
+      var sh = document.getElementById('inv-share');
+      if (sh) sh.addEventListener('click', function () {
+        if (navigator.share) { navigator.share({ title: subj, text: msg, url: link }).catch(function () {}); }
+        else { try { navigator.clipboard.writeText(link); } catch (e) {} sh.textContent = 'Copied!'; setTimeout(function () { sh.textContent = 'Share'; }, 1500); }
       });
     })();
     recalc();
