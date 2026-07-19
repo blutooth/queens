@@ -265,6 +265,7 @@ function heritage({ data, noteHtml, letterHtml }) {
           <img class="partner-logo" src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
         </div>
         <p class="org">ARUK II Humanitarian Services (UK) C.I.C</p>
+        <p class="web"><a href="https://africanqueenssummit.com">africanqueenssummit.com</a></p>
         <p>Hawkhill Place, Stanton St John, Oxford, OX33 1HS, United Kingdom &middot; Tel: +44 793 250 6556</p>
         <p><a href="mailto:obonganwan.aruk@yahoo.com">obonganwan.aruk@yahoo.com</a> &middot; <a href="mailto:africanqueenssummit@gmail.com">africanqueenssummit@gmail.com</a> &middot; Company Reg. No. 17110628</p>
       </div>
@@ -470,7 +471,9 @@ function heritage({ data, noteHtml, letterHtml }) {
   .letterhead-box { background: #ffffff; display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--gold); height: 92px; }
   .letterhead-box img { height: 74px; width: auto; max-width: 56vw; display: block; }
   .partner-logo { height: 92px; width: auto; max-width: 56vw; border-radius: 10px; border: 1px solid var(--gold); box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
-  .footer .org { font-family: 'Marcellus', serif; font-size: 15px; color: var(--gold); margin: 0 0 8px; letter-spacing: 0.04em; }
+  .footer .org { font-family: 'Marcellus', serif; font-size: 15px; color: var(--gold); margin: 0 0 4px; letter-spacing: 0.04em; }
+  .footer .web { margin: 0 0 8px; }
+  .footer .web a { color: var(--gold); font-family: 'Marcellus', serif; font-size: 14px; letter-spacing: 0.08em; }
   .footer p { margin: 4px auto; font-size: 13px; max-width: 540px; line-height: 1.6; color: #ddc89f; }
   .footer a { color: #f1dca0; }
 
@@ -2123,6 +2126,7 @@ function tributePage() {
           <img class="partner-logo" src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
         </div>
         <p class="org">ARUK II Humanitarian Services (UK) C.I.C</p>
+        <p class="meta" style="font-family:'Marcellus',serif;letter-spacing:.07em;color:var(--gold);"><a href="https://africanqueenssummit.com" style="color:var(--gold);">africanqueenssummit.com</a></p>
         <p class="meta">Hawkhill Place, Stanton St John, Oxford, OX33 1HS, United Kingdom &middot; Tel: +44 793 250 6556</p>
         <p class="meta"><a href="mailto:obonganwan.aruk@yahoo.com">obonganwan.aruk@yahoo.com</a> &middot; <a href="mailto:africanqueenssummit@gmail.com">africanqueenssummit@gmail.com</a> &middot; Company Reg. No. 17110628</p>
       </div>
@@ -2217,6 +2221,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
           <img class="partner-logo" src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
         </div>
         <p class="org">ARUK II Humanitarian Services (UK) C.I.C</p>
+        <p class="web"><a href="https://africanqueenssummit.com">africanqueenssummit.com</a></p>
         <p>Hawkhill Place, Stanton St John, Oxford, OX33 1HS, United Kingdom &middot; Tel: +44 793 250 6556</p>
         <p><a href="mailto:obonganwan.aruk@yahoo.com">obonganwan.aruk@yahoo.com</a> &middot; <a href="mailto:africanqueenssummit@gmail.com">africanqueenssummit@gmail.com</a> &middot; Company Reg. No. 17110628</p>
       </div>
