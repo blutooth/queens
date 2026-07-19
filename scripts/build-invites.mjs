@@ -1336,7 +1336,7 @@ function invoicePage() {
   const rows = items.map(([d, sub, grp, defRate]) => {
     const picker = grp === 'events' ? ` <button type="button" class="opt-btn" id="summit-btn">Select events&hellip;</button>` : '';
     return `<tr class="item">
-        <td class="desc"><span class="d-main">${d}${picker}</span><span class="d-sub"${grp === 'events' ? ' id="summit-sub"' : ''}>${sub}</span></td>
+        <td class="desc"><span class="d-main">${d}${picker}</span><span class="d-sub"${grp === 'events' ? ' id="summit-sub" style="display:none"' : ''}>${sub}</span></td>
         <td class="c"><input class="qty" type="number" min="0" step="1" value="1" /></td>
         <td class="c"><span class="cur">&pound;</span><input class="rate" type="number" min="0" step="0.01" placeholder="0.00" value="${defRate || ''}" /></td>
         <td class="c amtcell"><span class="cur">&pound;</span><span class="amt">0.00</span></td>
