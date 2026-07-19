@@ -112,6 +112,23 @@ const programme = [
   ['31 Aug', 'Notting Hill Carnival — End of Summit', '🥳'],
 ];
 
+// Summit Events — the à-la-carte engagements offered on the website (name, £).
+// Pick some or all in the invoice picker; the selected ones total up.
+const SUMMIT_EVENTS = [
+  ['Opening Ceremony (16 Aug)', 0],
+  ['University of Oxford — course & banquet (17–18 Aug)', 150],
+  ['Blenheim Palace (19 Aug)', 72],
+  ["Lord Mayor's Reception (20 Aug)", 40],
+  ['Bicester Village (21 Aug)', 75],
+  ['Rest, Art & Leisure (22 Aug)', 20],
+  ['Buckingham Palace — State Rooms & Royal Mews (23 Aug)', 100],
+  ['London Sightseeing & River Cruise (24 Aug)', 65],
+  ['Royal Gala Night — Porchester Hall (25 Aug)', 150],
+  ['Kew Gardens (26 Aug)', 60],
+  ["St Paul's & Tower of London (27 Aug)", 100],
+  ['Westminster Abbey (28 Aug)', 55],
+];
+
 // Per-audience defaults
 const AUD_SALUTATION = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', politicians: 'Your Excellency', guests: '', princesses: 'Your Highness', excellency: 'Your Excellency' };
 
@@ -1308,19 +1325,22 @@ function appointmentPage() {
 
 function invoicePage() {
   const items = [
-    ['Summit Events', 'Access to the full programme of engagements, 14&ndash;31 August 2026'],
+    ['Summit Events', 'Leave blank, or choose engagements &rarr;', 'events'],
     ['Accommodation &mdash; Queen Aruk II Village (Gazebos)', 'Gazebo lodging in the grounds of Hawkhill Place. Sleeps four.'],
     ['Accommodation &mdash; Hawkhill Main Residence', 'Rooms within the main residence, Hawkhill Place. Sleeps four.'],
     ['Food &amp; Catering', 'Meals and catering throughout the stay'],
     ['Drinks &amp; Refreshments', 'Beverages and refreshments'],
     ['Transportation', 'Airport transfers and local transport'],
   ];
-  const rows = items.map(([d, sub]) => `<tr class="item">
-        <td class="desc"><span class="d-main">${d}</span><span class="d-sub">${sub}</span></td>
+  const rows = items.map(([d, sub, grp]) => {
+    const picker = grp === 'events' ? ` <button type="button" class="opt-btn" id="summit-btn">Select events&hellip;</button>` : '';
+    return `<tr class="item">
+        <td class="desc"><span class="d-main">${d}${picker}</span><span class="d-sub"${grp === 'events' ? ' id="summit-sub"' : ''}>${sub}</span></td>
         <td class="c"><input class="qty" type="number" min="0" step="1" value="1" /></td>
         <td class="c"><span class="cur">&pound;</span><input class="rate" type="number" min="0" step="0.01" placeholder="0.00" /></td>
         <td class="c amtcell"><span class="cur">&pound;</span><span class="amt">0.00</span></td>
-      </tr>`).join('\n      ');
+      </tr>`;
+  }).join('\n      ');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1362,6 +1382,23 @@ function invoicePage() {
   input.qty { width:52px; }
   .cur { color:var(--brown-soft); margin-right:1px; }
   .amtcell { font-weight:600; }
+  .opt-btn { font-family:'Marcellus',serif; font-size:11px; letter-spacing:.03em; color:var(--emerald-deep); background:rgba(212,175,55,.18); border:1px solid var(--gold-deep); border-radius:999px; padding:2px 10px; cursor:pointer; white-space:nowrap; }
+  .modal[hidden] { display:none; }
+  .modal { position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .modal-backdrop { position:absolute; inset:0; background:rgba(20,12,6,.6); }
+  .modal-card { position:relative; background:var(--paper); border:1px solid var(--gold-deep); border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.5); width:min(460px,100%); max-height:86vh; overflow:auto; padding:20px 22px; }
+  .modal-card h3 { font-family:'Cormorant Garamond',serif; color:var(--emerald-deep); font-size:22px; margin:0 0 4px; }
+  .modal-hint { font-size:12.5px; color:var(--brown-soft); margin:0 0 12px; }
+  .modal-all { display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--gold-deep); margin-bottom:4px; font-size:14px; }
+  .modal-list { display:flex; flex-direction:column; }
+  .ev { display:flex; align-items:center; gap:10px; padding:7px 2px; border-bottom:1px dashed rgba(184,134,11,.4); font-size:14px; cursor:pointer; }
+  .ev input { accent-color:var(--emerald); }
+  .ev .en { flex:1; }
+  .ev .ep { font-family:'Cormorant Garamond',serif; color:var(--emerald-deep); font-weight:700; }
+  .modal-total { text-align:right; font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--emerald-deep); font-size:18px; margin-top:12px; }
+  .modal-btns { display:flex; justify-content:flex-end; gap:10px; margin-top:14px; }
+  .mbtn { font-family:'Marcellus',serif; font-size:13px; cursor:pointer; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:9px 18px; border-radius:999px; }
+  .mbtn.ghost { background:transparent; color:var(--emerald-deep); border-color:var(--emerald); }
   .totals { margin-top:14px; margin-left:auto; width:min(340px,100%); }
   .totals .row { display:flex; justify-content:space-between; padding:7px 2px; font-size:14.5px; border-bottom:1px solid rgba(184,134,11,.3); }
   .totals .row.grand { border-top:2px solid var(--gold); border-bottom:none; margin-top:4px; padding-top:11px; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:20px; color:var(--emerald-deep); }
@@ -1385,6 +1422,7 @@ function invoicePage() {
     @page { margin:12mm; }
     body { background:#fff; padding:0; }
     .print { display:none !important; }
+    .opt-btn, .modal { display:none !important; }
     .sheet { box-shadow:none; max-width:100%; border-top:none; }
     input, .fld { background:transparent !important; }
     .billto, .notes .box { border-style:solid; }
@@ -1464,6 +1502,22 @@ function invoicePage() {
     </div>
   </div></div>
 
+  <div class="modal" id="summit-modal" hidden>
+    <div class="modal-backdrop" id="summit-backdrop"></div>
+    <div class="modal-card">
+      <h3>Summit Events &mdash; select engagements</h3>
+      <p class="modal-hint">Tick some or all. Prices match the website.</p>
+      <label class="modal-all"><input type="checkbox" id="summit-all" /> <strong>Select all (Full Programme)</strong></label>
+      <div class="modal-list" id="summit-list"></div>
+      <div class="modal-total">Selected total: &pound;<span id="summit-modal-total">0.00</span></div>
+      <div class="modal-btns">
+        <button type="button" class="mbtn ghost" id="summit-clear">Clear</button>
+        <button type="button" class="mbtn ghost" id="summit-cancel">Cancel</button>
+        <button type="button" class="mbtn" id="summit-apply">Apply</button>
+      </div>
+    </div>
+  </div>
+
   <script>
   (function () {
     function money(n) { if (!isFinite(n)) n = 0; return n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -1498,6 +1552,40 @@ function invoicePage() {
         }
         document.title = 'Invoice ' + (d.invNo || '') + ' \\u2014 African Queens Summit';
       } catch (e) {}
+    })();
+    // Summit Events picker — tick some or all engagements (matches the website).
+    (function () {
+      var EVENTS = ${JSON.stringify(SUMMIT_EVENTS)};
+      var modal = document.getElementById('summit-modal'), listEl = document.getElementById('summit-list');
+      var allCb = document.getElementById('summit-all'), totEl = document.getElementById('summit-modal-total');
+      var btn = document.getElementById('summit-btn');
+      if (!modal || !listEl || !btn) return;
+      var boxes = [];
+      for (var i = 0; i < EVENTS.length; i++) {
+        var w = document.createElement('label'); w.className = 'ev';
+        var cb = document.createElement('input'); cb.type = 'checkbox'; cb.setAttribute('data-price', EVENTS[i][1]); cb.setAttribute('data-name', EVENTS[i][0]);
+        var en = document.createElement('span'); en.className = 'en'; en.textContent = EVENTS[i][0];
+        var ep = document.createElement('span'); ep.className = 'ep'; ep.textContent = EVENTS[i][1] ? ('\\u00a3' + EVENTS[i][1]) : 'Included';
+        w.appendChild(cb); w.appendChild(en); w.appendChild(ep); listEl.appendChild(w); boxes.push(cb);
+      }
+      function modalTotal() { var s = 0; for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) s += parseFloat(boxes[i].getAttribute('data-price')) || 0; return s; }
+      function syncModal() { totEl.textContent = money(modalTotal()); var all = boxes.length > 0; for (var i = 0; i < boxes.length; i++) if (!boxes[i].checked) all = false; allCb.checked = all; }
+      listEl.addEventListener('change', syncModal);
+      allCb.addEventListener('change', function () { for (var i = 0; i < boxes.length; i++) boxes[i].checked = allCb.checked; syncModal(); });
+      function close() { modal.hidden = true; }
+      btn.addEventListener('click', function () { modal.hidden = false; syncModal(); });
+      document.getElementById('summit-cancel').addEventListener('click', close);
+      document.getElementById('summit-backdrop').addEventListener('click', close);
+      document.getElementById('summit-clear').addEventListener('click', function () { for (var i = 0; i < boxes.length; i++) boxes[i].checked = false; syncModal(); });
+      document.getElementById('summit-apply').addEventListener('click', function () {
+        var picked = [], sum = 0;
+        for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) { picked.push(boxes[i].getAttribute('data-name')); sum += parseFloat(boxes[i].getAttribute('data-price')) || 0; }
+        rows[0].querySelector('.rate').value = sum ? sum : '';
+        rows[0].querySelector('.qty').value = 1;
+        var sub = document.getElementById('summit-sub');
+        sub.textContent = picked.length ? (picked.length + (picked.length === 1 ? ' engagement: ' : ' engagements: ') + picked.join(', ')) : 'Leave blank, or choose engagements \\u2192';
+        close(); recalc();
+      });
     })();
     recalc();
   })();
@@ -1627,7 +1715,12 @@ function invoiceMasterPage() {
 
       <div class="totrow"><span class="tl">Total</span><span class="tv">&pound;<span id="m-total">0.00</span></span></div>
 
-      <div class="btns"><button class="act" id="m-create">Create invoice &#10095;</button></div>
+      <div class="btns">
+        <button class="act" id="m-create">Create invoice &#10095;</button>
+        <button class="act ghost" id="m-savetpl">Save as template</button>
+        <button class="act ghost" id="m-cleartpl">Clear template</button>
+      </div>
+      <p class="hint">A template stores the bank details, notes, due terms and unit prices so new invoices start pre-filled &mdash; Bill To and the number stay unique.</p>
 
       <div class="out" id="m-out">
         <label>Shareable invoice link</label>
@@ -1701,7 +1794,25 @@ function invoiceMasterPage() {
       toast('Invoice ' + d.invNo + ' created');
     });
     $('m-copy').addEventListener('click', function () { $('m-link').select(); navigator.clipboard.writeText($('m-link').value); toast('Link copied'); });
+
+    // Reusable template (bank details, notes, due terms, unit prices) in this browser.
+    var TKEY = 'aqs-invoice-template';
+    function setBank(b) { b = b || {}; $('m-bk-name').value = b.name || ''; $('m-bk-bank').value = b.bank || ''; $('m-bk-sort').value = b.sort || ''; $('m-bk-acct').value = b.acct || ''; $('m-bk-iban').value = b.iban || ''; $('m-bk-swift').value = b.swift || ''; $('m-bk-ref').value = b.ref || ''; }
+    function saveTemplate() { var d = collect(); delete d.billTo; delete d.invNo; try { localStorage.setItem(TKEY, JSON.stringify(d)); toast('Template saved'); } catch (e) {} }
+    function applyTemplate() {
+      var d; try { d = JSON.parse(localStorage.getItem(TKEY)); } catch (e) {}
+      if (!d) return;
+      if (d.due != null) $('m-due').value = d.due;
+      if (d.notes != null) $('m-notes').value = d.notes;
+      if (d.bank) setBank(d.bank);
+      if (d.items) { var rs = irows(); for (var i = 0; i < rs.length && i < d.items.length; i++) { if (d.items[i].qty != null) rs[i].querySelector('.m-qty').value = d.items[i].qty; if (d.items[i].rate != null) rs[i].querySelector('.m-rate').value = d.items[i].rate; } }
+      liveTotal();
+    }
+    $('m-savetpl').addEventListener('click', saveTemplate);
+    $('m-cleartpl').addEventListener('click', function () { try { localStorage.removeItem(TKEY); } catch (e) {} toast('Template cleared'); });
+
     $('m-no').value = nextNo();
+    applyTemplate();
     renderList(); liveTotal();
   })();
   </script>
