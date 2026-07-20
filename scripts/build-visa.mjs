@@ -42,7 +42,7 @@ const SENDER = {
   name: 'Obonganwan Marie Erete',
   line1: 'Queen Aruk II',
   address: ['Hawkhill Place, Stanton St John', 'Oxford OX33 1HS, United Kingdom'],
-  contact: 'africanqueenssummit@gmail.com · +44 7932 506 556',
+  contact: 'www.africanqueenssummit.com · africanqueenssummit@gmail.com · +44 7932 506 556',
 };
 const ACCOMMODATION = 'Hawkhill Place, Stanton St John, Oxford OX33 1HS';
 const DEFAULT_FROM = '25 July 2026';
