@@ -64,6 +64,12 @@ const VISA_BLOCK_SCOPE = 'guest';
 const VISA_BLOCK_COND = VISA_BLOCK_SCOPE === 'all' ? 'true'
   : VISA_BLOCK_SCOPE === 'guest' ? 'guest'
   : VISA_BLOCK_SCOPE === 'staff' ? '!guest' : '';
+// Individual names exempt from the block — their shared card link renders even
+// if their kind is otherwise blocked. Names must match the letter's name field.
+const VISA_UNBLOCK = [
+  'Bisola Najite Olaosegbe',
+  'Samuel Adesina Adenle',
+];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
 // no external requests).
@@ -372,7 +378,8 @@ UK Visas and Immigration</div>
     var data = {};
     try { data = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, '+').replace(/_/g, '/'))))); } catch (e) {}
     var guest = data.kind === 'guest';
-    ${VISA_BLOCK_COND ? `if (${VISA_BLOCK_COND}) {
+    ${VISA_BLOCK_COND ? `var ALLOW = ${JSON.stringify(VISA_UNBLOCK)};
+    if ((${VISA_BLOCK_COND}) && ALLOW.indexOf((data.name || '').trim()) < 0) {
     document.title = 'Temporarily Unavailable';
     document.body.innerHTML = '<div style="min-height:100vh;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;font-family:Georgia,\\'Times New Roman\\',serif;background:#241a10;">' +
       '<div style="max-width:480px;">' +
