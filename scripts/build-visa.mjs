@@ -68,6 +68,7 @@ const VISA_BLOCK_COND = VISA_BLOCK_SCOPE === 'all' ? 'true'
 // if their kind is otherwise blocked. Names must match the letter's name field.
 const VISA_UNBLOCK = [
   'Bisola Najite Olaosegbe',
+  'Bisola NagiteOlaosegbe', // older forwarded links carry the pre-correction spelling
   'Samuel Adesina Adenle',
   'Dr. Yeye Folashade Shona Aluko',
 ];
