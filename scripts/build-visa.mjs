@@ -69,6 +69,7 @@ const VISA_BLOCK_COND = VISA_BLOCK_SCOPE === 'all' ? 'true'
 const VISA_UNBLOCK = [
   'Bisola Najite Olaosegbe',
   'Samuel Adesina Adenle',
+  'Dr. Yeye Folashade Shona Aluko',
 ];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
