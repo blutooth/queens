@@ -293,6 +293,48 @@ export const dignitaries = [
     region: 'Lagos · Nigeria',
     status: 'Invited',
   },
+  {
+    honorific: 'Her Royal Majesty',
+    name: 'Queen Diambi Kabatusuila',
+    role: 'Queen of the Bakwa Luntu · Luba Kingdom',
+    region: 'Kasaï · DR Congo',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Her Royal Highness',
+    name: 'Queen Best Kemigisa',
+    role: 'Queen Mother of Tooro Kingdom',
+    region: 'Fort Portal · Uganda',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Her Royal Majesty',
+    name: 'Queen Ikamalandel Gumede',
+    role: 'Royal Matriarch · Zulu Lineage',
+    region: 'South Africa',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'His Majesty',
+    name: 'King Guide Bamba',
+    role: 'Mansa of Mali · United Kingdoms of Africa',
+    region: 'Bamako · Mali',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Mayor',
+    name: 'Aja Brown',
+    role: 'Guest Speaker · Former Mayor of Compton',
+    region: 'California · USA',
+    status: 'Guest Speaker',
+  },
+  {
+    honorific: 'Dr',
+    name: 'Gia Grant-Rutledge',
+    role: 'Guest Speaker · CDC Health Scientist',
+    region: 'Georgia · USA',
+    status: 'Guest Speaker',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
