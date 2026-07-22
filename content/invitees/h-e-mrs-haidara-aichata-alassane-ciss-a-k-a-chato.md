@@ -1,6 +1,6 @@
 ---
 slug: h-e-mrs-haidara-aichata-alassane-ciss-a-k-a-chato
-name: H. E. Mrs Haidara Aichata Alassane Cissé, a.k.a. Chato
+name: H. E. Mrs Haïdara Aïchata Alassane Cissé, a.k.a. Chato
 audience: excellency
 template: heritage
 salutation: Your Excellency

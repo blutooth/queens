@@ -1,5 +1,5 @@
 ---
-name: Abdoulaye Traoré
+name: Abdoulaye Touré
 role: Royal Adviser and Executive Director of the NGO CREDEL, Mali
 address: Bamako, Mali
 dob: 7 January 1989

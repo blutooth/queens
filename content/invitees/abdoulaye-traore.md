@@ -1,6 +1,6 @@
 ---
 slug: abdoulaye-traore
-name: Abdoulaye Traoré
+name: Abdoulaye Touré
 audience: guests
 template: heritage
 kingdom: Royal Delegation of Mansa Bamba · Mali

@@ -76,16 +76,20 @@ const VISA_UNBLOCK = [
   // Royal Delegation of Mansa Bamba (Mali) — temporarily unblocked
   'H.R.H. Princess Loda Coulibaly',
   'H.R.H. Prince Moussa Badian',
+  'H.E. Mrs Haïdara Aïchata Alassane Cissé',
   'H.E. Mrs Aichata Alassane Cissé Haïdara',
   'H.E. Hamadoun Kassogué',
   'H.E. Yao Raymond Lezin Djè',
+  'Dr Paul Kodio',
   'Dr Paul Kodjo',
   'Mr Djibrila Diallo',
   'Mr Youba Cissé',
   'Mrs Aïssata Coulibaly',
   'Mr Mahamane Touré',
   'Mrs Binta Nango',
+  'Abdoulaye Touré',
   'Abdoulaye Traoré',
+  'Mahamed Baba',
 ];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
