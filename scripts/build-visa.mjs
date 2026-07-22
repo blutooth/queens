@@ -73,6 +73,19 @@ const VISA_UNBLOCK = [
   'Dr. Yeye Folashade Shona Aluko',
   'Chisola Getrude Sakapazhi',
   'Chisola Gertrude Sakapazhi', // pre-correction spelling, in case an older link was sent
+  // Royal Delegation of Mansa Bamba (Mali) — temporarily unblocked
+  'H.R.H. Princess Loda Coulibaly',
+  'H.R.H. Prince Moussa Badian',
+  'H.E. Mrs Aichata Alassane Cissé Haïdara',
+  'H.E. Hamadoun Kassogué',
+  'H.E. Yao Raymond Lezin Djè',
+  'Dr Paul Kodjo',
+  'Mr Djibrila Diallo',
+  'Mr Youba Cissé',
+  'Mrs Aïssata Coulibaly',
+  'Mr Mahamane Touré',
+  'Mrs Binta Nango',
+  'Abdoulaye Traoré',
 ];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
