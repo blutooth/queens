@@ -71,6 +71,8 @@ const VISA_UNBLOCK = [
   'Bisola NagiteOlaosegbe', // older forwarded links carry the pre-correction spelling
   'Samuel Adesina Adenle',
   'Dr. Yeye Folashade Shona Aluko',
+  'Chisola Getrude Sakapazhi',
+  'Chisola Gertrude Sakapazhi', // pre-correction spelling, in case an older link was sent
 ];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
