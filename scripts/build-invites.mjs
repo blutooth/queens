@@ -785,10 +785,15 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     var n = encodeURIComponent(String(name).trim().replace(/\\s+/g, '_'));
     return SITE + '/invite/card/?n=' + n + '&t=' + (SHORT[audience] || 'q') + (noLetter ? '&letter=0' : '');
   }
-  function shareWa(name, slug, audience, noLetter) {
+  // Invitees with a personal (custom) letter link to their own page; everyone
+  // else uses the shareable card link (which carries the shared audience letter).
+  function personalUrl(it) {
+    return it.custom ? (SITE + '/invite/' + it.slug + '/') : inviteUrl(it.name, it.audience, it.noLetter);
+  }
+  function shareWa(name, audience, url) {
     var sal = SAL_DEFAULT[audience] || '';
     var greeting = sal ? (sal + ', ' + name) : ('Dear ' + name);
-    var msg = greeting + ' \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, you are warmly invited to the African Global Queens Summit (United Kingdom, 14\\u201331 August 2026). Your personal invitation: ' + inviteUrl(name, audience, noLetter) + ' \\u2014 kindly RSVP via the page.';
+    var msg = greeting + ' \\u2014 on behalf of Her Majesty Obonganwan Marie Erete, Queen Aruk II, you are warmly invited to the African Global Queens Summit (United Kingdom, 14\\u201331 August 2026). Your personal invitation: ' + url + ' \\u2014 kindly RSVP via the page.';
     return 'https://wa.me/?text=' + encodeURIComponent(msg);
   }
   var SAL_DEFAULT = { queens: 'Your Majesty', kings: 'Your Majesty', morocco: 'Your Excellencies', queenmother: 'Queen Mother', princes: 'Your Highness', politicians: 'Your Excellency', guests: '', princesses: 'Your Highness', excellency: 'Your Excellency' };
@@ -841,7 +846,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
   // --- existing list ---
   var list = document.getElementById('list');
   function renderRow(it) {
-    var url = inviteUrl(it.name, it.audience, it.noLetter);
+    var url = personalUrl(it);
     var row = document.createElement('div');
     row.className = 'row' + (sent[it.slug] ? ' sent' : '');
     row.setAttribute('data-slug', it.slug);
@@ -853,7 +858,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       '<span class="tag">' + it.template + '</span>' +
       '<a class="act" href="' + url + '" target="_blank">Open</a>' +
       '<button class="act ghost" data-copy="' + url + '">Copy link</button>' +
-      '<a class="act wa" href="' + shareWa(it.name, it.slug, it.audience, it.noLetter) + '" target="_blank">Send on WhatsApp</a>' +
+      '<a class="act wa" href="' + shareWa(it.name, it.audience, url) + '" target="_blank">Send on WhatsApp</a>' +
       '<span class="path">' + url + '</span>';
     var chk = document.createElement('label'); chk.className = 'sent-chk';
     var box = document.createElement('input'); box.type = 'checkbox'; box.checked = !!sent[it.slug];
@@ -2325,7 +2330,7 @@ for (const f of files) {
   const dir = join(outRoot, slug);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), html);
-  built.push({ slug, name: data.name || slug, template, audience });
+  built.push({ slug, name: data.name || slug, template, audience, custom: !!data.custom });
   console.log(`  ✓ /invite/${slug}/  —  ${data.name || slug}  [${audience} · ${template}]`);
 }
 
