@@ -195,6 +195,7 @@ function heritage({ data, noteHtml, letterHtml }) {
     ? data.salutation
     : (AUD_SALUTATION[audience] !== undefined ? AUD_SALUTATION[audience] : 'Your Majesty');
   const kingdom = data.kingdom || '';
+  const ribbonLabel = data.label || 'A Personal Invitation To';
   const date = data.date || '';
   // Orange-box honorific line: defaults to the audience salutation, but can be
   // overridden per person (honorific: ...) or hidden (honorific: none).
@@ -228,7 +229,7 @@ function heritage({ data, noteHtml, letterHtml }) {
     <div class="kente-band"></div>`,
     recipient: () => `<div class="ribbon-wrap">
       <div class="ribbon fade fd5">
-        <span class="ribbon-label">A Personal Invitation To</span>
+        <span class="ribbon-label">${esc(ribbonLabel)}</span>
         ${honorificText ? `<span class="ribbon-honorific">${esc(honorificText)}</span>` : ''}
         <span class="ribbon-name">${esc(name)}</span>
         ${kingdomBlock}

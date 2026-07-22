@@ -3,6 +3,8 @@ slug: gia-grant-rutledge
 name: Dr Gia Grant-Rutledge
 audience: guests
 template: heritage
+label: An Invitation to Speak
+kingdom: Distinguished Guest Speaker
 date: 22nd July 2026
 ---
 

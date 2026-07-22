@@ -3,6 +3,8 @@ slug: aja-brown
 name: Mayor Aja Brown
 audience: guests
 template: heritage
+label: An Invitation to Speak
+kingdom: Distinguished Guest Speaker
 date: 22nd July 2026
 ---
 
