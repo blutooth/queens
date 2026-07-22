@@ -458,12 +458,21 @@ if (existsSync(shortlinksPath)) {
 const files = readdirSync(visaDir).filter((f) => f.endsWith('.md')).sort();
 const built = [];
 
+const vDir = join(root, 'public', 'v'); // short-code pages: /v/<code>/ (stays short in the address bar)
 for (const f of files) {
   const v = parseFrontmatter(readFileSync(join(visaDir, f), 'utf8'));
   const slug = f.replace(/\.md$/, '');
   const label = v.name || '(blank template — details to be inserted)';
   mkdirSync(join(outDir, slug), { recursive: true });
-  writeFileSync(join(outDir, slug, 'index.html'), letterHtml(v, sig, emblem, { short: SHORTLINKS[slug] }));
+  const html = letterHtml(v, sig, emblem, { short: SHORTLINKS[slug] });
+  writeFileSync(join(outDir, slug, 'index.html'), html);
+  // Optional short-code route — e.g. `code: baba` -> /v/baba/ (same baked-in letter).
+  const code = (v.code || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  if (code) {
+    mkdirSync(join(vDir, code), { recursive: true });
+    writeFileSync(join(vDir, code, 'index.html'), html);
+    console.log(`  ✓ /v/${code}/  —  ${label}`);
+  }
   built.push({ slug, name: label, v });
   console.log(`  ✓ /visa/${slug}/  —  ${label}`);
 }
