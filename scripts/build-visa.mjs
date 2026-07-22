@@ -467,9 +467,10 @@ for (const f of files) {
   mkdirSync(join(outDir, slug), { recursive: true });
   const html = letterHtml(v, sig, emblem, { short: SHORTLINKS[slug] });
   writeFileSync(join(outDir, slug, 'index.html'), html);
-  // Optional short-code route — e.g. `code: baba` -> /v/baba/ (same baked-in letter).
-  const code = (v.code || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
-  if (code) {
+  // Optional short-code route(s) — e.g. `code: bamba, baba` -> /v/bamba/ and /v/baba/
+  // (same baked-in letter; multiple codes keep older shared links from breaking).
+  const codes = (v.code || '').toLowerCase().split(/[,\s]+/).map((c) => c.replace(/[^a-z0-9-]/g, '')).filter(Boolean);
+  for (const code of codes) {
     mkdirSync(join(vDir, code), { recursive: true });
     writeFileSync(join(vDir, code, 'index.html'), html);
     console.log(`  ✓ /v/${code}/  —  ${label}`);
