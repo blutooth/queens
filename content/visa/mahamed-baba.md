@@ -1,5 +1,5 @@
 ---
-name: Mahamed Baba
+name: Mahamed Bamba
 role: Member of the Royal Cabinet, Royal Delegation of Mansa Bamba
 address: Djelibougou, Rue 224, P16, Bamako, Mali
 dob: 7 February 1977

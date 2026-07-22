@@ -89,6 +89,7 @@ const VISA_UNBLOCK = [
   'Mrs Binta Nango',
   'Abdoulaye Touré',
   'Abdoulaye Traoré',
+  'Mahamed Bamba',
   'Mahamed Baba',
 ];
 
