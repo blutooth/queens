@@ -1,7 +1,7 @@
 ---
 name: Mahamed Baba
 role: Member of the Royal Cabinet, Royal Delegation of Mansa Bamba
-address: 24, Porte 116, Bamako, Mali
+address: Djelibougou, Rue 224, P16, Bamako, Mali
 dob: 7 February 1977
 passport: PP00474
 date: 22 July 2026
