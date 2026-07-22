@@ -17,14 +17,9 @@ tools/whatsapp/.wwebjs_auth/
 tools/whatsapp/.wwebjs_cache/
 tools/whatsapp/sent.json
 
-# Personal data — kept local only, never committed/deployed. Invitations use
-# query-param links (/invite/card/?name=…&type=…) so no PII is stored on the site.
-content/invitees/*
-!content/invitees/.gitkeep
-content/data/*
-!content/data/.gitkeep
-content/visa/*
-!content/visa/.gitkeep
+# Personal data (invitees, visa letters w/ passport & DOB, data files) is now
+# COMMITTED to this repo. ⚠️ THIS REPO MUST REMAIN PRIVATE — it contains PII.
+# Only the generated public build output stays ignored (regenerated at deploy):
 public/visa/
 
 # never commit secrets

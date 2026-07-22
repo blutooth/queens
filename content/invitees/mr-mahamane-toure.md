@@ -1,0 +1,10 @@
+---
+slug: mr-mahamane-toure
+name: Mr Mahamane Touré
+audience: guests
+template: heritage
+kingdom: Royal Delegation of Mansa Bamba · Mali
+date: 22nd July 2026
+---
+
+It would be a joy to welcome you as our honoured guest at the Summit in England this August.
