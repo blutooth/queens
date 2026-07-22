@@ -60,7 +60,7 @@ const SITE_URL = 'https://africanqueenssummit.com';
 //   'staff' = Palace Staff blocked, Queens & Kings available
 //   'all'   = everyone blocked
 // Only affects shared web links, not local pages.
-const VISA_BLOCK_SCOPE = 'guest';
+const VISA_BLOCK_SCOPE = '';
 const VISA_BLOCK_COND = VISA_BLOCK_SCOPE === 'all' ? 'true'
   : VISA_BLOCK_SCOPE === 'guest' ? 'guest'
   : VISA_BLOCK_SCOPE === 'staff' ? '!guest' : '';
