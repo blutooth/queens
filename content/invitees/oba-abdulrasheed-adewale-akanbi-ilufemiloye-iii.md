@@ -1,7 +1,7 @@
 ---
 slug: oba-abdulrasheed-adewale-akanbi-ilufemiloye-iii
 name: Oba AbdulRasheed Adewale Akanbi, Ilufemiloye III
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Oluwo of Iwo

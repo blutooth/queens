@@ -1,7 +1,7 @@
 ---
 slug: alhaji-ahmed-tijani-anaje
 name: Alhaji Ahmed Tijani Anaje
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Ohinoyi of Ebiraland

@@ -1,7 +1,7 @@
 ---
 slug: oba-adegoke-adewuyi-adebanji
 name: Oba Adegoke Adewuyi Adebanji
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Ewi of Ado-Ekiti

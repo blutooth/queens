@@ -1,7 +1,7 @@
 ---
 slug: oba-ewuare-ii
 name: Oba Ewuare II
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Oba of Benin

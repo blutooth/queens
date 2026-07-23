@@ -1,7 +1,7 @@
 ---
 slug: dr-muhammadu-barkindo-aliyu-mustapha
 name: Dr Muhammadu Barkindo Aliyu Mustapha
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Lamido of Adamawa

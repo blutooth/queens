@@ -1,7 +1,7 @@
 ---
 slug: his-majesty-ogiame-atuwatse-iii
 name: His Majesty Ogiame Atuwatse III
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Olu of Warri

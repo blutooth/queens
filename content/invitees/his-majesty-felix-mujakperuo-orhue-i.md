@@ -1,7 +1,7 @@
 ---
 slug: his-majesty-felix-mujakperuo-orhue-i
 name: His Majesty Felix Mujakperuo, Orhue I
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Orodje of Okpe

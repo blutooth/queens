@@ -1,7 +1,7 @@
 ---
 slug: his-majesty-king-edmund-daukoru-mene-beke-xiv
 name: His Majesty King Edmund Daukoru, Mene-Beke XIV
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Amanyanabo of Nembe

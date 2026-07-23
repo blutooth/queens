@@ -1,7 +1,7 @@
 ---
 slug: alhaji-muhammadu-sa-ad-abubakar-iii
 name: Alhaji Muhammadu Sa'ad Abubakar III
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Sultan of Sokoto

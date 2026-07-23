@@ -1,7 +1,7 @@
 ---
 slug: igwe-alfred-nnaemeka-achebe-cfr
 name: Igwe Alfred Nnaemeka Achebe, CFR
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Obi of Onitsha

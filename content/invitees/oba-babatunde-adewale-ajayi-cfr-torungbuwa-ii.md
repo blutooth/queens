@@ -1,7 +1,7 @@
 ---
 slug: oba-babatunde-adewale-ajayi-cfr-torungbuwa-ii
 name: Oba Babatunde Adewale Ajayi, CFR, Torungbuwa II
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Akarigbo of Remoland

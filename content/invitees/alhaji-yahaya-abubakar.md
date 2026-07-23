@@ -1,7 +1,7 @@
 ---
 slug: alhaji-yahaya-abubakar
 name: Alhaji Yahaya Abubakar
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Etsu Nupe

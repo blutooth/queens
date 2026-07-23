@@ -1,7 +1,7 @@
 ---
 slug: oba-adedotun-aremu-gbadebo-iii-cfr
 name: Oba Adedotun Aremu Gbadebo III, CFR
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Alake of Egbaland

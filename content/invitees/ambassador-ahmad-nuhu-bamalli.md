@@ -1,7 +1,7 @@
 ---
 slug: ambassador-ahmad-nuhu-bamalli
 name: Ambassador Ahmad Nuhu Bamalli
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Emir of Zazzau

@@ -1,7 +1,7 @@
 ---
 slug: his-imperial-majesty-oba-rasidi-adewolu-ladoja
 name: His Imperial Majesty Oba Rasidi Adewolu Ladoja
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Olubadan of Ibadanland

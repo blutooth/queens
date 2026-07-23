@@ -1,7 +1,7 @@
 ---
 slug: alhaji-abubakar-ibn-umar-garbai-el-kanemi
 name: Alhaji Abubakar Ibn Umar Garbai El-Kanemi
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Shehu of Borno

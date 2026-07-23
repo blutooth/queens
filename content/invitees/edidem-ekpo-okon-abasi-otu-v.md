@@ -1,7 +1,7 @@
 ---
 slug: edidem-ekpo-okon-abasi-otu-v
 name: Edidem Ekpo Okon Abasi Otu V
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Obong of Calabar

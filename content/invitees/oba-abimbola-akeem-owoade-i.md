@@ -1,7 +1,7 @@
 ---
 slug: oba-abimbola-akeem-owoade-i
 name: Oba Abimbola Akeem Owoade I
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Alaafin of Oyo

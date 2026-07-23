@@ -1,7 +1,7 @@
 ---
 slug: oba-adeyeye-enitan-ogunwusi-cfr-ojaja-ii
 name: Oba Adeyeye Enitan Ogunwusi, CFR, Ojaja II
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Ooni of Ife

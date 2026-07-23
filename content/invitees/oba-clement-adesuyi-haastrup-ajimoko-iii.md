@@ -1,7 +1,7 @@
 ---
 slug: oba-clement-adesuyi-haastrup-ajimoko-iii
 name: Oba Clement Adesuyi Haastrup, Ajimoko III
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Owa Obokun of Ijesaland

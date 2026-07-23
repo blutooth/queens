@@ -1,7 +1,7 @@
 ---
 slug: oba-rilwan-babatunde-osuolale-aremu-akiolu-i
 name: Oba Rilwan Babatunde Osuolale Aremu Akiolu I
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Oba of Lagos

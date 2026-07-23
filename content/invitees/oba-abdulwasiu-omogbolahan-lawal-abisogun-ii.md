@@ -1,7 +1,7 @@
 ---
 slug: oba-abdulwasiu-omogbolahan-lawal-abisogun-ii
 name: Oba Abdulwasiu Omogbolahan Lawal, Abisogun II
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Oniru of Iruland

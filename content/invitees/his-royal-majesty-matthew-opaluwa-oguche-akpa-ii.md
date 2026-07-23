@@ -1,7 +1,7 @@
 ---
 slug: his-royal-majesty-matthew-opaluwa-oguche-akpa-ii
 name: His Royal Majesty Matthew Opaluwa Oguche Akpa II
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Attah of Igala

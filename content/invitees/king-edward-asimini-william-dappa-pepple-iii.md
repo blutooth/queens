@@ -1,7 +1,7 @@
 ---
 slug: king-edward-asimini-william-dappa-pepple-iii
 name: King Edward Asimini William Dappa Pepple III
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Amanyanabo of Bonny

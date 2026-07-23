@@ -1,7 +1,7 @@
 ---
 slug: hrm-oba-alhaji-abdul-mumini-adebayo-orishagbemi-abolokefa-iv
 name: HRM Oba Alhaji Abdul-Mumini Adebayo Orishagbemi, Abolokefa IV
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Ata of Ayede-Ekiti

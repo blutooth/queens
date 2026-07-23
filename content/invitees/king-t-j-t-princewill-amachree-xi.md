@@ -1,7 +1,7 @@
 ---
 slug: king-t-j-t-princewill-amachree-xi
 name: King T. J. T. Princewill, Amachree XI
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Amanyanabo of Kalabari

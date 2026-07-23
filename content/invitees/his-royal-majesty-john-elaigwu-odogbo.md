@@ -1,7 +1,7 @@
 ---
 slug: his-royal-majesty-john-elaigwu-odogbo
 name: His Royal Majesty John Elaigwu Odogbo
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Och'Idoma

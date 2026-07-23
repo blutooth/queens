@@ -1,7 +1,7 @@
 ---
 slug: his-majesty-benjamin-ikenchuku-keagborekuzi-i
 name: His Majesty Benjamin Ikenchuku Keagborekuzi I
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Dein of Agbor

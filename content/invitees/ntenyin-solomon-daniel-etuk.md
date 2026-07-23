@@ -1,7 +1,7 @@
 ---
 slug: ntenyin-solomon-daniel-etuk
 name: Ntenyin Solomon Daniel Etuk
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Oku Ibom Ibibio

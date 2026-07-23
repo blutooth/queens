@@ -1,7 +1,7 @@
 ---
 slug: muhammadu-sanusi-ii
 name: Muhammadu Sanusi II
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Emir of Kano

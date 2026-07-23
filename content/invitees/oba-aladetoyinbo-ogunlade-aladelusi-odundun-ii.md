@@ -1,7 +1,7 @@
 ---
 slug: oba-aladetoyinbo-ogunlade-aladelusi-odundun-ii
 name: Oba Aladetoyinbo Ogunlade Aladelusi, Odundun II
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Deji of Akure

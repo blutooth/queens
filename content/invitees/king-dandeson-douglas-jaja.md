@@ -1,7 +1,7 @@
 ---
 slug: king-dandeson-douglas-jaja
 name: King Dandeson Douglas Jaja
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Amanyanabo of Opobo

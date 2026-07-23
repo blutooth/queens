@@ -1,7 +1,7 @@
 ---
 slug: his-royal-majesty-eze-dr-eberechukwu-oji
 name: His Royal Majesty Eze Dr Eberechukwu Oji
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Eze Aro of Arochukwu

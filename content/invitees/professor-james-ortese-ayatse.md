@@ -1,7 +1,7 @@
 ---
 slug: professor-james-ortese-ayatse
 name: Professor James Ortese Ayatse
-audience: kings
+audience: rulers
 template: heritage
 label: An Invitation to Their Majesties
 kingdom: Tor Tiv V
