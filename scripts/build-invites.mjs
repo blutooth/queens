@@ -2336,7 +2336,7 @@ for (const f of files) {
   const dir = join(outRoot, slug);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), html);
-  built.push({ slug, name: data.name || slug, template, audience, custom: !!data.custom });
+  built.push({ slug, name: data.name || slug, template, audience, custom: !!data.custom, kingdom: data.kingdom || '' });
   console.log(`  ✓ /invite/${slug}/  —  ${data.name || slug}  [${audience} · ${template}]`);
 }
 
@@ -2397,5 +2397,59 @@ console.log('  ✓ /invite/invoices/  —  invoice master page (create/save/list
 mkdirSync(join(outRoot, 'tribute'), { recursive: true });
 writeFileSync(join(outRoot, 'tribute', 'index.html'), tributePage());
 console.log('  ✓ /invite/tribute/  —  ceremonial tribute (Chief Olusegun Obasanjo)');
+
+// Shareable index of all Traditional Rulers (Nigeria) invitations — one link.
+function rulersIndexPage(items) {
+  const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const rows = items
+    .map((it, i) => `
+      <li>
+        <span class="num">${String(i + 1).padStart(2, '0')}</span>
+        <span class="who"><span class="title">${esc(it.kingdom)}</span><span class="name">${esc(it.name)}</span></span>
+        <a class="btn" href="/invite/${esc(it.slug)}/">Open Invitation →</a>
+      </li>`)
+    .join('');
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Traditional Rulers in Nigeria — African Queens Summit</title>
+<style>
+  :root { --ink:#2b2118; --gold:#b08d34; --cream:#faf5ea; --line:#e5d9bf; --terra:#9c4a2f; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--cream); color:var(--ink); font-family:'Spectral',Georgia,serif; line-height:1.5; }
+  .wrap { max-width:820px; margin:0 auto; padding:40px 20px 64px; }
+  header { text-align:center; border-bottom:2px solid var(--gold); padding-bottom:22px; margin-bottom:8px; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.28em; font-size:12px; color:var(--terra); }
+  h1 { font-family:'Marcellus',serif; font-weight:400; font-size:30px; margin:10px 0 6px; }
+  .sub { color:#6b5c44; font-size:15px; }
+  ol, ul { list-style:none; margin:0; padding:0; }
+  li { display:flex; align-items:center; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line); }
+  .num { font-family:'Marcellus',serif; color:var(--gold); width:28px; text-align:right; font-size:14px; }
+  .who { flex:1; display:flex; flex-direction:column; }
+  .title { font-family:'Marcellus',serif; font-size:16px; }
+  .name { font-size:13.5px; color:#6b5c44; }
+  .btn { flex-shrink:0; text-decoration:none; background:var(--gold); color:#fff; font-family:'Marcellus',serif; font-size:13px; padding:8px 14px; border-radius:4px; white-space:nowrap; }
+  .btn:hover { background:#95762b; }
+  footer { text-align:center; margin-top:28px; color:#6b5c44; font-size:13px; }
+  footer a { color:var(--terra); }
+  @media (max-width:520px){ li{flex-wrap:wrap;} .btn{margin-left:42px;} }
+</style></head><body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">The African Queens Summit · 14–31 August 2026</div>
+      <h1>Traditional Rulers in Nigeria</h1>
+      <div class="sub">An Invitation to Their Majesties — ${items.length} royal invitations</div>
+    </header>
+    <ul>${rows}</ul>
+    <footer><a href="https://africanqueenssummit.com">www.africanqueenssummit.com</a></footer>
+  </div>
+</body></html>`;
+}
+const rulerItems = built
+  .filter((b) => b.audience === 'rulers')
+  .sort((a, b) => (a.name > b.name ? 1 : -1));
+mkdirSync(join(outRoot, 'traditional-rulers'), { recursive: true });
+writeFileSync(join(outRoot, 'traditional-rulers', 'index.html'), rulersIndexPage(rulerItems));
+console.log(`  ✓ /invite/traditional-rulers/  —  shareable index of ${rulerItems.length} ruler invitations`);
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);
