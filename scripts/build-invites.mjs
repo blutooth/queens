@@ -2401,14 +2401,34 @@ console.log('  ✓ /invite/tribute/  —  ceremonial tribute (Chief Olusegun Oba
 // Shareable index of all Traditional Rulers (Nigeria) invitations — one link.
 function rulersIndexPage(items) {
   const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const rows = items
-    .map((it, i) => `
+  const REGIONS = [
+    ['South-West', ['Ooni of Ife', 'Alaafin of Oyo', 'Oba of Lagos', 'Alake of Egbaland', 'Olubadan of Ibadanland', 'Akarigbo of Remoland', 'Deji of Akure', 'Owa Obokun of Ijesaland', 'Oniru of Iruland', 'Ewi of Ado-Ekiti', 'Ata of Ayede-Ekiti', 'Oluwo of Iwo']],
+    ['North', ['Sultan of Sokoto', 'Emir of Kano', 'Shehu of Borno', 'Etsu Nupe', 'Emir of Zazzau', 'Lamido of Adamawa', 'Ohinoyi of Ebiraland']],
+    ['South-South', ['Olu of Warri', 'Dein of Agbor', 'Orodje of Okpe', 'Amanyanabo of Opobo', 'Amanyanabo of Bonny', 'Amanyanabo of Kalabari', 'Oba of Benin', 'Oku Ibom Ibibio', 'Obong of Calabar', 'Amanyanabo of Nembe']],
+    ['South-East', ['Obi of Onitsha', 'Eze Aro of Arochukwu']],
+    ['North-Central', ['Tor Tiv V', "Och'Idoma", 'Attah of Igala']],
+  ];
+  const byKingdom = new Map(items.map((it) => [it.kingdom, it]));
+  const used = new Set();
+  let n = 0;
+  const row = (it) => {
+    n++;
+    used.add(it.kingdom);
+    return `
       <li>
-        <span class="num">${String(i + 1).padStart(2, '0')}</span>
+        <span class="num">${String(n).padStart(2, '0')}</span>
         <span class="who"><span class="title">${esc(it.kingdom)}</span><span class="name">${esc(it.name)}</span></span>
         <a class="btn" href="/invite/${esc(it.slug)}/">Open Invitation →</a>
-      </li>`)
-    .join('');
+      </li>`;
+  };
+  let sections = '';
+  for (const [region, titles] of REGIONS) {
+    const found = titles.map((t) => byKingdom.get(t)).filter(Boolean);
+    if (!found.length) continue;
+    sections += `<h2 class="region">${esc(region)}</h2><ul>${found.map(row).join('')}</ul>`;
+  }
+  const leftovers = items.filter((it) => !used.has(it.kingdom));
+  if (leftovers.length) sections += `<h2 class="region">Other</h2><ul>${leftovers.map(row).join('')}</ul>`;
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
@@ -2423,6 +2443,7 @@ function rulersIndexPage(items) {
   h1 { font-family:'Marcellus',serif; font-weight:400; font-size:30px; margin:10px 0 6px; }
   .sub { color:#6b5c44; font-size:15px; }
   ol, ul { list-style:none; margin:0; padding:0; }
+  h2.region { font-family:'Marcellus',serif; font-weight:400; font-size:14px; text-transform:uppercase; letter-spacing:.18em; color:var(--terra); margin:30px 0 4px; padding-bottom:6px; border-bottom:1px solid var(--gold); }
   li { display:flex; align-items:center; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line); }
   .num { font-family:'Marcellus',serif; color:var(--gold); width:28px; text-align:right; font-size:14px; }
   .who { flex:1; display:flex; flex-direction:column; }
@@ -2440,7 +2461,7 @@ function rulersIndexPage(items) {
       <h1>Traditional Rulers in Nigeria</h1>
       <div class="sub">An Invitation to Their Majesties — ${items.length} royal invitations</div>
     </header>
-    <ul>${rows}</ul>
+    ${sections}
     <footer><a href="https://africanqueenssummit.com">www.africanqueenssummit.com</a></footer>
   </div>
 </body></html>`;
