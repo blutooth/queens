@@ -2408,8 +2408,10 @@ function rulersIndexPage(items) {
     ['South-East', ['Obi of Onitsha', 'Eze Aro of Arochukwu']],
     ['North-Central', ['Tor Tiv V', "Och'Idoma", 'Attah of Igala']],
   ];
-  const byKingdom = new Map(items.map((it) => [it.kingdom, it]));
   const used = new Set();
+  // Match a region title to a ruler by exact or prefix (titles may carry extra
+  // styling, e.g. 'Emir of Kano · Sarkin Kano · Kano Emirate, Nigeria').
+  const findByTitle = (t) => items.find((it) => !used.has(it.kingdom) && (it.kingdom === t || it.kingdom.startsWith(t + ' ') || it.kingdom.startsWith(t + ' ·')));
   let n = 0;
   const row = (it) => {
     n++;
@@ -2423,7 +2425,7 @@ function rulersIndexPage(items) {
   };
   let sections = '';
   for (const [region, titles] of REGIONS) {
-    const found = titles.map((t) => byKingdom.get(t)).filter(Boolean);
+    const found = titles.map((t) => findByTitle(t)).filter(Boolean);
     if (!found.length) continue;
     sections += `<h2 class="region">${esc(region)}</h2><ul>${found.map(row).join('')}</ul>`;
   }
