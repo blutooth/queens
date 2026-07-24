@@ -91,6 +91,12 @@ const VISA_UNBLOCK = [
   'Abdoulaye Traoré',
   'Mahamed Bamba',
   'Mahamed Baba',
+  'Selina Tweneboah',
+  'Prince Awulosu',
+  'Arnold Tetteh Mensah',
+  'Michael Austin Quarshie',
+  'Isaac Agyapong',
+  'Christian Nana Arkorful Godsent',
 ];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
