@@ -17,11 +17,7 @@ Your Highness,
 
 On behalf of the African Queens Summit Organising Committee, it is with profound honour and the deepest respect that we extend this special invitation to Your Highness to grace the **African Queens Summit 2026**, to be held from **14th to 31st August 2026** in London and Oxford, United Kingdom.
 
-The African Queens Summit is an esteemed international gathering that celebrates visionary leadership, cultural heritage, and excellence among distinguished leaders from Africa and the global diaspora. We would be greatly honoured by the presence of a prince whose life has been devoted to the service, protocol, and cultural dignity of one of Africa's most illustrious royal houses.
-
-## A Distinguished Royal Lineage
-
-Your Highness is a scion of the ancient and revered Kano Emirate — son of the late **Khalifah Sir Muhammadu Sanusi I**, Emir of Kano, and grandson of **Emir Abdullahi Bayero**. Born of this distinguished lineage, you have carried the honour of the Kano royal house with grace, loyalty, and unwavering devotion across a lifetime of service.
+The African Queens Summit is an esteemed international gathering that celebrates visionary leadership, cultural heritage, and excellence among distinguished leaders from Africa and the global diaspora. We would be greatly honoured by the presence of a prince whose life has been devoted to service, protocol, and cultural diplomacy at the highest level.
 
 ## A Life of Service and Achievement
 
