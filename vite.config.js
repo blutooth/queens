@@ -156,6 +156,79 @@ function invitedApi() {
   };
 }
 
+// Dev-only: prototype invitation-request flow.
+//   POST /api/request-invite   -> store request, start a review timer, return id
+//   GET  /api/request-status   -> current record; auto-flips pending->invited when timer elapses
+//   POST /api/request-paid      -> mark paid (simulates the Stripe webhook)
+// Storage: content/data/invite-requests.json. REVIEW_SECONDS is the demo timer.
+function requestFlowApi() {
+  const REVIEW_SECONDS = 60; // demo "review" period; real flow would be hours/days
+  const store = resolve(__dirname, 'content/data/invite-requests.json');
+  const read = () => { try { return JSON.parse(readFileSync(store, 'utf8')); } catch (e) { return {}; } };
+  const write = (o) => writeFileSync(store, JSON.stringify(o, null, 2));
+  const body = (req) => new Promise((r) => { let b = ''; req.on('data', (c) => { b += c; }); req.on('end', () => r(b)); });
+  const id = () => 'req-' + Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-4);
+  const advance = (rec) => { // flip pending->invited once the timer elapses
+    if (rec && rec.status === 'pending' && Date.now() >= new Date(rec.readyAt).getTime()) {
+      rec.status = 'invited'; rec.invitedAt = new Date().toISOString();
+    }
+    return rec;
+  };
+  return {
+    name: 'request-flow-api',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use('/api/request-invite', (req, res) => {
+        if (req.method !== 'POST') { res.statusCode = 405; res.end('Method Not Allowed'); return; }
+        body(req).then((b) => {
+          res.setHeader('Content-Type', 'application/json');
+          try {
+            const d = JSON.parse(b || '{}');
+            if (!d.name || !d.email) throw new Error('name and email required');
+            const all = read();
+            const rid = id();
+            all[rid] = {
+              id: rid, status: 'pending',
+              name: String(d.name).slice(0, 160), honorific: d.honorific || '', audience: d.audience || 'guests',
+              kingdom: d.kingdom || '', email: String(d.email).slice(0, 160), phone: d.phone || '',
+              address: d.address || '', dob: d.dob || '', passport: d.passport || '',
+              delegates: d.delegates || '0', country: d.country || '', notes: d.notes || '',
+              createdAt: new Date().toISOString(),
+              readyAt: new Date(Date.now() + REVIEW_SECONDS * 1000).toISOString(),
+            };
+            write(all);
+            res.end(JSON.stringify({ ok: true, id: rid, reviewSeconds: REVIEW_SECONDS }));
+          } catch (e) { res.statusCode = 400; res.end(JSON.stringify({ ok: false, error: String((e && e.message) || e) })); }
+        });
+      });
+      server.middlewares.use('/api/request-status', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        try {
+          const rid = new URL(req.url, 'http://x').searchParams.get('id');
+          const all = read();
+          const rec = advance(all[rid]);
+          if (!rec) { res.end(JSON.stringify({ ok: false, error: 'not found' })); return; }
+          write(all); // persist any auto-advance
+          res.end(JSON.stringify({ ok: true, record: rec }));
+        } catch (e) { res.statusCode = 400; res.end(JSON.stringify({ ok: false, error: String((e && e.message) || e) })); }
+      });
+      server.middlewares.use('/api/request-paid', (req, res) => {
+        if (req.method !== 'POST') { res.statusCode = 405; res.end('Method Not Allowed'); return; }
+        res.setHeader('Content-Type', 'application/json');
+        try {
+          const rid = new URL(req.url, 'http://x').searchParams.get('id');
+          const all = read();
+          const rec = advance(all[rid]);
+          if (!rec) { res.end(JSON.stringify({ ok: false, error: 'not found' })); return; }
+          rec.status = 'paid'; rec.paidAt = new Date().toISOString();
+          write(all);
+          res.end(JSON.stringify({ ok: true, record: rec }));
+        } catch (e) { res.statusCode = 400; res.end(JSON.stringify({ ok: false, error: String((e && e.message) || e) })); }
+      });
+    },
+  };
+}
+
 // Dev-only: serve the prebuilt /invite/** pages (master page + each
 // invitation) directly from public/, so the Svelte SPA fallback doesn't
 // hijack those routes during `npm run dev`. In production they're plain
@@ -192,7 +265,7 @@ function serveInvitePages() {
 }
 
 export default defineConfig(() => ({
-  plugins: [serveInvitePages(), svelte(), inviteCreateApi(), invitedApi(), visaApi(), shortenApi()],
+  plugins: [serveInvitePages(), svelte(), inviteCreateApi(), invitedApi(), visaApi(), shortenApi(), requestFlowApi()],
   base,
   build: {
     rollupOptions: {

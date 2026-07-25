@@ -2298,6 +2298,25 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     var waMsg = opener + ' \\u2014 I am honoured to accept your gracious invitation and confirm my attendance at the African Queens Summit (14\\u201331 August 2026, London \\u0026 Oxford).';
     document.getElementById('v-wa').href = 'https://wa.me/447932506556?text=' + encodeURIComponent(waMsg);
 
+    // Provisional state (?provisional=1): watermark the card, hide the signature,
+    // and replace the RSVP block with a "reservation pending" notice. The signed
+    // version (no ?provisional) shows the full Queen Aruk II signature.
+    var provisional = /^(1|yes|on|true)$/i.test(P.get('provisional') || P.get('draft') || '');
+    if (provisional) {
+      document.title = 'Provisional Invitation \\u00b7 ' + name;
+      var sig = document.querySelector('.signoff'); if (sig) sig.style.display = 'none';
+      var rsvpSec = document.querySelector('.rsvp');
+      if (rsvpSec) {
+        rsvpSec.innerHTML = '<h2>Reservation Pending</h2>' +
+          '<p style="max-width:520px;margin:0 auto 6px;font-family:Spectral,serif;color:#6b5c44;">This is a provisional invitation. Your place is confirmed and the invitation is signed once the reservation fee is received.</p>';
+      }
+      var wm = document.createElement('div');
+      wm.setAttribute('aria-hidden', 'true');
+      wm.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;';
+      wm.innerHTML = '<span style="font-family:Marcellus,serif;font-size:14vw;letter-spacing:0.08em;color:rgba(176,141,52,0.13);transform:rotate(-32deg);white-space:nowrap;font-weight:700;">PROVISIONAL</span>';
+      document.body.appendChild(wm);
+    }
+
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!reduce && 'IntersectionObserver' in window) {
       var sel = '.content p:not(.salutation), .content h2, .content ul, .programme h2, .prog-row, .signoff > *, .footer-pad > *';
@@ -2474,5 +2493,234 @@ const rulerItems = built
 mkdirSync(join(outRoot, 'traditional-rulers'), { recursive: true });
 writeFileSync(join(outRoot, 'traditional-rulers', 'index.html'), rulersIndexPage(rulerItems));
 console.log(`  ✓ /invite/traditional-rulers/  —  shareable index of ${rulerItems.length} ruler invitations`);
+
+// ---- Invitation-request flow (prototype) ---------------------------------
+// Public request form -> "under review" timer -> provisional invite + pay ->
+// signed invite. Backed by the dev-only requestFlowApi in vite.config.js.
+const REQUEST_CSS = `
+  :root{--ink:#2b2118;--gold:#b08d34;--cream:#faf5ea;--sand:#f3ead6;--line:#e5d9bf;--terra:#9c4a2f;--emerald:#1f5c46;}
+  *{box-sizing:border-box;} body{margin:0;background:var(--cream);color:var(--ink);font-family:'Spectral',Georgia,serif;line-height:1.55;}
+  .wrap{max-width:640px;margin:0 auto;padding:36px 20px 72px;}
+  header{text-align:center;border-bottom:2px solid var(--gold);padding-bottom:20px;margin-bottom:26px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:11px;color:var(--terra);}
+  h1{font-family:'Marcellus',serif;font-weight:400;font-size:27px;margin:10px 0 6px;}
+  .sub{color:#6b5c44;font-size:14.5px;}
+  form{display:flex;flex-direction:column;gap:14px;}
+  .row{display:flex;gap:12px;flex-wrap:wrap;} .row>*{flex:1;min-width:160px;}
+  label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#6b5c44;margin-bottom:5px;}
+  input,select,textarea{width:100%;font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);}
+  textarea{min-height:70px;resize:vertical;}
+  .btn{cursor:pointer;border:none;background:var(--gold);color:#fff;font-family:'Marcellus',serif;font-size:15px;padding:14px 20px;border-radius:8px;text-decoration:none;display:inline-block;text-align:center;}
+  .btn:hover{background:#95762b;} .btn.wide{width:100%;} .btn.emerald{background:var(--emerald);} .btn.emerald:hover{background:#164031;}
+  .btn.ghost{background:transparent;border:1px solid var(--gold);color:var(--gold);}
+  .hint{font-size:12.5px;color:#8a7a5f;margin:2px 0 0;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 22px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.06);}
+  .timer{font-family:'Marcellus',serif;font-size:44px;color:var(--emerald);margin:10px 0 2px;font-variant-numeric:tabular-nums;}
+  .stage{display:none;} .stage.on{display:block;}
+  .pill{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.14em;padding:5px 12px;border-radius:999px;background:var(--sand);color:var(--terra);margin-bottom:10px;}
+  .steps{display:flex;justify-content:center;gap:8px;margin:16px 0 4px;font-size:11px;color:#a08a63;text-transform:uppercase;letter-spacing:.1em;flex-wrap:wrap;}
+  .steps b{color:var(--emerald);} .fee{font-family:'Marcellus',serif;font-size:22px;color:var(--ink);}
+  .emailbox{text-align:left;background:var(--sand);border:1px dashed var(--gold);border-radius:9px;padding:14px 16px;margin:14px 0;font-size:14px;}
+  .emailbox .from{font-size:11px;color:#8a7a5f;text-transform:uppercase;letter-spacing:.1em;}
+  a.link{color:var(--terra);word-break:break-all;} footer{text-align:center;margin-top:26px;color:#8a7a5f;font-size:12.5px;}
+  .note-proto{margin-top:18px;font-size:11.5px;color:#a08a63;text-align:center;font-style:italic;}
+`;
+
+function requestFormPage() {
+  const audienceOptions = [
+    ['queens', 'Queen'], ['kings', 'King'], ['rulers', 'Traditional Ruler'],
+    ['queenmother', 'Queen Mother'], ['princes', 'Prince'], ['princesses', 'Princess'],
+    ['excellency', 'Head of State / Excellency'], ['politicians', 'Government / Official'],
+    ['guests', 'Distinguished Guest'],
+  ].map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex" />
+<title>Request an Invitation · African Queens Summit</title><style>${REQUEST_CSS}</style></head><body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">African Queens Summit · 14–31 August 2026 · United Kingdom</div>
+    <h1>Request Your Invitation</h1>
+    <div class="sub">Kindly provide your details below. Your request will be reviewed, after which your official invitation will be issued.</div>
+  </header>
+  <div class="steps"><b>1 · Request</b> → 2 · Review → 3 · Invitation → 4 · Reservation → 5 · Signed</div>
+  <form id="reqForm">
+    <div class="row">
+      <div><label>Honorific / Title</label><input name="honorific" placeholder="His Majesty / Her Highness / Chief" /></div>
+      <div><label>Audience</label><select name="audience">${audienceOptions}</select></div>
+    </div>
+    <div><label>Full name *</label><input name="name" required placeholder="Oba Adeyeye Enitan Ogunwusi" /></div>
+    <div><label>Kingdom / Title / Institution</label><input name="kingdom" placeholder="Ooni of Ife · Nigeria" /></div>
+    <div class="row">
+      <div><label>Email *</label><input name="email" type="email" required placeholder="name@example.com" /></div>
+      <div><label>Telephone</label><input name="phone" placeholder="+234 …" /></div>
+    </div>
+    <div><label>Postal address</label><input name="address" placeholder="Street, City, State, Country" /></div>
+    <div class="row">
+      <div><label>Date of birth</label><input name="dob" placeholder="5 July 1970" /></div>
+      <div><label>Passport number</label><input name="passport" placeholder="A1234567" /></div>
+    </div>
+    <div class="row">
+      <div><label>Accompanying delegates</label><input name="delegates" type="number" min="0" value="0" /></div>
+      <div><label>Country</label><input name="country" placeholder="Nigeria" /></div>
+    </div>
+    <div><label>Dietary / access / protocol needs</label><textarea name="notes" placeholder="Optional"></textarea></div>
+    <button class="btn wide" type="submit">Submit Invitation Request</button>
+    <p class="hint" id="err" style="color:var(--terra);"></p>
+  </form>
+  <p class="note-proto">Prototype · details are stored locally on the Summit dev server.</p>
+</div>
+<script>
+(function(){
+  var f=document.getElementById('reqForm');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var d={}; new FormData(f).forEach(function(v,k){ d[k]=v; });
+    if(!d.name||!d.email){ document.getElementById('err').textContent='Name and email are required.'; return; }
+    var btn=f.querySelector('button'); btn.disabled=true; btn.textContent='Submitting…';
+    fetch('/api/request-invite',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){return r.json();})
+      .then(function(j){ if(!j.ok) throw new Error(j.error||'failed');
+        location.href='/invite/request/status/?id='+encodeURIComponent(j.id); })
+      .catch(function(err){ document.getElementById('err').textContent='Sorry — '+err.message; btn.disabled=false; btn.textContent='Submit Invitation Request'; });
+  });
+})();
+</script>
+</body></html>`;
+}
+
+function requestStatusPage(stripeUrl, feeLabel) {
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex" />
+<title>Your Invitation · African Queens Summit</title><style>${REQUEST_CSS}</style></head><body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">African Queens Summit · 14–31 August 2026</div>
+    <h1 id="hd">Your Invitation Request</h1>
+    <div class="sub" id="hdsub">Checking the status of your request…</div>
+  </header>
+
+  <div class="stage on" id="s-loading"><div class="card">Loading…</div></div>
+
+  <div class="stage" id="s-review">
+    <div class="card">
+      <div class="pill">Under Review</div>
+      <p>Thank you, <b id="rv-name"></b>. Your invitation request has been received and is being reviewed by the Summit Secretariat.</p>
+      <div class="timer" id="timer">--:--</div>
+      <p class="hint">You will be notified by email the moment your invitation is ready. You may keep this page open.</p>
+    </div>
+  </div>
+
+  <div class="stage" id="s-invited">
+    <div class="card">
+      <div class="pill" style="background:#e8f0ea;color:var(--emerald);">You're Invited</div>
+      <p>Congratulations, <b id="iv-name"></b> — your invitation to the African Queens Summit 2026 has been approved.</p>
+      <div class="emailbox">
+        <div class="from">Simulated email · to <span id="iv-email"></span></div>
+        <p style="margin:6px 0 0;"><b>Your invitation to the African Queens Summit 2026</b><br/>
+        It is our honour to invite you. View your provisional invitation below. To confirm your place and receive your signed invitation, kindly settle the reservation fee.</p>
+      </div>
+      <a class="btn ghost wide" id="iv-view" target="_blank" rel="noopener" style="margin-bottom:10px;">View provisional invitation ↗</a>
+      <div class="fee">Reservation fee: <span id="iv-fee"></span></div>
+      <p class="hint" style="margin:2px 0 12px;">Payable to confirm your place. Your invitation is signed once received.</p>
+      <a class="btn emerald wide" id="iv-pay" target="_blank" rel="noopener">Pay Reservation Fee →</a>
+      <p class="note-proto">Prototype · after paying on Stripe, return here and press the button below to simulate the payment webhook.</p>
+      <button class="btn wide" id="iv-simulate" style="background:#c9b79a;">✓ Simulate payment received</button>
+    </div>
+  </div>
+
+  <div class="stage" id="s-signed">
+    <div class="card">
+      <div class="pill" style="background:#e8f0ea;color:var(--emerald);">Confirmed &amp; Signed</div>
+      <p>Your reservation is confirmed, <b id="sg-name"></b>. Your <b>signed invitation</b> is ready, and your visa support letter has been unlocked.</p>
+      <a class="btn emerald wide" id="sg-view" target="_blank" rel="noopener" style="margin-bottom:10px;">View your signed invitation ↗</a>
+      <a class="btn ghost wide" id="sg-visa" target="_blank" rel="noopener">Open visa support letter ↗</a>
+      <p class="hint" style="margin-top:12px;">A confirmation email with these links has been sent to <span id="sg-email"></span>.</p>
+    </div>
+  </div>
+
+  <footer>African Queens Summit Secretariat · <a class="link" href="https://africanqueenssummit.com">africanqueenssummit.com</a></footer>
+</div>
+<script>
+(function(){
+  var STRIPE=${JSON.stringify(stripeUrl)};
+  var P=new URLSearchParams(location.search); var id=P.get('id');
+  var SHORT={q:'q',k:'k',rulers:'tr',queenmother:'qm',princes:'pi',princesses:'pr',politicians:'po',guests:'g',excellency:'ex'};
+  var TSHORT={queens:'q',kings:'k',rulers:'tr',queenmother:'qm',princes:'pi',princesses:'pr',politicians:'po',guests:'g',excellency:'ex'};
+  function show(id){ ['s-loading','s-review','s-invited','s-signed'].forEach(function(s){ document.getElementById(s).classList.toggle('on', s===id); }); }
+  function cardUrl(rec, provisional){
+    var t=TSHORT[rec.audience]||'q';
+    var u='/invite/card/?n='+encodeURIComponent((rec.name||'').replace(/ /g,'_'))+'&t='+t;
+    if(rec.kingdom) u+='&e='+encodeURIComponent(rec.kingdom.replace(/ /g,'_'));
+    if(provisional) u+='&provisional=1';
+    return u;
+  }
+  function visaUrl(rec){
+    var d={name:rec.name||'',role:rec.kingdom||'',address:rec.address||'',dob:rec.dob||'',passport:rec.passport||'',date:'',from:'13 August 2026',to:'1 September 2026',kind:'guest'};
+    function b64u(s){return btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');}
+    return '/visa/card/?d='+b64u(JSON.stringify(d));
+  }
+  if(!id){ document.getElementById('s-loading').innerHTML='<div class="card">No request id. Please <a class="link" href="/invite/request/">start a request</a>.</div>'; return; }
+  var timerInt=null;
+  function render(rec){
+    if(rec.status==='pending'){
+      show('s-review');
+      document.getElementById('rv-name').textContent=rec.name||'';
+      var ready=new Date(rec.readyAt).getTime();
+      if(!timerInt){ timerInt=setInterval(tick,1000); tick(); }
+      function tick(){
+        var ms=ready-Date.now();
+        if(ms<=0){ clearInterval(timerInt); timerInt=null; poll(); return; }
+        var s=Math.ceil(ms/1000), m=Math.floor(s/60); s=s%60;
+        document.getElementById('timer').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+      }
+    } else if(rec.status==='invited'){
+      show('s-invited');
+      document.getElementById('iv-name').textContent=rec.name||'';
+      document.getElementById('iv-email').textContent=rec.email||'';
+      document.getElementById('iv-fee').textContent=${JSON.stringify(feeLabel)};
+      document.getElementById('iv-view').href=cardUrl(rec,true);
+      var pay=STRIPE+(STRIPE.indexOf('?')<0?'?':'&')+'client_reference_id='+encodeURIComponent(id);
+      document.getElementById('iv-pay').href=pay;
+      document.getElementById('iv-simulate').onclick=function(){
+        this.disabled=true; this.textContent='Confirming…';
+        fetch('/api/request-paid?id='+encodeURIComponent(id),{method:'POST'}).then(function(r){return r.json();}).then(function(){ poll(); });
+      };
+    } else if(rec.status==='paid'){
+      show('s-signed');
+      document.getElementById('sg-name').textContent=rec.name||'';
+      document.getElementById('sg-email').textContent=rec.email||'';
+      document.getElementById('sg-view').href=cardUrl(rec,false);
+      document.getElementById('sg-visa').href=visaUrl(rec);
+      document.getElementById('hd').textContent='Welcome to the Summit';
+      document.getElementById('hdsub').textContent='Your place is confirmed.';
+    }
+  }
+  function poll(){
+    fetch('/api/request-status?id='+encodeURIComponent(id)).then(function(r){return r.json();})
+      .then(function(j){ if(!j.ok){ document.getElementById('s-loading').innerHTML='<div class="card">Request not found.</div>'; return; } render(j.record); })
+      .catch(function(){ setTimeout(poll,3000); });
+  }
+  // If returning from Stripe with a success flag, mark paid.
+  if(/^(1|true|success)$/i.test(P.get('paid')||'')){ fetch('/api/request-paid?id='+encodeURIComponent(id),{method:'POST'}).then(poll); }
+  else { poll(); }
+  // gentle auto-refresh while pending/invited
+  setInterval(function(){ var onReview=document.getElementById('s-review').classList.contains('on'); if(!onReview) poll(); }, 6000);
+})();
+</script>
+</body></html>`;
+}
+
+// Prototype only: the form/status pages depend on the dev-only requestFlowApi,
+// so we skip them in CI (deploy) to avoid publishing a form that has no backend.
+// They generate whenever build-invites runs locally (incl. via the dev server).
+if (!process.env.CI) {
+  const STRIPE_CHECKOUT = 'https://checkout.africanqueenssummit.com/b/14A3cvd5D7DWaNH6Vj1VK05';
+  mkdirSync(join(outRoot, 'request'), { recursive: true });
+  writeFileSync(join(outRoot, 'request', 'index.html'), requestFormPage());
+  mkdirSync(join(outRoot, 'request', 'status'), { recursive: true });
+  writeFileSync(join(outRoot, 'request', 'status', 'index.html'), requestStatusPage(STRIPE_CHECKOUT, '£100'));
+  console.log('  ✓ /invite/request/  —  public invitation-request form (prototype, dev-only)');
+  console.log('  ✓ /invite/request/status/  —  review timer → provisional → pay → signed');
+}
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);
