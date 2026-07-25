@@ -2526,6 +2526,20 @@ const REQUEST_CSS = `
   .note-proto{margin-top:18px;font-size:11.5px;color:#a08a63;text-align:center;font-style:italic;}
 `;
 
+// Shared name-derived unlock code. Same function on the invitee's status page
+// (to validate) and the private codes page (for the Secretariat to generate).
+// Honour-based: it gates the button, the real control is that a code is only
+// issued once the reservation fee is received.
+const INVITE_CODE_JS = `
+  function aqsCode(name){
+    var s=(name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+    var h=5381; for(var i=0;i<s.length;i++){ h=(((h<<5)+h)+s.charCodeAt(i))>>>0; }
+    h=(h ^ 0x5a17e2b)>>>0;
+    var b=('00000000'+h.toString(36).toUpperCase()).slice(-8);
+    return 'AQS-'+b.slice(0,4)+'-'+b.slice(4);
+  }
+`;
+
 function requestFormPage() {
   const audienceOptions = [
     ['queens', 'Queen'], ['kings', 'King'], ['rulers', 'Traditional Ruler'],
@@ -2540,9 +2554,9 @@ function requestFormPage() {
   <header>
     <div class="eyebrow">African Queens Summit · 14–31 August 2026 · United Kingdom</div>
     <h1>Request Your Invitation</h1>
-    <div class="sub">Kindly provide your details below. Your request will be reviewed, after which your official invitation will be issued.</div>
+    <div class="sub">Kindly provide your details below. Your invitation is prepared instantly and kept privately on your own device.</div>
   </header>
-  <div class="steps"><b>1 · Request</b> → 2 · Review → 3 · Invitation → 4 · Reservation → 5 · Signed</div>
+  <div class="steps"><b>1 · Your details</b> → 2 · Provisional invitation → 3 · Reserve your place → 4 · Signed invitation &amp; visa</div>
   <form id="reqForm">
     <div class="row">
       <div><label>Honorific / Title</label><input name="honorific" placeholder="His Majesty / Her Highness / Chief" /></div>
@@ -2564,163 +2578,185 @@ function requestFormPage() {
       <div><label>Country</label><input name="country" placeholder="Nigeria" /></div>
     </div>
     <div><label>Dietary / access / protocol needs</label><textarea name="notes" placeholder="Optional"></textarea></div>
-    <button class="btn wide" type="submit">Submit Invitation Request</button>
+    <button class="btn wide" type="submit">Prepare My Invitation</button>
     <p class="hint" id="err" style="color:var(--terra);"></p>
   </form>
-  <p class="note-proto">Prototype · details are stored locally on the Summit dev server.</p>
+  <p class="note-proto">Your details are saved only in this browser (no account, no server). They are used to prepare your invitation and visa letter.</p>
 </div>
 <script>
 (function(){
+  var KEY='aqs_invite';
   var f=document.getElementById('reqForm');
+  // Prefill if they've filled it before on this device.
+  try{ var prev=JSON.parse(localStorage.getItem(KEY)||'null'); if(prev){ Object.keys(prev).forEach(function(k){ var el=f.elements[k]; if(el&&prev[k]!=null) el.value=prev[k]; }); } }catch(e){}
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var d={}; new FormData(f).forEach(function(v,k){ d[k]=v; });
+    var d={}; new FormData(f).forEach(function(v,k){ d[k]=(v||'').toString().trim(); });
     if(!d.name||!d.email){ document.getElementById('err').textContent='Name and email are required.'; return; }
-    var btn=f.querySelector('button'); btn.disabled=true; btn.textContent='Submitting…';
-    fetch('/api/request-invite',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
-      .then(function(r){return r.json();})
-      .then(function(j){ if(!j.ok) throw new Error(j.error||'failed');
-        location.href='/invite/request/status/?id='+encodeURIComponent(j.id); })
-      .catch(function(err){ document.getElementById('err').textContent='Sorry — '+err.message; btn.disabled=false; btn.textContent='Submit Invitation Request'; });
+    d.savedAt=new Date().toISOString();
+    try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(err){ document.getElementById('err').textContent='Could not save on this device: '+err.message; return; }
+    location.href='/invite/request/status/';
   });
 })();
 </script>
 </body></html>`;
 }
 
-function requestStatusPage(stripeUrl, feeLabel) {
+function requestStatusPage(waNumber, feeLabel) {
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex" />
 <title>Your Invitation · African Queens Summit</title><style>${REQUEST_CSS}</style></head><body>
 <div class="wrap">
   <header>
     <div class="eyebrow">African Queens Summit · 14–31 August 2026</div>
-    <h1 id="hd">Your Invitation Request</h1>
-    <div class="sub" id="hdsub">Checking the status of your request…</div>
+    <h1 id="hd">Your Invitation</h1>
+    <div class="sub" id="hdsub">Your provisional invitation is ready.</div>
   </header>
 
-  <div class="stage on" id="s-loading"><div class="card">Loading…</div></div>
-
-  <div class="stage" id="s-review">
+  <div class="stage" id="s-none">
     <div class="card">
-      <div class="pill">Under Review</div>
-      <p>Thank you, <b id="rv-name"></b>. Your invitation request has been received and is being reviewed by the Summit Secretariat.</p>
-      <div class="timer" id="timer">--:--</div>
-      <p class="hint">You will be notified by email the moment your invitation is ready. You may keep this page open.</p>
+      <p>We don't have your details on this device yet.</p>
+      <a class="btn wide" href="/invite/request/">Request your invitation →</a>
     </div>
   </div>
 
-  <div class="stage" id="s-invited">
+  <div class="stage" id="s-provisional">
     <div class="card">
-      <div class="pill" style="background:#e8f0ea;color:var(--emerald);">You're Invited</div>
-      <p>Congratulations, <b id="iv-name"></b> — your invitation to the African Queens Summit 2026 has been approved.</p>
-      <div class="emailbox">
-        <div class="from">Simulated email · to <span id="iv-email"></span></div>
-        <p style="margin:6px 0 0;"><b>Your invitation to the African Queens Summit 2026</b><br/>
-        It is our honour to invite you. View your provisional invitation below. To confirm your place and receive your signed invitation, kindly settle the reservation fee.</p>
+      <div class="pill">Provisional Invitation</div>
+      <p>Honoured to welcome you, <b id="pv-name"></b>. Your provisional invitation is prepared. To confirm your place and receive the <b>signed</b> invitation and your <b>visa support letter</b>, kindly settle the reservation fee.</p>
+      <a class="btn ghost wide" id="pv-view" target="_blank" rel="noopener" style="margin-bottom:12px;">View provisional invitation ↗</a>
+      <div class="fee">Reservation fee: <span id="pv-fee"></span></div>
+      <p class="hint" style="margin:2px 0 12px;">Message the Secretariat to arrange payment. You'll be sent an unlock code.</p>
+      <a class="btn emerald wide" id="pv-msg" target="_blank" rel="noopener" style="margin-bottom:8px;">Message Marie to reserve →</a>
+      <a class="btn ghost wide" id="pv-email" style="margin-bottom:16px;">Email the Secretariat</a>
+      <div style="border-top:1px solid var(--line);padding-top:16px;">
+        <label style="text-align:left;">Have an unlock code?</label>
+        <div class="row" style="gap:8px;">
+          <input id="pv-code" placeholder="AQS-XXXX-XXXX" style="text-transform:uppercase;letter-spacing:.08em;" />
+          <button class="btn" id="pv-unlock" style="flex:0 0 auto;">Unlock</button>
+        </div>
+        <p class="hint" id="pv-codeerr" style="color:var(--terra);min-height:16px;"></p>
       </div>
-      <a class="btn ghost wide" id="iv-view" target="_blank" rel="noopener" style="margin-bottom:10px;">View provisional invitation ↗</a>
-      <div class="fee">Reservation fee: <span id="iv-fee"></span></div>
-      <p class="hint" style="margin:2px 0 12px;">Payable to confirm your place. Your invitation is signed once received.</p>
-      <a class="btn emerald wide" id="iv-pay" target="_blank" rel="noopener">Pay Reservation Fee →</a>
-      <p class="note-proto">Prototype · after paying on Stripe, return here and press the button below to simulate the payment webhook.</p>
-      <button class="btn wide" id="iv-simulate" style="background:#c9b79a;">✓ Simulate payment received</button>
+      <p style="margin-top:8px;"><a class="link" href="/invite/request/">Edit my details</a></p>
     </div>
   </div>
 
   <div class="stage" id="s-signed">
     <div class="card">
       <div class="pill" style="background:#e8f0ea;color:var(--emerald);">Confirmed &amp; Signed</div>
-      <p>Your reservation is confirmed, <b id="sg-name"></b>. Your <b>signed invitation</b> is ready, and your visa support letter has been unlocked.</p>
+      <p>Your reservation is confirmed, <b id="sg-name"></b>. Your <b>signed invitation</b> is ready, and your <b>visa support letter</b> has been unlocked.</p>
       <a class="btn emerald wide" id="sg-view" target="_blank" rel="noopener" style="margin-bottom:10px;">View your signed invitation ↗</a>
       <a class="btn ghost wide" id="sg-visa" target="_blank" rel="noopener">Open visa support letter ↗</a>
-      <p class="hint" style="margin-top:12px;">A confirmation email with these links has been sent to <span id="sg-email"></span>.</p>
+      <p class="hint" style="margin-top:12px;"><a class="link" href="/invite/request/">Edit my details</a></p>
     </div>
   </div>
 
   <footer>African Queens Summit Secretariat · <a class="link" href="https://africanqueenssummit.com">africanqueenssummit.com</a></footer>
 </div>
 <script>
+${INVITE_CODE_JS}
 (function(){
-  var STRIPE=${JSON.stringify(stripeUrl)};
-  var P=new URLSearchParams(location.search); var id=P.get('id');
-  var SHORT={q:'q',k:'k',rulers:'tr',queenmother:'qm',princes:'pi',princesses:'pr',politicians:'po',guests:'g',excellency:'ex'};
+  var KEY='aqs_invite', UNLOCK='aqs_unlocked', WA=${JSON.stringify(waNumber)}, FEE=${JSON.stringify(feeLabel)};
   var TSHORT={queens:'q',kings:'k',rulers:'tr',queenmother:'qm',princes:'pi',princesses:'pr',politicians:'po',guests:'g',excellency:'ex'};
-  function show(id){ ['s-loading','s-review','s-invited','s-signed'].forEach(function(s){ document.getElementById(s).classList.toggle('on', s===id); }); }
-  function cardUrl(rec, provisional){
+  var rec=null; try{ rec=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  function show(id){ ['s-none','s-provisional','s-signed'].forEach(function(s){ document.getElementById(s).classList.toggle('on', s===id); }); }
+  function cardUrl(provisional){
     var t=TSHORT[rec.audience]||'q';
     var u='/invite/card/?n='+encodeURIComponent((rec.name||'').replace(/ /g,'_'))+'&t='+t;
     if(rec.kingdom) u+='&e='+encodeURIComponent(rec.kingdom.replace(/ /g,'_'));
+    if(rec.honorific) u+='&h='+encodeURIComponent(rec.honorific.replace(/ /g,'_'));
     if(provisional) u+='&provisional=1';
     return u;
   }
-  function visaUrl(rec){
-    var d={name:rec.name||'',role:rec.kingdom||'',address:rec.address||'',dob:rec.dob||'',passport:rec.passport||'',date:'',from:'13 August 2026',to:'1 September 2026',kind:'guest'};
+  function visaUrl(){
+    var d={name:((rec.honorific?rec.honorific+' ':'')+ (rec.name||'')).trim(),role:rec.kingdom||'',address:rec.address||'',dob:rec.dob||'',passport:rec.passport||'',date:'',from:'13 August 2026',to:'1 September 2026',kind:'guest'};
     function b64u(s){return btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');}
     return '/visa/card/?d='+b64u(JSON.stringify(d));
   }
-  if(!id){ document.getElementById('s-loading').innerHTML='<div class="card">No request id. Please <a class="link" href="/invite/request/">start a request</a>.</div>'; return; }
-  var timerInt=null;
-  function render(rec){
-    if(rec.status==='pending'){
-      show('s-review');
-      document.getElementById('rv-name').textContent=rec.name||'';
-      var ready=new Date(rec.readyAt).getTime();
-      if(!timerInt){ timerInt=setInterval(tick,1000); tick(); }
-      function tick(){
-        var ms=ready-Date.now();
-        if(ms<=0){ clearInterval(timerInt); timerInt=null; poll(); return; }
-        var s=Math.ceil(ms/1000), m=Math.floor(s/60); s=s%60;
-        document.getElementById('timer').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  if(!rec||!rec.name){ show('s-none'); return; }
+  var unlocked=false; try{ unlocked=(localStorage.getItem(UNLOCK)===aqsCode(rec.name)); }catch(e){}
+  function renderSigned(){
+    show('s-signed');
+    document.getElementById('sg-name').textContent=rec.name;
+    document.getElementById('sg-view').href=cardUrl(false);
+    document.getElementById('sg-visa').href=visaUrl();
+    document.getElementById('hd').textContent='Welcome to the Summit';
+    document.getElementById('hdsub').textContent='Your place is confirmed.';
+  }
+  function renderProvisional(){
+    show('s-provisional');
+    document.getElementById('pv-name').textContent=rec.name;
+    document.getElementById('pv-fee').textContent=FEE;
+    document.getElementById('pv-view').href=cardUrl(true);
+    var msg='Hello, this is '+rec.name+(rec.kingdom?' ('+rec.kingdom+')':'')+'. I would like to reserve my place at the African Queens Summit 2026 and settle the reservation fee ('+FEE+'). My email is '+(rec.email||'')+'.';
+    document.getElementById('pv-msg').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+    document.getElementById('pv-email').href='mailto:africanqueenssummit@gmail.com?subject='+encodeURIComponent('Reservation — African Queens Summit 2026')+'&body='+encodeURIComponent(msg);
+    document.getElementById('pv-unlock').onclick=function(){
+      var entered=(document.getElementById('pv-code').value||'').trim().toUpperCase();
+      if(entered===aqsCode(rec.name)){
+        try{ localStorage.setItem(UNLOCK, aqsCode(rec.name)); }catch(e){}
+        renderSigned();
+      } else {
+        document.getElementById('pv-codeerr').textContent='That code does not match. Please check with the Secretariat.';
       }
-    } else if(rec.status==='invited'){
-      show('s-invited');
-      document.getElementById('iv-name').textContent=rec.name||'';
-      document.getElementById('iv-email').textContent=rec.email||'';
-      document.getElementById('iv-fee').textContent=${JSON.stringify(feeLabel)};
-      document.getElementById('iv-view').href=cardUrl(rec,true);
-      var pay=STRIPE+(STRIPE.indexOf('?')<0?'?':'&')+'client_reference_id='+encodeURIComponent(id);
-      document.getElementById('iv-pay').href=pay;
-      document.getElementById('iv-simulate').onclick=function(){
-        this.disabled=true; this.textContent='Confirming…';
-        fetch('/api/request-paid?id='+encodeURIComponent(id),{method:'POST'}).then(function(r){return r.json();}).then(function(){ poll(); });
-      };
-    } else if(rec.status==='paid'){
-      show('s-signed');
-      document.getElementById('sg-name').textContent=rec.name||'';
-      document.getElementById('sg-email').textContent=rec.email||'';
-      document.getElementById('sg-view').href=cardUrl(rec,false);
-      document.getElementById('sg-visa').href=visaUrl(rec);
-      document.getElementById('hd').textContent='Welcome to the Summit';
-      document.getElementById('hdsub').textContent='Your place is confirmed.';
-    }
+    };
+    document.getElementById('pv-code').addEventListener('keydown',function(e){ if(e.key==='Enter') document.getElementById('pv-unlock').click(); });
   }
-  function poll(){
-    fetch('/api/request-status?id='+encodeURIComponent(id)).then(function(r){return r.json();})
-      .then(function(j){ if(!j.ok){ document.getElementById('s-loading').innerHTML='<div class="card">Request not found.</div>'; return; } render(j.record); })
-      .catch(function(){ setTimeout(poll,3000); });
-  }
-  // If returning from Stripe with a success flag, mark paid.
-  if(/^(1|true|success)$/i.test(P.get('paid')||'')){ fetch('/api/request-paid?id='+encodeURIComponent(id),{method:'POST'}).then(poll); }
-  else { poll(); }
-  // gentle auto-refresh while pending/invited
-  setInterval(function(){ var onReview=document.getElementById('s-review').classList.contains('on'); if(!onReview) poll(); }, 6000);
+  if(unlocked) renderSigned(); else renderProvisional();
 })();
 </script>
 </body></html>`;
 }
 
-// Prototype only: the form/status pages depend on the dev-only requestFlowApi,
-// so we skip them in CI (deploy) to avoid publishing a form that has no backend.
-// They generate whenever build-invites runs locally (incl. via the dev server).
+// Private admin tool (dev-only): the Secretariat enters a recipient's exact name
+// and gets their unlock code to send once the reservation fee is received.
+function codesPage() {
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex" />
+<title>Unlock Codes · Secretariat</title><style>${REQUEST_CSS}</style></head><body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">African Queens Summit · Secretariat (private)</div>
+    <h1>Reservation Unlock Codes</h1>
+    <div class="sub">Enter the recipient's exact full name (as they typed it). Send them the code once payment is received; it unlocks their signed invitation &amp; visa letter.</div>
+  </header>
+  <div><label>Full name</label><input id="nm" placeholder="Oba Adeyeye Enitan Ogunwusi" /></div>
+  <div class="card" style="margin-top:14px;">
+    <div class="hint">Unlock code</div>
+    <div class="timer" id="code" style="font-size:30px;letter-spacing:.06em;">—</div>
+    <button class="btn" id="copy">Copy code</button>
+  </div>
+  <p class="note-proto">The name must match exactly (case &amp; spacing are normalised). Different name → different code.</p>
+</div>
+<script>
+${INVITE_CODE_JS}
+(function(){
+  var nm=document.getElementById('nm'), out=document.getElementById('code');
+  function upd(){ out.textContent = nm.value.trim() ? aqsCode(nm.value) : '—'; }
+  nm.addEventListener('input',upd);
+  document.getElementById('copy').onclick=function(){ var t=out.textContent; if(t&&t!=='—'){ navigator.clipboard&&navigator.clipboard.writeText(t); this.textContent='Copied ✓'; var b=this; setTimeout(function(){b.textContent='Copy code';},1200); } };
+})();
+</script>
+</body></html>`;
+}
+
+// Invitation self-service (backend-free): the invitee's details live only in
+// their browser (localStorage); their browser renders the provisional invite,
+// and a name-derived unlock code (sent after payment) reveals the signed invite
+// + visa letter. Fully static — safe to deploy publicly.
+const SUMMIT_WA = '447932506556';
+const RESERVATION_FEE = '£100';
+mkdirSync(join(outRoot, 'request'), { recursive: true });
+writeFileSync(join(outRoot, 'request', 'index.html'), requestFormPage());
+mkdirSync(join(outRoot, 'request', 'status'), { recursive: true });
+writeFileSync(join(outRoot, 'request', 'status', 'index.html'), requestStatusPage(SUMMIT_WA, RESERVATION_FEE));
+console.log('  ✓ /invite/request/  —  public self-service invitation form (localStorage)');
+console.log('  ✓ /invite/request/status/  —  provisional → message Marie → unlock code → signed + visa');
+// The unlock-code generator is for the Secretariat only — keep it out of deploys.
 if (!process.env.CI) {
-  const STRIPE_CHECKOUT = 'https://checkout.africanqueenssummit.com/b/14A3cvd5D7DWaNH6Vj1VK05';
-  mkdirSync(join(outRoot, 'request'), { recursive: true });
-  writeFileSync(join(outRoot, 'request', 'index.html'), requestFormPage());
-  mkdirSync(join(outRoot, 'request', 'status'), { recursive: true });
-  writeFileSync(join(outRoot, 'request', 'status', 'index.html'), requestStatusPage(STRIPE_CHECKOUT, '£100'));
-  console.log('  ✓ /invite/request/  —  public invitation-request form (prototype, dev-only)');
-  console.log('  ✓ /invite/request/status/  —  review timer → provisional → pay → signed');
+  mkdirSync(join(outRoot, 'codes'), { recursive: true });
+  writeFileSync(join(outRoot, 'codes', 'index.html'), codesPage());
+  console.log('  ✓ /invite/codes/  —  Secretariat unlock-code generator (dev-only)');
 }
 
 console.log(`\nBuilt ${built.length} invitation(s) + master page → public/invite/`);

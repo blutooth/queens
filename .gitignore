@@ -23,8 +23,6 @@ tools/whatsapp/sent.json
 public/visa/
 public/v/
 
-# Prototype invitation-request submissions (PII: email, DOB, passport) — local only
-content/data/invite-requests.json
 
 # never commit secrets
 stripe.txt
