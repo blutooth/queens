@@ -328,13 +328,6 @@ export const dignitaries = [
     region: 'California · USA',
     status: 'Guest Speaker',
   },
-  {
-    honorific: 'Dr',
-    name: 'Gia Grant-Rutledge',
-    role: 'Guest Speaker · CDC Health Scientist',
-    region: 'Georgia · USA',
-    status: 'Guest Speaker',
-  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
