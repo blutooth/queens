@@ -321,13 +321,6 @@ export const dignitaries = [
     region: 'Bamako · Mali',
     status: 'Confirmed',
   },
-  {
-    honorific: 'Mayor',
-    name: 'Aja Brown',
-    role: 'Guest Speaker · Former Mayor of Compton',
-    region: 'California · USA',
-    status: 'Guest Speaker',
-  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
