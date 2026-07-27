@@ -28,16 +28,17 @@
       {/each}
     </div>
 
-    <div class="logos">
-      <div class="logo-card"><img src={asset('/images/foundation-african-royals.jpg')} alt="Foundation of African Royals" /></div>
-      <div class="logo-card"><img src={asset('/images/unipgc-logo.png')} alt="United International Peace & Governance Council (UNIPGC)" /></div>
-    </div>
-
     <p class="horizon">
       <span class="italic">Following England,</span> the movement continues across
       the Caribbean and the nations of Africa — a sustained convocation for
       generations to come.
     </p>
+
+    <div class="logos">
+      <div class="logo-card wide"><img src={asset('/images/partners-letterhead.png')} alt="Aruk II crest and partners" /></div>
+      <div class="logo-card"><img src={asset('/images/foundation-african-royals.jpg')} alt="Foundation of African Royals" /></div>
+      <div class="logo-card"><img src={asset('/images/unipgc-logo.png')} alt="United International Peace &amp; Governance Council (UNIPGC)" /></div>
+    </div>
   </div>
 </section>
 
@@ -123,7 +124,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 0 auto 3.5rem;
+    margin: 3.5rem auto 0;
   }
   .logo-card {
     background: #ffffff;
@@ -135,6 +136,7 @@
     justify-content: center;
   }
   .logo-card img { height: 82px; width: auto; display: block; }
+  .logo-card.wide img { height: 68px; }
 
   .horizon {
     text-align: center;
