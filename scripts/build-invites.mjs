@@ -248,14 +248,23 @@ function heritage({ data, noteHtml, letterHtml }) {
         ${progRows}
       </div>
     </section>`,
-    signature: () => `<div class="kente-band"></div>
+    signature: () => {
+      // Per-letter sign-off overrides (optional frontmatter): regard, signName,
+      // and signRoles (title lines separated by "|"). Default to the standard block.
+      const regard = data.regard || 'With Highest Royal Regard,';
+      const signName = data.signName || 'Obonganwan Marie Erete, Queen Aruk II';
+      const roleLines = data.signRoles
+        ? data.signRoles.split('|').map((r) => `<p class="role">${esc(r.trim())}</p>`).join('\n      ')
+        : '<p class="role">Summit Convener &middot; African and Diaspora Queens Summit</p>';
+      return `<div class="kente-band"></div>
     <section class="signoff">
-      <p class="regard">With Highest Royal Regard,</p>
+      <p class="regard">${esc(regard)}</p>
       <img class="sig-img" src="/images/queen-aruk-signature.png" alt="Signature of Queen Aruk II" />
-      <p class="name">Obonganwan Marie Erete, Queen Aruk II</p>
-      <p class="role">Summit Convener &middot; African and Diaspora Queens Summit</p>
+      <p class="name">${esc(signName)}</p>
+      ${roleLines}
       <p class="motto">Leadership Rooted in Service, Royalty Defined by Impact.</p>
-    </section>`,
+    </section>`;
+    },
     rsvp: () => `<section class="rsvp">
       <h2>The Honour of Your Reply Is Requested</h2>
       <a class="btn" href="/rsvp/">RSVP &amp; Reserve Your Place</a>
