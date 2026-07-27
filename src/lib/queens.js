@@ -414,5 +414,6 @@ export const partners = [
   { name: 'Forum of African Traditional Authorities', role: 'Institutional Partner' },
   { name: 'Maasai Tourism Festival', role: 'Cultural Partner' },
   { name: 'Motherland Beckons', role: 'Diaspora Partner' },
+  { name: 'Foundation of African Royals', role: 'Royal Partner' },
   { name: 'United International Peace & Governance Council', role: 'International Partner' },
 ];
