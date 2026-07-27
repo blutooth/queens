@@ -267,6 +267,7 @@ function heritage({ data, noteHtml, letterHtml }) {
         <div class="partners-row">
           <div class="letterhead-box"><img src="/images/partners-letterhead.png" alt="Partners and letterhead" /></div>
           <img class="partner-logo" src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
+          <img class="partner-logo" src="/images/unipgc-logo.png" alt="UNIPGC — International Peace &amp; Governance Council" />
         </div>
         <p class="org">ARUK II Humanitarian Services (UK) C.I.C</p>
         <p class="web"><a href="https://africanqueenssummit.com">www.africanqueenssummit.com</a></p>
@@ -2146,6 +2147,7 @@ function tributePage() {
         <div class="partners">
           <div class="lh-box"><img src="/images/partners-letterhead.png" alt="Aruk II crest and partners" /></div>
           <img class="partner-logo" src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
+          <img class="partner-logo" src="/images/unipgc-logo.png" alt="UNIPGC — International Peace &amp; Governance Council" />
         </div>
         <p class="org">ARUK II Humanitarian Services (UK) C.I.C</p>
         <p class="meta" style="font-family:'Marcellus',serif;letter-spacing:.07em;color:var(--gold);"><a href="https://africanqueenssummit.com" style="color:var(--gold);">www.africanqueenssummit.com</a></p>
@@ -2241,6 +2243,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
         <div class="partners-row">
           <div class="letterhead-box"><img src="/images/partners-letterhead.png" alt="Partners and letterhead" /></div>
           <img class="partner-logo" src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
+          <img class="partner-logo" src="/images/unipgc-logo.png" alt="UNIPGC — International Peace &amp; Governance Council" />
         </div>
         <p class="org">ARUK II Humanitarian Services (UK) C.I.C</p>
         <p class="web"><a href="https://africanqueenssummit.com">www.africanqueenssummit.com</a></p>

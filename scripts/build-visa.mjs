@@ -254,6 +254,8 @@ function letterHtml(v, sig, emblem, opts = {}) {
   .sign { margin-top: 22px; }
   .sign img { display: block; height: 84px; width: auto; margin: 6px 0 2px; }
   .sign .nm { font-weight: 600; }
+  .visa-foot { display: flex; gap: 22px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 20px 20px 26px; }
+  .visa-foot img { height: 64px; width: auto; display: block; }
   .toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px; }
   .toolbar button, .toolbar a { font-family: system-ui, sans-serif; font-size: 13px; padding: 8px 16px; border: 1px solid #999; border-radius: 6px; background: #fff; cursor: pointer; color: #1a1a1a; text-decoration: none; }
   .toolbar button:hover, .toolbar a:hover { background: #f2f2f2; }
@@ -377,6 +379,11 @@ UK Visas and Immigration</div>
     <div>${esc(SIGNATORY.line1)}</div>
     <div>${esc(SIGNATORY.line2)}</div>
   </div>
+  </div>
+  <div class="kente-band"></div>
+  <div class="visa-foot">
+    <img src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
+    <img src="/images/unipgc-logo.png" alt="UNIPGC — International Peace &amp; Governance Council" />
   </div>
 </div>
 <script>

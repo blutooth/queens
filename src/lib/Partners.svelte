@@ -1,5 +1,6 @@
 <script>
   import { partners } from './queens.js';
+  import { asset } from './asset.js';
 </script>
 
 <section id="partners" class="partners">
@@ -25,6 +26,11 @@
           <div class="role">{p.role}</div>
         </div>
       {/each}
+    </div>
+
+    <div class="logos">
+      <div class="logo-card"><img src={asset('/images/foundation-african-royals.jpg')} alt="Foundation of African Royals" /></div>
+      <div class="logo-card"><img src={asset('/images/unipgc-logo.png')} alt="United International Peace & Governance Council (UNIPGC)" /></div>
     </div>
 
     <p class="horizon">
@@ -110,6 +116,25 @@
     text-transform: uppercase;
     color: rgba(250, 246, 234, 0.65);
   }
+
+  .logos {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto 3.5rem;
+  }
+  .logo-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 14px 20px;
+    height: 112px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-card img { height: 82px; width: auto; display: block; }
 
   .horizon {
     text-align: center;
