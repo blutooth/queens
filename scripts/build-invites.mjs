@@ -2063,6 +2063,7 @@ function receiptPage() {
   .ack .r-name { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:24px; color:var(--emerald-deep); letter-spacing:.02em; margin:4px 0; }
   .ack .r-amt { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:22px; color:var(--brown); margin:4px 0; }
   .ack .r-being { font-size:14.5px; color:var(--ink); }
+  .ack .r-note { font-size:12.5px; color:#9c4a2f; font-style:italic; margin-top:6px; }
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 22px; margin:16px 0 8px; border-top:1px dashed var(--gold-deep); padding-top:16px; }
   .grid .v { font-size:14px; }
   .grid .paid { display:inline-block; font-family:'Marcellus',serif; font-size:12px; letter-spacing:.05em; color:#fff; background:var(--emerald); border-radius:999px; padding:3px 12px; }
@@ -2110,10 +2111,11 @@ function receiptPage() {
         <p>the sum of</p>
         <p class="r-amt"><span id="r-words">One Hundred Pounds only</span> (<span id="r-amt">&pound;100.00</span>)</p>
         <p class="r-being">being <strong id="r-being">the Commitment Fee for the African Queens Summit 2026</strong>.</p>
+        <p class="r-note">This payment is a <strong>non-refundable registration fee</strong> for the African Queens Summit 2026.</p>
       </div>
 
       <div class="grid">
-        <div><label>Purpose</label><div class="v" id="r-purpose">Commitment Fee &middot; African Queens Summit 2026</div></div>
+        <div><label>Purpose</label><div class="v" id="r-purpose">Commitment payment &middot; Non-refundable registration fee</div></div>
         <div><label>Payment method</label><div class="v" id="r-method">Direct payment (received outside online checkout)</div></div>
         <div><label>Status</label><div class="v"><span class="paid">PAID &middot; Received with thanks</span></div></div>
         <div><label>Summit dates</label><div class="v">14&ndash;31 August 2026 &middot; London &amp; Oxford</div></div>
