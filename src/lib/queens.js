@@ -417,3 +417,18 @@ export const partners = [
   { name: 'Foundation of African Royals', role: 'Royal Partner' },
   { name: 'United International Peace & Governance Council', role: 'International Partner' },
 ];
+
+// Confirmed delegates — participants who have registered and confirmed their
+// attendance at the African Queens Summit 2026.
+export const delegates = [
+  'Florence Tigah', 'Stephen Addo', 'Abu Bonsrah Daniel', 'Martha Anyopoka',
+  'Deborah Larbi', 'Cephas Asakia', 'Valis Ofori', 'Acheampong Theresah',
+  'Owusu Erica Diamond', 'Awuni George', 'Cecilia Vincentia Corleki Adjaottor',
+  'Michael Cobbina', 'Menen Oparebea Larbi', 'Ruth Nyarko', 'Prince Appiah',
+  'Gloria Sarkodie', 'Stephen Akowuah', 'Stephen K. Nutsugah', 'Felix Akiti',
+  'Stephanie Adwoa Frimpong', 'Mercy Ante Agyepong', 'Yvonne Owusu',
+  'Daniel Quansah', 'Sarah Hammond', 'Felix Korang Ntiamoah',
+  'Christopher Kyei Agyapong', 'Georgina Mawutordzi', 'Agartha Yeboah',
+  'Arnold Tetteh Mensah', 'Ebenezer Kingsley Kofi Afful', 'Naomi Dansoa Amoah',
+  'Prince Awulosu',
+];

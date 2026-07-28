@@ -7,6 +7,7 @@
   import Program from './lib/Program.svelte';
   import Queens from './lib/Queens.svelte';
   import Gathering from './lib/Gathering.svelte';
+  import Delegates from './lib/Delegates.svelte';
   import Partners from './lib/Partners.svelte';
   import RsvpCta from './lib/RsvpCta.svelte';
   import Footer from './lib/Footer.svelte';
@@ -21,6 +22,7 @@
   <Program />
   <Queens />
   <Gathering />
+  <Delegates />
   <Partners />
   <RsvpCta />
 </main>
