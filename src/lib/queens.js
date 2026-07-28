@@ -430,5 +430,5 @@ export const delegates = [
   'Daniel Quansah', 'Sarah Hammond', 'Felix Korang Ntiamoah',
   'Christopher Kyei Agyapong', 'Georgina Mawutordzi', 'Agartha Yeboah',
   'Arnold Tetteh Mensah', 'Ebenezer Kingsley Kofi Afful', 'Naomi Dansoa Amoah',
-  'Prince Awulosu', 'Sharon Nanjala née Sandwe',
+  'Prince Awulosu', 'Sharon Nanjala née Sandwe', 'Theresa Pellser Nakubiana',
 ];
