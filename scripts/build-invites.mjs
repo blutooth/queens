@@ -2023,6 +2023,143 @@ function invoiceMasterPage() {
 // on the African Queens Summit letterhead (emblem header + partners footer).
 // ====================================================================
 
+// Official payment receipt — renders a single locked receipt from an encoded
+// ?d= param (base64url JSON: {no, date, name, amount, words, being, method}).
+// Deployed once; each person gets their own link. Summit letterhead + signature.
+function receiptPage() {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Official Receipt &middot; African Queens Summit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Marcellus&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root { --emerald:#0d6b4f; --emerald-deep:#094b38; --gold:#d4af37; --gold-deep:#b8860b; --brown:#3c2415; --brown-soft:#5a3a24; --ink:#241a10; --paper:#fdfaf2; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Spectral',Georgia,serif; color:var(--ink); line-height:1.5; font-size:15px; background:#6b5636; padding:24px 12px 60px; }
+  .actions { position:fixed; top:14px; right:14px; z-index:50; display:flex; gap:7px; flex-wrap:wrap; justify-content:flex-end; max-width:70vw; }
+  .abtn { font-family:'Marcellus',serif; font-size:12px; letter-spacing:.03em; color:var(--brown); background:linear-gradient(180deg,#f4d97a,var(--gold)); border:1px solid var(--gold-deep); padding:8px 13px; border-radius:999px; box-shadow:0 6px 16px rgba(0,0,0,.3); cursor:pointer; text-decoration:none; white-space:nowrap; }
+  .abtn.wa { background:#25d366; border-color:#1da851; color:#053; }
+  .sheet { max-width:800px; margin:0 auto; background:var(--paper); box-shadow:0 20px 60px rgba(0,0,0,.45); border-top:6px solid var(--emerald); position:relative; overflow:hidden; }
+  .pad { padding:36px clamp(20px,5vw,56px) 30px; position:relative; z-index:2; }
+  .lh { text-align:center; border-bottom:2px solid var(--gold); padding-bottom:16px; }
+  .lh .motto { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; color:var(--emerald-deep); font-size:16px; margin:0 0 10px; }
+  .lh .crest { width:66px; height:66px; object-fit:contain; margin:0 auto 8px; display:block; }
+  .lh .org { font-family:'Marcellus',serif; font-weight:700; letter-spacing:.06em; color:var(--brown); font-size:clamp(16px,3.4vw,21px); margin:0 0 5px; }
+  .lh .tag { font-family:'Spectral',serif; font-style:italic; color:var(--brown-soft); font-size:12.5px; margin:0 0 4px; }
+  .lh .addr { font-family:'Marcellus',serif; font-size:11px; letter-spacing:.03em; color:var(--brown-soft); margin:0; }
+  .r-title { text-align:center; font-family:'Cormorant Garamond',serif; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--emerald-deep); font-size:27px; margin:22px 0 0; }
+  .r-sub { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; color:var(--brown-soft); font-size:17px; margin:2px 0 16px; }
+  .meta { display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; margin:6px 0 18px; }
+  .meta .box { flex:1 1 200px; }
+  .meta label, .grid label { display:block; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-deep); margin-bottom:3px; }
+  .meta .val { font-family:'Spectral',serif; font-size:15px; border-bottom:1px solid var(--gold-deep); padding:3px 2px; }
+  .ack { text-align:center; padding:16px 6px 8px; }
+  .ack p { margin:5px 0; color:var(--brown-soft); font-size:14.5px; }
+  .ack .r-name { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:24px; color:var(--emerald-deep); letter-spacing:.02em; margin:4px 0; }
+  .ack .r-amt { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:22px; color:var(--brown); margin:4px 0; }
+  .ack .r-being { font-size:14.5px; color:var(--ink); }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 22px; margin:16px 0 8px; border-top:1px dashed var(--gold-deep); padding-top:16px; }
+  .grid .v { font-size:14px; }
+  .grid .paid { display:inline-block; font-family:'Marcellus',serif; font-size:12px; letter-spacing:.05em; color:#fff; background:var(--emerald); border-radius:999px; padding:3px 12px; }
+  .sign { text-align:center; margin:24px 0 6px; }
+  .sign .sig { height:70px; width:auto; display:block; margin:0 auto; mix-blend-mode:multiply; }
+  .sign .signline { width:230px; max-width:70%; border-bottom:1px solid var(--brown); margin:2px auto 6px; }
+  .sign .signname { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:18px; color:var(--emerald-deep); margin:0; }
+  .sign .signrole { font-family:'Marcellus',serif; font-size:12px; letter-spacing:.04em; color:var(--brown-soft); margin:3px 0 0; }
+  .stamp { position:absolute; top:52%; left:50%; transform:translate(-50%,-50%) rotate(-16deg); font-family:'Marcellus',serif; font-size:74px; letter-spacing:.1em; color:rgba(13,107,79,.10); border:5px solid rgba(13,107,79,.10); border-radius:14px; padding:6px 26px; z-index:1; pointer-events:none; white-space:nowrap; }
+  .foot { text-align:center; background:var(--emerald-deep); color:#f6eccf; padding:18px 20px 22px; }
+  .foot .logos { display:flex; gap:16px; align-items:center; justify-content:center; flex-wrap:wrap; margin-bottom:10px; }
+  .foot .logos img { height:52px; width:auto; background:#fff; border-radius:8px; padding:5px 8px; }
+  .foot .web a { color:var(--gold); font-family:'Marcellus',serif; letter-spacing:.06em; text-decoration:none; }
+  .foot .meta2 { font-size:11px; color:#d9cba7; margin:6px 0 0; line-height:1.6; }
+  @media print { body { background:#fff; padding:0; } .actions { display:none; } .sheet { box-shadow:none; max-width:none; } }
+</style>
+</head>
+<body>
+  <div class="actions">
+    <a class="abtn" href="#" onclick="window.print();return false;">&#128424;&nbsp;Print / PDF</a>
+    <button type="button" class="abtn" id="copy">Copy link</button>
+    <a class="abtn wa" id="wa" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="sheet">
+    <div class="pad">
+      <div class="lh">
+        <p class="motto">&ldquo;Leadership Rooted in Service, Royalty Defined by Impact.&rdquo;</p>
+        <img class="crest" src="/images/summit-emblem.png" alt="Summit crest" />
+        <p class="org">AFRICAN GLOBAL QUEENS SUMMIT</p>
+        <p class="tag">Convened by Her Royal Majesty Obonganwan Marie Erete, Queen Aruk II</p>
+        <p class="addr">Aruk II Humanitarian Services (UK) C.I.C &middot; Hawkhill Place, Stanton St John, Oxford, OX33 1HS</p>
+      </div>
+
+      <div class="r-title">Official Receipt</div>
+      <p class="r-sub">Acknowledgement of Payment</p>
+
+      <div class="meta">
+        <div class="box"><label>Receipt No.</label><div class="val" id="r-no">&mdash;</div></div>
+        <div class="box" style="text-align:right"><label>Date</label><div class="val" id="r-date">&mdash;</div></div>
+      </div>
+
+      <div class="ack">
+        <p>Received with sincere thanks from</p>
+        <p class="r-name" id="r-name">&mdash;</p>
+        <p>the sum of</p>
+        <p class="r-amt"><span id="r-words">One Hundred Pounds only</span> (<span id="r-amt">&pound;100.00</span>)</p>
+        <p class="r-being">being <strong id="r-being">the Commitment Fee for the African Queens Summit 2026</strong>.</p>
+      </div>
+
+      <div class="grid">
+        <div><label>Purpose</label><div class="v" id="r-purpose">Commitment Fee &middot; African Queens Summit 2026</div></div>
+        <div><label>Payment method</label><div class="v" id="r-method">Direct payment (received outside online checkout)</div></div>
+        <div><label>Status</label><div class="v"><span class="paid">PAID &middot; Received with thanks</span></div></div>
+        <div><label>Summit dates</label><div class="v">14&ndash;31 August 2026 &middot; London &amp; Oxford</div></div>
+      </div>
+
+      <div class="sign">
+        <img class="sig" src="/images/queen-aruk-signature.png" alt="Signature of Queen Aruk II" />
+        <div class="signline"></div>
+        <p class="signname">Obonganwan Marie Erete, Queen Aruk II</p>
+        <p class="signrole">Convener &middot; For and on behalf of the African Queens Summit</p>
+      </div>
+
+      <div class="stamp">RECEIVED</div>
+    </div>
+    <div class="foot">
+      <div class="logos">
+        <img src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
+        <img src="/images/unipgc-logo.png" alt="UNIPGC" />
+      </div>
+      <p class="web"><a href="https://africanqueenssummit.com">www.africanqueenssummit.com</a></p>
+      <p class="meta2">Hawkhill Place, Stanton St John, Oxford, OX33 1HS, United Kingdom &middot; Tel: +44 793 250 6556<br />obonganwan.aruk@yahoo.com &middot; africanqueenssummit@gmail.com &middot; Company Registration No: 17110628</p>
+    </div>
+  </div>
+  <script>
+  (function(){
+    function dec(s){ try { s=s.replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(escape(atob(s)))); } catch(e){ return {}; } }
+    var d = dec(new URLSearchParams(location.search).get('d') || '') || {};
+    function set(id,v){ var e=document.getElementById(id); if(e && v!=null && v!=='') e.textContent=v; }
+    set('r-no', d.no); set('r-date', d.date); set('r-name', d.name);
+    if(d.words) set('r-words', d.words);
+    if(d.amount) set('r-amt', d.amount);
+    if(d.being) set('r-being', d.being);
+    if(d.purpose) set('r-purpose', d.purpose);
+    if(d.method) set('r-method', d.method);
+    document.title = 'Receipt ' + (d.no||'') + ' \\u00b7 ' + (d.name||'African Queens Summit');
+    var url = location.href;
+    var copy = document.getElementById('copy');
+    if(copy) copy.onclick = function(){ if(navigator.clipboard) navigator.clipboard.writeText(url); this.textContent='Copied \\u2713'; };
+    var wa = document.getElementById('wa');
+    if(wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent('Your African Queens Summit receipt ' + (d.no||'') + ': ' + url);
+  })();
+  </script>
+</body>
+</html>`;
+}
+
 function tributePage() {
   const paras = [
     "It is with the deepest admiration and profound respect that we pay tribute to your extraordinary life of service&mdash;a life defined by courage, conviction, visionary leadership, and an unwavering commitment to the advancement of Nigeria, Africa, and humanity.",
@@ -2428,6 +2565,10 @@ console.log('  ✓ /invite/invoices/  —  invoice master page (create/save/list
 mkdirSync(join(outRoot, 'tribute'), { recursive: true });
 writeFileSync(join(outRoot, 'tribute', 'index.html'), tributePage());
 console.log('  ✓ /invite/tribute/  —  ceremonial tribute (Chief Olusegun Obasanjo)');
+
+mkdirSync(join(outRoot, 'receipt'), { recursive: true });
+writeFileSync(join(outRoot, 'receipt', 'index.html'), receiptPage());
+console.log('  ✓ /invite/receipt/  —  official payment receipt (renders per-person from ?d=)');
 
 // Shareable index of all Traditional Rulers (Nigeria) invitations — one link.
 function rulersIndexPage(items) {
