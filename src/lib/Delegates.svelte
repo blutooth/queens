@@ -2,17 +2,17 @@
   import { delegates } from './queens.js';
 </script>
 
-<section id="delegates" class="delegates">
+<section id="advance-delegates" class="delegates">
   <div class="container">
     <header>
-      <p class="eyebrow">Registered &amp; confirmed</p>
+      <p class="eyebrow">Advance registration</p>
       <h2>
-        Our confirmed<br />
-        <span class="italic">delegates.</span>
+        Advance Registered<br />
+        <span class="italic">Delegates.</span>
       </h2>
       <p class="lead">
-        We warmly welcome the distinguished participants who have confirmed
-        their attendance at the African Queens Summit 2026.
+        We warmly welcome the distinguished participants who have completed their
+        advance registration for the African Queens Summit 2026.
       </p>
     </header>
 
