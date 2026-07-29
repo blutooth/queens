@@ -568,6 +568,8 @@ const MASTER_CSS = `
   .nm{font-weight:600;color:#fdf6e3;}
   .nm a{color:inherit;text-decoration:none;}.nm a:hover{text-decoration:underline;color:#f4d98a;}
   .cat{font-weight:400;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#0a2e22;background:var(--gold);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle;}
+  .addr{font-weight:400;font-size:12px;color:#cdbf9a;margin-top:3px;}
+  .addr.none{color:#e6a15a;font-style:italic;}
   .act{text-align:right;white-space:nowrap;}
   .act a{color:#f4d98a;font-weight:600;text-decoration:none;margin-right:12px;}
   .act a:hover{text-decoration:underline;}
@@ -640,7 +642,7 @@ function masterPage(pageKind) {
   const isGuest = pageKind === 'guest';
   const members = built.filter((b) => b.slug !== '_template' && memberKind(b) === pageKind);
   const rows = members
-    .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm"><a href="/visa/${b.slug}/index.html" target="_blank">${esc(b.name)}</a>${b.v && b.v.category ? ` <span class="cat">${esc(b.v.category)}</span>` : ''}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="/visa/${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
+    .map((b, i) => `<tr data-slug="${b.slug}"><td class="num">${i + 1}</td><td class="nm"><a href="/visa/${b.slug}/index.html" target="_blank">${esc(b.name)}</a>${b.v && b.v.category ? ` <span class="cat">${esc(b.v.category)}</span>` : ''}${b.v && b.v.address ? `<div class="addr">${esc(b.v.address)}</div>` : '<div class="addr none">⚠ no address on file</div>'}</td><td class="inv"><button class="inv-btn" onclick="toggleInvited('${b.slug}')"><span class="tickbox"></span>Invited</button></td><td class="act"><a href="/visa/${b.slug}/index.html" target="_blank">Open ↗</a><button class="linkbtn" onclick="getLink('${b.slug}')">🔗 Get link</button><button class="del" onclick="del('${b.slug}')">Delete</button></td></tr>`)
     .join('\n      ');
   const title = isGuest ? 'Queens & Kings · Visa Letters' : 'Palace Staff · Visa Letters';
   const sub = isGuest
