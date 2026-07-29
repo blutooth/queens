@@ -321,6 +321,34 @@ export const dignitaries = [
     region: 'Bamako · Mali',
     status: 'Confirmed',
   },
+  {
+    honorific: 'His Royal Highness',
+    name: 'Olusegun Aderemi',
+    role: 'Atayero of Aramoko-Ekiti',
+    region: 'Ekiti · Nigeria',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Ambassador',
+    name: 'Jonathan Ojadah',
+    role: 'Distinguished Ambassador',
+    region: 'Liberia',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Amb. Dr Chief',
+    name: 'Wallace',
+    role: 'Distinguished Ambassador',
+    region: 'International',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Ambassador',
+    name: 'Coralita Yard',
+    role: 'Distinguished Ambassador',
+    region: 'Diaspora',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
