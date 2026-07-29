@@ -349,6 +349,27 @@ export const dignitaries = [
     region: 'Diaspora',
     status: 'Confirmed',
   },
+  {
+    honorific: 'His Majesty',
+    name: 'King Abdirehid Sanwayne',
+    role: 'Traditional Sovereign',
+    region: 'Somalia',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'His Highness',
+    name: 'Omar Ali Hanfare',
+    role: 'Distinguished Royal Guest',
+    region: 'Djibouti',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'His Royal Highness',
+    name: 'Munong',
+    role: 'Traditional Ruler',
+    region: 'Ethiopia',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
