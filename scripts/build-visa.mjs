@@ -112,6 +112,18 @@ const VISA_UNBLOCK = [
   'Mhlongo Siphosenkosi Shiyinduku',
   'Mokwena Synah Magdeline',
   'Gumata Nomathemba Mavis',
+  'Akwasi Boakye',
+  'Brian Kweku Asiedu Adjepong',
+  'Helena Mensah',
+  'Nii Moi Namoale I',
+  'Elizabeth Neequaye',
+  'Constance Dokua Arthur',
+  'Daniel Bonney Awotwi',
+  'Naa Adoofo Adjorbo I',
+  'Sabina Ahinei Amartey',
+  'Getrude Darkwah Addo',
+  'Bernice Crowther',
+  'Adamah Margaret Naa Ayeley',
 ];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
