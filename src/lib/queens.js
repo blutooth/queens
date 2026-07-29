@@ -365,9 +365,9 @@ export const dignitaries = [
   },
   {
     honorific: 'His Royal Highness',
-    name: 'Munong',
+    name: 'Munongo',
     role: 'Traditional Ruler',
-    region: 'Ethiopia',
+    region: 'Kenya',
     status: 'Confirmed',
   },
 ];
