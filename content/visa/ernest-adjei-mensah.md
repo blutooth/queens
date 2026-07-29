@@ -2,8 +2,8 @@
 name: Ernest Adjei Mensah
 kind: guest
 category: Queen
-role: 
-address: 
+role: Electrical Engineer
+address: LEKMA Hospital, Accra, Ghana (Digital: GZ-130-0156)
 dob: 29 Decmber 1995
 passport: G4693732
 date: 16 July 2026
