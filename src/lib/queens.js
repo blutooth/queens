@@ -249,7 +249,7 @@ export const dignitaries = [
     name: 'The Ooni of Ife',
     role: 'Spiritual Head of Yoruba Race',
     region: 'Ile-Ife · Nigeria',
-    status: 'Invited',
+    status: 'Confirmed',
   },
   {
     honorific: 'Her Royal Majesty',
