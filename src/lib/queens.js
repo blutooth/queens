@@ -377,6 +377,20 @@ export const dignitaries = [
     region: 'DR Congo',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Her Royal Majesty',
+    name: 'Queen Thembi',
+    role: 'Royal Matriarch',
+    region: 'South Africa',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Her Royal Highness',
+    name: 'Princess Boitumelo',
+    role: 'Royal Princess',
+    region: 'South Africa',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
