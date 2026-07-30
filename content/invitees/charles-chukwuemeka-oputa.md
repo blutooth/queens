@@ -5,6 +5,7 @@ audience: guests
 template: heritage
 label: A Personal Invitation
 kingdom: "Charly Boy" · Entertainer & Cultural Icon · Nigeria
+salutation: Dear Mr Oputa
 date: 30th July 2026
 ---
 
