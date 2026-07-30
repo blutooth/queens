@@ -30,11 +30,11 @@ Your Excellency has also stepped courageously onto the national stage as a **Pre
 
 It would be our profound honour to welcome Your Excellency to the podium, to share your wisdom and inspiration with the African Queens, Queen Mothers, traditional leaders, dignitaries, and changemakers gathered from across the continent and the Diaspora. Your address would enrich our proceedings and inspire all who have the privilege of attending.
 
-## Hospitality &amp; Logistics
+## Hospitality & Logistics
 
 In appreciation of your gracious participation, the Secretariat will be pleased to provide **meals, local transportation, and entrance to all Summit events** for the duration of your engagement.
 
-## Visa Support — For the Attention of UK Visas &amp; Immigration
+## Visa Support — For the Attention of UK Visas & Immigration
 
 We respectfully confirm that Her Excellency is our officially invited Guest Speaker at the African Global Queens Summit 2026, and we kindly request that favourable consideration be given to her visa application. Her particulars are as follows:
 
@@ -50,7 +50,7 @@ The Summit will provide her meals, local transportation, and entrance to all off
 
 ## Official Summit Itinerary — 14 to 31 August 2026
 
-- 14–15 August — Royal Arrival &amp; Protocol Reception
+- 14–15 August — Royal Arrival & Protocol Reception
 - 16 August — Official Opening Ceremony
 - 17–18 August — University of Oxford Leadership Programme
 - 19 August — Blenheim Palace Visit
@@ -59,11 +59,11 @@ The Summit will provide her meals, local transportation, and entrance to all off
 - 22 August — Queens' Strategic Roundtables
 - 23 August — African Global Queens Gala Night · Porchester Hall, London
 - 24 August — London Heritage Tour
-- 25 August — Royal Heritage Visit · Buckingham Palace State Rooms &amp; Royal Mews
+- 25 August — Royal Heritage Visit · Buckingham Palace State Rooms & Royal Mews
 - 26 August — Kew Gardens Visit
-- 27 August — Historical London Tour · St Paul's Cathedral &amp; Tower of London
+- 27 August — Historical London Tour · St Paul's Cathedral & Tower of London
 - 28 August — Westminster Abbey Visit
-- 29–30 August — Private Engagements &amp; Networking
+- 29–30 August — Private Engagements & Networking
 - 31 August — Closing Celebrations · Notting Hill Carnival
 
 Your Excellency, your presence and your voice would lend immeasurable distinction to this historic gathering. I look forward to welcoming you personally to the United Kingdom.
