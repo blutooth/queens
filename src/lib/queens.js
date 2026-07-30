@@ -3,6 +3,17 @@ import { asset } from './asset.js';
 // Featured Summit speakers.
 export const speakers = [
   {
+    name: 'Aja Brown',
+    title: 'Former Mayor of Compton, California',
+    role: 'Author of “Visionary Builders” · Strategic Impact Partner, FORWARD',
+    region: 'USA',
+    images: [asset('/images/aja-brown.jpg')],
+    bio: [
+      'Aja Brown is a transformative leader and two-term Mayor of Compton — one of the youngest mayors in America to lead a major city. She turned vision into results, driving over $3 billion in new investment into her city and a reduction of roughly 60% in violent crime, while breaking a glass ceiling and inspiring a new wave of women mayors across the nation.',
+      'She launched the Compton Pledge — the largest guaranteed basic income programme in the country at the time — and was a founding mayor of Mayors for a Guaranteed Income. A multi-founder and co-founder of Omega Circle Holdings, she now partners with governments nationwide through FORWARD to modernise public systems, and is the author of “Visionary Builders”.',
+    ],
+  },
+  {
     name: 'Prince Iganda Kamole',
     title: 'Prince of the Bashinjahavu-Bashaho',
     role: 'President, Movement for the Cultural Renaissance of Africa',
