@@ -23,7 +23,7 @@ One of Africa's foremost businesswomen, you rose from the world of fashion — a
 
 Your presence would lend immeasurable distinction to this gathering of African Queens, traditional leaders, and changemakers from across the continent and the Diaspora. It would be our profound honour to welcome a daughter of **Nigeria** whose life so wholly embodies enterprise, faith, and generosity of spirit.
 
-## Duration &amp; Logistics
+## Duration & Logistics
 
 Guests are respectfully requested to reserve the full period **14–31 August 2026** to enable meaningful participation across all Summit engagements. The Secretariat will be glad to assist with arrangements following your kind confirmation.
 
