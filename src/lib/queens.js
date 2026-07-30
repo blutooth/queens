@@ -391,6 +391,27 @@ export const dignitaries = [
     region: 'South Africa',
     status: 'Confirmed',
   },
+  {
+    honorific: 'His Excellency',
+    name: 'Mike Mbuvi Sonko',
+    role: 'Former Governor of Nairobi City',
+    region: 'Kenya',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Hon. Dr',
+    name: 'Rupa Munugapati',
+    role: 'Minister of the Interior',
+    region: 'Madagascar',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Barr.',
+    name: 'David Balondemu',
+    role: 'Distinguished Guest',
+    region: 'Uganda',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
