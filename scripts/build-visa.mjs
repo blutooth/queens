@@ -124,6 +124,7 @@ const VISA_UNBLOCK = [
   'Getrude Darkwah Addo',
   'Bernice Crowther',
   'Adamah Margaret Naa Ayeley',
+  'Kimani Anne Muthoni',
 ];
 
 // Images inlined so the letter is fully self-contained (opens/prints anywhere,
