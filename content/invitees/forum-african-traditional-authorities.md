@@ -9,7 +9,7 @@ salutation: Your Majesties, Royal Highnesses & Distinguished Rulers
 date: 30th July 2026
 ---
 
-It would be our profound honour to welcome the Forum and its royal members to this historic gathering.
+It would be our profound honour to welcome the traditional rulers of Africa to this historic gathering.
 
 <!-- letter -->
 Your Majesties, Your Royal Highnesses, and Distinguished Rulers,
