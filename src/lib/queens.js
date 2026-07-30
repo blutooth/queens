@@ -370,6 +370,13 @@ export const dignitaries = [
     region: 'Kenya',
     status: 'Confirmed',
   },
+  {
+    honorific: 'His Royal Highness',
+    name: 'Prince Iganda Jean Louis Lucien',
+    role: 'Guest Speaker · Prince of the Bashinjahavu-Bashaho; President, Movement for the Cultural Renaissance of Africa',
+    region: 'DR Congo',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
