@@ -1,5 +1,21 @@
 import { asset } from './asset.js';
 
+// Featured Summit speakers.
+export const speakers = [
+  {
+    name: 'Prince Iganda Kamole',
+    title: 'Prince of the Bashinjahavu-Bashaho',
+    role: 'President, Movement for the Cultural Renaissance of Africa',
+    region: 'DR Congo',
+    images: [asset('/images/prince-iganda-1.jpg'), asset('/images/prince-iganda-2.jpg')],
+    bio: [
+      "Prince Iganda Kamole descends from two royal families of Kivu, in the east of the Democratic Republic of the Congo — the N'Iganda of the Bashinjahavu-Bashaho on his father's side, and the Katana of the Banyamocha, who reign at Irhambi-Katana, on his mother's side.",
+      'In 2021, under divine inspiration, the sub-clan chiefs and custodians of custom across Kalehe, Kabare, Idjwi, Walungu, Mwenga and Masisi designated him as representative of the Bashinjahavu-Bashaho — a community of more than one million members, which he has coordinated ever since.',
+      'He is President of the Movement for the Cultural Renaissance of Africa, championing African unity and a shared consciousness of belonging in the service of peace and development, and a representative of the National Alliance of Traditional Authorities of the Congo. A jurist and political scientist, he holds a Bachelor of Laws and a Master of Political Science in International Relations from the Université Libre de Bruxelles.',
+    ],
+  },
+];
+
 export const summit = {
   name: 'African Queens Summit',
   longName: 'African & Diaspora Queens Summit',
