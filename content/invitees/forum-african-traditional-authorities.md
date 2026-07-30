@@ -5,14 +5,14 @@ audience: rulers
 template: heritage
 label: A Royal Invitation
 kingdom: The Sovereign Traditional Rulers of Africa
-salutation: Your Majesties, Royal Highnesses & Distinguished Rulers
+salutation: Dear Sir or Madam
 date: 30th July 2026
 ---
 
 It would be our profound honour to welcome the traditional rulers of Africa to this historic gathering.
 
 <!-- letter -->
-Your Majesties, Your Royal Highnesses, and Distinguished Rulers,
+Dear Sir or Madam,
 
 **Re: A Royal Invitation to the African Global Queens Summit 2026**
 
@@ -30,6 +30,6 @@ We warmly invite the traditional rulers of Africa to take their rightful place a
 
 Their Majesties and Royal Highnesses are respectfully requested to reserve the full period **14–31 August 2026** to ensure meaningful participation across all Summit engagements — from the Ceremonial Opening and the University of Oxford Leadership Programme to the African Global Queens Gala Night and the closing celebrations. The Secretariat will be glad to assist with the arrangements for your delegation following confirmation of participation.
 
-Your Majesties, Your Royal Highnesses, your presence would lend immeasurable distinction to this landmark occasion. It would be our profound honour to welcome you to the United Kingdom.
+Your presence would lend immeasurable distinction to this landmark occasion, and it would be our profound honour to welcome you to the United Kingdom.
 
 Please accept the assurances of my highest esteem and warmest regard.
