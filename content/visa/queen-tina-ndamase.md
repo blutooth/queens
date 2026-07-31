@@ -2,7 +2,7 @@
 name: HRH Queen Tina Ndamase
 role: Queen of Pondoland · Chairperson, South African Queens Council
 address: Pondoland, Eastern Cape, South Africa
-dob:
+dob: 23 April 1984
 passport:
 date: 31 July 2026
 from: 13 August 2026
