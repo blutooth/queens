@@ -124,6 +124,7 @@ const VISA_UNBLOCK = [
   'Getrude Darkwah Addo',
   'Bernice Crowther',
   'Adamah Margaret Naa Ayeley',
+  'HRH Queen Tina Ndamase',
   'Kimani Anne Muthoni',
 ];
 
