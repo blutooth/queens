@@ -11,11 +11,11 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Angola at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Rui Alberto de Carvalho, Ambassador\
 Embassy of the Republic of Angola\
 22 Dorset Street, London W1U 6QY\
 Tel: 020 7299 9850\
-Email: embassy@angola.org.uk
+Email: geral@angola.org.uk
 
 Your Excellency,
 

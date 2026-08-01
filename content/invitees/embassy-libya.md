@@ -14,8 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the State 
 His Excellency The Ambassador\
 Embassy of the State of Libya\
 15 Knightsbridge, London SW1X 7LY\
-Tel: 020 7201 8280\
-Email: charge-D@libyanembassyuk.org
+Tel: 020 7589 9444\
+Email: info@libyanembassy.org
 
 Your Excellency,
 

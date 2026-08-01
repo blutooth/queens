@@ -11,11 +11,11 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Zimbabwe at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Colonel Christian Katsande, Ambassador\
 High Commission of the Republic of Zimbabwe\
-Zimbabwe House, 429 Strand, London WC2R 0JR\
+Zimbabwe House, 429 The Strand, London WC2R 0JR\
 Tel: 020 7836 7755\
-Email: zimlondon@zimfa.gov.zw
+Email: info@zimlondon.gov.zw
 
 Your Excellency,
 

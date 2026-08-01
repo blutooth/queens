@@ -11,7 +11,7 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Tunisia at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Nabil Ben Khedher, Ambassador\
 Embassy of the Republic of Tunisia\
 29 Prince’s Gate, London SW7 1QG\
 Tel: 020 7584 8117\

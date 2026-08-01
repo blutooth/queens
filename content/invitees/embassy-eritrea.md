@@ -11,11 +11,11 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the State of Eritrea at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+The Chargé d’Affaires a.i.\
 Embassy of the State of Eritrea\
-95-96 White Lion Street, London N1 9PF\
+96 White Lion Street, London N1 9PF\
 Tel: 020 7713 0096\
-Email: pa.ambassador@eritreanembassyuk.org
+Email: eriembuk@gmail.com
 
 Your Excellency,
 

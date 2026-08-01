@@ -11,9 +11,9 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Seychelles at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+Ms Patsy Moustache, Acting High Commissioner\
 High Commission of the Republic of Seychelles\
-130-132 Buckingham Palace Road, London SW1W 9SA\
+Ground Floor, 130-132 Buckingham Palace Road, London SW1W 9SA\
 Email: office@seychelleshcl.co.uk
 
 Your Excellency,

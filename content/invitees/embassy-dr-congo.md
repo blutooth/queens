@@ -14,8 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Democr
 His Excellency The Ambassador\
 Embassy of the Democratic Republic of the Congo\
 281 Gray’s Inn Road, London WC1X 8QF\
-Tel: 020 7580 3931\
-Email: missionrdclondres@gmail.com
+Tel: 020 7278 8068\
+Email: info@ambardc-london.org
 
 Your Excellency,
 

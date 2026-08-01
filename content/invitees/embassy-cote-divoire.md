@@ -11,11 +11,11 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Côte d’Ivoire at the Summit.
 
 <!-- letter -->
-Her Excellency Mrs Sara Affoue Amani, Ambassador\
+Her Excellency Mrs Sara Affoué Amani, Ambassador\
 Embassy of the Republic of Côte d’Ivoire\
-138-140 Buckingham Palace Road, London SW1W 9SA\
+2 Upper Belgrave Street, London SW1X 8BJ\
 Tel: 020 7235 6991\
-Email: secretariat.royaumeuni@diplomatie.gouv.ci
+Email: info@ambacilondres.org
 
 Your Excellency,
 
