@@ -30,7 +30,8 @@ export const speakers = [
     title: 'Queen (Olori) of Ife',
     role: 'Yeye Omi Oodua · Chartered Accountant & Entrepreneur',
     region: 'Nigeria & UK',
-    images: [],
+    images: [asset('/images/olori-ashley.jpg')],
+    objectPosition: 'center 35%',
     bio: [
       'Olori Afolashade Ashley Ogunwusi (née Adegoke) is a spouse of the Ooni of Ife, His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II. She holds the title of Yeye Omi Oodua — “Mother of Oodua’s Water”.',
       "A chartered accountant and entrepreneur based between Nigeria and the United Kingdom, she holds a Master's degree in Accounting and Finance from the University of Greenwich, and is the founder of the Ashley Adegoke Foundation, which supports underprivileged children and widows.",
