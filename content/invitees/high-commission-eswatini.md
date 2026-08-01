@@ -13,7 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Kingdo
 <!-- letter -->
 Her Excellency Ms Thandazile Penelope Mbuyisa, High Commissioner\
 High Commission of the Kingdom of Eswatini\
-20 Buckingham Gate, London SW1E 6LB
+20 Buckingham Gate, London SW1E 6LB\
+Email: london.eswatinihighcommission@gov.sz
 
 Your Excellency,
 

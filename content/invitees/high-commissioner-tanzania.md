@@ -13,7 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the United
 <!-- letter -->
 His Excellency Mr Mbelwa Kairuki, High Commissioner\
 High Commission of the United Republic of Tanzania\
-3 Stratford Place, London W1C 1AS
+3 Stratford Place, London W1C 1AS\
+Email: ubalozi@tzhc.uk
 
 Your Excellency,
 
