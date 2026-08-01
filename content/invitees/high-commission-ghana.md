@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Ghana at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+Her Excellency Mrs Sabah Zita Benson, High Commissioner\
 High Commission of the Republic of Ghana\
-London\
-United Kingdom
+13 Belgrave Square, London SW1X 8PS\
+Tel: 020 7201 5900
 
 Your Excellency,
 

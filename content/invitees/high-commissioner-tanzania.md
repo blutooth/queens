@@ -8,14 +8,12 @@ kingdom: High Commission of the United Republic of Tanzania · London
 date: 1st August 2026
 ---
 
-It would be a singular honour to welcome Your Excellency to represent the President of the United Republic of Tanzania at the Summit.
+It would be a singular honour to welcome Your Excellency to represent the United Republic of Tanzania at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Mbelwa Kairuki, High Commissioner\
 High Commission of the United Republic of Tanzania\
-3 Stratford Place\
-London W1C 1AS\
-United Kingdom
+3 Stratford Place, London W1C 1AS
 
 Your Excellency,
 
@@ -27,9 +25,9 @@ On behalf of the African Global Queens Summit Organising Committee, and in accor
 
 The Summit is an esteemed international convocation uniting reigning African Queens, Queen Mothers, Kings, traditional rulers, heads of mission, government representatives, scholars, and distinguished guests from across the continent and the Diaspora. It is convened to celebrate our shared heritage, to strengthen royal and diplomatic ties between Africa and the United Kingdom, and to advance the cultural, economic, and moral presence of Africa upon the global stage.
 
-## An Invitation to Represent the President
+## An Invitation to Represent the Head of State
 
-It would be our profound and singular honour for Your Excellency to attend and, **on behalf of His Excellency the President of the United Republic of Tanzania**, to represent the Head of State and the people of Tanzania at this historic gathering, with all the ceremonial honour and distinction that so eminent a mandate deserves. Your Excellency would be received with full protocol and accorded a place of honour among the sovereigns and heads of mission in attendance.
+It would be our profound and singular honour for Your Excellency to attend and, **on behalf of His Excellency the President of the United Republic of Tanzania**, to represent the Head of State and the people of your nation at this historic gathering, with all the ceremonial honour and distinction that so eminent a mandate deserves. Your Excellency would be received with full protocol and accorded a place of honour among the sovereigns and heads of mission in attendance.
 
 ## Engagements of Honour
 

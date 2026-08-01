@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Mozambique at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+Her Excellency Ms Albertina Maria Domingos Macdonald, High Commissioner\
 High Commission of the Republic of Mozambique\
-London\
-United Kingdom
+21 Fitzroy Square, London W1T 6EL\
+Tel: 020 7383 3800
 
 Your Excellency,
 

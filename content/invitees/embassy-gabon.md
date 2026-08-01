@@ -1,20 +1,20 @@
 ---
 slug: embassy-gabon
-name: The Ambassador of the Gabonese Republic
+name: The High Commissioner of the Gabonese Republic
 audience: excellency
 template: heritage
 label: A Formal Invitation
-kingdom: Embassy of the Gabonese Republic · London
+kingdom: High Commission of the Gabonese Republic · London
 date: 1st August 2026
 ---
 
 It would be a singular honour to welcome Your Excellency to represent the Gabonese Republic at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
-Embassy of the Gabonese Republic\
-London\
-United Kingdom
+Her Excellency Mrs Aichatou Sanni Aoudou, High Commissioner\
+High Commission of the Gabonese Republic\
+27 Elvaston Place, London SW7 5NL\
+Tel: 020 7823 9986
 
 Your Excellency,
 

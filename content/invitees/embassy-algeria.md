@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the People's Democratic Republic of Algeria at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Nourredine Yazid, Ambassador\
 Embassy of the People's Democratic Republic of Algeria\
-London\
-United Kingdom
+1-3 Riding House Street, London W1W 7DR\
+Tel: 020 7299 7077
 
 Your Excellency,
 

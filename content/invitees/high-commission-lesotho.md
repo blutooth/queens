@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Kingdom of Lesotho at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Mosuoe Letuma, High Commissioner\
 High Commission of the Kingdom of Lesotho\
-London\
-United Kingdom
+7 Chesham Place, Belgravia, London SW1X 8HN\
+Tel: 020 7235 5686
 
 Your Excellency,
 

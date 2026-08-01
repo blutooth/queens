@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Botswana at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Shimane Lawrence Gaokgethelwe Kelaotswe, High Commissioner\
 High Commission of the Republic of Botswana\
-London\
-United Kingdom
+6 Stratford Place, London W1C 1AY\
+Tel: 020 7499 0031
 
 Your Excellency,
 

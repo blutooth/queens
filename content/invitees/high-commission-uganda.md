@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Uganda at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+Her Excellency Ms Nimisha Madhvani, High Commissioner\
 High Commission of the Republic of Uganda\
-London\
-United Kingdom
+Uganda House, 58-59 Trafalgar Square, London WC2N 5DX\
+Tel: 020 7839 5783
 
 Your Excellency,
 

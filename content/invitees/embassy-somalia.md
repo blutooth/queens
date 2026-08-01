@@ -11,10 +11,9 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Federal Republic of Somalia at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Abdulkadir Abdi Hashi, Ambassador\
 Embassy of the Federal Republic of Somalia\
-London\
-United Kingdom
+Unit 10-12, Exhibition House, Addison Bridge Place, London W14 8XP
 
 Your Excellency,
 

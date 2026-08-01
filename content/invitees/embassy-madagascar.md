@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency The Ambassador\
 Embassy of the Republic of Madagascar\
-London\
-United Kingdom
+One Knightsbridge Green (5th Floor), London SW1X 7NE\
+Tel: 020 7052 8277
 
 Your Excellency,
 

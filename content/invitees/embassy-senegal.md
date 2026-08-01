@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Senegal at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency General Cheikh Wade, Ambassador\
 Embassy of the Republic of Senegal\
-London\
-United Kingdom
+47 Bedford Row, London WC1R 4LR\
+Tel: 020 7938 4048
 
 Your Excellency,
 

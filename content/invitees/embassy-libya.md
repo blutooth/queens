@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the State 
 <!-- letter -->
 His Excellency The Ambassador\
 Embassy of the State of Libya\
-London\
-United Kingdom
+15 Knightsbridge, London SW1X 7LY\
+Tel: 020 7201 8280
 
 Your Excellency,
 

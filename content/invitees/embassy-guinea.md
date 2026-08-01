@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Guinea at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Aly Diallo, Ambassador\
 Embassy of the Republic of Guinea\
-London\
-United Kingdom
+156 Cromwell Road, London SW7 4EF\
+Tel: 020 7258 9640
 
 Your Excellency,
 

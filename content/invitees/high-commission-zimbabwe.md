@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency The High Commissioner\
 High Commission of the Republic of Zimbabwe\
-London\
-United Kingdom
+Zimbabwe House, 429 Strand, London WC2R 0JR\
+Tel: 020 7836 7755
 
 Your Excellency,
 

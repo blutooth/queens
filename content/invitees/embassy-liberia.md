@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Liberia at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+Her Excellency Ms Genevieve A Kennedy, Ambassador\
 Embassy of the Republic of Liberia\
-London\
-United Kingdom
+23 Fitzroy Square, London W1T 6EW\
+Tel: 020 7388 5489
 
 Your Excellency,
 

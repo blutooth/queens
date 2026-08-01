@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of South Sudan at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Nickson Deng Peter Kuccath, Ambassador\
 Embassy of the Republic of South Sudan\
-London\
-United Kingdom
+Office 11, 2nd Floor, 21 Knightsbridge, London SW1X 7LY\
+Tel: 020 3687 2366
 
 Your Excellency,
 

@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Malawi at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Dr Thomas John Bisika, High Commissioner\
 High Commission of the Republic of Malawi\
-London\
-United Kingdom
+36 John Street, London WC1N 2AT\
+Tel: 020 7421 6010
 
 Your Excellency,
 

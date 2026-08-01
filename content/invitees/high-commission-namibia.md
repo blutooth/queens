@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Namibia at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Veiccoh Kahwadi Nghiwete, High Commissioner\
 High Commission of the Republic of Namibia\
-London\
-United Kingdom
+6 Chandos Street, London W1G 9LU\
+Tel: 020 7636 6244
 
 Your Excellency,
 

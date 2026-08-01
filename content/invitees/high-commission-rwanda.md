@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Rwanda at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Johnston Busingye, High Commissioner\
 High Commission of the Republic of Rwanda\
-London\
-United Kingdom
+120-122 Seymour Place, London W1H 1NR\
+Tel: 020 7224 9832
 
 Your Excellency,
 

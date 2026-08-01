@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Mauritius at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Dr Rajeshwar Jeetah, High Commissioner\
 High Commission of the Republic of Mauritius\
-London\
-United Kingdom
+32/33 Elvaston Place, London SW7 5NW\
+Tel: 020 7581 0294
 
 Your Excellency,
 

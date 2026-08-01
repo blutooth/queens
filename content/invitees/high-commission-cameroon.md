@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Cameroon at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Albert Njoteh Fotabong, High Commissioner\
 High Commission of the Republic of Cameroon\
-London\
-United Kingdom
+84 Holland Park, London W11 3SB\
+Tel: 020 7727 0771
 
 Your Excellency,
 

@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Zambia at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+Her Excellency Mrs Macenje Florence Mazoka, High Commissioner\
 High Commission of the Republic of Zambia\
-London\
-United Kingdom
+Zambia House, 2 Palace Gate, London W8 5NG\
+Tel: 020 7581 2142
 
 Your Excellency,
 

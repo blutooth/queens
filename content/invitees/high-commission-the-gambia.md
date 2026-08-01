@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of The Gambia at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+Her Excellency Mrs Fatou Bensouda, High Commissioner\
 High Commission of the Republic of The Gambia\
-London\
-United Kingdom
+57 Kensington Court, London W8 5DG\
+Tel: 020 3928 9770
 
 Your Excellency,
 

@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency The Ambassador\
 Embassy of the Republic of Tunisia\
-London\
-United Kingdom
+29 Prince’s Gate, London SW7 1QG\
+Tel: 020 7584 8117
 
 Your Excellency,
 

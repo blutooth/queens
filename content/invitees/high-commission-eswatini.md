@@ -11,10 +11,9 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Kingdom of Eswatini at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+Her Excellency Ms Thandazile Penelope Mbuyisa, High Commissioner\
 High Commission of the Kingdom of Eswatini\
-London\
-United Kingdom
+20 Buckingham Gate, London SW1E 6LB
 
 Your Excellency,
 

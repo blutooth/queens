@@ -11,10 +11,9 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Sierra Leone at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Dr Morie Komba Manyeh, High Commissioner\
 High Commission of the Republic of Sierra Leone\
-London\
-United Kingdom
+41 Eagle Street, London WC1R 4TL
 
 Your Excellency,
 

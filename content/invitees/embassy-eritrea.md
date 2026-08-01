@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the State 
 <!-- letter -->
 His Excellency The Ambassador\
 Embassy of the State of Eritrea\
-London\
-United Kingdom
+95-96 White Lion Street, London N1 9PF\
+Tel: 020 7713 0096
 
 Your Excellency,
 

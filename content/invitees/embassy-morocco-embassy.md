@@ -11,10 +11,9 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Kingdom of Morocco at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Hakim Hajoui, Ambassador\
 Embassy of the Kingdom of Morocco\
-London\
-United Kingdom
+6 Grosvenor Gardens, London SW1W 0DH
 
 Your Excellency,
 

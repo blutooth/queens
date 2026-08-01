@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency The Ambassador\
 Embassy of the Republic of Angola\
-London\
-United Kingdom
+22 Dorset Street, London W1U 6QY\
+Tel: 020 7299 9850
 
 Your Excellency,
 

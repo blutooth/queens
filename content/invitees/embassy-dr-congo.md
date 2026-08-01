@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Democr
 <!-- letter -->
 His Excellency The Ambassador\
 Embassy of the Democratic Republic of the Congo\
-London\
-United Kingdom
+281 Gray’s Inn Road, London WC1X 8QF\
+Tel: 020 7580 3931
 
 Your Excellency,
 

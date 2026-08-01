@@ -11,10 +11,9 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of Kenya at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Maurice Odhiambo Makoloo, High Commissioner\
 High Commission of the Republic of Kenya\
-London\
-United Kingdom
+45 Portland Place, London W1B 1AS
 
 Your Excellency,
 

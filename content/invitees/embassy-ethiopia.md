@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Federal Democratic Republic of Ethiopia at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Biruk Mekonnen Demissie, Ambassador\
 Embassy of the Federal Democratic Republic of Ethiopia\
-London\
-United Kingdom
+17 Princes Gate, London SW7 1PZ\
+Tel: 020 7589 7212
 
 Your Excellency,
 

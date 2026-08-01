@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Federal Republic of Nigeria at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Amin Muhammad Dalhatu, High Commissioner\
 High Commission of the Federal Republic of Nigeria\
-London\
-United Kingdom
+Nigeria House, 9 Northumberland Avenue, London WC2N 5BX\
+Tel: 020 7839 1244
 
 Your Excellency,
 

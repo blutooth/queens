@@ -11,10 +11,10 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Republic of South Africa at the Summit.
 
 <!-- letter -->
-His Excellency The High Commissioner\
+His Excellency Mr Jeremiah Nyamane Mamabolo, High Commissioner\
 High Commission of the Republic of South Africa\
-London\
-United Kingdom
+South Africa House, Trafalgar Square, London WC2N 5DP\
+Tel: 020 7451 7299
 
 Your Excellency,
 

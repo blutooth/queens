@@ -11,10 +11,9 @@ date: 1st August 2026
 It would be a singular honour to welcome Your Excellency to represent the Arab Republic of Egypt at the Summit.
 
 <!-- letter -->
-His Excellency The Ambassador\
+His Excellency Mr Ashraf Mohamed Nabhan Swelam, Ambassador\
 Embassy of the Arab Republic of Egypt\
-London\
-United Kingdom
+26 South Street, London W1K 1DW
 
 Your Excellency,
 

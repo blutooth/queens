@@ -13,8 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency The Ambassador\
 Embassy of the Republic of Equatorial Guinea\
-London\
-United Kingdom
+13 Park Place, St James’s, London SW1A 1LP\
+Tel: 020 7408 0500
 
 Your Excellency,
 
