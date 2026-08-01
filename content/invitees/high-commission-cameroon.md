@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Mr Albert Njoteh Fotabong, High Commissioner\
 High Commission of the Republic of Cameroon\
 84 Holland Park, London W11 3SB\
-Tel: 020 7727 0771
+Tel: 020 7727 0771\
+Email: info@cameroonhighcommission.co.uk
 
 Your Excellency,
 

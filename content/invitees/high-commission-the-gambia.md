@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 Her Excellency Mrs Fatou Bensouda, High Commissioner\
 High Commission of the Republic of The Gambia\
 57 Kensington Court, London W8 5DG\
-Tel: 020 3928 9770
+Tel: 020 3928 9770\
+Email: gambiahighcomuk@btconnect.com
 
 Your Excellency,
 

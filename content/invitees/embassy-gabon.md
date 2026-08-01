@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Gabone
 Her Excellency Mrs Aichatou Sanni Aoudou, High Commissioner\
 High Commission of the Gabonese Republic\
 27 Elvaston Place, London SW7 5NL\
-Tel: 020 7823 9986
+Tel: 020 7823 9986\
+Email: gabonembassyuk@gmail.com
 
 Your Excellency,
 

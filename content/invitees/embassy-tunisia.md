@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency The Ambassador\
 Embassy of the Republic of Tunisia\
 29 Prince’s Gate, London SW7 1QG\
-Tel: 020 7584 8117
+Tel: 020 7584 8117\
+Email: London@tunisianembassy.co.uk
 
 Your Excellency,
 

@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Dr Rajeshwar Jeetah, High Commissioner\
 High Commission of the Republic of Mauritius\
 32/33 Elvaston Place, London SW7 5NW\
-Tel: 020 7581 0294
+Tel: 020 7581 0294\
+Email: londonhc@govmu.org
 
 Your Excellency,
 

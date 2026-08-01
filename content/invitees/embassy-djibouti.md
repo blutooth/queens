@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Mr Ayeid Mousseid Yahya, Ambassador\
 Embassy of the Republic of Djibouti\
 26 Rue Emile Ménier, 75116 Paris, France\
-Tel: 0033 1 4727 4922
+Tel: 0033 1 4727 4922\
+Email: webmaster@amb-djibouti.org
 
 Your Excellency,
 

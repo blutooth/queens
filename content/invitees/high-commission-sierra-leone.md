@@ -13,7 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency Dr Morie Komba Manyeh, High Commissioner\
 High Commission of the Republic of Sierra Leone\
-41 Eagle Street, London WC1R 4TL
+41 Eagle Street, London WC1R 4TL\
+Email: info@slhc-uk.org
 
 Your Excellency,
 

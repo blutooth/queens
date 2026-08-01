@@ -13,7 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Arab R
 <!-- letter -->
 His Excellency Mr Ashraf Mohamed Nabhan Swelam, Ambassador\
 Embassy of the Arab Republic of Egypt\
-26 South Street, London W1K 1DW
+26 South Street, London W1K 1DW\
+Email: egtamboff@gmail.com
 
 Your Excellency,
 

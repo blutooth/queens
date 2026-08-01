@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Federa
 His Excellency Amin Muhammad Dalhatu, High Commissioner\
 High Commission of the Federal Republic of Nigeria\
 Nigeria House, 9 Northumberland Avenue, London WC2N 5BX\
-Tel: 020 7839 1244
+Tel: 020 7839 1244\
+Email: chancery@nigeriahc.org
 
 Your Excellency,
 

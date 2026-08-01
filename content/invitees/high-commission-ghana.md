@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 Her Excellency Mrs Sabah Zita Benson, High Commissioner\
 High Commission of the Republic of Ghana\
 13 Belgrave Square, London SW1X 8PS\
-Tel: 020 7201 5900
+Tel: 020 7201 5900\
+Email: gh.donlon@gmail.com
 
 Your Excellency,
 

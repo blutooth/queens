@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Mr Jeremiah Nyamane Mamabolo, High Commissioner\
 High Commission of the Republic of South Africa\
 South Africa House, Trafalgar Square, London WC2N 5DP\
-Tel: 020 7451 7299
+Tel: 020 7451 7299\
+Email: london.sahc@dirco.gov.za
 
 Your Excellency,
 

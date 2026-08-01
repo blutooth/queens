@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Mr Johnston Busingye, High Commissioner\
 High Commission of the Republic of Rwanda\
 120-122 Seymour Place, London W1H 1NR\
-Tel: 020 7224 9832
+Tel: 020 7224 9832\
+Email: uk@rwandainuk.gov.rw
 
 Your Excellency,
 

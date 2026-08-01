@@ -13,7 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency Mr Maurice Odhiambo Makoloo, High Commissioner\
 High Commission of the Republic of Kenya\
-45 Portland Place, London W1B 1AS
+45 Portland Place, London W1B 1AS\
+Email: info@kenyahighcom.org.uk
 
 Your Excellency,
 

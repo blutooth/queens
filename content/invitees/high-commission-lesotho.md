@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Kingdo
 His Excellency Mr Mosuoe Letuma, High Commissioner\
 High Commission of the Kingdom of Lesotho\
 7 Chesham Place, Belgravia, London SW1X 8HN\
-Tel: 020 7235 5686
+Tel: 020 7235 5686\
+Email: hicom@lesotholondon.org.uk
 
 Your Excellency,
 

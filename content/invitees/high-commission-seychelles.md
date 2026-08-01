@@ -13,7 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 <!-- letter -->
 His Excellency The High Commissioner\
 High Commission of the Republic of Seychelles\
-130-132 Buckingham Palace Road, London SW1W 9SA
+130-132 Buckingham Palace Road, London SW1W 9SA\
+Email: office@seychelleshcl.co.uk
 
 Your Excellency,
 

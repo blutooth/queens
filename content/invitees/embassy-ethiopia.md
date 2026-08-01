@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Federa
 His Excellency Mr Biruk Mekonnen Demissie, Ambassador\
 Embassy of the Federal Democratic Republic of Ethiopia\
 17 Princes Gate, London SW7 1PZ\
-Tel: 020 7589 7212
+Tel: 020 7589 7212\
+Email: london.embassy@mfa.gov.et
 
 Your Excellency,
 

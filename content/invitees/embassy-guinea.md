@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Mr Aly Diallo, Ambassador\
 Embassy of the Republic of Guinea\
 156 Cromwell Road, London SW7 4EF\
-Tel: 020 7258 9640
+Tel: 020 7258 9640\
+Email: embassyofguineauk@gmail.com
 
 Your Excellency,
 

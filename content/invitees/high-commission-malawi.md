@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Dr Thomas John Bisika, High Commissioner\
 High Commission of the Republic of Malawi\
 36 John Street, London WC1N 2AT\
-Tel: 020 7421 6010
+Tel: 020 7421 6010\
+Email: london@malawihighcommission.co.uk
 
 Your Excellency,
 

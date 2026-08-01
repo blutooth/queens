@@ -13,7 +13,8 @@ It would be a singular honour to welcome Your Excellency to represent the Kingdo
 <!-- letter -->
 His Excellency Mr Hakim Hajoui, Ambassador\
 Embassy of the Kingdom of Morocco\
-6 Grosvenor Gardens, London SW1W 0DH
+6 Grosvenor Gardens, London SW1W 0DH\
+Email: ambalondres@maec.gov.ma
 
 Your Excellency,
 

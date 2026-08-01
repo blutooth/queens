@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency The Ambassador\
 Embassy of the Republic of the Sudan\
 3 Cleveland Row, St James’s, London SW1A 1DD\
-Tel: 020 7839 8080
+Tel: 020 7839 8080\
+Email: info@sudanembassy.org.uk
 
 Your Excellency,
 

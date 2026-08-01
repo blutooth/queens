@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 Her Excellency Ms Albertina Maria Domingos Macdonald, High Commissioner\
 High Commission of the Republic of Mozambique\
 21 Fitzroy Square, London W1T 6EL\
-Tel: 020 7383 3800
+Tel: 020 7383 3800\
+Email: hclondon@mozambiquehc.co.uk
 
 Your Excellency,
 

@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Mr Veiccoh Kahwadi Nghiwete, High Commissioner\
 High Commission of the Republic of Namibia\
 6 Chandos Street, London W1G 9LU\
-Tel: 020 7636 6244
+Tel: 020 7636 6244\
+Email: info@namibiahc.org.uk
 
 Your Excellency,
 

@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 Her Excellency Mrs Macenje Florence Mazoka, High Commissioner\
 High Commission of the Republic of Zambia\
 Zambia House, 2 Palace Gate, London W8 5NG\
-Tel: 020 7581 2142
+Tel: 020 7581 2142\
+Email: info@zambiahc.org.uk
 
 Your Excellency,
 

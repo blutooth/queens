@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the People
 His Excellency Mr Nourredine Yazid, Ambassador\
 Embassy of the People's Democratic Republic of Algeria\
 1-3 Riding House Street, London W1W 7DR\
-Tel: 020 7299 7077
+Tel: 020 7299 7077\
+Email: info@algerianembassy.org.uk
 
 Your Excellency,
 

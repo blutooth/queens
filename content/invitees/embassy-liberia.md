@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 Her Excellency Ms Genevieve A Kennedy, Ambassador\
 Embassy of the Republic of Liberia\
 23 Fitzroy Square, London W1T 6EW\
-Tel: 020 7388 5489
+Tel: 020 7388 5489\
+Email: info@embassyofliberia.org.uk
 
 Your Excellency,
 

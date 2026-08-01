@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 His Excellency Mr Nickson Deng Peter Kuccath, Ambassador\
 Embassy of the Republic of South Sudan\
 Office 11, 2nd Floor, 21 Knightsbridge, London SW1X 7LY\
-Tel: 020 3687 2366
+Tel: 020 3687 2366\
+Email: info@embrss.org.uk
 
 Your Excellency,
 

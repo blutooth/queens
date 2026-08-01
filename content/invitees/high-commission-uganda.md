@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 Her Excellency Ms Nimisha Madhvani, High Commissioner\
 High Commission of the Republic of Uganda\
 Uganda House, 58-59 Trafalgar Square, London WC2N 5DX\
-Tel: 020 7839 5783
+Tel: 020 7839 5783\
+Email: info@ugandahighcommission.co.uk
 
 Your Excellency,
 

@@ -14,7 +14,8 @@ It would be a singular honour to welcome Your Excellency to represent the Republ
 Her Excellency Mrs Sara Affoue Amani, Ambassador\
 Embassy of the Republic of Côte d’Ivoire\
 138-140 Buckingham Palace Road, London SW1W 9SA\
-Tel: 020 7235 6991
+Tel: 020 7235 6991\
+Email: secretariat.royaumeuni@diplomatie.gouv.ci
 
 Your Excellency,
 
