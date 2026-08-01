@@ -25,6 +25,17 @@ export const speakers = [
       'He is President of the Movement for the Cultural Renaissance of Africa, championing African unity and a shared consciousness of belonging in the service of peace and development, and a representative of the National Alliance of Traditional Authorities of the Congo. A jurist and political scientist, he holds a Bachelor of Laws and a Master of Political Science in International Relations from the Université Libre de Bruxelles.',
     ],
   },
+  {
+    name: 'Olori Afolashade Ashley Ogunwusi',
+    title: 'Queen (Olori) of Ife',
+    role: 'Chartered Accountant · Founder, Ashley Adegoke Foundation',
+    region: 'Ile-Ife, Nigeria',
+    images: [],
+    bio: [
+      'Olori Afolashade Ashley Ogunwusi (née Adegoke) is a Queen of Ife and wife of His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II, the Ooni of Ife — one of the foremost thrones of Yorubaland. UK-born and raised, she was received into the royal palace in 2022.',
+      "A chartered accountant, she holds a Master's degree in Accounting and Finance from the University of Greenwich and runs several businesses in the United Kingdom. She is the founder of the Ashley Adegoke Foundation, which supports underprivileged children and widows.",
+    ],
+  },
 ];
 
 export const summit = {

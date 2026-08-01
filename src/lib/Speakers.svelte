@@ -1,5 +1,15 @@
 <script>
   import { speakers } from './queens.js';
+
+  function initials(name) {
+    const parts = name
+      .replace(/^(Olori|Queen|HRH|HRM|HRM\.|Oba|King|Prince|Princess|Chief|Dr|Mr|Mrs|Ms)\s+/i, '')
+      .split(/\s+/)
+      .filter(Boolean);
+    if (!parts.length) return '★';
+    const last = parts.length > 1 ? parts[parts.length - 1][0] : '';
+    return (parts[0][0] + last).toUpperCase();
+  }
 </script>
 
 <section id="speakers" class="speakers">
@@ -20,9 +30,13 @@
       {#each speakers as s, i}
         <article class="speaker" class:reverse={i % 2 === 1}>
           <div class="portrait">
-            <img src={s.images[0]} alt={s.name} loading="lazy" />
-            {#if s.images[1]}
-              <img class="inset" src={s.images[1]} alt={s.name} loading="lazy" />
+            {#if s.images[0]}
+              <img src={s.images[0]} alt={s.name} loading="lazy" />
+              {#if s.images[1]}
+                <img class="inset" src={s.images[1]} alt={s.name} loading="lazy" />
+              {/if}
+            {:else}
+              <div class="ph" aria-hidden="true"><span>{initials(s.name)}</span></div>
             {/if}
           </div>
           <div class="detail">
@@ -100,6 +114,26 @@
     border-radius: 5px;
     border: 2px solid var(--forest);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  }
+  .portrait .ph {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(circle at 50% 35%, rgba(212, 175, 55, 0.22), transparent 60%),
+      linear-gradient(160deg, rgba(13, 107, 79, 0.55), rgba(9, 59, 44, 0.9));
+  }
+  .portrait .ph span {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: 0.08em;
+    color: var(--gold, #d4af37);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
   }
 
   .detail .who {
