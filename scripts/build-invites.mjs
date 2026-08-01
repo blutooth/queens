@@ -663,6 +663,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       <button class="tab active" data-tab="create">＋ Create</button>
       <button class="tab" data-tab="existing">Existing invitations</button>
       <button class="tab" data-tab="shared">Shared letters</button>
+      <a class="tab visa-tab" href="/f/" target="_blank" rel="noopener">👑 FATA ↗</a>
       <a class="tab visa-tab" href="/visa/" target="_blank" rel="noopener">🛂 Visa Letters ↗</a>
       <a class="tab visa-tab" href="/invite/morocco/" target="_blank" rel="noopener">🇲🇦 Morocco Letter ↗</a>
       <a class="tab visa-tab" href="/invite/invoices/" target="_blank" rel="noopener">🧾 Invoices ↗</a>
