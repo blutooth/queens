@@ -37,6 +37,18 @@ export const speakers = [
       "A chartered accountant and entrepreneur based between Nigeria and the United Kingdom, she holds a Master's degree in Accounting and Finance from the University of Greenwich, and is the founder of the Ashley Adegoke Foundation, which supports underprivileged children and widows.",
     ],
   },
+  {
+    name: 'Dr Gia Grant-Rutledge',
+    title: 'Chief Strategy Officer, The Kingdom Collective Group',
+    role: 'Chief Strategy & Partnerships Officer · Africa–USA International Chamber of Commerce & Industry · PAGTIC',
+    region: 'Diaspora · USA',
+    images: [asset('/images/gia-grant-rutledge.jpg')],
+    objectPosition: 'center 20%',
+    bio: [
+      'Dr Gia Grant-Rutledge is Chief Strategy Officer of The Kingdom Collective Group and Chief Strategy & Partnerships Officer of the Africa–USA International Chamber of Commerce & Industry and PAGTIC. Her work connects Africa, the United States, and the Pan-African Diaspora through international trade, investment, and commerce.',
+      'She champions strategic partnerships to advance transformative trade and investment, accelerate infrastructure development, and expand economic opportunity across Africa and the global Pan-African Diaspora.',
+    ],
+  },
 ];
 
 export const summit = {
