@@ -291,6 +291,13 @@ export const dignitaries = [
     status: 'Confirmed',
   },
   {
+    honorific: 'Her Royal Highness',
+    name: 'Princess Namukola',
+    role: 'Royal Princess',
+    region: 'Zambia',
+    status: 'Confirmed',
+  },
+  {
     honorific: 'Her Royal Majesty',
     name: 'The Queen Mother of Ejisu',
     role: 'Traditional Matriarch of Ashanti',
