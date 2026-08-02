@@ -298,6 +298,13 @@ export const dignitaries = [
     status: 'Confirmed',
   },
   {
+    honorific: 'Her Royal Highness',
+    name: 'Princess Khanyisa Mogale',
+    role: 'Princess of the Bapo ba Mogale 2 Kingdom',
+    region: 'North West · South Africa',
+    status: 'Confirmed',
+  },
+  {
     honorific: 'Her Royal Majesty',
     name: 'The Queen Mother of Ejisu',
     role: 'Traditional Matriarch of Ashanti',
