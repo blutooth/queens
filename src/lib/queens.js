@@ -507,7 +507,7 @@ export const itinerary = [
   { date: '24 Aug', title: 'London Sightseeing & River Cruise', price: 65, image: asset('/images/london-sightseeing.jpg'), detail: 'A guided open-top coach tour of the capital with a Thames river cruise — a 24-hour pass.' },
   { date: '25 Aug', title: 'Royal Gala Night', price: 150, retail: 220, flagship: true, image: asset('/images/porchester-2.jpg'), detail: 'The black-tie Gala at Porchester Hall, London.', checkout: 'https://checkout.africanqueenssummit.com/b/00w00j8Pn0bu6xr0wV1VK0a' },
   { date: '26 Aug', title: 'Kew Gardens', price: 60, image: asset('/images/kew-gardens.jpg'), detail: 'The Royal Botanic Gardens at Kew.' },
-  { date: '27 Aug', title: "St Paul's & Tower of London", price: 100, image: asset('/images/st-pauls.jpg'), detail: 'The cathedral, the Tower and the Crown Jewels.' },
+  { date: '27 Aug', title: "St Paul's & Tower of London", price: 100, image: asset('/images/st-pauls.jpg'), detail: 'The cathedral, the Tower and the Crown Jewels.', checkout: 'https://checkout.africanqueenssummit.com/b/cNi3cvd5Dgas9JD1AZ1VK0o' },
   { date: '28 Aug', title: 'Westminster Abbey', price: 55, image: asset('/images/westminster.jpg'), detail: 'A visit to the historic Westminster Abbey.' },
   { date: '29–30 Aug', title: 'Rest', price: 'Free', image: asset('/images/london-rest.jpg'), detail: 'Leisure days and personal engagements.' },
   { date: '31 Aug', title: 'Notting Hill Carnival', price: 'Free', image: asset('/images/celebration-carnival.jpg'), detail: 'The cultural finale on a global stage.' },
