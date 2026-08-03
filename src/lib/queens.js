@@ -483,10 +483,10 @@ export const dignitaries = [
 // `retail` is the indicative à-la-carte value, shown struck through to convey
 // the saving against the summit package rate.
 export const packages = [
-  { name: 'Signature', price: 550, retail: 600, note: 'The three flagship engagements', body: 'Oxford, the Royal Gala and Buckingham Palace — the heart of the summit.', image: asset('/images/oxford-university.jpg'), stripe: 'https://buy.stripe.com/test_00w9ATfdCdJV8Cl4rQ8og01' },
-  { name: 'Signature + 2', price: 650, retail: 760, note: 'Flagships + any two excursions', body: 'Add two further outings of your choosing from the programme.', image: asset('/images/oxford-magdalen.jpg'), stripe: 'https://buy.stripe.com/test_7sY8wP3uU7lx6ud4rQ8og03' },
-  { name: 'Signature + 3', price: 750, retail: 920, note: 'Flagships + any three excursions', body: 'Add three further outings of your choosing from the programme.', featured: true, image: asset('/images/dancers.jpg'), stripe: 'https://buy.stripe.com/test_eVq9AT9TiaxJ3i1bUi8og02' },
-  { name: 'Full Programme', price: 900, retail: 1100, note: 'Any available engagement', body: 'The complete convocation — any available excursion across the seventeen days.', premium: true, image: asset('/images/queen-aruk-ii-throne.jpg'), stripe: 'https://buy.stripe.com/test_00w9ATc1q0X97yhbUi8og04' },
+  { name: 'Signature', price: 400, retail: 600, note: 'The three flagship engagements', body: 'Oxford, the Royal Gala and Buckingham Palace — the heart of the summit.', image: asset('/images/oxford-university.jpg'), stripe: 'https://buy.stripe.com/test_00w9ATfdCdJV8Cl4rQ8og01' },
+  { name: 'Silver', price: 480, retail: 760, note: 'Flagships + any two excursions', body: 'Add two further outings of your choosing from the programme.', image: asset('/images/oxford-magdalen.jpg'), stripe: 'https://buy.stripe.com/test_7sY8wP3uU7lx6ud4rQ8og03' },
+  { name: 'Gold', price: 550, retail: 920, note: 'Flagships + any three excursions', body: 'Add three further outings of your choosing from the programme.', featured: true, image: asset('/images/dancers.jpg'), stripe: 'https://buy.stripe.com/test_eVq9AT9TiaxJ3i1bUi8og02' },
+  { name: 'Full Programme', price: 650, retail: 1100, note: 'Any available engagement', body: 'The complete convocation — any available excursion across the seventeen days.', premium: true, image: asset('/images/queen-aruk-ii-throne.jpg'), stripe: 'https://buy.stripe.com/test_00w9ATc1q0X97yhbUi8og04' },
 ];
 
 // The day-by-day programme. `price` is a number (GBP) or a label / null.
