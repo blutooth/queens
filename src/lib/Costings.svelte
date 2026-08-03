@@ -2,7 +2,6 @@
   import { packages, itinerary, extras } from './queens.js';
 
   const phone = '447932506556';
-  const stripeKey = 'pk_live_51ThqtEEEFvyMorqB9pOI1SvMrVVkRnIJ5z0KNTILgWtuXloDm87oDemiZnLxWMPQQcq5mOoHb8lyslwWyJqUsnFQ00SgEI4XZB';
   const waLink = (msg) => `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
   const packLink = (name, price) =>
     waLink(`Hello — I would like to book the ${name} package (£${price}) at the African Queens Summit, 14–31 August 2026.`);
@@ -51,13 +50,8 @@
                   <span class="label">{d.price}</span>
                 {/if}
               </div>
-              {#if d.buyButtonId}
-                <div class="ecard-buy">
-                  <stripe-buy-button
-                    buy-button-id={d.buyButtonId}
-                    publishable-key={stripeKey}
-                  ></stripe-buy-button>
-                </div>
+              {#if d.checkout}
+                <a class="ecard-buy" href={d.checkout} target="_blank" rel="noopener">Book &amp; pay →</a>
               {/if}
             </div>
           </article>
@@ -217,7 +211,13 @@
     font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--terracotta); font-weight: 600;
   }
-  .ecard-buy { margin-top: 0.9rem; }
+  .ecard-buy {
+    display: block; text-align: center; margin-top: 0.9rem;
+    padding: 0.7rem 1rem; background: var(--ink); color: var(--cream);
+    border-radius: 999px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.01em;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .ecard-buy:hover { background: var(--terracotta); transform: translateY(-1px); }
 
   /* Pricing — picture cards */
   .pgrid {
