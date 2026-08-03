@@ -2,6 +2,7 @@
   import { packages, itinerary, extras } from './queens.js';
 
   const phone = '447932506556';
+  const stripeKey = 'pk_live_51ThqtEEEFvyMorqB9pOI1SvMrVVkRnIJ5z0KNTILgWtuXloDm87oDemiZnLxWMPQQcq5mOoHb8lyslwWyJqUsnFQ00SgEI4XZB';
   const waLink = (msg) => `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
   const packLink = (name, price) =>
     waLink(`Hello — I would like to book the ${name} package (£${price}) at the African Queens Summit, 14–31 August 2026.`);
@@ -50,6 +51,14 @@
                   <span class="label">{d.price}</span>
                 {/if}
               </div>
+              {#if d.buyButtonId}
+                <div class="ecard-buy">
+                  <stripe-buy-button
+                    buy-button-id={d.buyButtonId}
+                    publishable-key={stripeKey}
+                  ></stripe-buy-button>
+                </div>
+              {/if}
             </div>
           </article>
         {/each}
@@ -208,6 +217,7 @@
     font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--terracotta); font-weight: 600;
   }
+  .ecard-buy { margin-top: 0.9rem; }
 
   /* Pricing — picture cards */
   .pgrid {
