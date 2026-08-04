@@ -1,10 +1,10 @@
 ---
 slug: mr-hattab-haddaoui-minister-plenipotentiary-head-of-mission-the-charg-d-affaires-a-i
 name: Mr Hattab HADDAOUI, Minister Plenipotentiary, Head of Mission, the Chargé d’Affaires A.I.
-audience: politicians
+audience: excellency
 template: heritage
-salutation: Honourable Charge D"Affair
-kingdom: Tunisia
+salutation: Your Excellency
+kingdom: Embassy of the Republic of Tunisia
 date: 2 July 2026
 ---
 
