@@ -3,7 +3,7 @@
 
   function initials(name) {
     const parts = name
-      .replace(/^(Olori|Queen|HRH|HRM|HRM\.|Oba|King|Prince|Princess|Chief|Dr|Mr|Mrs|Ms)\s+/i, '')
+      .replace(/^((Olori|Queen|Mother|Naa|HRH|HRM|HRM\.|Oba|King|Prince|Princess|Chief|Dr|Mr|Mrs|Ms)\s+)+/i, '')
       .split(/\s+/)
       .filter(Boolean);
     if (!parts.length) return '★';
