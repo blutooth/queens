@@ -513,26 +513,6 @@ export const itinerary = [
   { date: '31 Aug', title: 'Notting Hill Carnival', price: 'Free', image: asset('/images/celebration-carnival.jpg'), detail: 'The cultural finale on a global stage.' },
 ];
 
-// Programme Highlights — the ceremonial day-by-day overview, mirrored from the
-// official invitation letter (date, engagement, icon).
-export const programmeHighlights = [
-  { date: '14–15 Aug', title: 'Royal Arrival & Protocol Reception', icon: '👑' },
-  { date: '16 Aug', title: 'Opening of the Summit', icon: '📜' },
-  { date: '17–18 Aug', title: 'Oxford University Leadership Course & Seminar', icon: '🎓' },
-  { date: '19 Aug', title: 'Visit to Blenheim Palace', icon: '🏰' },
-  { date: '20 Aug', title: 'Courtesy visit to the Lord Mayor of Oxford · Art Exhibition', icon: '🎨' },
-  { date: '21 Aug', title: 'Bicester Designer Village', icon: '🛍️' },
-  { date: '22 Aug', title: "Day of Rest · Queen's Strategic Roundtables (closed-door)", icon: '🫖' },
-  { date: '23 Aug', title: 'Buckingham State Rooms & Royal Mews', icon: '🏛️' },
-  { date: '24 Aug', title: 'London bus tour — Big Ben, London Eye', icon: '🎡' },
-  { date: '25 Aug', title: 'Gala Night — Fashion, Art & Entertainment · Porchester Hall', icon: '🥂' },
-  { date: '26 Aug', title: 'Kew Gardens', icon: '🌿' },
-  { date: '27 Aug', title: "St Paul's Cathedral & Tower of London", icon: '🗼' },
-  { date: '28 Aug', title: 'Westminster Abbey', icon: '⛪' },
-  { date: '29–30 Aug', title: 'Free', icon: '🕊️' },
-  { date: '31 Aug', title: 'Notting Hill Carnival — End of Summit', icon: '🥳' },
-];
-
 // Optional London attractions, bookable as add-ons. Per person.
 export const extras = [
   { name: 'London Eye', price: '£33' },
