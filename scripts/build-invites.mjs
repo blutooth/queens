@@ -626,6 +626,7 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
   a.act.ghost, button.act.ghost { background: transparent; color: var(--emerald-deep); border-color: var(--emerald); }
   a.act.wa, button.act.wa { background: #25d366; border-color: #1da851; color: #053; }
   a.act.email, button.act.email { background: #1a73e8; border-color: #1557b0; color: #fff; }
+  a.act.email.indiv, button.act.email.indiv { background: #0b57d0; border-color: #0842a0; }
   .field { margin-bottom: 14px; }
   label { display: block; font-family: 'Marcellus', serif; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--emerald-deep); margin-bottom: 5px; }
   input, select, textarea { width: 100%; font-family: 'Spectral', serif; font-size: 15px; padding: 10px 12px; border: 1px solid #cdbb8e; border-radius: 8px; background: #fff; color: var(--ink); }
@@ -885,6 +886,19 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
     );
     return 'https://mail.google.com/mail/?view=cm&fs=1&to=&su=' + su + '&body=' + body;
   }
+  function gmailComposePersonal(it) {
+    var url = personalUrl(it);
+    var mission = it.kingdom || 'your mission';
+    var su = encodeURIComponent('Invitation — ' + (it.kingdom || it.name) + ' · African Queens Summit · 14–31 August 2026');
+    var body = encodeURIComponent(
+      (it.salutation || 'Your Excellency') + ',\\n\\n' +
+      'On behalf of the Office of the Convener, it would be a distinct honour to welcome you and the ' + mission + ' to the African Queens Summit in England, 14–31 August 2026.\\n\\n' +
+      'Your personal invitation may be viewed here:\\n\\n' + url + '\\n\\n' +
+      'With the compliments of the Office of the Convener,\\n' +
+      'African Queens Summit'
+    );
+    return 'https://mail.google.com/mail/?view=cm&fs=1&to=&su=' + su + '&body=' + body;
+  }
   function renderRow(it) {
     var url = personalUrl(it);
     var row = document.createElement('div');
@@ -899,7 +913,10 @@ function masterPage(built, templateNames, rawLetters, invitedStore) {
       '<a class="act" href="' + url + '" target="_blank">Open</a>' +
       '<button class="act ghost" data-copy="' + url + '">Copy link</button>' +
       '<a class="act wa" href="' + shareWa(it.name, it.audience, url) + '" target="_blank">Send on WhatsApp</a>' +
-      (isDiplomat(it) ? '<a class="act email" href="' + gmailCompose(it) + '" target="_blank" rel="noopener">✉ Email</a>' : '') +
+      (isDiplomat(it)
+        ? '<a class="act email" href="' + gmailCompose(it) + '" target="_blank" rel="noopener">✉ General</a>' +
+          '<a class="act email indiv" href="' + gmailComposePersonal(it) + '" target="_blank" rel="noopener">✉ Individual</a>'
+        : '') +
       '<span class="path">' + url + '</span>';
     var chk = document.createElement('label'); chk.className = 'sent-chk';
     var box = document.createElement('input'); box.type = 'checkbox'; box.checked = !!sent[it.slug];
@@ -2539,7 +2556,7 @@ for (const f of files) {
   const dir = join(outRoot, slug);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), html);
-  built.push({ slug, name: data.name || slug, template, audience, custom: !!data.custom, kingdom: data.kingdom || '' });
+  built.push({ slug, name: data.name || slug, template, audience, custom: !!data.custom, kingdom: data.kingdom || '', salutation: data.salutation || '' });
   console.log(`  ✓ /invite/${slug}/  —  ${data.name || slug}  [${audience} · ${template}]`);
 }
 
