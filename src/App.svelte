@@ -5,6 +5,7 @@
   import Foundations from './lib/Foundations.svelte';
   import Declaration from './lib/Declaration.svelte';
   import Program from './lib/Program.svelte';
+  import ProgramHighlights from './lib/ProgramHighlights.svelte';
   import Queens from './lib/Queens.svelte';
   import Gathering from './lib/Gathering.svelte';
   import Speakers from './lib/Speakers.svelte';
@@ -21,6 +22,7 @@
   <Foundations />
   <Declaration />
   <Program />
+  <ProgramHighlights />
   <Queens />
   <Gathering />
   <Speakers />
