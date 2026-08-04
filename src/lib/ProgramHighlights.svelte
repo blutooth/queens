@@ -16,6 +16,7 @@
     <ol class="timeline">
       {#each programmeHighlights as h}
         <li class="item" class:finale={h.title.includes('End of Summit')}>
+          <span class="ico" aria-hidden="true">{h.icon}</span>
           <span class="when">{h.date}</span>
           <span class="what">{h.title}</span>
         </li>
@@ -36,16 +37,18 @@
 
   .timeline { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; }
   .item {
-    display: grid; grid-template-columns: 8.5rem 1fr; align-items: center;
-    gap: 0.5rem 1.1rem; padding: 0.85rem 0.5rem; border-bottom: 1px solid var(--line, rgba(60,36,21,0.14));
+    display: grid; grid-template-columns: 2.2rem 8.5rem 1fr; align-items: center;
+    gap: 0.5rem 1rem; padding: 0.85rem 0.5rem; border-bottom: 1px solid var(--line, rgba(60,36,21,0.14));
   }
   .item:last-child { border-bottom: none; }
+  .ico { font-size: 1.2rem; line-height: 1; justify-self: center; }
   .when {
-    justify-self: start; display: inline-block; text-align: center; white-space: nowrap;
+    justify-self: start; box-sizing: border-box; width: 7.5rem;
+    text-align: center; white-space: nowrap;
     background: #1f8a53; color: #fff; border: 1px solid #14663c;
     box-shadow: 0 1px 3px rgba(20, 102, 60, 0.35);
     font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 700;
-    padding: 0.4rem 0.75rem; border-radius: 999px;
+    padding: 0.4rem 0.5rem; border-radius: 999px;
   }
   .what {
     font-family: var(--font-display); font-size: 1.12rem; color: var(--ink); line-height: 1.3;
@@ -53,6 +56,9 @@
   .item.finale .what { color: var(--terracotta); font-style: italic; }
 
   @media (max-width: 560px) {
-    .item { grid-template-columns: 1fr; gap: 0.45rem; }
+    .item { grid-template-columns: 1.9rem 1fr; gap: 0.4rem 0.7rem; }
+    .ico { grid-row: span 2; align-self: center; }
+    .when { grid-column: 2; }
+    .what { grid-column: 2; }
   }
 </style>
