@@ -63,6 +63,17 @@ export const speakers = [
       'Her work is the quiet architecture of connection: developing leaders, building institutions, and turning relationships between government, industry, and education into partnerships of lasting consequence. Founder of Global Diaspora Day — a movement now recognised across three countries and two U.S. states — she champions a leadership that is collective in spirit, strategic in method, and generational in its reach.',
     ],
   },
+  {
+    name: 'Coralita Yard',
+    title: 'Founder & CEO, Korvana',
+    role: 'International Development Advocate · VP Caribbean, IPADA Initiative (Motherland Beckons)',
+    region: 'Caribbean & Africa',
+    images: [],
+    bio: [
+      'Coralita Yard is an entrepreneur, humanitarian leader and international-development advocate, and the Founder and Chief Executive of Korvana — a venture dedicated to building enduring bridges between Africa and the Caribbean through business, culture, tourism and shared enterprise.',
+      'She serves as Vice-President for the Caribbean of the IPADA Initiative (Motherland Beckons), reconnecting the diaspora with the continent, and as Special Adviser on Humanitarian Affairs within the Office of the Special Envoy for West Africa. A consultant, speaker and steadfast champion of women, youth and underserved communities, she has become a trusted voice in Pan-African cooperation and diaspora engagement — persuaded, above all, that collaboration is the surest architecture of lasting change.',
+    ],
+  },
 ];
 
 export const summit = {
