@@ -33,7 +33,7 @@
             {#if s.images[0]}
               <img src={s.images[0]} alt={s.name} loading="lazy" style={s.objectPosition ? 'object-position: ' + s.objectPosition : ''} />
               {#if s.images[1]}
-                <img class="inset" src={s.images[1]} alt={s.name} loading="lazy" />
+                <img class="inset" src={s.images[1]} alt={s.name} loading="lazy" style={s.insetPosition ? 'object-position: ' + s.insetPosition : ''} />
               {/if}
             {:else}
               <div class="ph" aria-hidden="true"><span>{initials(s.name)}</span></div>
