@@ -33,7 +33,7 @@
             {#if s.images[0]}
               <img src={s.images[0]} alt={s.name} loading="lazy" style={s.objectPosition ? 'object-position: ' + s.objectPosition : ''} />
               {#if s.images[1]}
-                <img class="inset" src={s.images[1]} alt={s.name} loading="lazy" style={s.insetPosition ? 'object-position: ' + s.insetPosition : ''} />
+                <img class="inset" class:round={s.insetRound} src={s.images[1]} alt={s.name} loading="lazy" style={s.insetPosition ? 'object-position: ' + s.insetPosition : ''} />
               {/if}
             {:else}
               <div class="ph" aria-hidden="true"><span>{initials(s.name)}</span></div>
@@ -114,6 +114,16 @@
     border-radius: 5px;
     border: 2px solid var(--forest);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  }
+  /* Circular "medallion" inset — matches the speaker-card look */
+  .portrait .inset.round {
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    right: -14px;
+    bottom: -14px;
+    border: 3px solid #c9a227;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
   }
   .portrait .ph {
     width: 100%;

@@ -54,9 +54,10 @@ export const speakers = [
     title: 'Enstooled as Naa Afoley Jormo',
     role: 'Attorney · Founder, Diaspora District & Global Diaspora Day',
     region: 'Ethiopia · USA · Ghana',
-    images: [asset('/images/manal-al-ansi-2.jpg'), asset('/images/manal-al-ansi.jpg')],
-    objectPosition: '50% 2%',
-    insetPosition: 'center 22%',
+    images: [asset('/images/manal-al-ansi.jpg'), asset('/images/manal-al-ansi-2.jpg')],
+    objectPosition: 'center 18%',
+    insetPosition: 'center 10%',
+    insetRound: true,
     bio: [
       'Born in Ethiopia, raised in the United States, and enstooled in Ghana as Queen Mother Naa Afoley Jormo, Manal Omar Al-Ansi is an attorney and strategic-partnerships consultant, and the founder of Diaspora District — a global hub for collaboration across the African diaspora.',
       'Her work is the quiet architecture of connection: developing leaders, building institutions, and turning relationships between government, industry, and education into partnerships of lasting consequence. Founder of Global Diaspora Day — a movement now recognised across three countries and two U.S. states — she champions a leadership that is collective in spirit, strategic in method, and generational in its reach.',
