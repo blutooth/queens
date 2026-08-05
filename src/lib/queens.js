@@ -56,10 +56,8 @@ export const speakers = [
     region: 'Ethiopia · USA · Ghana',
     images: [],
     bio: [
-      'Born in Ethiopia and raised in the United States, Queen Mother Manal Omar Al-Ansi, enstooled as Naa Afoley Jormo, is an attorney, strategic partnerships and investments consultant, and Founder of Diaspora District, the global hub for diaspora collaboration.',
-      'Throughout her career, she has dedicated herself to developing leaders, building institutions, and forging strategic partnerships that strengthen communities across Africa and the diaspora. Her work focuses on developing leadership capacity and creating ecosystems that unite leaders across government, industry, and education to transform relationships into strategic partnerships that create sustainable impact.',
-      'As Founder of Diaspora District, she brings together leaders from across industries and continents to build partnerships that advance economic and educational development across Africa and the diaspora. She founded Global Diaspora Day, an international movement officially recognised across three countries and two U.S. states that celebrates and strengthens collaboration throughout the global African diaspora.',
-      'In recognition of her unwavering commitment to economic and educational development, servant leadership, and strengthening the relationship between Africa and its global diaspora, she was enstooled in Ghana as Queen Mother Naa Afoley Jormo. She continues to champion visionary leadership and strategic partnerships that inspire leaders across generations to work collectively and strategically toward a more connected, prosperous, and united future.',
+      'Born in Ethiopia, raised in the United States, and enstooled in Ghana as Queen Mother Naa Afoley Jormo, Manal Omar Al-Ansi is an attorney and strategic-partnerships consultant, and the founder of Diaspora District — a global hub for collaboration across the African diaspora.',
+      'Her work is the quiet architecture of connection: developing leaders, building institutions, and turning relationships between government, industry, and education into partnerships of lasting consequence. Founder of Global Diaspora Day — a movement now recognised across three countries and two U.S. states — she champions a leadership that is collective in spirit, strategic in method, and generational in its reach.',
     ],
   },
 ];
