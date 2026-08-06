@@ -142,7 +142,7 @@ const emblemDataUri = () => dataUri('summit-emblem.png');
 const b64url = (s) => Buffer.from(s, 'utf8').toString('base64url');
 const cardLinkFor = (v) => `${SITE_URL}/visa/card/?d=${b64url(JSON.stringify({
   name: v.name || '', role: v.role || '', address: v.address || '', dob: v.dob || '',
-  passport: v.passport || '', date: v.date || '', from: v.from || '', to: v.to || '',
+  passport: v.passport || '', email: v.email || '', date: v.date || '', from: v.from || '', to: v.to || '',
   kind: v.kind === 'guest' ? 'guest' : 'staff',
 }))}`;
 
@@ -184,6 +184,7 @@ function letterHtml(v, sig, emblem, opts = {}) {
     ${item('Address', v.address)}
     ${item('Date of Birth', v.dob)}
     ${item('Passport Number', v.passport)}
+    ${v.email ? item('Contact e-mail', v.email) : ''}
   </ul>`;
   const senderAddr = SENDER.address.map((l) => esc(l)).join('<br />');
 
@@ -478,7 +479,7 @@ UK Visas and Immigration</div>
     var nameBit = esch(data.name || '');
     if (!guest && data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
     var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + (val ? esch(val) : '') + '</li>'; };
-    var reHtml = '<p class="re">Re: ' + nameBit + '</p><ul class="re-list">' + li('Address', data.address) + li('Date of Birth', data.dob) + li('Passport Number', data.passport) + '</ul>';
+    var reHtml = '<p class="re">Re: ' + nameBit + '</p><ul class="re-list">' + li('Address', data.address) + li('Date of Birth', data.dob) + li('Passport Number', data.passport) + (data.email ? li('Contact e-mail', data.email) : '') + '</ul>';
     var res = document.querySelectorAll('.c-re'); for (var j=0;j<res.length;j++) res[j].innerHTML = reHtml;
     if (guest) { var bp = document.querySelector('.body-pad'); if (bp) bp.classList.add('kind-guest'); }
     document.title = 'Visa Invitation Letter \\u2014 ' + (data.name || '');
