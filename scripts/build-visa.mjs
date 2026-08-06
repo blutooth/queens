@@ -268,8 +268,10 @@ function letterHtml(v, sig, emblem, opts = {}) {
   .sign { margin-top: 22px; }
   .sign img { display: block; height: 84px; width: auto; margin: 6px 0 2px; }
   .sign .nm { font-weight: 600; }
-  .visa-foot { display: flex; gap: 22px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 20px 20px 26px; }
-  .visa-foot img { height: 64px; width: auto; display: block; }
+  .visa-foot { display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 18px 20px 24px; }
+  .visa-foot img { height: 60px; width: auto; display: block; }
+  .visa-foot .lh-box { background: #fff; display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 9px; border: 1px solid var(--gold); height: 72px; }
+  .visa-foot .lh-box img { height: 58px; max-width: 320px; }
   .toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px; }
   .toolbar button, .toolbar a { font-family: system-ui, sans-serif; font-size: 13px; padding: 8px 16px; border: 1px solid #999; border-radius: 6px; background: #fff; cursor: pointer; color: #1a1a1a; text-decoration: none; }
   .toolbar button:hover, .toolbar a:hover { background: #f2f2f2; }
@@ -277,7 +279,17 @@ function letterHtml(v, sig, emblem, opts = {}) {
     html, body { background: #fff; }
     .toolbar { display: none; }
     .sheet { width: auto; min-height: auto; margin: 0; box-shadow: none; }
-    .body-pad { padding: 10mm 16mm 14mm; }
+    .body-pad { padding: 9mm 16mm 5mm; }
+    /* Keep the whole letter tight enough that the footer logos never orphan
+       onto a near-empty final page. */
+    p { margin: 0 0 8px; }
+    h3 { margin: 12px 0 5px; }
+    .sign { margin-top: 14px; }
+    .sign img { height: 64px; }
+    .visa-foot { padding: 8px 20px 10px; gap: 14px; break-inside: avoid; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .visa-foot img { height: 48px; }
+    .visa-foot .lh-box { height: 62px; padding: 5px 10px; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .visa-foot .lh-box img { height: 50px; max-width: 300px; }
     @page { size: A4; margin: 0; }
   }
 </style>
@@ -396,6 +408,7 @@ UK Visas and Immigration</div>
   </div>
   <div class="kente-band"></div>
   <div class="visa-foot">
+    <div class="lh-box"><img src="/images/partners-letterhead.png" alt="Queen Aruk II crest and collaborating organisations" /></div>
     <img src="/images/foundation-african-royals.jpg" alt="Foundation of African Royals" />
     <img src="/images/unipgc-logo.png" alt="UNIPGC — International Peace &amp; Governance Council" />
   </div>
