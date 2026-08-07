@@ -68,10 +68,35 @@ export const speakers = [
     title: 'Founder & CEO, Korvana',
     role: 'International Development Advocate · VP Caribbean, IPADA Initiative (Motherland Beckons)',
     region: 'Caribbean & Africa',
-    images: [],
+    images: [asset('/images/coralita-yard.jpg')],
+    objectPosition: 'center 12%',
     bio: [
       'Coralita Yard is an entrepreneur, humanitarian leader and international-development advocate, and the Founder and Chief Executive of Korvana — a venture dedicated to building enduring bridges between Africa and the Caribbean through business, culture, tourism and shared enterprise.',
       'She serves as Vice-President for the Caribbean of the IPADA Initiative (Motherland Beckons), reconnecting the diaspora with the continent, and as Special Adviser on Humanitarian Affairs within the Office of the Special Envoy for West Africa. A consultant, speaker and steadfast champion of women, youth and underserved communities, she has become a trusted voice in Pan-African cooperation and diaspora engagement — persuaded, above all, that collaboration is the surest architecture of lasting change.',
+    ],
+  },
+  {
+    name: 'Her Excellency Nyakan June',
+    title: 'Global CEO, Timeless Women of Wonder Africa',
+    role: 'Strategy, Transformation & Innovation Expert · Founder, TWOW Africa · Chair, Global Innovation Society of Kenya',
+    region: 'Kenya',
+    images: [asset('/images/nyakan-june.jpg')],
+    objectPosition: 'center 18%',
+    bio: [
+      'Her Excellency Nyakan June is a strategy, transformation and innovation expert whose twenty-seven-year career has been devoted to raising impact, efficiency, productivity and wealth across both the private and public sectors. She is the Global Chief Executive of Timeless Dynamic Services Ltd and the founder and Global CEO of Timeless Women of Wonder (TWOW) Africa — a movement celebrating and elevating the continent’s women of enduring influence.',
+      'Chair of the Global Innovation Society of Kenya and of Group 7 Investments Company, an adviser to governments and a member of the Leadership, Ethics & Values Africa platform, she has been honoured as a Pan-African American Leadership Impact Award winner (2025) for Blazing the Trail, Chairman of the Year (2015) and a CIO Award winner (2012). She hosts the Accelerate Africa’s Growth Conferences — building on the legacy of her Timeless Women Conferences — and co-hosted the inaugural Africa Funding Tour in 2020, which supported 744 SMEs across six African countries through the pandemic. In 2022 she stood as an independent presidential aspirant in Kenya’s elections: a leader defined by service, courage, and the conviction that Africa’s growth is timeless.',
+    ],
+  },
+  {
+    name: 'Otunba (Dr.) Olawanle Raphael Akinboboye',
+    title: 'Founder & President, La Campagne Tropicana Beach Resort',
+    role: 'Pan-African Tourism Icon · Founder, Motherland Beckons & IPADA',
+    region: 'Nigeria',
+    images: [asset('/images/akinboboye.jpg')],
+    objectPosition: 'center 20%',
+    bio: [
+      'Otunba (Dr.) Olawanle Raphael Akinboboye is a Pan-African visionary, tourism icon and cultural entrepreneur — one of the continent’s foremost champions of heritage tourism, devoted to repositioning Africa as a leading destination for culture, investment and international engagement. As Founder and President of La Campagne Tropicana Beach Resort, he pioneered the world’s first authentic African-themed beach, forest and mangrove resort: a globally acclaimed model uniting indigenous architecture, environmental sustainability, luxury hospitality and African cultural identity. He holds a Master’s in Hospitality Management from Florida International University and an Honorary Doctorate for his contributions to tourism, culture and national development.',
+      'He is the visionary founder of Motherland Beckons and IPADA — Pan-African movements reconnecting Africans and the Diaspora with their ancestral homeland through tourism, culture, commerce and investment, and inspiring thousands worldwide to rediscover the continent. An entrepreneur, author, strategist and cultural diplomat, he has advised governments, traditional institutions and international organisations on tourism development, destination branding and cultural diplomacy — an enduring voice of the African Renaissance, building lasting bridges between Africa and its worldwide family.',
     ],
   },
 ];
