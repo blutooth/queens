@@ -99,6 +99,18 @@ export const speakers = [
       'He is the visionary founder of Motherland Beckons and IPADA — Pan-African movements reconnecting Africans and the Diaspora with their ancestral homeland through tourism, culture, commerce and investment, and inspiring thousands worldwide to rediscover the continent. An entrepreneur, author, strategist and cultural diplomat, he has advised governments, traditional institutions and international organisations on tourism development, destination branding and cultural diplomacy — an enduring voice of the African Renaissance, building lasting bridges between Africa and its worldwide family.',
     ],
   },
+  {
+    name: 'HRM Oba (Dr.) Olusegun Idowu Aderemi, JP',
+    title: 'Atayero II of Aramoko-Ekiti Kingdom',
+    role: 'Traditional Ruler · Entrepreneur · Regional President, Occupational Health & Safety (UK), Nigeria',
+    region: 'Nigeria · Ekiti State',
+    images: [asset('/images/oba-aderemi.jpg')],
+    objectPosition: 'center 16%',
+    bio: [
+      'HRM Oba (Dr.) Amb. Olusegun Idowu Aderemi, JP, reigns as the Atayero II of Aramoko-Ekiti Kingdom in Ekiti State, ascending the throne of the Arakale Ruling House in January 2020 as son of Oba Okunola Osefaja Ajibike, Atayero I. A devout Christian and church elder who upholds the traditional customs of his forefathers, he is a dedicated custodian of Aramoko’s cultural heritage. He holds an MBA in Cultural Heritage Management, serves on the Governing Council of Lagos Business School, and is a Justice of the Peace and Fellow of numerous professional bodies.',
+      'A renowned entrepreneur and employer of labour, he founded Segmat Springs Ltd in 1996 and built a group of auto-care enterprises — among them Automatic Fit and Energy Ltd, distributor for Michelin in Nigeria and partner to Total and NNPC — and, in 2021, the mobile venture Fixit and Go. As Nigeria’s Regional President of Occupational Health and Safety (UK) he is a leading advocate for road safety, and his philanthropy and peacebuilding have drawn recognition at home and abroad, including honours from the Mayors of Newark and Franklin, New Jersey. He is celebrated as a builder, motivator and symbol of African culture and tradition.',
+    ],
+  },
 ];
 
 export const summit = {
