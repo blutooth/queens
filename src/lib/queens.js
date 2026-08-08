@@ -644,6 +644,13 @@ export const dignitaries = [
     region: 'Somalia',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Mr',
+    name: 'Mohamed Daw Mabrook Fazzani',
+    role: 'Distinguished Delegate',
+    region: 'Libya',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
