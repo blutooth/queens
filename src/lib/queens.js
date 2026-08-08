@@ -125,6 +125,18 @@ export const speakers = [
       'Her commitment reaches equally into community development: she builds mentorship programmes for young entrepreneurs, facilitates workshops in leadership and personal growth, and champions policies for social justice and equality. Through the Bright Star Foundation and partnerships spanning the African Early Childhood Network, the African Union’s Continental Education Strategy for Africa, the UN South African Working Group and the C20 — where she serves as Co-Facilitator — she inspires individuals to embrace their cultural roots and helps build a more inclusive, culturally rich and vibrant world.',
     ],
   },
+  {
+    name: 'HRM Professor Queen Eunice Bakare',
+    title: 'Crown Queen of the Ikpai Clan, Cross River',
+    role: 'Professor of Christian Education & Divinity · Founding President, Mothers on Planet Earth International',
+    region: 'Cross River · Nigeria',
+    images: [asset('/images/eunice-bakare.jpg')],
+    objectPosition: 'center 8%',
+    bio: [
+      'Her Royal Majesty, Professor Queen Eunice Bakare (née Okey) is Crown Queen of the Ikpai Clan in Akamkpa, Cross River State, Nigeria — a monarch whose reign is inseparable from a lifetime of scholarship and faith. A Professor of Christian Education and Divinity and a professional marketer holding a PhD in Marketing, she is at once teacher, preacher, author, and spiritual and motivational speaker, uniting the disciplines of the academy with the callings of the pulpit.',
+      'With her husband, Engr. Sylvester K. Bakare, she is Founder, Monarch and Presiding Priest of the New Jerusalem Empire International Organization, and Director of its Bible, Leadership and Professional Institute. As Founding President of Mothers on Planet Earth International and host of JAKAs, she has devoted her life’s work to faith, leadership, education, marriage enrichment and humanitarian service — with a particular and tender commitment to the empowerment and wellbeing of women, children and the less privileged across Nigeria, Africa and beyond. She and Engr. Bakare are blessed with four children and make their home in Abuja.',
+    ],
+  },
 ];
 
 export const summit = {
