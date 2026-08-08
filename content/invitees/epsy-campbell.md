@@ -1,6 +1,6 @@
 ---
 slug: epsy-campbell
-name: Her Excellency Epsy Campbell
+name: Epsy Campbell
 audience: excellency
 salutation: Your Excellency
 kingdom: Former Vice-President of Costa Rica
