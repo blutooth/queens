@@ -602,6 +602,13 @@ export const dignitaries = [
     region: 'Nigeria',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Ambassador',
+    name: 'Anne Eneita',
+    role: 'Distinguished Ambassador',
+    region: 'Nigeria',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
