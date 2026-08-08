@@ -1,6 +1,6 @@
 ---
 slug: janet-wainaina-mwangi
-name: Janet Wainaina Mwangi
+name: Ms Janet Wainaina Mwangi
 audience: guests
 kingdom: Kenya
 email: 

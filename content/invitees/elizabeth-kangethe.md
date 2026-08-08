@@ -1,6 +1,6 @@
 ---
 slug: elizabeth-kangethe
-name: Elizabeth Kangethe
+name: Ms Elizabeth Kangethe
 audience: guests
 kingdom: Former Mayor of Barking and Dagenham · United Kingdom
 email: 

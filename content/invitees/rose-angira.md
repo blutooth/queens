@@ -1,6 +1,6 @@
 ---
 slug: rose-angira
-name: Rose Angira
+name: Ms Rose Angira
 audience: guests
 kingdom: Kenya
 email: 
