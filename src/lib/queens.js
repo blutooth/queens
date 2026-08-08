@@ -670,6 +670,20 @@ export const dignitaries = [
     region: 'The Gambia',
     status: 'Confirmed',
   },
+  {
+    honorific: 'His Excellency',
+    name: 'Senator Prince Bassey Edet Otu, Executive Governor of Cross River State',
+    role: 'Government of Cross River State',
+    region: 'Cross River · Nigeria',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Her Excellency',
+    name: 'Bishop (Mrs) Eyoanwan Bassey Otu',
+    role: 'First Lady of Cross River State',
+    region: 'Cross River · Nigeria',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
