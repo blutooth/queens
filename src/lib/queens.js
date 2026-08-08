@@ -6,7 +6,7 @@ export const speakers = [
     name: 'Aja Brown',
     title: 'Former Mayor of Compton, California',
     role: 'Author of “Visionary Builders” · Strategic Impact Partner, FORWARD',
-    region: 'USA',
+    region: 'Diaspora · Compton, USA',
     images: [asset('/images/aja-brown.jpg')],
     bio: [
       'Aja Brown is a transformative leader and two-term Mayor of Compton — one of the youngest mayors in America to lead a major city. She turned vision into results, driving over $3 billion in new investment into her city and a reduction of roughly 60% in violent crime, while breaking a glass ceiling and inspiring a new wave of women mayors across the nation.',
@@ -29,7 +29,7 @@ export const speakers = [
     name: 'Olori Afolashade Ashley Ogunwusi',
     title: 'Queen (Olori) of Ife',
     role: 'Yeye Omi Oodua · Chartered Accountant & Entrepreneur',
-    region: 'Nigeria & UK',
+    region: 'Diaspora · England',
     images: [asset('/images/olori-ashley.jpg')],
     objectPosition: 'center 35%',
     bio: [
@@ -41,7 +41,7 @@ export const speakers = [
     name: 'Dr Gia Grant-Rutledge',
     title: 'Chief Strategy Officer, The Kingdom Collective Group',
     role: 'Chief Strategy & Partnerships Officer · Africa–USA International Chamber of Commerce & Industry · PAGTIC',
-    region: 'Diaspora · USA',
+    region: 'Diaspora · California, USA',
     images: [asset('/images/gia-grant-rutledge.jpg')],
     objectPosition: 'center 20%',
     bio: [
@@ -53,7 +53,7 @@ export const speakers = [
     name: 'Queen Mother Manal Omar Al-Ansi',
     title: 'Enstooled as Naa Afoley Jormo',
     role: 'Attorney · Founder, Diaspora District & Global Diaspora Day',
-    region: 'Ethiopia · USA · Ghana',
+    region: 'Diaspora · Atlanta, USA',
     images: [asset('/images/manal-al-ansi.jpg'), asset('/images/manal-al-ansi-2.jpg')],
     objectPosition: 'center 18%',
     insetPosition: 'center 10%',
@@ -67,7 +67,7 @@ export const speakers = [
     name: 'Coralita Yard',
     title: 'Founder & CEO, Korvana',
     role: 'International Development Advocate · VP Caribbean, IPADA Initiative (Motherland Beckons)',
-    region: 'Caribbean & Africa',
+    region: 'Diaspora · Barbados, Caribbean',
     images: [asset('/images/coralita-yard.jpg')],
     objectPosition: 'center 12%',
     bio: [
