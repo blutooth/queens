@@ -616,6 +616,34 @@ export const dignitaries = [
     region: 'Nigeria',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Ms',
+    name: 'Azadeh Bozorgmanesh-Fard',
+    role: 'Distinguished Delegate',
+    region: 'Morocco',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Ms',
+    name: 'Aleena Bozorgmanesh-Fard',
+    role: 'Distinguished Delegate',
+    region: 'Morocco',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Ms',
+    name: 'Samia Maali',
+    role: 'Arabic Interpreter · Distinguished Delegate',
+    region: 'Morocco',
+    status: 'Confirmed',
+  },
+  {
+    honorific: '',
+    name: 'Dassim Obsiye',
+    role: 'Distinguished Delegate',
+    region: 'Somalia',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
