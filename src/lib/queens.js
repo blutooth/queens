@@ -641,7 +641,7 @@ export const dignitaries = [
     honorific: '',
     name: 'Dassim Obsiye',
     role: 'Distinguished Delegate',
-    region: 'Somalia',
+    region: 'Somaliland',
     status: 'Confirmed',
   },
   {
