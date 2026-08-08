@@ -588,6 +588,13 @@ export const dignitaries = [
     region: 'United Kingdom',
     status: 'Confirmed',
   },
+  {
+    honorific: '',
+    name: 'Tiki Emezie',
+    role: 'Distinguished Delegate',
+    region: 'United Kingdom',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
