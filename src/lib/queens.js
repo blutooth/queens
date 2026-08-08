@@ -684,6 +684,13 @@ export const dignitaries = [
     region: 'Cross River · Nigeria',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Mr',
+    name: 'Norbert Mbu Mputu',
+    role: 'Distinguished Delegate',
+    region: 'DR Congo',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
