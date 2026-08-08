@@ -609,6 +609,13 @@ export const dignitaries = [
     region: 'Nigeria',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Dr',
+    name: 'Coby Eneita',
+    role: 'Distinguished Delegate',
+    region: 'Nigeria',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
