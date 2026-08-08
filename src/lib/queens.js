@@ -111,6 +111,20 @@ export const speakers = [
       'A renowned entrepreneur and employer of labour, he founded Segmat Springs Ltd in 1996 and built a group of auto-care enterprises — among them Automatic Fit and Energy Ltd, distributor for Michelin in Nigeria and partner to Total and NNPC — and, in 2021, the mobile venture Fixit and Go. As Nigeria’s Regional President of Occupational Health and Safety (UK) he is a leading advocate for road safety, and his philanthropy and peacebuilding have drawn recognition at home and abroad, including honours from the Mayors of Newark and Franklin, New Jersey. He is celebrated as a builder, motivator and symbol of African culture and tradition.',
     ],
   },
+  {
+    name: 'Boitumelo Monoketsi',
+    title: 'Cultural Heritage & Community Empowerment Advocate',
+    role: 'Speaker · Social Entrepreneur · C20 Co-Facilitator',
+    region: 'South Africa',
+    images: [asset('/images/boitumelo-monoketsi.jpg'), asset('/images/boitumelo-monoketsi-2.jpg')],
+    objectPosition: 'center 12%',
+    insetPosition: 'center 22%',
+    insetRound: true,
+    bio: [
+      'Boitumelo Monoketsi is a visionary leader and passionate advocate for cultural preservation and community empowerment, whose work moves fluently across heritage, education and social entrepreneurship. A dynamic and inspiring speaker, she has become a prominent voice for African identity — documenting and safeguarding traditional art forms, designing educational programmes that awaken cultural awareness in the young, and convening community events that celebrate the full breadth of African heritage.',
+      'Her commitment reaches equally into community development: she builds mentorship programmes for young entrepreneurs, facilitates workshops in leadership and personal growth, and champions policies for social justice and equality. Through the Bright Star Foundation and partnerships spanning the African Early Childhood Network, the African Union’s Continental Education Strategy for Africa, the UN South African Working Group and the C20 — where she serves as Co-Facilitator — she inspires individuals to embrace their cultural roots and helps build a more inclusive, culturally rich and vibrant world.',
+    ],
+  },
 ];
 
 export const summit = {
