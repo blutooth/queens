@@ -7,7 +7,7 @@ label: A Royal Invitation
 kingdom: Rectory Farm · Stanton St John · Oxfordshire
 date: 27th July 2026
 regard: Yours faithfully,
-signName: Her Royal Majesty Obonganwan Barr. Marie Ikpeme Erete
+signName: Her Royal Majesty Obonganwan Marie Ikpeme Erete
 signRoles: Queen Aruk II · Mbonga Mo Misoh I|Traditional Ruler of Eniong Abatim, Efik Kingdom, Nigeria|Convener, African Global Queens Summit
 ---
 

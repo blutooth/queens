@@ -691,6 +691,13 @@ export const dignitaries = [
     region: 'DR Congo',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Her Excellency',
+    name: 'Ms Epsy Campbell',
+    role: 'Former Vice-President of Costa Rica',
+    region: 'Costa Rica',
+    status: 'Invited',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
