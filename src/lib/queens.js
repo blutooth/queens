@@ -663,6 +663,13 @@ export const dignitaries = [
     region: 'Libya',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Lady',
+    name: 'Chilel Sarr',
+    role: 'Distinguished Delegate',
+    region: 'The Gambia',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
