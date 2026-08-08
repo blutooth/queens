@@ -581,6 +581,13 @@ export const dignitaries = [
     region: 'France',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Ms',
+    name: 'Aida Bluejack',
+    role: 'Distinguished Delegate',
+    region: 'United Kingdom',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
