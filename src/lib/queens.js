@@ -595,6 +595,13 @@ export const dignitaries = [
     region: 'United Kingdom',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Ms',
+    name: 'Anita King',
+    role: 'Distinguished Delegate',
+    region: 'Nigeria',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
