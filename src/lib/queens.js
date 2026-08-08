@@ -679,8 +679,8 @@ export const dignitaries = [
   },
   {
     honorific: 'Her Excellency',
-    name: 'Bishop (Mrs) Eyoanwan Bassey Otu',
-    role: 'First Lady of Cross River State',
+    name: 'Bishop (Mrs) Eyoanwan Bassey Otu, First Lady of Cross River State',
+    role: 'Office of the First Lady, Cross River State',
     region: 'Cross River · Nigeria',
     status: 'Confirmed',
   },
