@@ -693,7 +693,7 @@ export const dignitaries = [
   },
   {
     honorific: 'Her Excellency',
-    name: 'Ms Epsy Campbell',
+    name: 'Epsy Campbell',
     role: 'Former Vice-President of Costa Rica',
     region: 'Costa Rica',
     status: 'Invited',
