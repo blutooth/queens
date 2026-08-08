@@ -553,6 +553,34 @@ export const dignitaries = [
     region: 'Uganda',
     status: 'Confirmed',
   },
+  {
+    honorific: '',
+    name: 'Sandwe',
+    role: 'Distinguished Delegate',
+    region: 'Zambia',
+    status: 'Confirmed',
+  },
+  {
+    honorific: '',
+    name: 'Imwiko',
+    role: 'Distinguished Delegate',
+    region: 'Zambia',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Ms',
+    name: 'Mercy Effiom',
+    role: 'Distinguished Delegate',
+    region: 'Nigeria',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Ms',
+    name: 'Cecilia Merody',
+    role: 'Distinguished Delegate',
+    region: 'France',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
