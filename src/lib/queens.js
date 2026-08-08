@@ -477,8 +477,8 @@ export const dignitaries = [
     status: 'Confirmed',
   },
   {
-    honorific: 'Amb. Dr Chief',
-    name: 'Wallace',
+    honorific: 'Dr Chief',
+    name: 'Amb. Wallace',
     role: 'Distinguished Ambassador',
     region: 'International',
     status: 'Confirmed',
