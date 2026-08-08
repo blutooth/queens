@@ -1,6 +1,6 @@
 ---
-slug: janet-kenya
-name: Janet
+slug: janet-wainaina-mwangi
+name: Janet Wainaina Mwangi
 audience: guests
 kingdom: Kenya
 email: 
