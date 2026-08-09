@@ -698,6 +698,20 @@ export const dignitaries = [
     region: 'Costa Rica',
     status: 'Invited',
   },
+  {
+    honorific: 'Councillor',
+    name: 'Dr Dianne Regisford',
+    role: 'Distinguished Delegate',
+    region: 'Diaspora · United Kingdom',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'His Majesty',
+    name: 'Ali Ibrahim',
+    role: 'The Sekyere South Municipal Zongo King',
+    region: 'Ashanti · Ghana',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
