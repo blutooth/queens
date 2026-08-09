@@ -113,16 +113,16 @@ export const speakers = [
   },
   {
     name: 'Princess Boitumelo Monoketsi',
-    title: 'Cultural Heritage & Community Empowerment Advocate',
-    role: 'Speaker · Social Entrepreneur · C20 Co-Facilitator',
+    title: 'Chair, Foundation of African Royals',
+    role: 'Educationist · Developmental Activist',
     region: 'South Africa',
     images: [asset('/images/boitumelo-monoketsi.jpg'), asset('/images/boitumelo-monoketsi-2.jpg')],
     objectPosition: 'center 12%',
     insetPosition: 'center 22%',
     insetRound: true,
     bio: [
-      'Boitumelo Monoketsi is a visionary leader and passionate advocate for cultural preservation and community empowerment, whose work moves fluently across heritage, education and social entrepreneurship. A dynamic and inspiring speaker, she has become a prominent voice for African identity — documenting and safeguarding traditional art forms, designing educational programmes that awaken cultural awareness in the young, and convening community events that celebrate the full breadth of African heritage.',
-      'Her commitment reaches equally into community development: she builds mentorship programmes for young entrepreneurs, facilitates workshops in leadership and personal growth, and champions policies for social justice and equality. Through the Bright Star Foundation and partnerships spanning the African Early Childhood Network, the African Union’s Continental Education Strategy for Africa, the UN South African Working Group and the C20 — where she serves as Co-Facilitator — she inspires individuals to embrace their cultural roots and helps build a more inclusive, culturally rich and vibrant world.',
+      'Princess Boitumelo Monoketsi is an educationist and developmental activist who chairs the Foundation of African Royals. Her leadership rests upon a single, unifying imperative — continental unity — and the conviction that Africa’s modern socio-economic systems must be anchored in the historical wisdom of its traditional leaders. Rather than regarding traditional monarchies as symbolic or relics of the past, she draws them together as a living force for progress.',
+      'Under her stewardship, the Foundation ensures that local communities are placed at the heart of socio-political decision-making — directed toward rural economic transformation and the skilling of Africa’s youth. In partnership with broader institutional bodies, it works to streamline traditional leadership into a formidable Pan-African entity, convening landmark continental gatherings and high-profile summits for traditional leaders across Africa and around the world.',
     ],
   },
   {
