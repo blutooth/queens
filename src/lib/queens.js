@@ -714,8 +714,8 @@ export const dignitaries = [
   },
   {
     honorific: 'Her Royal Majesty',
-    name: 'The Queen Mother of Bedomasi',
-    role: 'Traditional Matriarch',
+    name: 'Nana Akrofoso',
+    role: 'Queen Mother of Bedomasi',
     region: 'Ashanti · Ghana',
     status: 'Confirmed',
   },
