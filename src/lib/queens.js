@@ -112,7 +112,7 @@ export const speakers = [
     ],
   },
   {
-    name: 'Boitumelo Monoketsi',
+    name: 'Princess Boitumelo Monoketsi',
     title: 'Cultural Heritage & Community Empowerment Advocate',
     role: 'Speaker · Social Entrepreneur · C20 Co-Facilitator',
     region: 'South Africa',
