@@ -712,6 +712,20 @@ export const dignitaries = [
     region: 'Ashanti · Ghana',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Her Royal Majesty',
+    name: 'The Queen Mother of Bedomasi',
+    role: 'Traditional Matriarch',
+    region: 'Ashanti · Ghana',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Her Royal Majesty',
+    name: 'Nana Akrofoso Hemaa',
+    role: 'Queen Mother of Akrofoso',
+    region: 'Ashanti · Ghana',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
