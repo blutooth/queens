@@ -768,6 +768,27 @@ export const dignitaries = [
     region: '',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Mr',
+    name: 'Michael Okoigun',
+    role: 'Distinguished Delegate',
+    region: '',
+    status: 'Confirmed',
+  },
+  {
+    honorific: '',
+    name: 'Gessele Angba Rhima',
+    role: 'Distinguished Delegate',
+    region: '',
+    status: 'Confirmed',
+  },
+  {
+    honorific: 'Mr',
+    name: 'Lucas Odell Angba',
+    role: 'Distinguished Delegate',
+    region: '',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
