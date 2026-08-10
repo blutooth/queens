@@ -733,6 +733,13 @@ export const dignitaries = [
     region: 'South Africa',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Mr',
+    name: 'Kerzia Manu',
+    role: 'Distinguished Delegate',
+    region: 'Ghana',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
