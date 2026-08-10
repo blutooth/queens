@@ -567,7 +567,7 @@ export const dignitaries = [
   },
   {
     honorific: '',
-    name: 'Sandwe',
+    name: 'Queen Sanwe',
     role: 'Distinguished Delegate',
     region: 'Zambia',
     status: 'Confirmed',
