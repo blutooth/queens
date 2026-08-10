@@ -754,6 +754,13 @@ export const dignitaries = [
     region: 'Ghana',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Her Royal Highness',
+    name: 'Mouli (Queen) Maangela',
+    role: 'Barotse Royal House · Mwandi Palace',
+    region: 'Western Province · Zambia',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
