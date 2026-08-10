@@ -761,6 +761,13 @@ export const dignitaries = [
     region: 'Western Province · Zambia',
     status: 'Confirmed',
   },
+  {
+    honorific: '',
+    name: 'Tolou',
+    role: 'Entertainer & Singer',
+    region: '',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
