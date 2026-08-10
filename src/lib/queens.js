@@ -726,6 +726,13 @@ export const dignitaries = [
     region: 'Ashanti · Ghana',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Her Royal Highness',
+    name: 'Princess Moloto Exley',
+    role: 'Royal Princess',
+    region: 'South Africa',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
