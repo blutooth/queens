@@ -740,6 +740,13 @@ export const dignitaries = [
     region: 'Ghana',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Mr',
+    name: 'Ziaudeen Ibrahim',
+    role: 'Distinguished Delegate',
+    region: 'Ashanti · Ghana',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
