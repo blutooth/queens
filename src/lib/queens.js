@@ -3,6 +3,16 @@ import { asset } from './asset.js';
 // Featured Summit speakers.
 export const speakers = [
   {
+    name: 'Marianta Njomia',
+    title: 'President of Ambazonia',
+    role: 'Keynote Speaker',
+    region: '',
+    images: [],
+    bio: [
+      'Her Excellency Marianta Njomia serves as President of the Interim Government of Ambazonia, carrying the hopes of the peoples of the Anglophone regions of the former Southern Cameroons. A stateswoman who leads in exile, she has become a steadfast voice for self-determination, dignity and human rights — bearing her people’s cause onto the international stage with resolve and grace.',
+    ],
+  },
+  {
     name: 'Aja Brown',
     title: 'Former Mayor of Compton, California',
     role: 'Author of “Visionary Builders” · Strategic Impact Partner, FORWARD',
