@@ -1,8 +1,8 @@
 ---
 slug: elizabeth-kangethe
-name: Ms Elizabeth Kangethe
+name: Dr Elizabeth Kangethe
 audience: guests
-kingdom: Former Mayor of Barking and Dagenham · United Kingdom
+kingdom: Vice-President, London Mayors Association · Past Mayor, Barking and Dagenham, London
 email: 
 date: 8th August 2026
 template: heritage

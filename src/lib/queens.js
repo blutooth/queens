@@ -799,6 +799,13 @@ export const dignitaries = [
     region: '',
     status: 'Confirmed',
   },
+  {
+    honorific: 'Dr',
+    name: 'Elizabeth Kangethe',
+    role: 'Vice-President, London Mayors Association · Past Mayor & Councillor, Barking and Dagenham',
+    region: 'London · United Kingdom',
+    status: 'Confirmed',
+  },
 ];
 
 // Four registration packages. Each includes the three flagship engagements.
