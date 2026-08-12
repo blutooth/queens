@@ -6,22 +6,26 @@
   const packLink = (name, price) =>
     waLink(`Hello — I would like to book the ${name} package (£${price}) at the African Queens Summit, 14–31 August 2026.`);
 
-  let tab = 'events';
+  function scrollToId(id) {
+    if (typeof document === 'undefined') return;
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 </script>
 
 <!-- Sticky tab bar — the very top of the page -->
 <div class="tabbar">
   <div class="container">
     <div class="tabs">
-      <button class:active={tab === 'events'} on:click={() => (tab = 'events')}>Events</button>
-      <button class:active={tab === 'pricing'} on:click={() => (tab = 'pricing')}>Pricing</button>
+      <button class="active" on:click={() => scrollToId('pricing-events')}>Individual Events</button>
+      <button on:click={() => scrollToId('pricing-packages')}>Booking Packages</button>
     </div>
   </div>
 </div>
 
 <section class="panel">
   <div class="container">
-    {#if tab === 'events'}
+    <div id="pricing-events">
       <header>
         <p class="eyebrow">The programme · 14 – 31 August</p>
         <h2>Seventeen days, <span class="italic">one convocation.</span></h2>
@@ -57,9 +61,11 @@
           </article>
         {/each}
       </div>
-    {:else}
+    </div>
+
+    <div id="pricing-packages" class="pk-section">
       <header>
-        <p class="eyebrow">Registration packages</p>
+        <p class="eyebrow">Registration packages · Bulk booking</p>
         <h2>Choose <span class="italic">your seat.</span></h2>
         <p class="sub">Every package includes the three flagship engagements — Oxford, the Royal Gala and Buckingham Palace — at a saving on the individual rate.</p>
       </header>
@@ -108,7 +114,7 @@
       </div>
 
       <p class="footnote">All fees are indicative, per person, and confirmed individually by the Office of the Convener. Retail values shown for comparison.</p>
-    {/if}
+    </div>
   </div>
 </section>
 
@@ -146,6 +152,11 @@
   }
   .tabs button:hover { color: var(--ink); }
   .tabs button.active { background: var(--ink); color: var(--cream); }
+
+  /* Individual events first, then bulk packages below on one page */
+  .pk-section { margin-top: 5rem; padding-top: 3.5rem; border-top: 1px solid var(--line, rgba(60, 36, 21, 0.14)); }
+  #pricing-events { scroll-margin-top: 90px; }
+  #pricing-packages { scroll-margin-top: 90px; }
 
   .panel { background: var(--paper); }
 
