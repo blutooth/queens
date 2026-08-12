@@ -7,7 +7,8 @@ export const speakers = [
     title: 'President of Ambazonia',
     role: 'Keynote Speaker',
     region: '',
-    images: [],
+    images: [asset('/images/marianta-njomia.jpg')],
+    objectPosition: 'center 8%',
     bio: [
       'Her Excellency Marianta Njomia serves as President of the Interim Government of Ambazonia, carrying the hopes of the peoples of the Anglophone regions of the former Southern Cameroons. A stateswoman who leads in exile, she has become a steadfast voice for self-determination, dignity and human rights — bearing her people’s cause onto the international stage with resolve and grace.',
     ],
