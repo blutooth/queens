@@ -6,7 +6,7 @@
   const packLink = (name, price) =>
     waLink(`Hello — I would like to book the ${name} package (£${price}) at the African Queens Summit, 14–31 August 2026.`);
 
-  let tab = 'pricing';
+  let tab = 'events';
 </script>
 
 <!-- Sticky tab bar — the very top of the page -->
