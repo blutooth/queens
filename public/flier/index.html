@@ -16,8 +16,11 @@
   *{ margin:0; padding:0; box-sizing:border-box; }
   body{ background:radial-gradient(120% 60% at 50% 0,#12503b,#0a2e22 60%,#071f18); min-height:100vh;
     color:#faf6ea; font-family:'Marcellus','Georgia',serif; text-align:center; padding:26px 16px 56px; }
+  a.flierwrap{ display:inline-block; text-decoration:none; cursor:pointer; }
   .flier{ max-width:700px; width:100%; height:auto; border-radius:12px;
     box-shadow:0 24px 70px rgba(0,0,0,.55); border:1px solid rgba(212,175,55,.4); }
+  .taphint{ display:block; max-width:700px; margin:0 auto 12px; font-size:15px; letter-spacing:.08em;
+    text-transform:uppercase; color:#f4d98a; }
   .btns{ margin:28px auto 0; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
   a.btn{ display:inline-block; text-decoration:none; font-size:18px; letter-spacing:.10em; text-transform:uppercase;
     padding:17px 44px; border-radius:999px; }
@@ -28,7 +31,10 @@
 </style>
 </head>
 <body>
-  <img class="flier" src="/images/aqs-flier.png" alt="African & Global Queens Summit 2026 — 14–31 August 2026, London & Oxford, England">
+  <span class="taphint">▼ Tap the flier to register ▼</span>
+  <a class="flierwrap" href="/rsvp/" aria-label="Register for the African &amp; Global Queens Summit">
+    <img class="flier" src="/images/aqs-flier.png" alt="African & Global Queens Summit 2026 — 14–31 August 2026, London & Oxford, England">
+  </a>
   <div class="btns">
     <a class="btn reg" href="/rsvp/">Register Now</a>
     <a class="btn dl" href="/images/aqs-flier.png" download="African-Global-Queens-Summit-2026.png">Download Flier</a>
