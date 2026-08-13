@@ -237,7 +237,8 @@ export const speakers = [
     title: 'Climate & Energy Scientist',
     role: 'Climate Resilience, Oxford · PhD in Chemistry, University of Cambridge',
     region: 'Cambridge, United Kingdom',
-    images: [],
+    images: [asset('/images/sandile-mtetwa.jpg')],
+    objectPosition: 'center 15%',
     bio: [
       'Dr Sandile Mtetwa is a scientist and researcher working at the intersection of science, climate, energy and sustainable development. She holds a PhD in Chemistry from the University of Cambridge, where her research focused on advanced materials for low-carbon energy generation and carbon storage, and has worked with the Centre for Global Equality and Climate Compatible Growth to strengthen research-to-policy collaboration and equitable partnerships between the UK and Kenya.',
       'As a Next Generation Foresight Practitioners Fellow she researches climate and energy futures in Zimbabwe, with a focus on marginalised communities, and is a founding member of the Rondil Scholars Hub. Her work centres on translating scientific knowledge into locally relevant solutions, policy and meaningful community impact.',
