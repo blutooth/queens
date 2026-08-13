@@ -187,6 +187,61 @@ export const speakers = [
       'Through decades of public service she has become a respected voice for inclusive local governance and diaspora leadership, building bridges between her Kenyan heritage and her adopted city of London — and carrying that same spirit of service to the African Global Queens Summit.',
     ],
   },
+  {
+    name: 'Dh. Lawrence Ellis',
+    title: 'Founder & CEO, One Thriving Planet',
+    role: 'Programme Host, Oxford · Climate, Biodiversity & Economic Inclusion',
+    region: 'Diaspora · California, USA',
+    images: [asset('/images/lawrence-ellis.jpg')],
+    bio: [
+      'Dhammācariya Lawrence Ellis is Founder and CEO of One Thriving Planet, a global consortium addressing three pressing crises — climate change, biodiversity loss and economic exclusion in the low-carbon transition. Its investment arm deploys some US $100 million a year toward the UN Sustainable Development Goals, while its Solutions arm runs initiatives on four continents, with members honoured by the Nobel Sustainability Award and the CANEX Prize across Africa.',
+      'Drawing on his African and Native American heritage and Asian Earth-based traditions, he teaches an “Eco Ubuntu” — “I am because we are; we are because the Planet is.” A Dhammācariya who received direct transmission from Venerable Thich Nhat Hanh and was authorised to teach by Jack Kornfield, he serves as the Summit’s Programme Host at Oxford, turning high-level strategy into grounded, participatory leadership.',
+    ],
+  },
+  {
+    name: 'Mercedes Martin-Burgess',
+    title: 'Founder & CEO, Mercedes Martin & Company',
+    role: 'Leading from Wholeness, Oxford · Global Leadership Strategist & IDG Ambassador',
+    region: 'Diaspora · Alaska, USA',
+    images: [],
+    bio: [
+      'Mercedes Martin-Burgess is an award-winning Afro-Latina author, global leadership strategist and IDG Ambassador. As Founder and CEO of Mercedes Martin & Company she stewards The River Journey™ and Leading From Wholeness™, advancing women’s leadership, cultural wisdom and legacy.',
+      'A former US Air Force officer and corporate executive, she brings expertise in leadership development, change management, executive coaching and global diversity, and has worked with a client roster that includes Fortune 50 companies. She uses storytelling and metaphor to offer cultural insight to leaders and organisations the world over.',
+    ],
+  },
+  {
+    name: 'Ian Mangenga',
+    title: 'Founder, Digital Girl Africa',
+    role: 'Artificial Intelligence, Oxford · AI Strategy Consultant & Visiting Fellow, LSE',
+    region: 'London, United Kingdom',
+    images: [],
+    bio: [
+      'Ian Mangenga is an AI strategy consultant and founder who, over the past decade, has helped culture-shaping organisations — brands, think tanks, cultural institutions and mission-driven bodies — navigate technological change and adopt AI in ways that strengthen innovation while protecting trust, creativity and public value. She is the founder of Digital Girl Africa, an AI lab expanding women’s access to the AI economy through research, advocacy and innovation.',
+      'A Visiting Fellow at the London School of Economics, she explores sustainable AI futures in Africa through indigenous knowledge systems, local histories and the continent’s diverse ecologies of intelligence. Her practice bridges strategy, research, design, policy and culture — helping organisations build AI systems that are effective, culturally grounded and designed for long-term public value.',
+    ],
+  },
+  {
+    name: 'Dr Irina Fedorenko-Aula',
+    title: 'Co-Founder, Flying Forests',
+    role: 'Biodiversity & Africa’s Natural Heritage, Oxford · Nature-Based Solutions',
+    region: 'Oxford, United Kingdom',
+    images: [],
+    bio: [
+      'Dr Irina Fedorenko-Aula holds a DPhil from the University of Oxford in Geography and the Environment. She has served as Managing Director of the Caux Dialogue on Environment and Security for the Swiss NGO Initiatives of Change and consulted for the World Bank, specialising in nature-based solutions, climate technology and carbon markets.',
+      'A co-founder of BioCarbon Engineering, Vlinder Climate and Flying Forests, she has pioneered the use of technology to restore landscapes at scale, and today works as Head of Origination for Abatable — bringing rigour and imagination to the protection of the natural world.',
+    ],
+  },
+  {
+    name: 'Dr Sandile Mtetwa',
+    title: 'Climate & Energy Scientist',
+    role: 'Climate Resilience, Oxford · PhD in Chemistry, University of Cambridge',
+    region: 'Cambridge, United Kingdom',
+    images: [],
+    bio: [
+      'Dr Sandile Mtetwa is a scientist and researcher working at the intersection of science, climate, energy and sustainable development. She holds a PhD in Chemistry from the University of Cambridge, where her research focused on advanced materials for low-carbon energy generation and carbon storage, and has worked with the Centre for Global Equality and Climate Compatible Growth to strengthen research-to-policy collaboration and equitable partnerships between the UK and Kenya.',
+      'As a Next Generation Foresight Practitioners Fellow she researches climate and energy futures in Zimbabwe, with a focus on marginalised communities, and is a founding member of the Rondil Scholars Hub. Her work centres on translating scientific knowledge into locally relevant solutions, policy and meaningful community impact.',
+    ],
+  },
 ];
 
 export const summit = {
