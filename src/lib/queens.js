@@ -173,6 +173,18 @@ export const speakers = [
       'The first Black scholar in the world to earn a PhD in Social Sculpture, Dr Regisford has pioneered an Ubuntu-centred approach that positions belonging itself as a transformative force for Diaspora leadership, governance and renewal. In September 2026 she launches UbuntuSphere — Evoking Belonging’s participatory space for living knowledge, collective imagination and globally connected enquiry.',
     ],
   },
+  {
+    name: 'Dr Elizabeth Kangethe',
+    title: 'Vice-President, London Mayors Association',
+    role: 'Past Mayor & Councillor, London Borough of Barking and Dagenham',
+    region: 'Diaspora · London, United Kingdom',
+    images: [asset('/images/elizabeth-kangethe.jpg')],
+    objectPosition: 'center 12%',
+    bio: [
+      'Dr Elizabeth Kangethe is a distinguished civic leader and a past Mayor and Councillor of the London Borough of Barking and Dagenham. A Kenyan-British stateswoman based in London, she serves today as Vice-President of the London Mayors Association, championing civic leadership, community cohesion and the empowerment of women across the capital and beyond.',
+      'Through decades of public service she has become a respected voice for inclusive local governance and diaspora leadership, building bridges between her Kenyan heritage and her adopted city of London — and carrying that same spirit of service to the African Global Queens Summit.',
+    ],
+  },
 ];
 
 export const summit = {
