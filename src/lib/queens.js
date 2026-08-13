@@ -215,7 +215,7 @@ export const speakers = [
     title: 'Founder, Digital Girl Africa',
     role: 'Artificial Intelligence, Oxford · AI Strategy Consultant & Visiting Fellow, LSE',
     region: 'London, United Kingdom',
-    images: [],
+    images: [asset('/images/ian-mangenga.jpg')],
     bio: [
       'Ian Mangenga is an AI strategy consultant and founder who, over the past decade, has helped culture-shaping organisations — brands, think tanks, cultural institutions and mission-driven bodies — navigate technological change and adopt AI in ways that strengthen innovation while protecting trust, creativity and public value. She is the founder of Digital Girl Africa, an AI lab expanding women’s access to the AI economy through research, advocacy and innovation.',
       'A Visiting Fellow at the London School of Economics, she explores sustainable AI futures in Africa through indigenous knowledge systems, local histories and the continent’s diverse ecologies of intelligence. Her practice bridges strategy, research, design, policy and culture — helping organisations build AI systems that are effective, culturally grounded and designed for long-term public value.',
