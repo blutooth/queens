@@ -101,7 +101,7 @@ export const speakers = [
   {
     name: 'Otunba (Dr.) Olawanle Raphael Akinboboye',
     title: 'Founder & President, La Campagne Tropicana Beach Resort',
-    role: 'Pan-African Tourism Icon · Founder, Motherland Beckons & IPADA',
+    role: 'Keynote Speaker · Pan-African Tourism Icon · Founder, Motherland Beckons & IPADA',
     region: 'Nigeria',
     images: [asset('/images/akinboboye.jpg')],
     objectPosition: 'center 20%',
