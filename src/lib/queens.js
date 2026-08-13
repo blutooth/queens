@@ -160,6 +160,19 @@ export const speakers = [
       'Robed in the resplendent regalia of Barotseland, she carries the living heritage of her people onto the international stage. Her presence at the African Global Queens Summit lends the gathering the grace, gravitas and timeless dignity of one of the continent’s most storied royal houses.',
     ],
   },
+  {
+    name: 'Dr Dianne Regisford',
+    title: 'Founder, Evoking Belonging',
+    role: 'Oxford City Councillor for Holywell · Belonging Futurist & Cultural Convener',
+    region: 'Diaspora · United Kingdom',
+    images: [asset('/images/dianne-regisford.jpg')],
+    objectPosition: 'center 12%',
+    bio: [
+      'Dr Dianne Regisford is the visionary Founder of Evoking Belonging — a global living practice, philosophy and movement shaping the futures of the African-Caribbean Diaspora. Through its guiding triad of Culture, Polity and ARTivism, she cultivates an Indigenous Diaspora ecology of knowledge-making: an art of encounter, witness, enquiry, embodiment and cultural stewardship. A social-impact entrepreneur of more than thirty-five years, she is building cultural infrastructure across the Black Atlantic through a tri-continental process spanning Africa, the United Kingdom and the Caribbean.',
+      'An Oxford City Councillor for Holywell, she is the first Black person elected as a Green Party councillor in Oxfordshire, and her civic leadership brings cultural justice, belonging and historically excluded knowledge into public life — ensuring governance shaped by lived experience as much as by institution. A Belonging Futurist, systems-change thinker, keynote speaker, writer and poet, she convenes leaders, artists, scholars and communities into “Evocative Enquiries” that turn complexity and difference into shared vision and collective action.',
+      'The first Black scholar in the world to earn a PhD in Social Sculpture, Dr Regisford has pioneered an Ubuntu-centred approach that positions belonging itself as a transformative force for Diaspora leadership, governance and renewal. In September 2026 she launches UbuntuSphere — Evoking Belonging’s participatory space for living knowledge, collective imagination and globally connected enquiry.',
+    ],
+  },
 ];
 
 export const summit = {
@@ -731,7 +744,7 @@ export const dignitaries = [
   {
     honorific: 'Councillor',
     name: 'Dr Dianne Regisford',
-    role: 'Distinguished Delegate',
+    role: 'Oxford City Councillor for Holywell · Founder, Evoking Belonging',
     region: 'Diaspora · United Kingdom',
     status: 'Confirmed',
   },
