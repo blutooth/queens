@@ -178,8 +178,10 @@ export const speakers = [
     title: 'Vice-President, London Mayors Association',
     role: 'Past Mayor & Councillor, London Borough of Barking and Dagenham',
     region: 'Diaspora · London, United Kingdom',
-    images: [asset('/images/elizabeth-kangethe.jpg')],
+    images: [asset('/images/elizabeth-kangethe.jpg'), asset('/images/elizabeth-kangethe-2.jpg')],
     objectPosition: 'center 12%',
+    insetPosition: 'center 20%',
+    insetRound: true,
     bio: [
       'Dr Elizabeth Kangethe is a distinguished civic leader and a past Mayor and Councillor of the London Borough of Barking and Dagenham. A Kenyan-British stateswoman based in London, she serves today as Vice-President of the London Mayors Association, championing civic leadership, community cohesion and the empowerment of women across the capital and beyond.',
       'Through decades of public service she has become a respected voice for inclusive local governance and diaspora leadership, building bridges between her Kenyan heritage and her adopted city of London — and carrying that same spirit of service to the African Global Queens Summit.',
