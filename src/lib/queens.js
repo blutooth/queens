@@ -395,6 +395,13 @@ export const dignitaries = [
     status: 'Convener',
   },
   {
+    honorific: 'Councillor',
+    name: 'Chewe Munkonge',
+    role: 'The Lord Mayor of Oxford, 2026–27',
+    region: 'Oxford · United Kingdom',
+    status: 'Confirmed',
+  },
+  {
     honorific: 'His Imperial Majesty',
     name: 'The Ooni of Ife',
     role: 'Spiritual Head of Yoruba Race',
