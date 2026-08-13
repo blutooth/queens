@@ -203,7 +203,8 @@ export const speakers = [
     title: 'Founder & CEO, Mercedes Martin & Company',
     role: 'Leading from Wholeness, Oxford · Global Leadership Strategist & IDG Ambassador',
     region: 'Diaspora · Alaska, USA',
-    images: [],
+    images: [asset('/images/mercedes-martin-burgess.jpg')],
+    objectPosition: 'center 15%',
     bio: [
       'Mercedes Martin-Burgess is an award-winning Afro-Latina author, global leadership strategist and IDG Ambassador. As Founder and CEO of Mercedes Martin & Company she stewards The River Journey™ and Leading From Wholeness™, advancing women’s leadership, cultural wisdom and legacy.',
       'A former US Air Force officer and corporate executive, she brings expertise in leadership development, change management, executive coaching and global diversity, and has worked with a client roster that includes Fortune 50 companies. She uses storytelling and metaphor to offer cultural insight to leaders and organisations the world over.',
