@@ -148,6 +148,18 @@ export const speakers = [
       'She is Founder, Monarch and Presiding Priest of the New Jerusalem Empire International Organization, and Director of its Bible, Leadership and Professional Institute. As Founding President of Mothers on Planet Earth International and host of JAKAs, she has devoted her life’s work to faith, leadership, education, marriage enrichment and humanitarian service — with a particular and tender commitment to the empowerment and wellbeing of women, children and the less privileged across Nigeria, Africa and beyond. She makes her home in Abuja, Nigeria.',
     ],
   },
+  {
+    name: 'Queen Consort Maangela Imwiko',
+    title: 'Queen Consort · Barotse Royal Establishment',
+    role: 'Mwandi Palace · Western Province, Zambia',
+    region: 'Zambia',
+    images: [asset('/images/maangela-imwiko.jpg')],
+    objectPosition: 'center 6%',
+    bio: [
+      'Queen Consort Maangela Imwiko is a royal matriarch of the Barotse Royal Establishment at Mwandi Palace, in the Western Province of Zambia — the ancestral heartland of the Lozi people. As Queen Consort she stands among the custodians of one of Southern Africa’s oldest and most revered monarchies, upholding the traditions, dignity and cultural inheritance of the Barotse nation.',
+      'Robed in the resplendent regalia of Barotseland, she carries the living heritage of her people onto the international stage. Her presence at the African Global Queens Summit lends the gathering the grace, gravitas and timeless dignity of one of the continent’s most storied royal houses.',
+    ],
+  },
 ];
 
 export const summit = {
@@ -774,8 +786,8 @@ export const dignitaries = [
   },
   {
     honorific: 'Her Royal Highness',
-    name: 'Mouli (Queen) Maangela',
-    role: 'Barotse Royal House · Mwandi Palace',
+    name: 'Queen Consort Maangela Imwiko',
+    role: 'Barotse Royal Establishment · Mwandi Palace',
     region: 'Western Province · Zambia',
     status: 'Confirmed',
   },
