@@ -225,7 +225,7 @@ export const speakers = [
     title: 'Co-Founder, Flying Forests',
     role: 'Biodiversity & Africa’s Natural Heritage, Oxford · Nature-Based Solutions',
     region: 'Oxford, United Kingdom',
-    images: [],
+    images: [asset('/images/irina-fedorenko-aula.jpg')],
     bio: [
       'Dr Irina Fedorenko-Aula holds a DPhil from the University of Oxford in Geography and the Environment. She has served as Managing Director of the Caux Dialogue on Environment and Security for the Swiss NGO Initiatives of Change and consulted for the World Bank, specialising in nature-based solutions, climate technology and carbon markets.',
       'A co-founder of BioCarbon Engineering, Vlinder Climate and Flying Forests, she has pioneered the use of technology to restore landscapes at scale, and today works as Head of Origination for Abatable — bringing rigour and imagination to the protection of the natural world.',
