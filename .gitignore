@@ -28,3 +28,6 @@ public/v/
 stripe.txt
 *.secret
 .dev.vars
+content/visa/
+content/invitees/
+content/data/visa-shortlinks.json
