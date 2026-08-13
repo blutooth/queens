@@ -229,16 +229,16 @@ export const venues = [
   },
   {
     id: 'oxford',
-    kicker: 'The Academy',
+    kicker: 'The Transformative Leadership Experience',
     name: 'University of Oxford',
     city: 'Oxford',
     image: asset('/images/oxford-colleges.jpg'),
-    description: 'A capacity-building course at one of the world\'s oldest universities — academic sessions, lectures, and scholarly dialogue on leadership, governance, and heritage.',
+    description: 'A two-day immersive leadership experience at one of the world\'s oldest universities. African Queens, Traditional Leaders, and global changemakers come together to learn, connect, and lead on the forces shaping Africa\'s future — leaving with practical ideas, new partnerships, and a bolder and clearer leadership commitment.',
     features: [
-      'Capacity-building curriculum',
-      'Leadership & governance',
-      'Lectures by Oxford faculty',
-      'Honorary banquet & convocation',
+      'Leading Climate Resilience',
+      'Protecting Africa\'s Natural Heritage',
+      'Leading in the Age of Artificial Intelligence',
+      'Leading from Wholeness: The Leadership Africa Needs Next',
     ],
   },
 ];
@@ -353,14 +353,14 @@ export const matriarchs = [
 export const programme = [
   {
     idx: '01',
-    group: 'Academic & Intellectual',
-    title: 'The Oxford Convocation',
-    body: 'A short executive course and royal lecture series at the University of Oxford — a curriculum on leadership, governance, and global influence.',
+    group: 'An Immersive Leadership Experience',
+    title: 'The Oxford Leadership Experience',
+    body: 'A two-day immersive leadership experience for African Queens, Traditional Leaders, and Global Changemakers at the University of Oxford. Explore the forces shaping Africa\'s future, connect with leaders from across the continent and diaspora, and leave with a personal commitment to lead.',
     image: asset('/images/oxford-colleges.jpg'),
     items: [
-      'Executive course at Oxford',
-      'Royal lecture series',
-      'Honorary banquet',
+      'Learn — global experts on Climate, Biodiversity & AI',
+      'Connect — with Queens, Traditional Leaders & Changemakers',
+      'Lead — leave with a bolder, clearer leadership commitment',
     ],
   },
   {
@@ -874,7 +874,7 @@ export const packages = [
 export const itinerary = [
   { date: '14–15 Aug', title: 'Arrival & Welcome', price: null, image: asset('/images/queen-aruk-ii-throne.jpg'), detail: 'Reception of the royal delegations and settling into residence.' },
   { date: '16 Aug', title: 'Opening Ceremony', price: 'Included', image: asset('/images/porchester-1.jpg'), detail: 'The grand opening processional and royal reception.' },
-  { date: '17–18 Aug', title: 'Oxford University', price: 150, retail: 220, flagship: true, image: asset('/images/oxford-university.jpg'), detail: 'Executive course, the royal lecture series and the honorary banquet.', checkout: 'https://checkout.africanqueenssummit.com/b/4gMcN5fdLaQ81d75Rf1VK07' },
+  { date: '17–18 Aug', title: 'Oxford University', price: 150, retail: 220, flagship: true, image: asset('/images/oxford-university.jpg'), detail: 'The two-day Transformative Leadership Experience at Oxford — learn, connect and lead on the forces shaping Africa\'s future.', checkout: 'https://checkout.africanqueenssummit.com/b/4gMcN5fdLaQ81d75Rf1VK07' },
   { date: '19 Aug', title: 'Blenheim Palace', price: 72, image: asset('/images/blenheim-palace.jpg'), detail: 'A private visit to the birthplace of Sir Winston Churchill.', checkout: 'https://checkout.africanqueenssummit.com/b/28E14n9Tr0bu1d73J71VK0l' },
   { date: '20 Aug', title: "Lord Mayor's Reception", price: 40, retail: 60, image: asset('/images/lord-mayor.jpg'), detail: 'A civic reception in the historic City of London.', checkout: 'https://checkout.africanqueenssummit.com/b/dRm4gzc1ze2kdZT7Zn1VK0g' },
   { date: '21 Aug', title: 'Bicester Village', price: 75, image: asset('/images/bicester-village.jpg'), detail: 'A luxury shopping excursion — lunch included.', checkout: 'https://checkout.africanqueenssummit.com/b/5kQ3cv4z79M49JD5Rf1VK0c' },
@@ -894,7 +894,7 @@ export const itinerary = [
 export const programmeHighlights = [
   { date: '14–15 Aug', title: 'Royal Arrival & Protocol Reception', icon: '👑' },
   { date: '16 Aug', title: 'Opening of the Summit', icon: '📜' },
-  { date: '17–18 Aug', title: 'Oxford University Leadership Course & Seminar', icon: '🎓' },
+  { date: '17–18 Aug', title: 'Transformative Leadership Experience at Oxford', icon: '🎓' },
   { date: '19 Aug', title: 'Visit to Blenheim Palace', icon: '🏰' },
   { date: '20 Aug', title: 'Courtesy visit to the Lord Mayor of Oxford · Art Exhibition', icon: '🎨' },
   { date: '21 Aug', title: 'Bicester Designer Village', icon: '🛍️' },
@@ -934,11 +934,11 @@ export const tiers = [
     name: 'Royal Guest',
     price: '£200',
     tag: 'Full programme',
-    body: 'Full access to the summit programme — ceremonies, forums, Oxford convocation, and the closing gala at Porchester Hall.',
+    body: 'Full access to the summit programme — ceremonies, forums, the Transformative Leadership Experience at Oxford, and the closing gala at Porchester Hall.',
     includes: [
       'All Observer benefits',
       'Leadership forum & panels',
-      'Oxford academic convocation',
+      'Transformative Leadership Experience at Oxford',
       'Honorary banquet · Oxford',
       'Closing gala · Porchester Hall',
     ],
@@ -968,6 +968,7 @@ export const partners = [
   { name: 'Motherland Beckons', role: 'Diaspora Partner' },
   { name: 'Foundation of African Royals', role: 'Royal Partner' },
   { name: 'United International Peace & Governance Council', role: 'International Partner' },
+  { name: 'One Thriving Planet', role: 'Global Partner' },
 ];
 
 // Confirmed delegates — participants who have registered and confirmed their
