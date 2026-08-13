@@ -194,7 +194,7 @@ export const speakers = [
     region: 'Diaspora · California, USA',
     images: [asset('/images/lawrence-ellis.jpg')],
     bio: [
-      'Dhammācariya Lawrence Ellis is Founder and CEO of One Thriving Planet, a global consortium addressing three pressing crises — climate change, biodiversity loss and economic exclusion in the low-carbon transition. Its investment arm deploys some US $100 million a year toward the UN Sustainable Development Goals, while its Solutions arm runs initiatives on four continents, with members honoured by the Nobel Sustainability Award and the CANEX Prize across Africa.',
+      'Dhammācariya Lawrence Ellis is a Rhodes Scholar of the University of Oxford and Founder and CEO of One Thriving Planet, a global consortium addressing three pressing crises — climate change, biodiversity loss and economic exclusion in the low-carbon transition. Its investment arm deploys some US $100 million a year toward the UN Sustainable Development Goals, while its Solutions arm runs initiatives on four continents, with members honoured by the Nobel Sustainability Award and the CANEX Prize across Africa.',
       'Drawing on his African and Native American heritage and Asian Earth-based traditions, he teaches an “Eco Ubuntu” — “I am because we are; we are because the Planet is.” A Dhammācariya who received direct transmission from Venerable Thich Nhat Hanh and was authorised to teach by Jack Kornfield, he serves as the Summit’s Programme Host at Oxford, turning high-level strategy into grounded, participatory leadership.',
     ],
   },
