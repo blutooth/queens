@@ -10,7 +10,9 @@ export const speakers = [
     images: [asset('/images/marianta-njomia.jpg')],
     objectPosition: 'center 8%',
     bio: [
-      'Her Excellency Marianta Njomia serves as President of the Interim Government of Ambazonia, carrying the hopes of the peoples of the Anglophone regions of the former Southern Cameroons. A stateswoman who leads in exile, she has become a steadfast voice for self-determination, dignity and human rights — bearing her people’s cause onto the international stage with resolve and grace.',
+      'Her Excellency Marianta Njomia is an educator, humanitarian and author who serves as the third President of the Interim Government of the Federal Republic of Ambazonia. Operating in exile, she advocates for the self-determination and human rights of the people of the former British Southern Cameroons — Ambazonia.',
+      'She leads fundraising and advocacy efforts for refugees. As CEO of the charity Friends of British Southern Cameroons, she coordinates critical fundraising, and her leadership has established sustainable livelihood and educational projects for refugees across Nigeria.',
+      'Her Excellency is the co-author of “Echoes of Women’s Tears”, a powerful collection amplifying the voices of women in the Southern Cameroons’ struggle for the restoration of independence. She continues to advocate for justice, dignity and peace — not only for her suffering people of Ambazonia but for victims around the world — and remains a foundation of hope to them.',
     ],
   },
   {
