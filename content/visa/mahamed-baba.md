@@ -9,5 +9,5 @@ from: 13 August 2026
 to: 1 September 2026
 kind: guest
 category: Special Guest
-code: bamba, baba
+# code mapping removed: /v/bamba/ and /v/baba/ now serve the Gala speaker invitation (no PII on the public URL)
 ---
