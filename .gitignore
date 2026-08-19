@@ -21,7 +21,9 @@ tools/whatsapp/sent.json
 # COMMITTED to this repo. ⚠️ THIS REPO MUST REMAIN PRIVATE — it contains PII.
 # Only the generated public build output stays ignored (regenerated at deploy):
 public/visa/
-public/v/
+public/v/*
+!public/v/bamba/
+!public/v/baba/
 
 
 # never commit secrets
