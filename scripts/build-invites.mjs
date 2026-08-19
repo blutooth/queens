@@ -2540,7 +2540,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
 if (existsSync(outRoot)) rmSync(outRoot, { recursive: true, force: true });
 mkdirSync(outRoot, { recursive: true });
 
-const files = readdirSync(inviteesDir).filter((f) => f.endsWith('.md'));
+const files = existsSync(inviteesDir) ? readdirSync(inviteesDir).filter((f) => f.endsWith('.md')) : [];
 const built = [];
 
 for (const f of files) {
