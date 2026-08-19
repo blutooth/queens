@@ -248,6 +248,23 @@ export const speakers = [
   },
 ];
 
+// Summit Secretariat & Protocol — the administrative team who receive and steward guests
+export const team = [
+  {
+    name: 'Cecilia Merody',
+    title: 'Chief Protocol Executive',
+    role: 'French Interpreter · Protocol & Ceremony',
+    region: 'France',
+    images: [asset('/images/cecilia-merody.jpg')],
+    objectPosition: 'center 25%',
+    bio: [
+      'A Frenchwoman of rare range and refinement, Cecilia Merody brings to the African Global Queens Summit the poise of a natural diplomat and the warmth of a lifelong servant of others. As Chief Protocol Executive she oversees the ceremony, courtesy and careful choreography by which sovereigns and distinguished guests are received — ensuring that every arrival, introduction and engagement unfolds with grace, precision and dignity. A gifted French interpreter, she is also a bridge of language and culture, giving voice across borders so that no delegate goes unheard.',
+      'Her path to protocol has been anything but ordinary. Across a remarkable working life she has been a florist and a secretary, a charity worker and an exhibition organiser, a Lockheed computer operator in the earliest days of the industry, a model and an actress of television and film, an artist and curator of art exhibitions, a DVLA driving instructor and a primary school teacher. Each vocation has left its mark — an eye for beauty, a head for order, an ease before an audience and an abiding patience with people — the very gifts that now distinguish her stewardship of the Summit’s protocol.',
+      'Above all, Cecilia is a devoted mother and loving wife, whose generosity of spirit and quiet competence anchor those around her. It is this blend of artistry, discipline and heart that she offers in service of the Queens, Kings and honoured guests gathered in England.',
+    ],
+  },
+];
+
 export const summit = {
   name: 'African Queens Summit',
   longName: 'African & Diaspora Queens Summit',
@@ -705,7 +722,7 @@ export const dignitaries = [
   {
     honorific: 'Ms',
     name: 'Cecilia Merody',
-    role: 'Distinguished Delegate',
+    role: 'Chief Protocol Executive · French Interpreter',
     region: 'France',
     status: 'Confirmed',
   },

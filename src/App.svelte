@@ -9,6 +9,7 @@
   import Queens from './lib/Queens.svelte';
   import Gathering from './lib/Gathering.svelte';
   import Speakers from './lib/Speakers.svelte';
+  import Secretariat from './lib/Secretariat.svelte';
   import Delegates from './lib/Delegates.svelte';
   import Partners from './lib/Partners.svelte';
   import RsvpCta from './lib/RsvpCta.svelte';
@@ -26,6 +27,7 @@
   <Queens />
   <Gathering />
   <Speakers />
+  <Secretariat />
   <Delegates />
   <Partners />
   <RsvpCta />
