@@ -161,6 +161,12 @@ function parseFrontmatter(txt) {
   return data;
 }
 
+// The capacity sentence a guest letter carries when the visitor has a role
+// (e.g. a speaking engagement). Shared by the static letters and the card
+// viewer, which builds the same paragraph at runtime from ?d= — keep in step.
+const CAPACITY_HTML = (roleHtml) =>
+  `The visitor attends in the capacity of <strong>${roleHtml}</strong>. This is an unpaid, ceremonial engagement; no fee, salary, or other remuneration is paid by any UK source, and the visitor will undertake no employment in the United Kingdom.`;
+
 function letterHtml(v, sig, emblem, opts = {}) {
   const card = !!opts.card; // web card viewer — fields come from the URL at runtime
   const isGuestV = v.kind === 'guest';
@@ -341,7 +347,8 @@ UK Visas and Immigration</div>
 
   <p class="only-staff">The individuals named in their respective visa applications are longstanding members of my palace establishment and perform recognised customary, ceremonial, cultural, and administrative duties in support of my traditional institution. Their participation forms an important part of the official cultural representation of my Queendom and will enable them to assist in the ceremonial, protocol, and cultural aspects of the Summit.</p>
   <p class="only-guest">The individual named above is an invited guest of the Summit. Their participation forms an important part of this international cultural and diplomatic gathering of traditional rulers, dignitaries, and members of the African diaspora.</p>
-${kind === 'guest' && v.role ? `  <p class="only-guest">The visitor attends in the capacity of <strong>${esc(v.role)}</strong>. This is an unpaid, ceremonial engagement; no fee, salary, or other remuneration is paid by any UK source, and the visitor will undertake no employment in the United Kingdom.</p>` : ''}
+${card ? `  <p class="only-guest c-cap" style="display:none"></p>`
+  : (kind === 'guest' && v.role ? `  <p class="only-guest">${CAPACITY_HTML(esc(v.role))}</p>` : '')}
 
   <p class="only-staff">The proposed visit will take place from ${fromHtml} (for preparation in advance of the summit) to on or before ${toHtml} (to take into account clearance and consolidation prior to departure), following which they will return to Nigeria to resume their official responsibilities in and outside the palace and their personal, family, and community obligations. Their visit is strictly temporary and is solely for cultural, ceremonial, and Summit-related activities permitted under the UK Standard Visitor route. They have no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
   <p class="only-guest">The proposed visit will take place from ${fromHtml} to on or before ${toHtml}, following which the visitor will return to their home country to resume their personal, professional, family, and community obligations. The visit is strictly temporary and is solely for attendance at the Summit and related cultural activities permitted under the UK Standard Visitor route. The visitor has no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
@@ -478,11 +485,15 @@ ${kind === 'guest' && v.role ? `  <p class="only-guest">The visitor attends in t
     setAll('c-from', data.from || (guest ? ${JSON.stringify(GUEST_FROM)} : ${JSON.stringify(DEFAULT_FROM)}));
     setAll('c-to', data.to || (guest ? ${JSON.stringify(GUEST_TO)} : ${JSON.stringify(DEFAULT_TO)}));
     var nameBit = esch(data.name || '');
-    if (!guest && data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
+    if (data.role) nameBit = nameBit ? nameBit + ' \\u2014 ' + esch(data.role) : esch(data.role);
     var li = function (l, val) { return '<li><span class="lbl">' + l + ':</span> ' + (val ? esch(val) : '') + '</li>'; };
     var reHtml = '<p class="re">Re: ' + nameBit + '</p><ul class="re-list">' + li('Address', data.address) + li('Date of Birth', data.dob) + li('Passport Number', data.passport) + (data.email ? li('Contact e-mail', data.email) : '') + '</ul>';
     var res = document.querySelectorAll('.c-re'); for (var j=0;j<res.length;j++) res[j].innerHTML = reHtml;
     if (guest) { var bp = document.querySelector('.body-pad'); if (bp) bp.classList.add('kind-guest'); }
+    if (guest && data.role) {
+      var caps = document.querySelectorAll('.c-cap');
+      for (var k=0;k<caps.length;k++) { caps[k].innerHTML = ${JSON.stringify(CAPACITY_HTML('@@ROLE@@'))}.replace('@@ROLE@@', esch(data.role)); caps[k].style.display = ''; }
+    }
     document.title = 'Visa Invitation Letter \\u2014 ' + (data.name || '');
   })();` : ''}
   (function () {
