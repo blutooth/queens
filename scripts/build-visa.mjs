@@ -177,7 +177,7 @@ function letterHtml(v, sig, emblem, opts = {}) {
   const kind = v.kind === 'guest' ? 'guest' : 'staff';
   // Re section fills from the details entered; any field left empty stays blank to fill by hand.
   let nameBit = esc(v.name || '');
-  if (kind === 'staff' && v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
+  if (v.role) nameBit = nameBit ? `${nameBit} — ${esc(v.role)}` : esc(v.role);
   const item = (label, valu) => `<li><span class="lbl">${label}:</span> ${valu ? esc(valu) : ''}</li>`;
   const reBlock = card ? '<div class="c-re"></div>' : `<p class="re">Re: ${nameBit}</p>
   <ul class="re-list">
@@ -341,6 +341,7 @@ UK Visas and Immigration</div>
 
   <p class="only-staff">The individuals named in their respective visa applications are longstanding members of my palace establishment and perform recognised customary, ceremonial, cultural, and administrative duties in support of my traditional institution. Their participation forms an important part of the official cultural representation of my Queendom and will enable them to assist in the ceremonial, protocol, and cultural aspects of the Summit.</p>
   <p class="only-guest">The individual named above is an invited guest of the Summit. Their participation forms an important part of this international cultural and diplomatic gathering of traditional rulers, dignitaries, and members of the African diaspora.</p>
+${kind === 'guest' && v.role ? `  <p class="only-guest">The visitor attends in the capacity of <strong>${esc(v.role)}</strong>. This is an unpaid, ceremonial engagement; no fee, salary, or other remuneration is paid by any UK source, and the visitor will undertake no employment in the United Kingdom.</p>` : ''}
 
   <p class="only-staff">The proposed visit will take place from ${fromHtml} (for preparation in advance of the summit) to on or before ${toHtml} (to take into account clearance and consolidation prior to departure), following which they will return to Nigeria to resume their official responsibilities in and outside the palace and their personal, family, and community obligations. Their visit is strictly temporary and is solely for cultural, ceremonial, and Summit-related activities permitted under the UK Standard Visitor route. They have no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
   <p class="only-guest">The proposed visit will take place from ${fromHtml} to on or before ${toHtml}, following which the visitor will return to their home country to resume their personal, professional, family, and community obligations. The visit is strictly temporary and is solely for attendance at the Summit and related cultural activities permitted under the UK Standard Visitor route. The visitor has no intention of seeking employment, remaining beyond the authorised period of stay, or accessing public funds in the United Kingdom.</p>
