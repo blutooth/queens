@@ -74,11 +74,13 @@
   .sig .nm{ font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.4rem; color:var(--emerald-deep); }
   .sig .role{ font-size:.92rem; color:#5a3a24; }
 
-  .footer{ background:var(--emerald-deep); color:#fdf6e3; text-align:center; padding:14px 20px 16px; }
-  .plogos{ display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; }
-  .footer .lh{ background:#fff; display:inline-flex; align-items:center; padding:7px 14px; border-radius:10px; border:1px solid var(--gold); }
-  .plogo{ height:50px; width:auto; background:#fff; border:1px solid var(--gold); border-radius:10px; padding:5px; }
-  .footer .lh img{ height:48px; display:block; }
+  .footer{ background:var(--emerald-deep); color:#fdf6e3; text-align:center; padding:18px 20px 18px; }
+  .plogos{ display:flex; gap:16px 20px; align-items:center; justify-content:center; flex-wrap:wrap; }
+  .footer .lh{ background:#fff; padding:10px 22px; border-radius:12px; border:1px solid var(--gold);
+    flex:0 0 100%; display:flex; justify-content:center; }
+  .footer .lh img{ width:auto; height:auto; max-height:66px; max-width:94%; object-fit:contain; display:block; }
+  .plogo{ height:84px; width:auto; max-width:150px; object-fit:contain; background:#fff;
+    border:1px solid var(--gold); border-radius:12px; padding:9px; display:block; }
   .footer .org{ font-family:'Marcellus',serif; font-size:12.5px; letter-spacing:0.05em; color:var(--gold); margin:9px 0 2px; }
   .footer .info{ font-family:'Marcellus',serif; font-size:11.5px; letter-spacing:0.04em; color:#f1dca0; line-height:1.65; }
 </style>
