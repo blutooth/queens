@@ -20,6 +20,8 @@
   *{ box-sizing:border-box; margin:0; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   body{ font-family:'Spectral',Georgia,serif; color:var(--ink);
     background:#3a2f1e; display:flex; align-items:center; justify-content:center; min-height:100vh; padding:18px; }
+  @media print{ html,body{ margin:0; padding:0; background:#fff; display:block; min-height:0; }
+    .cert{ box-shadow:none; } }
 
   .cert{ position:relative; width:297mm; height:210mm; background:
       radial-gradient(120% 90% at 50% 0%, #fefaf1 0%, var(--paper) 45%, var(--sand) 100%);
