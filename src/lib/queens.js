@@ -246,6 +246,17 @@ export const speakers = [
       'As a Next Generation Foresight Practitioners Fellow she researches climate and energy futures in Zimbabwe, with a focus on marginalised communities, and is a founding member of the Rondil Scholars Hub. Her work centres on translating scientific knowledge into locally relevant solutions, policy and meaningful community impact.',
     ],
   },
+  {
+    name: 'Mamadou Kwidjim Touré',
+    title: 'Founder & CEO, Ubuntu Group',
+    role: 'Investor & Economist · Founder, Africa 2.0 · World Economic Forum Agenda Contributor',
+    region: 'Pan-African',
+    images: [],
+    bio: [
+      'Mamadou Kwidjim Touré is a globally respected investor, economist and champion of Africa’s economic transformation. Founder and Chief Executive of the Ubuntu Group — an investment and advisory house he established in 2015 — he has spent more than two decades at the frontier of African finance, holding senior roles at KPMG, BNP Paribas Investment Banking, the IFC (World Bank Group) and General Electric, where he served as Managing Director for Investments and Project Finance across Sub-Saharan Africa, shaping infrastructure, mining and agri-technology projects worth over US $30 billion.',
+      'He is the founder of Africa 2.0, a pan-African civil-society movement advancing a sustainable vision for the continent’s future, and of Ubuntu Tribe, a digital platform pioneering the tokenisation of gold and mineral wealth for financial inclusion and shared prosperity. Named by Forbes among the ten most influential men in Africa and recognised globally as a leading voice in blockchain and inclusive finance, he is a World Economic Forum Agenda Contributor whose work is guided by the Ubuntu philosophy — that a better world is co-created when diversity is nurtured and opportunity is evenly shared.',
+    ],
+  },
 ];
 
 // Summit Secretariat & Protocol — the administrative team who receive and steward guests
