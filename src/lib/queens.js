@@ -250,7 +250,7 @@ export const speakers = [
     name: 'Mamadou Kwidjim Touré',
     title: 'Founder & CEO, Ubuntu Group',
     role: 'Investor & Economist · Founder, Africa 2.0 · World Economic Forum Agenda Contributor',
-    region: 'Pan-African',
+    region: 'Cameroon',
     images: [],
     bio: [
       'Mamadou Kwidjim Touré is a globally respected investor, economist and champion of Africa’s economic transformation. Founder and Chief Executive of the Ubuntu Group — an investment and advisory house he established in 2015 — he has spent more than two decades at the frontier of African finance, holding senior roles at KPMG, BNP Paribas Investment Banking, the IFC (World Bank Group) and General Electric, where he served as Managing Director for Investments and Project Finance across Sub-Saharan Africa, shaping infrastructure, mining and agri-technology projects worth over US $30 billion.',
