@@ -2459,12 +2459,12 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
     var name = (nU ? nU.replace(/_/g, ' ') : (nFull || 'Your Majesty')).trim().replace(/\\s+/g, ' ').replace(/[,\\s]+$/, '');
     var title = (P.get('e') || P.get('epithet') || P.get('title') || '').replace(/_/g, ' ').trim();
     var hOverride = (P.get('h') || P.get('honorific') || '').replace(/_/g, ' ').trim();
-    var TYPE_MAP = { q: 'queens', k: 'kings', tr: 'rulers', mo: 'morocco', qm: 'queenmother', pi: 'princes', pr: 'princesses', po: 'politicians', g: 'guests', ex: 'excellency' };
+    var TYPE_MAP = { q: 'queens', k: 'kings', tr: 'rulers', mo: 'morocco', qm: 'queenmother', pi: 'princes', pr: 'princesses', po: 'politicians', g: 'guests', ex: 'excellency', lm: 'lordmayor' };
     var rawType = (P.get('t') || P.get('type') || P.get('a') || 'q').trim().toLowerCase();
     var type = TYPE_MAP[rawType] || rawType || 'queens';
     // The Morocco Government letter has no individual addressee — default the ribbon to "Your Excellencies".
     if (!hasName && type === 'morocco') name = 'Your Excellencies';
-    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', rulers: 'Your Majesty', morocco: 'Your Excellencies', queenmother: 'Queen Mother', princes: 'Your Highness', politicians: 'Your Excellency', guests: '', princesses: 'Your Highness', excellency: 'Your Excellency' };
+    var SAL = { queens: 'Your Majesty', kings: 'Your Majesty', rulers: 'Your Majesty', morocco: 'Your Excellencies', queenmother: 'Queen Mother', princes: 'Your Highness', politicians: 'Your Excellency', guests: '', princesses: 'Your Highness', excellency: 'Your Excellency', lordmayor: 'Right Worshipful Lord Mayor' };
     var LETTERS = ${lettersJson};
     var sal = SAL.hasOwnProperty(type) ? SAL[type] : 'Your Majesty';
     document.getElementById('v-name').textContent = name;
@@ -2494,7 +2494,7 @@ function viewerPage(css, lettersHtmlMap, progRowsHtml) {
       }
     }
     document.title = 'A Royal Invitation \\u00b7 ' + name;
-    var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', rulers: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', morocco: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', queenmother: 'Queen Mother, this is ' + name + ' \\uD83D\\uDC51', princes: 'Your Highness, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Highness, this is ' + name + ' \\uD83D\\uDC51', excellency: 'Your Excellency, this is ' + name };
+    var openers = { queens: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', kings: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', rulers: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', morocco: 'Your Majesty, this is ' + name + ' \\uD83D\\uDC51', queenmother: 'Queen Mother, this is ' + name + ' \\uD83D\\uDC51', princes: 'Your Highness, this is ' + name + ' \\uD83D\\uDC51', politicians: 'Your Excellency, this is ' + name, guests: 'Hello, this is ' + name, princesses: 'Your Highness, this is ' + name + ' \\uD83D\\uDC51', excellency: 'Your Excellency, this is ' + name, lordmayor: 'Right Worshipful Lord Mayor, this is ' + name };
     var opener = openers[type] || openers.queens;
     var waMsg = opener + ' \\u2014 I am honoured to accept your gracious invitation and confirm my attendance at the African Queens Summit (14\\u201331 August 2026, London \\u0026 Oxford).';
     document.getElementById('v-wa').href = 'https://wa.me/447932506556?text=' + encodeURIComponent(waMsg);
@@ -2561,7 +2561,7 @@ for (const f of files) {
 }
 
 const rawLetters = {};
-for (const a of ['queens', 'kings', 'rulers', 'morocco', 'queenmother', 'princes', 'politicians', 'guests', 'princesses', 'excellency']) {
+for (const a of ['queens', 'kings', 'rulers', 'morocco', 'queenmother', 'princes', 'politicians', 'guests', 'princesses', 'excellency', 'lordmayor']) {
   const p = join(root, 'content', 'letters', `${a}.md`);
   if (existsSync(p)) rawLetters[a] = readFileSync(p, 'utf8');
 }
@@ -2589,7 +2589,7 @@ writeFileSync(join(outRoot, 'index.html'), masterPage(built, Object.keys(TEMPLAT
 const sampleHtml = heritage({ data: { name: 'Sample', audience: 'queens' }, noteHtml: '', letterHtml: '' });
 const HERITAGE_CSS = (sampleHtml.match(/<style>([\s\S]*?)<\/style>/) || [null, ''])[1];
 const lettersHtmlMap = {};
-for (const a of ['queens', 'kings', 'rulers', 'morocco', 'queenmother', 'princes', 'politicians', 'guests', 'princesses', 'excellency']) lettersHtmlMap[a] = getLetter(a);
+for (const a of ['queens', 'kings', 'rulers', 'morocco', 'queenmother', 'princes', 'politicians', 'guests', 'princesses', 'excellency', 'lordmayor']) lettersHtmlMap[a] = getLetter(a);
 const progRowsHtml = programme
   .map(([d, t, ic], i) =>
     `<div class="prog-row${i === programme.length - 1 ? ' finale' : ''}"><span class="prog-ico" aria-hidden="true">${ic}</span><span class="when">${esc(d)}</span><span class="what">${esc(t)}</span></div>`)
