@@ -5,6 +5,7 @@ On behalf of the African Global Queens Summit Organising Committee, and with the
 ## The Occasion
 
 - **Date** — Tuesday, 25 August 2026
+- **Time** — 6.00pm
 - **Venue** — Porchester Hall
 - **Address** — Porchester Road, Bayswater, London, W2 5HS
 - **Dress** — Black tie · Traditional royal attire warmly welcomed
