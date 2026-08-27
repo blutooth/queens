@@ -33,3 +33,9 @@ stripe.txt
 content/visa/
 content/invitees/
 content/data/visa-shortlinks.json
+
+# Certificate roll — delegate name list, kept local. Not for the website.
+public/certificate/oxford-masterclass/roll/
+
+# Temporary render source (certificate at HEAD). Local only.
+public/certificate/oxford-masterclass/_render/
