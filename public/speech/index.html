@@ -19,8 +19,8 @@ p.close { font-weight: 600; text-align: center; font-size: 16pt; margin-top: 6mm
 b { color: #094b38; }
 .foot { text-align: center; font-family: "Marcellus", serif; font-size: 9pt; color: #5a3a24; margin-top: 6mm; }
 @media screen {
-  html { background: #3a2f1e; }
-  body { max-width: 210mm; margin: 20px auto; padding: 0 clamp(16px, 6vw, 18mm) 14mm; box-shadow: 0 20px 60px rgba(0,0,0,.45); overflow: hidden; }
+  html { background: #3a2f1e; overflow-y: auto; height: auto; }
+  body { max-width: 210mm; margin: 20px auto; padding: 0 clamp(16px, 6vw, 18mm) 14mm; box-shadow: 0 20px 60px rgba(0,0,0,.45); overflow: visible; overflow-x: clip; height: auto; }
   .kente { margin: 0 calc(-1 * clamp(16px, 6vw, 18mm)); }
   p { font-size: clamp(16px, 2.3vw, 19px); }
   .head { flex-wrap: wrap; }
