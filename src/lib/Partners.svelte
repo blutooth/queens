@@ -29,9 +29,8 @@
     </div>
 
     <p class="prospective-note">
-      The maiden edition was funded by Her Royal Majesty Queen Aruk II and Aries
-      Pension Ltd. Partners are those who contribute to the Summit, through
-      financial support or by taking part in its organisation.
+      Partners are those who contribute to the Summit, through financial
+      support or by taking part in its organisation.
     </p>
 
     <div class="prospective">
