@@ -556,7 +556,7 @@ export const dignitaries = [
     status: 'Invited',
   },
   {
-    honorific: 'Her Royal Highness',
+    honorific: 'Her Majesty',
     name: 'The Nabagereka of Buganda',
     role: 'Queen Consort of Buganda',
     region: 'Buganda · Uganda',

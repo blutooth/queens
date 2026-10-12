@@ -44,7 +44,7 @@
       <p class="kicker">Preamble</p>
       <p>
         We, the African Queens and Royal Matriarchs of the continent and the
-        Diaspora, assembled under the patronage of <em>Her Royal Highness
+        Diaspora, assembled under the patronage of <em>Her Royal Majesty
         Queen Marie Erete Obonganwan Aruk II</em>, affirm our sacred
         responsibility as custodians of land, culture, and intergenerational
         leadership.
