@@ -42,7 +42,7 @@
 
     <div class="ipada">
       <span class="glyph">◈</span>
-      <span>In partnership with <strong>IPADA Initiatives</strong> — cultural impact, education, and empowerment across Africa and the Diaspora.</span>
+      <span>In partnership with <strong>Aries Pension Ltd</strong>, co-funder of the maiden African Global Queens Summit, 2026.</span>
     </div>
 
     <div class="bottom">

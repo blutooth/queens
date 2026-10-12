@@ -1047,15 +1047,20 @@ export const tiers = [
   },
 ];
 
+// Partners are those who have contributed financially or helped organise the Summit.
 export const partners = [
-  { name: 'Queen Aruk II Foundation', role: 'Convener' },
-  { name: 'IPADA Initiatives', role: 'Principal Partner', featured: true },
-  { name: 'Forum of African Traditional Authorities', role: 'Institutional Partner' },
-  { name: 'Maasai Tourism Festival', role: 'Cultural Partner' },
-  { name: 'Motherland Beckons', role: 'Diaspora Partner' },
-  { name: 'Foundation of African Royals', role: 'Royal Partner' },
-  { name: 'United International Peace & Governance Council', role: 'International Partner' },
-  { name: 'One Thriving Planet', role: 'Global Partner' },
+  { name: 'Aries Pension Ltd', role: 'Co-funder of the maiden edition, 2026', featured: true },
+];
+
+// Organisations that participated in the maiden edition — not partners.
+export const participants = [
+  'IPADA Initiatives',
+  'Motherland Beckons',
+  'Forum of African Traditional Authorities',
+  'Foundation of African Royals',
+  'Maasai Tourism Festival',
+  'United International Peace & Governance Council',
+  'One Thriving Planet',
 ];
 
 // Confirmed delegates — participants who have registered and confirmed their

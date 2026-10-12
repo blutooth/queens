@@ -1,12 +1,12 @@
 <script>
-  import { partners } from './queens.js';
+  import { partners, participants } from './queens.js';
   import { asset } from './asset.js';
 </script>
 
 <section id="partners" class="partners">
   <div class="container">
     <header>
-      <p class="eyebrow">Convened in collaboration with</p>
+      <p class="eyebrow">Our partners</p>
       <h2>
         A movement built<br />
         on <span class="italic">partnership.</span>
@@ -28,21 +28,57 @@
       {/each}
     </div>
 
+    <p class="prospective-note">
+      The maiden edition was funded by Her Royal Majesty Queen Aruk II and Aries
+      Pension Ltd. Partners are those who contribute to the Summit, through
+      financial support or by taking part in its organisation.
+    </p>
+
+    <div class="prospective">
+      <p class="eyebrow">Participating organisations · 2026</p>
+      <ul>
+        {#each participants as name}<li>{name}</li>{/each}
+      </ul>
+    </div>
+
     <p class="horizon">
       <span class="italic">Following England,</span> the movement continues across
       the Caribbean and the nations of Africa — a sustained convocation for
       generations to come.
     </p>
 
-    <div class="logos">
-      <div class="logo-card wide"><img src={asset('/images/partners-letterhead.png')} alt="Aruk II crest and partners" /></div>
-      <div class="logo-card"><img src={asset('/images/foundation-african-royals.jpg')} alt="Foundation of African Royals" /></div>
-      <div class="logo-card"><img src={asset('/images/unipgc-logo.png')} alt="United International Peace &amp; Governance Council (UNIPGC)" /></div>
-    </div>
   </div>
 </section>
 
 <style>
+  .prospective-note {
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+    text-align: center;
+    color: rgba(247, 241, 227, 0.82);
+    line-height: 1.6;
+  }
+  .prospective {
+    margin: 2.5rem auto 3rem;
+    max-width: 760px;
+    text-align: center;
+  }
+  .prospective ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .prospective li {
+    padding: 0.45rem 0.9rem;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 999px;
+    font-size: 0.95rem;
+    color: #f7f1e3;
+  }
   .partners {
     background: var(--forest);
     color: var(--cream);

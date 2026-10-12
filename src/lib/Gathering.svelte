@@ -54,14 +54,14 @@
     <header>
       <p class="eyebrow">The royal houses gather</p>
       <h2>
-        Building on a continental<br />
-        <span class="italic">legacy of convening.</span>
+        A stand-alone gathering<br />
+        <span class="italic">of royal houses.</span>
       </h2>
       <p class="sub">
-        The summit follows the celebrated <strong>IPADA convocation in Nigeria</strong> —
-        a gathering of queens, kings, and traditional rulers from across Africa
-        and the Diaspora. The images that follow are drawn from previous
-        convenings of this movement.
+        Founded and convened by Her Royal Majesty Queen Aruk II, the African
+        Global Queens Summit is a stand-alone gathering of queens, kings and
+        traditional rulers from across Africa and the Diaspora. The images that
+        follow are drawn from moments in the life and work of its Convener.
       </p>
     </header>
 
